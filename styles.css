@@ -53,7 +53,6 @@ body {
         transform: translateX(-100%);
     }
 }
-
 /* Header */
 header {
     background-color: var(--secondary-color);
@@ -67,7 +66,7 @@ header {
     display: flex;
     justify-content: space-between; /* Espacia los elementos a los extremos */
     align-items: center; /* Centra verticalmente los elementos */
-    padding: 1rem 2rem; /* Ajusta el padding para más espacio en los lados */
+    padding: 1rem 2rem; /* Espaciado en el header */
 }
 
 .logo-title {
@@ -77,36 +76,61 @@ header {
 }
 
 .logo-title h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--primary-color);
+    font-size: 1.5rem; /* Tamaño del texto */
+    font-weight: 600; /* Peso del texto */
+    color: var(--primary-color); /* Color del texto */
     margin: 0; /* Elimina el margen por defecto */
 }
 
-.logo-title p {
-    font-size: 1rem;
-    color: var(--text-color);
-}
-
 .header-logo {
-    width: 60px;
+    width: 60px; /* Ancho del logo */
     height: auto; /* Mantiene la proporción del logo */
 }
 
 .install-button {
-    background-color: var(--primary-color);
-    color: var(--light-text);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    background-color: var(--primary-color); /* Color del botón */
+    color: var(--light-text); /* Color del texto del botón */
+    border: none; /* Sin borde */
+    padding: 0.5rem 1rem; /* Padding interno del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de puntero al pasar el mouse */
+    font-weight: 500; /* Peso del texto del botón */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones para efectos */
 }
 
 .install-button:hover {
     background-color: #b58a5d; /* Color de fondo al pasar el mouse */
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Efecto de movimiento */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: row; /* Mantiene la dirección de fila en pantallas pequeñas */
+        justify-content: space-between; /* Asegura que haya espacio entre los elementos */
+    }
+
+    .logo-title h1 {
+        font-size: 1.2rem; /* Reduce el tamaño del texto en pantallas pequeñas */
+    }
+
+    .header-logo {
+        width: 50px; /* Reduce el tamaño del logo en pantallas pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-title h1 {
+        font-size: 1rem; /* Tamaño aún más pequeño en pantallas muy pequeñas */
+    }
+
+    .header-logo {
+        width: 40px; /* Reduce aún más el tamaño del logo */
+    }
+
+    .install-button {
+        padding: 0.4rem 0.8rem; /* Ajusta el padding del botón en pantallas muy pequeñas */
+    }
 }
 
 /* Hero Section */
