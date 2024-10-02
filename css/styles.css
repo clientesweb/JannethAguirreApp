@@ -1,0 +1,25 @@
+/* Estilos personalizados adicionales */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.pwa-download {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4A90E2;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.pwa-download:hover {
+  transform: scale(1.05);
+}
