@@ -4,32 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Janneth Aguirre Bienes Raíces</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4A90E2">
 </head>
-<body>
-    <header id="header">
-        <!-- El contenido del encabezado se cargará dinámicamente -->
-    </header>
+<body class="bg-gray-100">
+    <header id="header" class="bg-blue-600 text-white"></header>
+    <nav id="nav" class="bg-blue-500 text-white"></nav>
+    <main id="main" class="container mx-auto mt-4 p-4"></main>
+    <footer id="footer" class="bg-gray-800 text-white mt-8"></footer>
+    <div id="lead-form" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"></div>
 
-    <nav id="nav">
-        <!-- La navegación se cargará dinámicamente -->
-    </nav>
-
-    <main id="main">
-        <!-- El contenido principal se cargará dinámicamente -->
-    </main>
-
-    <footer id="footer">
-        <!-- El pie de página se cargará dinámicamente -->
-    </footer>
-
-    <div id="lead-form" class="hidden">
-        <!-- El formulario de captura de leads se cargará dinámicamente -->
-    </div>
-
-    <script src="app.js" type="module"></script>
+    <script src="js/app.js" type="module"></script>
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/service-worker.js')
