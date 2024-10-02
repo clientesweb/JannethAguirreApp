@@ -21,6 +21,16 @@ const services = [
     { id: 4, title: 'Asesoría Legal', description: 'Ofrecemos apoyo legal en todas tus transacciones.', icon: 'fa-gavel' },
 ];
 
+// Store items data
+const storeItems = [
+    { id: 1, title: 'Casa en la Playa', price: '$800,000', image: '/images/store1.jpg', category: 'venta' },
+    { id: 2, title: 'Apartamento Amoblado', price: '$2,000 /mes', image: '/images/store2.jpg', category: 'alquiler' },
+    { id: 3, title: 'Proyecto Residencial', price: 'Desde $150,000', image: '/images/store3.jpg', category: 'proyecto' },
+    { id: 4, title: 'Oficina Comercial', price: '$3,500 /mes', image: '/images/store4.jpg', category: 'alquiler' },
+    { id: 5, title: 'Terreno Industrial', price: '$1,200,000', image: '/images/store5.jpg', category: 'venta' },
+    { id: 6, title: 'Condominio de Lujo', price: 'Desde $500,000', image: '/images/store6.jpg', category: 'proyecto' },
+];
+
 // Hero Slider
 function initHeroSlider() {
     const heroSlider = document.querySelector('.hero-slider');
@@ -111,6 +121,47 @@ function populateServices() {
     });
 }
 
+// Populate store items
+function populateStoreItems() {
+    const storeGrid = document.getElementById('store-grid');
+    storeItems.forEach(item => {
+        const storeItem = document.createElement('div');
+        storeItem.className = 'store-item';
+        storeItem.dataset.category = item.category;
+        storeItem.innerHTML = `
+            <img src="${item.image}" alt="${item.title}">
+            <div class="store-item-info">
+                <h3>${item.title}</h3>
+                <p class="price">${item.price}</p>
+                <p class="category">${item.category}</p>
+            </div>
+        `;
+        storeGrid.appendChild(storeItem);
+    });
+}
+
+// Store filter functionality
+function initStoreFilter() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const storeItems = document.querySelectorAll('.store-item');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.dataset.filter;
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            storeItems.forEach(item => {
+                if (filter === 'all' || item.dataset.category === filter) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
 // Smooth scrolling for anchor links
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -156,7 +207,9 @@ function initContactForm() {
         const formData = new FormData(contactForm);
         console.log('Form data:', Object.fromEntries(formData));
         alert('Gracias por contactarnos. Nos pondremos en contacto contigo pronto.');
-        contactForm.reset();
+        contact
+
+Form.reset();
     });
 }
 
@@ -204,6 +257,8 @@ function init() {
     initHeroSlider();
     initPropertySlider();
     populateServices();
+    populateStoreItems();
+    initStoreFilter();
     initSmoothScroll();
     initActiveNavOnScroll();
     initContactForm();
