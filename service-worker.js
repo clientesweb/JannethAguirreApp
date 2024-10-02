@@ -2,8 +2,8 @@ const CACHE_NAME = 'ja-bienes-raices-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/styles.css',
-  '/script.js',
+  '/css/styles.css',
+  '/js/app.js',
   '/manifest.json',
   '/icons/icon-72x72.png',
   '/icons/icon-96x96.png',
