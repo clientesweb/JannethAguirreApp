@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Janneth Aguirre Bienes Raíces</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -11,16 +11,16 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1E3A8A">
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
     <header id="header" class="bg-blue-900 text-white fixed top-0 left-0 right-0 z-50"></header>
-    <main id="main" class="mt-16 mb-16"></main>
-    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50"></nav>
+    <main id="main" class="flex-grow mt-16 mb-16 px-4 sm:px-6 lg:px-8"></main>
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 md:hidden"></nav>
     <footer id="footer" class="bg-blue-900 text-white mt-8"></footer>
-    <div id="lead-form" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"></div>
-    <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="fixed bottom-20 right-4 bg-green-500 text-white rounded-full p-3 shadow-lg z-50">
+    <div id="lead-form" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"></div>
+    <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="fixed bottom-20 right-4 bg-green-500 text-white rounded-full p-3 shadow-lg z-50 hover:bg-green-600 transition-colors duration-300">
         <i class="fab fa-whatsapp text-2xl"></i>
     </a>
-    <button id="install-app" class="fixed top-20 right-4 bg-blue-600 text-white rounded-full p-3 shadow-lg z-50 hidden">
+    <button id="install-app" class="fixed top-20 right-4 bg-blue-600 text-white rounded-full p-3 shadow-lg z-50 hidden hover:bg-blue-700 transition-colors duration-300">
         <i class="fas fa-download text-xl"></i>
     </button>
 
