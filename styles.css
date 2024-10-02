@@ -99,7 +99,7 @@ header {
 @media (max-width: 768px) {
     .header-content {
         flex-direction: row; /* Mantiene la dirección de fila en pantallas pequeñas */
-        justify-content: space-between; /* Asegura que haya espacio entre los elementos */
+        justify-content: flex-start; /* Alínea los elementos a la izquierda */
     }
 
     .logo-title h1 {
@@ -108,6 +108,10 @@ header {
 
     .header-logo {
         width: 45px; /* Reduce el tamaño del logo en pantallas pequeñas */
+    }
+
+    .install-button {
+        margin-left: auto; /* Mueve el botón hacia la derecha */
     }
 }
 
