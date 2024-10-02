@@ -22,43 +22,72 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--secondary-color);
         }
 
         header {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: white;
+            color: var(--primary-color);
             padding: 1rem;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
             max-width: 200px;
+            height: auto;
         }
 
-        nav {
+        nav ul {
             display: none;
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-left: 1rem;
+        }
+
+        nav ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: block;
         }
 
         main {
-            margin-top: 60px;
+            margin-top: 80px;
             padding: 1rem;
         }
 
-        .slider {
+        .hero {
             position: relative;
+            height: 60vh;
             overflow: hidden;
-            height: 300px;
         }
 
-        .slide {
+        .hero-slider {
             position: absolute;
             top: 0;
             left: 0;
@@ -68,20 +97,58 @@
             transition: opacity 0.5s ease-in-out;
         }
 
-        .slide.active {
+        .hero-slider.active {
             opacity: 1;
         }
 
-        .slide img {
+        .hero-slider img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 2rem 0;
+            color: var(--primary-color);
+        }
+
         .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            gap: 2rem;
             margin-top: 2rem;
         }
 
@@ -119,11 +186,37 @@
             font-weight: bold;
         }
 
+        .property-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
         footer {
             background-color: var(--primary-color);
             color: white;
             padding: 2rem 1rem;
             text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
         }
 
         .social-icons {
@@ -154,7 +247,7 @@
         }
 
         .bottom-nav a {
-            color: var(--text-color);
+            color: var(--primary-color);
             text-decoration: none;
             font-size: 0.8rem;
             display: flex;
@@ -199,33 +292,65 @@
             border-radius: 5px;
             cursor: pointer;
             display: none;
+            z-index: 1001;
+        }
+
+        #lead-form {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1002;
+            display: none;
+        }
+
+        #lead-form h2 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        #lead-form input,
+        #lead-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #lead-form button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #lead-form button:hover {
+            background-color: var(--primary-color);
         }
 
         @media (min-width: 768px) {
-            nav {
-                display: block;
+            .menu-toggle {
+                display: none;
             }
 
             nav ul {
-                list-style: none;
                 display: flex;
             }
 
-            nav ul li {
-                margin-left: 1rem;
-            }
-
-            nav ul li a {
-                color: white;
-                text-decoration: none;
+            .hero-content h1 {
+                font-size: 3.5rem;
             }
 
             .bottom-nav {
                 display: none;
-            }
-
-            .slider {
-                height: 400px;
             }
         }
     </style>
@@ -241,29 +366,41 @@
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
     </header>
 
     <main>
-        <section id="inicio" class="slider">
-            <div class="slide active">
-                <img src="slide1.jpg" alt="Propiedad 1">
+        <section id="inicio" class="hero">
+            <div class="hero-slider active">
+                <img src="hero1.jpg" alt="Propiedad 1">
             </div>
-            <div class="slide">
-                <img src="slide2.jpg" alt="Propiedad 2">
+            <div class="hero-slider">
+                <img src="hero2.jpg" alt="Propiedad 2">
             </div>
-            <div class="slide">
-                <img src="slide3.jpg" alt="Propiedad 3">
+            <div class="hero-slider">
+                <img src="hero3.jpg" alt="Propiedad 3">
+            </div>
+            <div class="hero-content">
+                <h1>Encuentra tu hogar ideal</h1>
+                <a href="#" class="cta-button" id="open-lead-form">Contáctanos</a>
             </div>
         </section>
 
         <section id="propiedades">
-            <h2>Propiedades Destacadas</h2>
+            <h2 class="section-title">Propiedades Destacadas</h2>
             <div class="property-grid">
                 <div class="property-card">
                     <img src="property1.jpg" alt="Propiedad 1">
                     <div class="property-info">
                         <h3 class="property-title">Casa en Venta</h3>
                         <p class="property-price">$500,000</p>
+                        <div class="property-details">
+                            <span><i class="fas fa-bed"></i> 3 Habitaciones</span>
+                            <span><i class="fas fa-bath"></i> 2 Baños</span>
+                            <span><i class="fas fa-ruler-combined"></i> 200 m²</span>
+                        </div>
                     </div>
                 </div>
                 <div class="property-card">
@@ -271,6 +408,11 @@
                     <div class="property-info">
                         <h3 class="property-title">Apartamento en Renta</h3>
                         <p class="property-price">$1,500 /mes</p>
+                        <div class="property-details">
+                            <span><i class="fas fa-bed"></i> 2 Habitaciones</span>
+                            <span><i class="fas fa-bath"></i> 1 Baño</span>
+                            <span><i class="fas fa-ruler-combined"></i> 80 m²</span>
+                        </div>
                     </div>
                 </div>
                 <div class="property-card">
@@ -278,6 +420,10 @@
                     <div class="property-info">
                         <h3 class="property-title">Terreno en Venta</h3>
                         <p class="property-price">$200,000</p>
+                        <div class="property-details">
+                            <span><i class="fas fa-ruler-combined"></i> 500 m²</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Zona Residencial</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -285,12 +431,27 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
-        <div class="social-icons">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Janneth Aguirre Bienes Raíces</h3>
+                <p>Expertos en bienes raíces con años de experiencia en el mercado.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>Teléfono: (123) 456-7890</p>
+                <p>Email: info@jannethaguirre.com</p>
+                <p>Dirección: Calle Principal 123, Ciudad</p>
+            </div>
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
         </div>
+        <p>&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
     </footer>
 
     <nav class="bottom-nav">
@@ -306,18 +467,62 @@
 
     <button id="install-app" class="install-button">Instalar App</button>
 
+    <div id="lead-form">
+        <h2>Contáctanos</h2>
+        <form id="contact-form">
+            <input type="text" name="name" placeholder="Nombre" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="tel" name="phone" placeholder="Teléfono" required>
+            <textarea name="message" placeholder="Mensaje" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
     <script>
-        // Slider functionality
-        const slides = document.querySelectorAll('.slide');
+        // Hero slider functionality
+        const heroSlides = document.querySelectorAll('.hero-slider');
         let currentSlide = 0;
 
         function showSlide(n) {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (n + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
+            heroSlides[currentSlide].classList.remove('active');
+            currentSlide = (n + heroSlides.length) % heroSlides.length;
+            heroSlides[currentSlide].classList.add('active');
         }
 
         setInterval(() => showSlide(currentSlide + 1), 5000);
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav ul');
+
+        menuToggle.addEventListener('click', () => {
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Lead form functionality
+        const openLeadForm = document.getElementById('open-lead-form');
+        const leadForm = document.getElementById('lead-form');
+        const contactForm = document.getElementById('contact-form');
+
+        openLeadForm.addEventListener('click', (e) => {
+            e.preventDefault();
+            leadForm.style.display = 'block';
+        });
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you would typically send the form data to your server
+            alert('Gracias por contactarnos. Nos pondremos en contacto contigo pronto.');
+            leadForm.style.display = 'none';
+            contactForm.reset();
+        });
+
+        // Close lead form when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === leadForm) {
+                leadForm.style.display = 'none';
+            }
+        });
 
         // PWA installation
         if ('serviceWorker' in navigator) {
@@ -343,6 +548,16 @@
                     deferredPrompt = null;
                 });
             }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
