@@ -13,13 +13,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>Janneth Aguirre</h1>
-            <nav>
-                <a href="#inicio">Inicio</a>
-                <a href="#propiedades">Propiedades</a>
-                <a href="#servicios">Servicios</a>
-                <a href="#contacto">Contacto</a>
-            </nav>
+            <img src="logo.png" alt="Logo Janneth Aguirre" class="logo"> <!-- Agregar el logo -->
             <button id="install-app" class="install-button">
                 <i class="fas fa-download"></i> Instalar App
             </button>
@@ -28,6 +22,12 @@
 
     <main>
         <section id="inicio" class="hero">
+            <div class="hero-slider">
+                <!-- Slider con imágenes -->
+                <div class="slider-item"><img src="https://via.placeholder.com/1200x400?text=Imagen+1" alt="Imagen 1"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/1200x400?text=Imagen+2" alt="Imagen 2"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/1200x400?text=Imagen+3" alt="Imagen 3"></div>
+            </div>
             <div class="hero-content">
                 <h2>Encuentra tu hogar ideal</h2>
                 <p>Expertos en bienes raíces a tu servicio</p>
@@ -38,8 +38,17 @@
         <section id="propiedades" class="properties">
             <div class="container">
                 <h2>Propiedades Destacadas</h2>
-                <div class="property-grid" id="property-grid">
-                    <!-- Property cards will be inserted here by JavaScript -->
+                <div class="property-slider">
+                    <div class="property-card">
+                        <!-- Property card content will be inserted here by JavaScript -->
+                    </div>
+                    <div class="property-card">
+                        <!-- Property card content will be inserted here by JavaScript -->
+                    </div>
+                    <div class="property-card">
+                        <!-- Property card content will be inserted here by JavaScript -->
+                    </div>
+                    <!-- Additional property cards as needed -->
                 </div>
             </div>
         </section>
@@ -68,6 +77,7 @@
 
     <footer>
         <div class="container">
+            <img src="logo.png" alt="Logo Janneth Aguirre" class="footer-logo"> <!-- Agregar el logo en el footer -->
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Janneth Aguirre Bienes Raíces</h3>
