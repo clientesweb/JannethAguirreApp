@@ -64,18 +64,12 @@ header {
 
 .header-content {
     display: flex; 
-    justify-content: space-between; 
+    justify-content: space-between; /* Alinea logo a la izquierda y botón a la derecha */
     align-items: center; 
     padding: 1rem 2rem; 
 }
 
-.logo-title {
-    display: flex; /* Flex para permitir alineación horizontal */
-    align-items: center; 
-}
-
 .header-logo {
-    margin-right: 10px; /* Espacio entre logo y título */
     width: 50px; /* Ajusta el tamaño del logo */
 }
 
@@ -98,20 +92,15 @@ header {
 /* Responsive styles */
 @media (max-width: 768px) {
     .header-content {
-        flex-direction: row; /* Mantiene la dirección de fila en pantallas pequeñas */
-        justify-content: flex-start; /* Alínea los elementos a la izquierda */
-    }
-
-    .logo-title h1 {
-        font-size: 1.2rem; /* Reduce el tamaño del texto en pantallas pequeñas */
+        padding: 0.5rem 1rem; /* Ajusta el padding en pantallas más pequeñas */
     }
 
     .header-logo {
-        width: 45px; /* Reduce el tamaño del logo en pantallas pequeñas */
+        width: 45px; /* Ajusta el tamaño del logo en pantallas pequeñas */
     }
 
     .install-button {
-        margin-left: auto; /* Mueve el botón hacia la derecha */
+        padding: 0.4rem 0.8rem; /* Ajusta el tamaño del botón en pantallas pequeñas */
     }
 }
 
@@ -120,12 +109,8 @@ header {
         padding: 0.5rem 1rem; /* Ajusta el padding en pantallas muy pequeñas */
     }
 
-    .logo-title h1 {
-        font-size: 1rem; /* Tamaño aún más pequeño en pantallas muy pequeñas */
-    }
-
     .header-logo {
-        width: 40px; /* Reduce aún más el tamaño del logo */
+        width: 40px; /* Reduce el tamaño del logo en pantallas muy pequeñas */
     }
 
     .install-button {
