@@ -12,14 +12,31 @@
     <meta name="theme-color" content="#1E3A8A">
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen">
-    <header id="header" class="bg-blue-900 text-white fixed top-0 left-0 right-0 z-50"></header>
-    <main id="main" class="flex-grow mt-16 mb-16 px-4 sm:px-6 lg:px-8"></main>
-    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 md:hidden"></nav>
-    <footer id="footer" class="bg-blue-900 text-white mt-8"></footer>
-    <div id="lead-form" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"></div>
+    <header id="header" class="bg-blue-900 text-white fixed top-0 left-0 right-0 z-50 p-4 shadow-md">
+        <h1 class="text-2xl font-bold">Janneth Aguirre Bienes Raíces</h1>
+        <!-- Aquí puedes agregar un menú de navegación si es necesario -->
+    </header>
+    
+    <main id="main" class="flex-grow mt-16 mb-16 px-4 sm:px-6 lg:px-8">
+        <!-- Contenido principal va aquí -->
+    </main>
+    
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 md:hidden">
+        <!-- Navegación inferior -->
+    </nav>
+    
+    <footer id="footer" class="bg-blue-900 text-white mt-8 p-4">
+        <p class="text-center">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
+    </footer>
+    
+    <div id="lead-form" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <!-- Formulario de contacto o generación de leads -->
+    </div>
+    
     <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="fixed bottom-20 right-4 bg-green-500 text-white rounded-full p-3 shadow-lg z-50 hover:bg-green-600 transition-colors duration-300">
         <i class="fab fa-whatsapp text-2xl"></i>
     </a>
+    
     <button id="install-app" class="fixed top-20 right-4 bg-blue-600 text-white rounded-full p-3 shadow-lg z-50 hidden hover:bg-blue-700 transition-colors duration-300">
         <i class="fas fa-download text-xl"></i>
     </button>
