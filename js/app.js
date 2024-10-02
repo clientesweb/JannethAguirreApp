@@ -1,87 +1,105 @@
-import { initRouter } from './router.js';
-import { renderHeader } from './components/header.js';
-import { renderFooter } from './components/footer.js';
-import { renderBottomNav } from './components/bottomNav.js';
-import { showLeadForm } from './components/leadForm.js';
-import { initSliders } from './sliders.js';
+// Mobile menu toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('nav ul');
 
-// Estado global de la aplicación
-const state = {
-    properties: []
-};
+menuToggle.addEventListener('click', () => {
+    nav.classList.toggle('show');
+});
 
-// Inicialización de la aplicación
-async function initApp() {
-    renderHeader();
-    renderFooter();
-    renderBottomNav();
-    initRouter();
-    initSliders();
-    initLeadForm();
+// Hero slider functionality
+const heroSlides = document.querySelectorAll('.hero-slide');
+let currentSlide = 0;
 
-    // Cargar datos de propiedades
-    await loadProperties();
+function showSlide(n) {
+    heroSlides[currentSlide].classList.remove('active');
+    currentSlide = (n + heroSlides.length) % heroSlides.length;
+    heroSlides[currentSlide].classList.add('active');
 }
 
-// Función para inicializar el formulario de captura de leads
-function initLeadForm() {
-    document.body.addEventListener('click', (e) => {
-        if (e.target.classList.contains('show-lead-form')) {
-            showLeadForm();
+setInterval(() => showSlide(currentSlide + 1), 5000);
+
+// Property slider functionality
+const propertySlider = document.querySelector('.property-slider');
+const prevSlide = document.querySelector('.prev-slide');
+const nextSlide = document.querySelector('.next-slide');
+
+prevSlide.addEventListener('click', () => {
+    propertySlider.scrollBy({ left: -300, behavior: 'smooth' });
+});
+
+nextSlide.addEventListener('click', () => {
+    propertySlider.scrollBy({ left: 300, behavior: 'smooth' });
+});
+
+// Contact form submission
+const contactForm = document.getElementById('contact-form');
+
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Here you would typically send the form data to your server
+    alert('Gracias por contactarnos. Nos pondremos en contacto contigo pronto.');
+    contactForm.reset();
+});
+
+// Newsletter form submission
+const newsletterForm = document.getElementById('newsletter-form');
+
+newsletterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Here you would typically send the email to your server for newsletter subscription
+    alert('Gracias por suscribirte a nuestro boletín.');
+    newsletterForm.reset();
+});
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// PWA installation
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+        .then(reg => console.log('Service Worker registered'))
+        .catch(err => console.log('Service Worker not registered', err));
+}
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('install-app').style.display = 'block';
+});
+
+document.getElementById('install-app').addEventListener('click', (e) => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+            }
+            deferredPrompt = null;
+        });
+    }
+});
+
+// Animate on scroll
+function animateOnScroll() {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementTop < windowHeight - 50) {
+            element.classList.add('animate');
         }
     });
 }
 
-// Función para cargar propiedades
-async function loadProperties() {
-    try {
-        // Cargar propiedades de localStorage si están disponibles
-        const cachedProperties = localStorage.getItem('properties');
-        if (cachedProperties) {
-            state.properties = JSON.parse(cachedProperties);
-        } else {
-            // Cargar propiedades desde el archivo JSON
-            const response = await fetch('properties.json');
-            if (!response.ok) throw new Error('Network response was not ok');
-            const data = await response.json();
-            state.properties = data;
-            localStorage.setItem('properties', JSON.stringify(data));
-        }
-    } catch (error) {
-        console.error('Error loading properties:', error);
-        // Si no hay datos en caché y falla la carga, usamos datos de muestra
-        loadSampleProperties();
-    }
-}
-
-// Función para cargar propiedades de muestra
-function loadSampleProperties() {
-    state.properties = [
-        { 
-            id: 1, 
-            title: 'Casa Moderna en el Centro', 
-            description: '3 habitaciones | 2 baños | 150m²', 
-            price: 250000,
-            image: 'img/properties/property-1.jpg'
-        },
-        { 
-            id: 2, 
-            title: 'Apartamento con Vista al Mar', 
-            description: '2 habitaciones | 1 baño | 80m²', 
-            price: 150000,
-            image: 'img/properties/property-2.jpg'
-        },
-        { 
-            id: 3, 
-            title: 'Villa de Lujo con Piscina', 
-            description: '4 habitaciones | 3 baños | 300m²', 
-            price: 500000,
-            image: 'img/properties/property-3.jpg'
-        },
-    ];
-}
-
-// Iniciar la aplicación
-initApp();
-
-export { state };
+window.addEventListener('scroll', animateOnScroll);
+window.addEventListener('load', animateOnScroll);
