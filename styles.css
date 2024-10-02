@@ -63,30 +63,20 @@ header {
 }
 
 .header-content {
-    display: flex;
-    justify-content: space-between; /* Espacia los elementos a los extremos */
-    align-items: center; /* Centra verticalmente los elementos */
-    padding: 1rem 2rem; /* Espaciado en el header */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 1rem 2rem; 
 }
 
 .logo-title {
-    display: flex;
-    align-items: center; /* Alinea verticalmente el título con el logo */
-    margin-left: 10px; /* Espacio entre el logo y el título */
-}
-
-.logo-title h1 {
-    font-size: 1.5rem; /* Tamaño del texto */
-    font-weight: 600; /* Peso del texto */
-    color: var(--primary-color); /* Color del texto */
-    margin: 0; /* Elimina el margen por defecto */
+    display: flex; /* Flex para permitir alineación horizontal */
+    align-items: center; 
 }
 
 .header-logo {
-    width: 60px; /* Ancho del logo */
-    height: auto; /* Mantiene la proporción del logo */
+    margin-right: 10px; /* Añadido para espacio entre logo y título */
 }
-
 .install-button {
     background-color: var(--primary-color); /* Color del botón */
     color: var(--light-text); /* Color del texto del botón */
