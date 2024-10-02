@@ -5,163 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Janneth Aguirre Bienes Raíces</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#f0f4f8">
+    <meta name="theme-color" content="#C69C6D">
 </head>
 <body>
     <header>
         <div class="container">
-            <img src="logo.png" alt="Janneth Aguirre Bienes Raíces" class="logo">
-            <nav>
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#propiedades">Propiedades</a></li>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </nav>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
+            <h1>Janneth Aguirre</h1>
+            <button id="install-app" class="install-button">
+                <i class="fas fa-download"></i> Instalar App
+            </button>
         </div>
     </header>
 
     <main>
-        <section id="inicio" class="hero">
-            <div class="hero-content">
-                <h1>Encuentra tu hogar ideal</h1>
-                <p>Expertos en bienes raíces con años de experiencia en el mercado</p>
-                <a href="#" class="cta-button" id="open-lead-form">Contáctanos</a>
-            </div>
-            <div class="hero-slider">
-                <div class="hero-slide active" style="background-image: url('hero1.jpg');"></div>
-                <div class="hero-slide" style="background-image: url('hero2.jpg');"></div>
-                <div class="hero-slide" style="background-image: url('hero3.jpg');"></div>
-            </div>
-        </section>
-
-        <section id="propiedades" class="properties">
-            <div class="container">
-                <h2 class="section-title">Propiedades Destacadas</h2>
-                <div class="property-slider">
-                    <div class="property-card">
-                        <img src="property1.jpg" alt="Propiedad 1">
-                        <div class="property-info">
-                            <h3>Casa en Venta</h3>
-                            <p class="price">$500,000</p>
-                            <div class="property-details">
-                                <span><i class="fas fa-bed"></i> 3</span>
-                                <span><i class="fas fa-bath"></i> 2</span>
-                                <span><i class="fas fa-ruler-combined"></i> 200 m²</span>
-                            </div>
+        <section class="hero">
+            <div class="swiper-container hero-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="background-image: url('/images/hero1.jpg');">
+                        <div class="hero-content">
+                            <h2>Encuentra tu hogar ideal</h2>
+                            <p>Expertos en bienes raíces a tu servicio</p>
                         </div>
                     </div>
-                    <div class="property-card">
-                        <img src="property2.jpg" alt="Propiedad 2">
-                        <div class="property-info">
-                            <h3>Apartamento en Renta</h3>
-                            <p class="price">$1,500 /mes</p>
-                            <div class="property-details">
-                                <span><i class="fas fa-bed"></i> 2</span>
-                                <span><i class="fas fa-bath"></i> 1</span>
-                                <span><i class="fas fa-ruler-combined"></i> 80 m²</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="property-card">
-                        <img src="property3.jpg" alt="Propiedad 3">
-                        <div class="property-info">
-                            <h3>Terreno en Venta</h3>
-                            <p class="price">$200,000</p>
-                            <div class="property-details">
-                                <span><i class="fas fa-ruler-combined"></i> 500 m²</span>
-                                <span><i class="fas fa-map-marker-alt"></i> Zona Residencial</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="property-card">
-                        <img src="property4.jpg" alt="Propiedad 4">
-                        <div class="property-info">
-                            <h3>Casa de Lujo</h3>
-                            <p class="price">$1,200,000</p>
-                            <div class="property-details">
-                                <span><i class="fas fa-bed"></i> 5</span>
-                                <span><i class="fas fa-bath"></i> 4</span>
-                                <span><i class="fas fa-ruler-combined"></i> 400 m²</span>
-                            </div>
+                    <div class="swiper-slide" style="background-image: url('/images/hero2.jpg');">
+                        <div class="hero-content">
+                            <h2>Inversiones inteligentes</h2>
+                            <p>Maximiza tus oportunidades en el mercado inmobiliario</p>
                         </div>
                     </div>
                 </div>
-                <div class="slider-controls">
-                    <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
-                    <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <section class="featured-properties container">
+            <h2>Propiedades Destacadas</h2>
+            <div class="swiper-container property-slider">
+                <div class="swiper-wrapper" id="property-wrapper">
+                    <!-- Property cards will be inserted here by JavaScript -->
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <section class="services">
+            <div class="container">
+                <h2>Nuestros Servicios</h2>
+                <div class="service-grid" id="service-grid">
+                    <!-- Service cards will be inserted here by JavaScript -->
                 </div>
             </div>
         </section>
 
-        <section id="servicios" class="services">
-            <div class="container">
-                <h2 class="section-title">Nuestros Servicios</h2>
-                <div class="service-grid">
-                    <div class="service-card">
-                        <i class="fas fa-home"></i>
-                        <h3>Compra de Propiedades</h3>
-                        <p>Te ayudamos a encontrar la casa de tus sueños.</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-building"></i>
-                        <h3>Venta de Propiedades</h3>
-                        <p>Vendemos tu propiedad al mejor precio del mercado.</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>Inversiones Inmobiliarias</h3>
-                        <p>Asesoramos en las mejores oportunidades de inversión.</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-handshake"></i>
-                        <h3>Asesoría Legal</h3>
-                        <p>Ofrecemos apoyo legal en todas tus transacciones.</p>
-                    </div>
+        <section class="about-us container">
+            <h2>Sobre Nosotros</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>En Janneth Aguirre Bienes Raíces, nos dedicamos a hacer realidad los sueños de nuestros clientes. Con años de experiencia en el mercado inmobiliario, ofrecemos un servicio personalizado y de calidad.</p>
+                    <p>Nuestro equipo de profesionales está comprometido con la excelencia y la satisfacción del cliente. Conocemos el mercado local y estamos aquí para guiarte en cada paso del proceso.</p>
+                </div>
+                <div class="about-image">
+                    <img src="/images/about-us.jpg" alt="Equipo de Janneth Aguirre">
                 </div>
             </div>
         </section>
 
-        <section id="sobre-nosotros" class="about-us">
+        <section class="contact">
             <div class="container">
-                <h2 class="section-title">Sobre Nosotros</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>En Janneth Aguirre Bienes Raíces, nos dedicamos a hacer realidad los sueños de nuestros clientes. Con años de experiencia en el mercado inmobiliario, ofrecemos un servicio personalizado y de calidad.</p>
-                        <p>Nuestro equipo de profesionales está comprometido con la excelencia y la satisfacción del cliente. Conocemos el mercado local y estamos aquí para guiarte en cada paso del proceso.</p>
-                    </div>
-                    <div class="about-image">
-                        <img src="about-us.jpg" alt="Equipo de Janneth Aguirre Bienes Raíces">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contacto" class="contact">
-            <div class="container">
-                <h2 class="section-title">Contáctanos</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <h3>Información de Contacto</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> Calle Principal 123, Ciudad</p>
-                        <p><i class="fas fa-phone"></i> (123) 456-7890</p>
-                        <p><i class="fas fa-envelope"></i> info@jannethaguirre.com</p>
-                    </div>
-                    <form id="contact-form" class="contact-form">
-                        <input type="text" name="name" placeholder="Nombre" required>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <input type="tel" name="phone" placeholder="Teléfono" required>
-                        <textarea name="message" placeholder="Mensaje" required></textarea>
-                        <button type="submit" class="submit-button">Enviar</button>
-                    </form>
-                </div>
+                <h2>Contáctanos</h2>
+                <form id="contact-form">
+                    <input type="text" placeholder="Nombre" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Mensaje" rows="4" required></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
             </div>
         </section>
     </main>
@@ -172,46 +95,38 @@
                 <div class="footer-section">
                     <h3>Janneth Aguirre Bienes Raíces</h3>
                     <p>Expertos en bienes raíces con años de experiencia en el mercado.</p>
+                    <p>&copy; 2024 Todos los derechos reservados.</p>
                 </div>
                 <div class="footer-section">
-                    <h3>Enlaces Rápidos</h3>
-                    <ul>
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#propiedades">Propiedades</a></li>
-                        <li><a href="#servicios">Servicios</a></li>
-                        <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                    </ul>
+                    <h3>Contacto</h3>
+                    <p>Teléfono: (123) 456-7890</p>
+                    <p>Email: info@jannethaguirre.com</p>
+                    <p>Dirección: Calle Principal 123, Ciudad</p>
                 </div>
                 <div class="footer-section">
                     <h3>Síguenos</h3>
                     <div class="social-icons">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h3>Boletín</h3>
-                    <form id="newsletter-form">
-                        <input type="email" placeholder="Tu email" required>
-                        <button type="submit">Suscribirse</button>
-                    </form>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
+
+    <nav class="bottom-nav">
+        <a href="#" class="active"><i class="fas fa-home"></i><span>Inicio</span></a>
+        <a href="#"><i class="fas fa-building"></i><span>Propiedades</span></a>
+        <a href="#"><i class="fas fa-search"></i><span>Buscar</span></a>
+        <a href="#"><i class="fas fa-user"></i><span>Perfil</span></a>
+    </nav>
 
     <a href="https://wa.me/1234567890" class="whatsapp-button" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <button id="install-app" class="install-button">Instalar App</button>
-
-    <script src="js/app.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
