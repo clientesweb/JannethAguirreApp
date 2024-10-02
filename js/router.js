@@ -32,8 +32,10 @@ function handleLocation() {
     document.querySelectorAll('.bottom-nav-item').forEach(item => {
         if (item.getAttribute('href') === path) {
             item.classList.add('active');
+            item.classList.add('text-primary');
         } else {
             item.classList.remove('active');
+            item.classList.remove('text-primary');
         }
     });
 }
