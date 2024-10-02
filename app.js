@@ -10,70 +10,56 @@ import { showLeadForm } from './components/leadForm.js';
 // Estado global de la aplicación
 const state = {
     currentPage: 'home',
-    properties: [], // Aquí cargaríamos las propiedades desde un JSON local
+    properties: [],
 };
 
 // Función para actualizar la vista
-function updateView() {
-    switch (state.currentPage) {
-        case 'home':
-            renderHome(document.getElementById('main'));
-            break;
-        case 'properties':
-            renderProperties(document.getElementById('main'), state.properties);
-            break;
-        case 'contact':
-            renderContact(document.getElementById('main'));
-            break;
-        default:
-            renderHome(document.getElementById('main'));
+async function updateView() {
+    const main = document.getElementById('main');
+    main.innerHTML = '<div class="loading">Cargando...</div>';
+
+    try {
+        switch (state.currentPage) {
+            case 'home':
+                await renderHome(main);
+                break;
+            case 'properties':
+                await renderProperties(main, state.properties);
+                break;
+            case 'contact':
+                await renderContact(main);
+                break;
+            default:
+                await renderHome(main);
+        }
+    } catch (error) {
+        console.error('Error rendering page:', error);
+        main.innerHTML = '<div class="error">Lo sentimos, ha ocurrido un error. Por favor, intenta de nuevo más tarde.</div>';
     }
+
+    addEntryAnimations();
+}
+
+// Función para cambiar de página
+function navigateTo(page) {
+    state.currentPage = page;
+    history.pushState({ page }, '', `/${page}`);
+    updateView();
 }
 
 // Inicialización de la aplicación
-function initApp() {
+async function initApp() {
     renderHeader(document.getElementById('header'));
-    renderNav(document.getElementById('nav'), (page) => {
-        state.currentPage = page;
-        updateView();
-    });
+    renderNav(document.getElementById('nav'), navigateTo);
     renderFooter(document.getElementById('footer'));
-    updateView();
 
-    // Evento para mostrar el formulario de captura de leads
-    document.body.addEventListener('click', (e) => {
-        if (e.target.classList.contains('show-lead-form')) {
-            showLeadForm(document.getElementById('lead-form'));
+    // Manejar navegación del historial
+    window.addEventListener('popstate', (event) => {
+        if (event.state && event.state.page) {
+            state.currentPage = event.state.page;
+            updateView();
         }
     });
-}
-
-// Cargar datos de propiedades (simulado)
-fetch('properties.json')
-    .then(response => response.json())
-    .then(data => {
-        state.properties = data;
-        initApp();
-    })
-    .catch(error => {
-        console.error('Error loading properties:', error);
-        initApp(); // Iniciar la app incluso si falla la carga de propiedades
-    });
-// Importaciones de módulos (sin cambios)
-
-// Estado global de la aplicación (sin cambios)
-
-// Función para actualizar la vista (sin cambios)
-
-// Inicialización de la aplicación
-function initApp() {
-    renderHeader(document.getElementById('header'));
-    renderNav(document.getElementById('nav'), (page) => {
-        state.currentPage = page;
-        updateView();
-    });
-    renderFooter(document.getElementById('footer'));
-    updateView();
 
     // Evento para mostrar el formulario de captura de leads
     document.body.addEventListener('click', (e) => {
@@ -85,8 +71,32 @@ function initApp() {
     // Añadir botón de descarga de PWA
     addPWADownloadButton();
 
-    // Añadir animaciones de entrada
-    addEntryAnimations();
+    // Cargar datos de propiedades
+    await loadProperties();
+
+    updateView();
+}
+
+// Función para cargar propiedades
+async function loadProperties() {
+    try {
+        const cachedProperties = localStorage.getItem('properties');
+        if (cachedProperties) {
+            state.properties = JSON.parse(cachedProperties);
+        }
+
+        const response = await fetch('properties.json');
+        const data = await response.json();
+        state.properties = data;
+        localStorage.setItem('properties', JSON.stringify(data));
+    } catch (error) {
+        console.error('Error loading properties:', error);
+        // Si no hay datos en caché y falla la carga, usamos datos de muestra
+        state.properties = [
+            { id: 1, title: 'Casa de muestra', description: '3 habitaciones, 2 baños', price: 250000 },
+            { id: 2, title: 'Apartamento de muestra', description: '2 habitaciones, 1 baño', price: 150000 },
+        ];
+    }
 }
 
 // Función para añadir el botón de descarga de PWA
@@ -132,4 +142,5 @@ function addEntryAnimations() {
     });
 }
 
-// Cargar datos de propiedades (sin cambios)
+// Iniciar la aplicación
+initApp();
