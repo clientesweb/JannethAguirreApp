@@ -28,6 +28,9 @@
 
     <main>
         <section id="inicio" class="hero">
+            <div class="hero-slider">
+                <!-- Slider images will be inserted here by JavaScript -->
+            </div>
             <div class="hero-content">
                 <h2>Encuentra tu hogar ideal</h2>
                 <p>Expertos en bienes raíces a tu servicio</p>
@@ -38,7 +41,7 @@
         <section id="propiedades" class="properties">
             <div class="container">
                 <h2>Propiedades Destacadas</h2>
-                <div class="property-grid" id="property-grid">
+                <div class="property-slider">
                     <!-- Property cards will be inserted here by JavaScript -->
                 </div>
             </div>
@@ -57,9 +60,9 @@
             <div class="container">
                 <h2>Contáctanos</h2>
                 <form id="contact-form">
-                    <input type="text" placeholder="Nombre" required>
-                    <input type="email" placeholder="Email" required>
-                    <textarea placeholder="Mensaje" rows="4" required></textarea>
+                    <input type="text" name="name" placeholder="Nombre" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <textarea name="message" placeholder="Mensaje" rows="4" required></textarea>
                     <button type="submit">Enviar</button>
                 </form>
             </div>
