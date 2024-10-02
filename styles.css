@@ -65,21 +65,22 @@ header {
 
 .header-content {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
+    justify-content: space-between; /* Espacia los elementos a los extremos */
+    align-items: center; /* Centra verticalmente los elementos */
+    padding: 1rem 2rem; /* Ajusta el padding para más espacio en los lados */
 }
 
 .logo-title {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centra verticalmente el título con respecto al logo */
+    margin-left: 10px; /* Espacio entre el logo y el título */
 }
 
 .logo-title h1 {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--primary-color);
+    margin: 0; /* Elimina el margen por defecto */
 }
 
 .logo-title p {
@@ -89,7 +90,7 @@ header {
 
 .header-logo {
     width: 60px;
-    height: auto;
+    height: auto; /* Mantiene la proporción del logo */
 }
 
 .install-button {
@@ -104,7 +105,7 @@ header {
 }
 
 .install-button:hover {
-    background-color: #b58a5d;
+    background-color: #b58a5d; /* Color de fondo al pasar el mouse */
     transform: translateY(-2px);
 }
 
