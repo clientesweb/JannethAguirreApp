@@ -5,461 +5,206 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Janneth Aguirre Bienes Raíces</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1E3A8A">
-    <style>
-        :root {
-            --primary-color: #1E3A8A;
-            --secondary-color: #F3F4F6;
-            --accent-color: #3B82F6;
-            --text-color: #1F2937;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--secondary-color);
-        }
-
-        header {
-            background-color: white;
-            color: var(--primary-color);
-            padding: 1rem;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            max-width: 200px;
-            height: auto;
-        }
-
-        nav ul {
-            display: none;
-            list-style: none;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-left: 1rem;
-        }
-
-        nav ul li a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent-color);
-        }
-
-        .menu-toggle {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            display: block;
-        }
-
-        main {
-            margin-top: 80px;
-            padding: 1rem;
-        }
-
-        .hero {
-            position: relative;
-            height: 60vh;
-            overflow: hidden;
-        }
-
-        .hero-slider {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .hero-slider.active {
-            opacity: 1;
-        }
-
-        .hero-slider img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            z-index: 1;
-        }
-
-        .hero-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background-color: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background-color: var(--primary-color);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin: 2rem 0;
-            color: var(--primary-color);
-        }
-
-        .property-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .property-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .property-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .property-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .property-info {
-            padding: 1rem;
-        }
-
-        .property-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .property-price {
-            font-size: 1.1rem;
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-
-        .property-details {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-section {
-            flex: 1;
-            min-width: 200px;
-            margin-bottom: 1rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-        }
-
-        .social-icons {
-            margin-top: 1rem;
-        }
-
-        .social-icons a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 0.5rem;
-            transition: color 0.3s ease-in-out;
-        }
-
-        .social-icons a:hover {
-            color: var(--accent-color);
-        }
-
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 0.5rem;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .bottom-nav a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 0.8rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .bottom-nav i {
-            font-size: 1.2rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .whatsapp-button {
-            position: fixed;
-            bottom: 70px;
-            right: 20px;
-            background-color: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .whatsapp-button:hover {
-            transform: scale(1.1);
-        }
-
-        .install-button {
-            position: fixed;
-            top: 70px;
-            right: 20px;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            display: none;
-            z-index: 1001;
-        }
-
-        #lead-form {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 1002;
-            display: none;
-        }
-
-        #lead-form h2 {
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        #lead-form input,
-        #lead-form textarea {
-            width: 100%;
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        #lead-form button {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #lead-form button:hover {
-            background-color: var(--primary-color);
-        }
-
-        @media (min-width: 768px) {
-            .menu-toggle {
-                display: none;
-            }
-
-            nav ul {
-                display: flex;
-            }
-
-            .hero-content h1 {
-                font-size: 3.5rem;
-            }
-
-            .bottom-nav {
-                display: none;
-            }
-        }
-    </style>
+    <meta name="theme-color" content="#f0f4f8">
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="Janneth Aguirre Bienes Raíces" class="logo">
-        <nav>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#propiedades">Propiedades</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-        <div class="menu-toggle">
-            <i class="fas fa-bars"></i>
+        <div class="container">
+            <img src="logo.png" alt="Janneth Aguirre Bienes Raíces" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#propiedades">Propiedades</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </header>
 
     <main>
         <section id="inicio" class="hero">
-            <div class="hero-slider active">
-                <img src="hero1.jpg" alt="Propiedad 1">
-            </div>
-            <div class="hero-slider">
-                <img src="hero2.jpg" alt="Propiedad 2">
-            </div>
-            <div class="hero-slider">
-                <img src="hero3.jpg" alt="Propiedad 3">
-            </div>
             <div class="hero-content">
                 <h1>Encuentra tu hogar ideal</h1>
+                <p>Expertos en bienes raíces con años de experiencia en el mercado</p>
                 <a href="#" class="cta-button" id="open-lead-form">Contáctanos</a>
+            </div>
+            <div class="hero-slider">
+                <div class="hero-slide active" style="background-image: url('hero1.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('hero2.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('hero3.jpg');"></div>
             </div>
         </section>
 
-        <section id="propiedades">
-            <h2 class="section-title">Propiedades Destacadas</h2>
-            <div class="property-grid">
-                <div class="property-card">
-                    <img src="property1.jpg" alt="Propiedad 1">
-                    <div class="property-info">
-                        <h3 class="property-title">Casa en Venta</h3>
-                        <p class="property-price">$500,000</p>
-                        <div class="property-details">
-                            <span><i class="fas fa-bed"></i> 3 Habitaciones</span>
-                            <span><i class="fas fa-bath"></i> 2 Baños</span>
-                            <span><i class="fas fa-ruler-combined"></i> 200 m²</span>
+        <section id="propiedades" class="properties">
+            <div class="container">
+                <h2 class="section-title">Propiedades Destacadas</h2>
+                <div class="property-slider">
+                    <div class="property-card">
+                        <img src="property1.jpg" alt="Propiedad 1">
+                        <div class="property-info">
+                            <h3>Casa en Venta</h3>
+                            <p class="price">$500,000</p>
+                            <div class="property-details">
+                                <span><i class="fas fa-bed"></i> 3</span>
+                                <span><i class="fas fa-bath"></i> 2</span>
+                                <span><i class="fas fa-ruler-combined"></i> 200 m²</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <img src="property2.jpg" alt="Propiedad 2">
+                        <div class="property-info">
+                            <h3>Apartamento en Renta</h3>
+                            <p class="price">$1,500 /mes</p>
+                            <div class="property-details">
+                                <span><i class="fas fa-bed"></i> 2</span>
+                                <span><i class="fas fa-bath"></i> 1</span>
+                                <span><i class="fas fa-ruler-combined"></i> 80 m²</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <img src="property3.jpg" alt="Propiedad 3">
+                        <div class="property-info">
+                            <h3>Terreno en Venta</h3>
+                            <p class="price">$200,000</p>
+                            <div class="property-details">
+                                <span><i class="fas fa-ruler-combined"></i> 500 m²</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Zona Residencial</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <img src="property4.jpg" alt="Propiedad 4">
+                        <div class="property-info">
+                            <h3>Casa de Lujo</h3>
+                            <p class="price">$1,200,000</p>
+                            <div class="property-details">
+                                <span><i class="fas fa-bed"></i> 5</span>
+                                <span><i class="fas fa-bath"></i> 4</span>
+                                <span><i class="fas fa-ruler-combined"></i> 400 m²</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="property-card">
-                    <img src="property2.jpg" alt="Propiedad 2">
-                    <div class="property-info">
-                        <h3 class="property-title">Apartamento en Renta</h3>
-                        <p class="property-price">$1,500 /mes</p>
-                        <div class="property-details">
-                            <span><i class="fas fa-bed"></i> 2 Habitaciones</span>
-                            <span><i class="fas fa-bath"></i> 1 Baño</span>
-                            <span><i class="fas fa-ruler-combined"></i> 80 m²</span>
-                        </div>
+                <div class="slider-controls">
+                    <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="services">
+            <div class="container">
+                <h2 class="section-title">Nuestros Servicios</h2>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <i class="fas fa-home"></i>
+                        <h3>Compra de Propiedades</h3>
+                        <p>Te ayudamos a encontrar la casa de tus sueños.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-building"></i>
+                        <h3>Venta de Propiedades</h3>
+                        <p>Vendemos tu propiedad al mejor precio del mercado.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Inversiones Inmobiliarias</h3>
+                        <p>Asesoramos en las mejores oportunidades de inversión.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Asesoría Legal</h3>
+                        <p>Ofrecemos apoyo legal en todas tus transacciones.</p>
                     </div>
                 </div>
-                <div class="property-card">
-                    <img src="property3.jpg" alt="Propiedad 3">
-                    <div class="property-info">
-                        <h3 class="property-title">Terreno en Venta</h3>
-                        <p class="property-price">$200,000</p>
-                        <div class="property-details">
-                            <span><i class="fas fa-ruler-combined"></i> 500 m²</span>
-                            <span><i class="fas fa-map-marker-alt"></i> Zona Residencial</span>
-                        </div>
+            </div>
+        </section>
+
+        <section id="sobre-nosotros" class="about-us">
+            <div class="container">
+                <h2 class="section-title">Sobre Nosotros</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>En Janneth Aguirre Bienes Raíces, nos dedicamos a hacer realidad los sueños de nuestros clientes. Con años de experiencia en el mercado inmobiliario, ofrecemos un servicio personalizado y de calidad.</p>
+                        <p>Nuestro equipo de profesionales está comprometido con la excelencia y la satisfacción del cliente. Conocemos el mercado local y estamos aquí para guiarte en cada paso del proceso.</p>
                     </div>
+                    <div class="about-image">
+                        <img src="about-us.jpg" alt="Equipo de Janneth Aguirre Bienes Raíces">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contáctanos</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Información de Contacto</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Calle Principal 123, Ciudad</p>
+                        <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                        <p><i class="fas fa-envelope"></i> info@jannethaguirre.com</p>
+                    </div>
+                    <form id="contact-form" class="contact-form">
+                        <input type="text" name="name" placeholder="Nombre" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="tel" name="phone" placeholder="Teléfono" required>
+                        <textarea name="message" placeholder="Mensaje" required></textarea>
+                        <button type="submit" class="submit-button">Enviar</button>
+                    </form>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Janneth Aguirre Bienes Raíces</h3>
-                <p>Expertos en bienes raíces con años de experiencia en el mercado.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Contacto</h3>
-                <p>Teléfono: (123) 456-7890</p>
-                <p>Email: info@jannethaguirre.com</p>
-                <p>Dirección: Calle Principal 123, Ciudad</p>
-            </div>
-            <div class="footer-section">
-                <h3>Síguenos</h3>
-                <div class="social-icons">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Janneth Aguirre Bienes Raíces</h3>
+                    <p>Expertos en bienes raíces con años de experiencia en el mercado.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#propiedades">Propiedades</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Boletín</h3>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit">Suscribirse</button>
+                    </form>
                 </div>
             </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
+            </div>
         </div>
-        <p>&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
     </footer>
-
-    <nav class="bottom-nav">
-        <a href="#inicio"><i class="fas fa-home"></i>Inicio</a>
-        <a href="#propiedades"><i class="fas fa-building"></i>Propiedades</a>
-        <a href="#servicios"><i class="fas fa-concierge-bell"></i>Servicios</a>
-        <a href="#contacto"><i class="fas fa-envelope"></i>Contacto</a>
-    </nav>
 
     <a href="https://wa.me/1234567890" class="whatsapp-button" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
@@ -467,98 +212,6 @@
 
     <button id="install-app" class="install-button">Instalar App</button>
 
-    <div id="lead-form">
-        <h2>Contáctanos</h2>
-        <form id="contact-form">
-            <input type="text" name="name" placeholder="Nombre" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="tel" name="phone" placeholder="Teléfono" required>
-            <textarea name="message" placeholder="Mensaje" required></textarea>
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
-
-    <script>
-        // Hero slider functionality
-        const heroSlides = document.querySelectorAll('.hero-slider');
-        let currentSlide = 0;
-
-        function showSlide(n) {
-            heroSlides[currentSlide].classList.remove('active');
-            currentSlide = (n + heroSlides.length) % heroSlides.length;
-            heroSlides[currentSlide].classList.add('active');
-        }
-
-        setInterval(() => showSlide(currentSlide + 1), 5000);
-
-        // Mobile menu toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('nav ul');
-
-        menuToggle.addEventListener('click', () => {
-            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-        });
-
-        // Lead form functionality
-        const openLeadForm = document.getElementById('open-lead-form');
-        const leadForm = document.getElementById('lead-form');
-        const contactForm = document.getElementById('contact-form');
-
-        openLeadForm.addEventListener('click', (e) => {
-            e.preventDefault();
-            leadForm.style.display = 'block';
-        });
-
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Here you would typically send the form data to your server
-            alert('Gracias por contactarnos. Nos pondremos en contacto contigo pronto.');
-            leadForm.style.display = 'none';
-            contactForm.reset();
-        });
-
-        // Close lead form when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === leadForm) {
-                leadForm.style.display = 'none';
-            }
-        });
-
-        // PWA installation
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(reg => console.log('Service Worker registered'))
-                .catch(err => console.log('Service Worker not registered', err));
-        }
-
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('install-app').style.display = 'block';
-        });
-
-        document.getElementById('install-app').addEventListener('click', (e) => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                    }
-                    deferredPrompt = null;
-                });
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
