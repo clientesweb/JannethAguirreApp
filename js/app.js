@@ -103,3 +103,9 @@ function animateOnScroll() {
 
 window.addEventListener('scroll', animateOnScroll);
 window.addEventListener('load', animateOnScroll);
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(reg => console.log('Service Worker registered'))
+    .catch(err => console.log('Service Worker not registered', err));
+}
