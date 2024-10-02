@@ -27,6 +27,15 @@ function handleLocation() {
     const main = document.getElementById('main');
     main.innerHTML = '<div class="text-center py-4">Cargando...</div>';
     renderFunction(main, state.properties);
+
+    // Update active state in bottom navigation
+    document.querySelectorAll('.bottom-nav-item').forEach(item => {
+        if (item.getAttribute('href') === path) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
 }
 
 function navigateTo(url) {
