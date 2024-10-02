@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janneth Aguirre Bienes Raíces</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4A90E2">
+</head>
+<body>
+    <header id="header">
+        <!-- El contenido del encabezado se cargará dinámicamente -->
+    </header>
+
+    <nav id="nav">
+        <!-- La navegación se cargará dinámicamente -->
+    </nav>
+
+    <main id="main">
+        <!-- El contenido principal se cargará dinámicamente -->
+    </main>
+
+    <footer id="footer">
+        <!-- El pie de página se cargará dinámicamente -->
+    </footer>
+
+    <div id="lead-form" class="hidden">
+        <!-- El formulario de captura de leads se cargará dinámicamente -->
+    </div>
+
+    <script src="app.js" type="module"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then((reg) => console.log('Service worker registered', reg))
+                .catch((err) => console.log('Service worker not registered', err));
+        }
+    </script>
+</body>
+</html>
