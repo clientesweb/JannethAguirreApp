@@ -71,7 +71,7 @@ header {
 
 .logo-title {
     display: flex;
-    align-items: left; /* Centra verticalmente el título con respecto al logo */
+    align-items: center; /* Alinea verticalmente el título con el logo */
     margin-left: 10px; /* Espacio entre el logo y el título */
 }
 
@@ -132,7 +132,6 @@ header {
         padding: 0.4rem 0.8rem; /* Ajusta el padding del botón en pantallas muy pequeñas */
     }
 }
-
 /* Hero Section */
 .hero {
     position: relative;
