@@ -98,12 +98,27 @@ function initPropertySlider() {
                     ${property.baths ? `<span><i class="fas fa-bath"></i> ${property.baths}</span>` : ''}
                     <span><i class="fas fa-vector-square"></i> ${property.area} m²</span>
                 </div>
+                <a href="#" class="contact-button" data-property="${property.id}">Contactar</a>
             </div>
         `;
         sliderContainer.appendChild(propertyCard);
     });
 
     propertySlider.appendChild(sliderContainer);
+
+    // Add event listeners for contact buttons
+    const contactButtons = sliderContainer.querySelectorAll('.contact-button');
+    contactButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const propertyId = button.dataset.property;
+            const property = properties.find(p => p.id === parseInt(propertyId));
+            if (property) {
+                const message = encodeURIComponent(`Hola, estoy interesado en la propiedad "${property.title}" con precio ${property.price}. ¿Podría darme más información?`);
+                window.open(`https://wa.me/1234567890?text=${message}`, '_blank');
+            }
+        });
+    });
 }
 
 // Populate service cards
@@ -134,9 +149,24 @@ function populateStoreItems() {
                 <h3>${item.title}</h3>
                 <p class="price">${item.price}</p>
                 <p class="category">${item.category}</p>
+                <a href="#" class="contact-button" data-item="${item.id}">Contactar</a>
             </div>
         `;
         storeGrid.appendChild(storeItem);
+    });
+
+    // Add event listeners for contact buttons
+    const contactButtons = storeGrid.querySelectorAll('.contact-button');
+    contactButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const itemId = button.dataset.item;
+            const item = storeItems.find(i => i.id === parseInt(itemId));
+            if (item) {
+                const message = encodeURIComponent(`Hola, estoy interesado en el item "${item.title}" con precio ${item.price}. ¿Podría darme más información?`);
+                window.open(`https://wa.me/1234567890?text=${message}`, '_blank');
+            }
+        });
     });
 }
 
