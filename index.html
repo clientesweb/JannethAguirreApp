@@ -6,90 +6,108 @@
     <title>Janneth Aguirre Bienes Raíces</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#c69c6d',
+                        secondary: '#f0e6d2',
+                        background: '#faf7f2',
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#f0e6d2">
 </head>
-<body>
-    <div class="promo-banner">
-        <div class="promo-slider">
+<body class="font-poppins bg-background text-gray-800">
+    <div class="bg-primary text-white py-2 overflow-hidden">
+        <div class="promo-slider container mx-auto px-4">
             <!-- Promo items will be inserted here by JavaScript -->
         </div>
     </div>
 
-   <header>
-    <div class="container">
-        <div class="header-content">
-            <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="header-logo">
-            <button id="install-app" class="install-button">
-                <i class="fas fa-download"></i> Instalar App
-            </button>
+    <header class="bg-secondary shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="h-12">
+                <button id="install-app" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">
+                    <i class="fas fa-download mr-2"></i> Instalar App
+                </button>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
     <main>
-        <section id="inicio" class="hero">
-            <div class="hero-slider">
+        <section id="inicio" class="relative h-[calc(100vh-80px)] overflow-hidden">
+            <div class="hero-slider absolute inset-0">
                 <!-- Slider images will be inserted here by JavaScript -->
             </div>
-            <div class="hero-content">
-                <h2>Encuentra tu hogar ideal</h2>
-                <p>Expertos en bienes raíces a tu servicio</p>
-                <a href="#propiedades" class="cta-button">Ver Propiedades</a>
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div class="text-center text-white p-4">
+                    <h2 class="text-4xl font-bold mb-4">Encuentra tu hogar ideal</h2>
+                    <p class="text-xl mb-6">Expertos en bienes raíces a tu servicio</p>
+                    <a href="#propiedades" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Ver Propiedades</a>
+                </div>
             </div>
         </section>
 
-        <section id="propiedades" class="properties">
-            <div class="container">
-                <h2>Propiedades Destacadas</h2>
-                <div class="property-slider">
+        <section id="propiedades" class="py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Propiedades Destacadas</h2>
+                <div class="property-slider overflow-x-auto">
                     <!-- Property cards will be inserted here by JavaScript -->
                 </div>
             </div>
         </section>
 
-        <section id="servicios" class="services">
-            <div class="container">
-                <h2>Nuestros Servicios</h2>
-                <div class="service-grid" id="service-grid">
+        <section id="servicios" class="bg-secondary py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Nuestros Servicios</h2>
+                <div id="service-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Service cards will be inserted here by JavaScript -->
                 </div>
             </div>
         </section>
 
-        <section id="tienda" class="store">
-            <div class="container">
-                <h2>Tienda Online</h2>
-                <div class="store-filters">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="venta">Venta</button>
-                    <button class="filter-btn" data-filter="alquiler">Alquiler</button>
-                    <button class="filter-btn" data-filter="proyecto">Proyectos</button>
+        <section id="tienda" class="py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Tienda Online</h2>
+                <div class="flex justify-center space-x-4 mb-8">
+                    <button class="filter-btn active bg-primary text-white px-4 py-2 rounded" data-filter="all">Todos</button>
+                    <button class="filter-btn bg-secondary text-gray-800 px-4 py-2 rounded" data-filter="venta">Venta</button>
+                    <button class="filter-btn bg-secondary text-gray-800 px-4 py-2 rounded" data-filter="alquiler">Alquiler</button>
+                    <button class="filter-btn bg-secondary text-gray-800 px-4 py-2 rounded" data-filter="proyecto">Proyectos</button>
                 </div>
-                <div class="store-grid" id="store-grid">
+                <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Store items will be inserted here by JavaScript -->
                 </div>
             </div>
         </section>
 
-        <section id="promo-banner" class="promo-banner-section">
-            <div class="container">
-                <h2>Ofertas Especiales</h2>
-                <p>¡No te pierdas nuestras increíbles promociones en propiedades seleccionadas!</p>
-                <a href="#contacto" class="cta-button">Contáctanos Ahora</a>
+        <section id="promo-banner" class="bg-primary text-white py-16">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold mb-4">Ofertas Especiales</h2>
+                <p class="text-xl mb-8">¡No te pierdas nuestras increíbles promociones en propiedades seleccionadas!</p>
+                <a href="#contacto" class="bg-white text-primary px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors">Contáctanos Ahora</a>
             </div>
         </section>
 
-        <section id="contacto" class="contact">
-            <div class="container">
-                <h2>Contáctanos</h2>
-                <div class="contact-content">
-                    <form id="contact-form">
-                        <input type="text" name="name" placeholder="Nombre" required>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <textarea name="message" placeholder="Mensaje" rows="4" required></textarea>
-                        <button type="submit">Enviar</button>
+        <section id="contacto" class="py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <form id="contact-form" class="space-y-4">
+                        <input type="text" name="name" placeholder="Nombre" required class="w-full px-4 py-2 border border-gray-300 rounded">
+                        <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border border-gray-300 rounded">
+                        <textarea name="message" placeholder="Mensaje" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded"></textarea>
+                        <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Enviar</button>
                     </form>
                     <div class="map-container">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.964560146161!2d-77.03196518561798!3d-12.046654545137994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8b5d35662c7%3A0x15f0bbc9023d16d7!2sPlaza%20Mayor%20de%20Lima!5e0!3m2!1ses-419!2spe!4v1623344892535!5m2!1ses-419!2spe" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -99,44 +117,43 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="footer-logo">
-                    <h3></h3>
+    <footer class="bg-secondary py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="h-16 mb-4">
                     <p>Expertos en bienes raíces con años de experiencia en el mercado.</p>
                 </div>
-                <div class="footer-section">
-                    <h3>Contacto</h3>
-                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
-                    <p><i class="fas fa-envelope"></i> info@jannethaguirre.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Lima, Perú</p>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contacto</h3>
+                    <p class="mb-2"><i class="fas fa-phone mr-2"></i> (123) 456-7890</p>
+                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> info@jannethaguirre.com</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> Av. Principal 123, Lima, Perú</p>
                 </div>
-                <div class="footer-section">
-                    <h3>Síguenos</h3>
-                    <div class="social-icons">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Síguenos</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" aria-label="Facebook" class="text-primary hover:text-primary/80"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram" class="text-primary hover:text-primary/80"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter" class="text-primary hover:text-primary/80"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn" class="text-primary hover:text-primary/80"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
-            <p class="copyright">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
-            <p class="powered-by">Powered by <a href="https://dualitydomain.com" target="_blank" rel="noopener noreferrer">Duality Domain</a></p>
+            <p class="text-center mt-8">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
+            <p class="text-center mt-2">Powered by <a href="https://dualitydomain.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Duality Domain</a></p>
         </div>
     </footer>
 
-    <nav class="bottom-nav">
-        <a href="#inicio"><i class="fas fa-home"></i><span>Inicio</span></a>
-        <a href="#propiedades"><i class="fas fa-building"></i><span>Propiedades</span></a>
-        <a href="#servicios"><i class="fas fa-concierge-bell"></i><span>Servicios</span></a>
-        <a href="#tienda"><i class="fas fa-store"></i><span>Tienda</span></a>
-        <a href="#contacto"><i class="fas fa-envelope"></i><span>Contacto</span></a>
+    <nav class="fixed bottom-0 left-0 right-0 bg-secondary py-2 px-4 flex justify-around">
+        <a href="#inicio" class="text-center"><i class="fas fa-home block mb-1"></i><span class="text-xs">Inicio</span></a>
+        <a href="#propiedades" class="text-center"><i class="fas fa-building block mb-1"></i><span class="text-xs">Propiedades</span></a>
+        <a href="#servicios" class="text-center"><i class="fas fa-concierge-bell block mb-1"></i><span class="text-xs">Servicios</span></a>
+        <a href="#tienda" class="text-center"><i class="fas fa-store block mb-1"></i><span class="text-xs">Tienda</span></a>
+        <a href="#contacto" class="text-center"><i class="fas fa-envelope block mb-1"></i><span class="text-xs">Contacto</span></a>
     </nav>
 
-    <a href="https://wa.me/1234567890" class="whatsapp-button" aria-label="Contactar por WhatsApp">
+    <a href="https://wa.me/1234567890" class="fixed bottom-20 right-4 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
