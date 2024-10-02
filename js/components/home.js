@@ -5,20 +5,20 @@ export function renderHome(container) {
             <section class="hero-slider swiper-container mb-8">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <div class="hero-content bg-primary text-white p-4 md:p-8 lg:p-12 rounded-lg" style="background-image: url('https://via.placeholder.com/1200x600?text=Hero+Image+1'); background-size: cover; background-position: center;">
-                            <div class="bg-black bg-opacity-40 p-6 md:p-10 lg:p-14 rounded-xl max-w-3xl mx-auto text-center">
-                                <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">Encuentra la casa de tus sueños</h2>
-                                <p class="text-sm md:text-lg lg:text-xl mb-6">Explora nuestra selección de propiedades exclusivas</p>
-                                <a href="/properties" class="bg-yellow-400 text-blue-900 px-6 py-3 rounded-full font-semibold hover:bg-yellow-300 transition duration-300 inline-block" data-link>Ver Propiedades</a>
+                        <div class="hero-content rounded-lg shadow-lg overflow-hidden" style="background-image: url('https://via.placeholder.com/1200x600?text=Hero+Image+1'); background-size: cover; background-position: center;">
+                            <div class="bg-white bg-opacity-90 p-6 md:p-10 lg:p-12 rounded-xl max-w-3xl mx-auto text-center">
+                                <h2 class="text-3xl md:text-5xl font-bold mb-4">Encuentra la casa de tus sueños</h2>
+                                <p class="text-lg md:text-xl mb-6">Explora nuestra selección de propiedades exclusivas</p>
+                                <a href="/properties" class="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-400 transition duration-300 inline-block" data-link>Ver Propiedades</a>
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="hero-content bg-primary text-white p-4 md:p-8 lg:p-12 rounded-lg" style="background-image: url('https://via.placeholder.com/1200x600?text=Hero+Image+2'); background-size: cover; background-position: center;">
-                            <div class="bg-black bg-opacity-40 p-6 md:p-10 lg:p-14 rounded-xl max-w-3xl mx-auto text-center">
-                                <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">Inversiones inteligentes en bienes raíces</h2>
-                                <p class="text-sm md:text-lg lg:text-xl mb-6">Descubre oportunidades únicas en el mercado inmobiliario</p>
-                                <a href="/contact" class="bg-yellow-400 text-blue-900 px-6 py-3 rounded-full font-semibold hover:bg-yellow-300 transition duration-300 inline-block" data-link>Contáctanos</a>
+                        <div class="hero-content rounded-lg shadow-lg overflow-hidden" style="background-image: url('https://via.placeholder.com/1200x600?text=Hero+Image+2'); background-size: cover; background-position: center;">
+                            <div class="bg-white bg-opacity-90 p-6 md:p-10 lg:p-12 rounded-xl max-w-3xl mx-auto text-center">
+                                <h2 class="text-3xl md:text-5xl font-bold mb-4">Inversiones inteligentes en bienes raíces</h2>
+                                <p class="text-lg md:text-xl mb-6">Descubre oportunidades únicas en el mercado inmobiliario</p>
+                                <a href="/contact" class="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-400 transition duration-300 inline-block" data-link>Contáctanos</a>
                             </div>
                         </div>
                     </div>
@@ -42,9 +42,9 @@ export function renderHome(container) {
             </section>
             
             <!-- About Us Section -->
-            <section class="about-us bg-white p-6 md:p-8 lg:p-10 rounded-xl shadow-lg mb-12">
+            <section class="about-us bg-white p-6 md:p-8 lg:p-10 rounded-xl shadow-md mb-12">
                 <h2 class="text-2xl md:text-4xl font-bold mb-6 text-center">Sobre Nosotros</h2>
-                <p class="mb-8 text-center max-w-2xl mx-auto text-sm md:text-lg">Con más de 15 años de experiencia, Janneth Aguirre Bienes Raíces es tu mejor opción para encontrar el hogar perfecto. Nuestro equipo de expertos está comprometido con brindar un servicio excepcional y personalizado a cada uno de nuestros clientes.</p>
+                <p class="mb-8 text-center max-w-2xl mx-auto text-sm md:text-lg text-gray-600">Con más de 15 años de experiencia, Janneth Aguirre Bienes Raíces es tu mejor opción para encontrar el hogar perfecto. Nuestro equipo de expertos está comprometido con brindar un servicio excepcional y personalizado a cada uno de nuestros clientes.</p>
                 <div class="text-center">
                     <a href="/contact" class="inline-block bg-blue-600 text-white px-6 py-3 md:px-8 md:py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300" data-link>Contáctanos</a>
                 </div>
@@ -70,7 +70,7 @@ function generatePropertyCards(count) {
                         <h3 class="text-lg md:text-xl font-bold mb-2">Hermosa Casa en Venta</h3>
                         <p class="text-sm md:text-base text-gray-600 mb-4">3 habitaciones | 2 baños | 150m²</p>
                         <p class="text-xl md:text-2xl font-bold text-blue-600 mb-4">$250,000</p>
-                        <button class="bg-yellow-400 text-blue-900 px-4 py-2 rounded-full hover:bg-yellow-300 transition duration-300 show-lead-form">Ver Detalles</button>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-400 transition duration-300 show-lead-form">Ver Detalles</button>
                     </div>
                 </div>
             </div>
