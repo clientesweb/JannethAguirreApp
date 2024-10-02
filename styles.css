@@ -75,8 +75,10 @@ header {
 }
 
 .header-logo {
-    margin-right: 10px; /* Añadido para espacio entre logo y título */
+    margin-right: 10px; /* Espacio entre logo y título */
+    width: 50px; /* Ajusta el tamaño del logo */
 }
+
 .install-button {
     background-color: var(--primary-color); /* Color del botón */
     color: var(--light-text); /* Color del texto del botón */
@@ -105,11 +107,15 @@ header {
     }
 
     .header-logo {
-        width: 50px; /* Reduce el tamaño del logo en pantallas pequeñas */
+        width: 45px; /* Reduce el tamaño del logo en pantallas pequeñas */
     }
 }
 
 @media (max-width: 480px) {
+    .header-content {
+        padding: 0.5rem 1rem; /* Ajusta el padding en pantallas muy pequeñas */
+    }
+
     .logo-title h1 {
         font-size: 1rem; /* Tamaño aún más pequeño en pantallas muy pequeñas */
     }
