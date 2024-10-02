@@ -17,7 +17,7 @@ updatePromo(); // Initial update
 
 // Hero Slider
 const heroImages = [
-    "/placeholder.svg?height=600&width=1200",
+    "/img/paisaje-analogico-ciudad-edificios_23-2149661457.jpg",
     "/placeholder.svg?height=600&width=1200",
     "/placeholder.svg?height=600&width=1200"
 ];
