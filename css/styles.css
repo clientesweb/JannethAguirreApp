@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 :root {
-    --primary-color: #1E3A8A;
-    --secondary-color: #3B82F6;
+    --primary-color: #3B82F6;
+    --secondary-color: #10B981;
     --accent-color: #F59E0B;
-    --text-color: #1F2937;
+    --text-color: #374151;
     --background-color: #F3F4F6;
+    --card-background: #FFFFFF;
 }
 
 body {
@@ -46,6 +47,7 @@ body {
 
 .property-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--card-background);
 }
 
 .property-card:hover {
@@ -74,15 +76,20 @@ body {
 }
 
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.page-transition {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.page-transition.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Responsive adjustments */
@@ -99,4 +106,28 @@ body {
     .property-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+@media (min-width: 1025px) {
+    .property-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
 }
