@@ -1,3 +1,10 @@
+// Promo data
+const promos = [
+    "¡Oferta especial! 10% de descuento en propiedades seleccionadas",
+    "Nuevo proyecto residencial: Apartamentos de lujo desde $200,000",
+    "Asesoría gratuita para inversiones inmobiliarias este mes"
+];
+
 // Hero slider images
 const heroImages = [
     '/images/hero1.jpg',
@@ -11,6 +18,8 @@ const properties = [
     { id: 2, title: 'Apartamento Céntrico', price: '$1,500 /mes', image: '/images/property2.jpg', beds: 2, baths: 1, area: 80 },
     { id: 3, title: 'Terreno con Vista', price: '$200,000', image: '/images/property3.jpg', area: 500 },
     { id: 4, title: 'Casa de Lujo', price: '$1,200,000', image: '/images/property4.jpg', beds: 5, baths: 4, area: 400 },
+    { id: 5, title: 'Loft Industrial', price: '$350,000', image: '/images/property5.jpg', beds: 1, baths: 1, area: 120 },
+    { id: 6, title: 'Casa de Campo', price: '$600,000', image: '/images/property6.jpg', beds: 4, baths: 3, area: 300 },
 ];
 
 // Services data
@@ -30,6 +39,24 @@ const storeItems = [
     { id: 5, title: 'Terreno Industrial', price: '$1,200,000', image: '/images/store5.jpg', category: 'venta' },
     { id: 6, title: 'Condominio de Lujo', price: 'Desde $500,000', image: '/images/store6.jpg', category: 'proyecto' },
 ];
+
+// Promo Banner
+function initPromoBanner() {
+    const promoSlider = document.querySelector('.promo-slider');
+    promos.forEach(promo => {
+        const promoItem = document.createElement('div');
+        promoItem.className = 'promo-item';
+        promoItem.textContent = promo;
+        promoSlider.appendChild(promoItem);
+    });
+    // Clone the first set of items to create a seamless loop
+    promos.forEach(promo => {
+        const promoItem = document.createElement('div');
+        promoItem.className = 'promo-item';
+        promoItem.textContent = promo;
+        promoSlider.appendChild(promoItem);
+    });
+}
 
 // Hero Slider
 function initHeroSlider() {
@@ -55,8 +82,6 @@ function initHeroSlider() {
 // Property Slider
 function initPropertySlider() {
     const propertySlider = document.querySelector('.property-slider');
-    let currentIndex = 0;
-
     const sliderContainer = document.createElement('div');
     sliderContainer.className = 'property-slider-container';
 
@@ -79,31 +104,6 @@ function initPropertySlider() {
     });
 
     propertySlider.appendChild(sliderContainer);
-
-    const controls = document.createElement('div');
-    controls.className = 'slider-controls';
-    controls.innerHTML = `
-        <button class="slider-control prev"><i class="fas fa-chevron-left"></i></button>
-        <button class="slider-control next"><i class="fas fa-chevron-right"></i></button>
-    `;
-    propertySlider.appendChild(controls);
-
-    const prevButton = controls.querySelector('.prev');
-    const nextButton = controls.querySelector('.next');
-
-    prevButton.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + properties.length) % properties.length;
-        updateSlider();
-    });
-
-    nextButton.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % properties.length;
-        updateSlider();
-    });
-
-    function updateSlider() {
-        sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
 }
 
 // Populate service cards
@@ -207,9 +207,7 @@ function initContactForm() {
         const formData = new FormData(contactForm);
         console.log('Form data:', Object.fromEntries(formData));
         alert('Gracias por contactarnos. Nos pondremos en contacto contigo pronto.');
-        contact
-
-Form.reset();
+        contactForm.reset();
     });
 }
 
@@ -254,6 +252,7 @@ function registerServiceWorker() {
 
 // Initialize all functions
 function init() {
+    initPromoBanner();
     initHeroSlider();
     initPropertySlider();
     populateServices();
