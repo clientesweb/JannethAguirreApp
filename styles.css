@@ -71,7 +71,7 @@ header {
 
 .logo-title {
     display: flex;
-    align-items: center; /* Centra verticalmente el título con respecto al logo */
+    align-items: left; /* Centra verticalmente el título con respecto al logo */
     margin-left: 10px; /* Espacio entre el logo y el título */
 }
 
