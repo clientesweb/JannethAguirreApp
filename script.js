@@ -46,30 +46,51 @@ function updateHeroSlider() {
 
 setInterval(updateHeroSlider, 5000);
 
-// Property Slider
 const properties = [
-    { image: "/placeholder.svg?height=200&width=300", title: "Casa Moderna", price: "$250,000", bedrooms: 3, bathrooms: 2, area: "150m²" },
-    { image: "/placeholder.svg?height=200&width=300", title: "Apartamento Céntrico", price: "$150,000", bedrooms: 2, bathrooms: 1, area: "80m²" },
-    { image: "/placeholder.svg?height=200&width=300", title: "Villa de Lujo", price: "$500,000", bedrooms: 5, bathrooms: 4, area: "300m²" },
+    {
+        image: '/img/property1.jpg',
+        title: 'Casa en la Playa',
+        price: '$350,000',
+        bedrooms: 3,
+        bathrooms: 2,
+        area: '120 m²'
+    },
+    {
+        image: '/img/property2.jpg',
+        title: 'Apartamento Moderno',
+        price: '$250,000',
+        bedrooms: 2,
+        bathrooms: 1,
+        area: '85 m²'
+    }
+    // Agrega más propiedades si es necesario
 ];
 
 const propertySlider = document.querySelector('.property-slider');
 
 properties.forEach(property => {
     const propertyCard = document.createElement('div');
-    propertyCard.className = 'property-card bg-white rounded-lg shadow-md overflow-hidden flex-shrink-0 w-72 mr-4';
+    propertyCard.className = 'property-card bg-white rounded-lg shadow-md flex-shrink-0 w-72';
+    
+    const whatsappMessage = `Hola, estoy interesado en la propiedad: ${property.title}, que cuesta ${property.price}. Tiene ${property.bedrooms} habitaciones y ${property.bathrooms} baños.`;
+    const whatsappLink = `https://api.whatsapp.com/send?phone=1234567890&text=${encodeURIComponent(whatsappMessage)}`; // Reemplaza con el número real
+
     propertyCard.innerHTML = `
         <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
         <div class="p-4">
             <h3 class="font-bold text-lg mb-2">${property.title}</h3>
             <p class="text-primary font-bold mb-2">${property.price}</p>
-            <div class="flex justify-between text-sm text-gray-600">
+            <div class="flex justify-between text-sm text-gray-600 mb-2">
                 <span>${property.bedrooms} Habitaciones</span>
                 <span>${property.bathrooms} Baños</span>
                 <span>${property.area}</span>
             </div>
+            <a href="${whatsappLink}" target="_blank" class="whatsapp-button bg-green-500 text-white rounded-full p-2 inline-block text-center shadow-lg">
+                <i class="fab fa-whatsapp"></i>
+            </a>
         </div>
     `;
+    
     propertySlider.appendChild(propertyCard);
 });
 
