@@ -7,18 +7,18 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const heroImages = [
-        "/img/hero1.jpg",
-        "/img/hero2.jpg",
-        "/img/hero3.jpg"
+        "/placeholder.svg?height=600&width=1200",
+        "/placeholder.svg?height=600&width=1200",
+        "/placeholder.svg?height=600&width=1200"
     ];
 
     const properties = [
-        { id: 1, title: "Casa moderna", price: "$250,000", image: "/img/property1.jpg", type: "venta" },
-        { id: 2, title: "Apartamento céntrico", price: "$1,200/mes", image: "/img/property2.jpg", type: "alquiler" },
-        { id: 3, title: "Terreno en la playa", price: "$100,000", image: "/img/property3.jpg", type: "venta" },
-        { id: 4, title: "Oficina ejecutiva", price: "$2,000/mes", image: "/img/property4.jpg", type: "alquiler" },
-        { id: 5, title: "Casa de campo", price: "$180,000", image: "/img/property5.jpg", type: "venta" },
-        { id: 6, title: "Condominio de lujo", price: "$500,000", image: "/img/property6.jpg", type: "proyecto" }
+        { id: 1, title: "Casa moderna", price: "$250,000", image: "/placeholder.svg?height=200&width=300", type: "venta" },
+        { id: 2, title: "Apartamento céntrico", price: "$1,200/mes", image: "/placeholder.svg?height=200&width=300", type: "alquiler" },
+        { id: 3, title: "Terreno en la playa", price: "$100,000", image: "/placeholder.svg?height=200&width=300", type: "venta" },
+        { id: 4, title: "Oficina ejecutiva", price: "$2,000/mes", image: "/placeholder.svg?height=200&width=300", type: "alquiler" },
+        { id: 5, title: "Casa de campo", price: "$180,000", image: "/placeholder.svg?height=200&width=300", type: "venta" },
+        { id: 6, title: "Condominio de lujo", price: "$500,000", image: "/placeholder.svg?height=200&width=300", type: "proyecto" }
     ];
 
     const services = [
@@ -186,9 +186,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function openGallery(propertyId) {
         // En una aplicación real, aquí cargarías las imágenes de la galería desde una API
         const galleryImagesUrls = [
-            "/img/gallery1.jpg",
-            "/img/gallery2.jpg",
-            "/img/gallery3.jpg"
+            "/placeholder.svg?height=200&width=300",
+            "/placeholder.svg?height=200&width=300",
+            "/placeholder.svg?height=200&width=300"
         ];
 
         galleryImages.innerHTML = '';
