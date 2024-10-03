@@ -18,8 +18,8 @@ updatePromo(); // Initial update
 // Hero Slider
 const heroImages = [
     "/img/paisaje-analogico-ciudad-edificios_23-2149661457.jpg",
-    "/placeholder.svg?height=600&width=1200",
-    "/placeholder.svg?height=600&width=1200"
+    "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg",
+    "/img/casa-moderna-encantadora-villa-3d-render_1015255-30058.jpg"
 ];
 let currentImage = 0;
 const heroSlider = document.querySelector('.hero-slider');
