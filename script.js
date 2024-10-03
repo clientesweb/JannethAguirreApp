@@ -36,7 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     // Inicializar el slider de promociones
-    $('.promo-slider').slick({
+    const promoSlider = $('.promo-slider');
+    promoItems.forEach(item => {
+        promoSlider.append(`<div>${item}</div>`);
+    });
+    promoSlider.slick({
         autoplay: true,
         autoplaySpeed: 3000,
         arrows: false,
@@ -44,7 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Inicializar el slider del hero
-    $('.hero-slider').slick({
+    const heroSlider = $('.hero-slider');
+    heroImages.forEach(image => {
+        heroSlider.append(`<div style="background-image: url(${image}); background-size: cover; background-position: center; height: 100%;"></div>`);
+    });
+    heroSlider.slick({
         autoplay: true,
         autoplaySpeed: 5000,
         arrows: false,
@@ -229,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
         slidesToScroll: 1,
         autoplay: false,
         arrows: true,
-        dots: false,
+        dots: true,
         responsive: [
             {
                 breakpoint: 1024,
