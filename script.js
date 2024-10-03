@@ -162,7 +162,7 @@ const closeModal = document.getElementById('close-modal');
 
 function createStoreItem(item) {
     const storeItem = document.createElement('div');
-    storeItem.className = 'bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105 max-w-xs mx-auto'; // Ajustar tamaño y centrado
+    storeItem.className = 'bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105 mx-2'; // Añadir margen horizontal
 
     storeItem.innerHTML = `
         <img src="${item.image}" alt="${item.title}" class="w-full h-48 object-cover">
@@ -185,6 +185,8 @@ function createStoreItem(item) {
 function filterStoreItems(category) {
     storeSlider.innerHTML = ''; // Limpiar el slider
     const filteredItems = category === 'all' ? storeItems : storeItems.filter(item => item.category === category);
+    
+    // Crear y agregar elementos filtrados
     filteredItems.forEach(item => {
         storeSlider.appendChild(createStoreItem(item));
     });
@@ -192,24 +194,24 @@ function filterStoreItems(category) {
     // Reiniciar el slider después de agregar elementos
     $(storeSlider).slick('unslick'); // Destruir el slider si existe
     $(storeSlider).slick({ // Inicializar el slider
-        slidesToShow: 3, // Número de elementos visibles
-        slidesToScroll: 1, // Número de elementos a desplazarse
-        infinite: true, // Ciclo infinito
-        dots: true, // Puntos de navegación
-        autoplay: true, // Reproducción automática
-        autoplaySpeed: 2000, // Velocidad de reproducción
+        slidesToShow: 2, // Ajustar el número de elementos visibles
+        slidesToScroll: 1,
+        infinite: true,
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 2000,
         responsive: [ // Configuraciones responsivas
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 2, // Ajustar para pantallas grandes
                     slidesToScroll: 1,
                 }
             },
             {
                 breakpoint: 640,
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 1, // Un solo elemento en pantallas pequeñas
                     slidesToScroll: 1,
                 }
             }
