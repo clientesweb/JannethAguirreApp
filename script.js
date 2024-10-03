@@ -47,17 +47,25 @@ document.addEventListener('DOMContentLoaded', function() {
         dots: false
     });
 
-    // Inicializar el slider del hero
     const heroSlider = $('.hero-slider');
     heroImages.forEach(image => {
-        heroSlider.append(`<div style="background-image: url(${image}); background-size: cover; background-position: center; height: 100%;"></div>`);
+        heroSlider.append(`
+            <div class="w-full h-full">
+                <img src="${image}" alt="Hero image" class="w-full h-full object-cover">
+            </div>
+        `);
     });
+
     heroSlider.slick({
         autoplay: true,
         autoplaySpeed: 5000,
         arrows: false,
-        dots: true
+        dots: true,
+        fade: true,
+        cssEase: 'linear',
+        speed: 1000
     });
+});
 
     // Función para crear el botón de WhatsApp
     function createWhatsAppButton(property) {
