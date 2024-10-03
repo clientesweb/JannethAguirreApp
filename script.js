@@ -121,12 +121,13 @@ const storeItems = [
     { image: "/placeholder.svg?height=200&width=300", title: "Condominio Nuevo", price: "Desde $200,000", category: "proyecto" },
 ];
 
-const storeGrid = document.getElementById('store-grid');
+const storeSlider = document.getElementById('store-slider');
 const filterButtons = document.querySelectorAll('.filter-btn');
 
 function createStoreItem(item) {
     const storeItem = document.createElement('div');
-    storeItem.className = 'bg-white rounded-lg shadow-md overflow-hidden';
+    storeItem.className = 'bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105';
+    
     storeItem.innerHTML = `
         <img src="${item.image}" alt="${item.title}" class="w-full h-48 object-cover">
         <div class="p-4">
@@ -134,26 +135,54 @@ function createStoreItem(item) {
             <p class="text-primary font-bold">${item.price}</p>
         </div>
     `;
+    
     return storeItem;
 }
 
 function filterStoreItems(category) {
-    storeGrid.innerHTML = '';
+    storeSlider.innerHTML = ''; // Limpiar el slider
     const filteredItems = category === 'all' ? storeItems : storeItems.filter(item => item.category === category);
     filteredItems.forEach(item => {
-        storeGrid.appendChild(createStoreItem(item));
+        storeSlider.appendChild(createStoreItem(item));
+    });
+    
+    // Reiniciar el slider después de agregar elementos
+    $(storeSlider).slick('unslick'); // Destruir el slider si existe
+    $(storeSlider).slick({ // Inicializar el slider
+        slidesToShow: 3, // Número de elementos visibles
+        slidesToScroll: 1, // Número de elementos a desplazarse
+        infinite: true, // Ciclo infinito
+        dots: true, // Puntos de navegación
+        autoplay: true, // Reproducción automática
+        autoplaySpeed: 2000, // Velocidad de reproducción
+        responsive: [ // Configuraciones responsivas
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+        ]
     });
 }
 
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('bg-primary', 'text-white'));
-        button.classList.add('bg-primary', 'text-white');
+        filterButtons.forEach(btn => btn.classList.remove('bg-primary', 'text-white', 'bg-gray-800', 'text-white'));
+        button.classList.add('bg-primary', 'text-white', 'bg-gray-800', 'text-white');
         filterStoreItems(button.dataset.filter);
     });
 });
 
-filterStoreItems('all'); // Initial filter
+filterStoreItems('all'); // Filtro inicial
 
 // Contact Form
 const contactForm = document.getElementById('contact-form');
