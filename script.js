@@ -1,6 +1,3 @@
-Hola en español por favor! Tengo las imágenes cargadas en mi hero pero como que un fondo gris no deja visualizar las imágenes 
-
-
 document.addEventListener('DOMContentLoaded', function() {
     // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
     const promoItems = [
