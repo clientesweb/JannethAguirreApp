@@ -121,26 +121,44 @@ const storeItems = [
         title: "Casa Familiar", 
         price: "$300,000", 
         category: "venta",
-        whatsappMessage: "Hola, estoy interesado en la Casa Familiar que vi en su sitio web. ¿Podrían darme más información?"
+        whatsappMessage: "Hola, estoy interesado en la Casa Familiar que vi en su sitio web. ¿Podrían darme más información?",
+        gallery: [
+            "/placeholder.svg?height=200&width=300",
+            "/placeholder.svg?height=200&width=300",
+            "/placeholder.svg?height=200&width=300"
+        ]
     },
     { 
         image: "/placeholder.svg?height=200&width=300", 
         title: "Apartamento Estudio", 
         price: "$800/mes", 
         category: "alquiler",
-        whatsappMessage: "Hola, me gustaría saber más sobre el Apartamento Estudio que vi en su sitio web."
+        whatsappMessage: "Hola, me gustaría saber más sobre el Apartamento Estudio que vi en su sitio web.",
+        gallery: [
+            "/placeholder.svg?height=200&width=300",
+            "/placeholder.svg?height=200&width=300",
+            "/placeholder.svg?height=200&width=300"
+        ]
     },
     { 
         image: "/placeholder.svg?height=200&width=300", 
         title: "Condominio Nuevo", 
         price: "Desde $200,000", 
         category: "proyecto",
-        whatsappMessage: "Hola, estoy interesado en el Condominio Nuevo que vi en su sitio web. ¿Podrían brindarme más detalles?"
+        whatsappMessage: "Hola, estoy interesado en el Condominio Nuevo que vi en su sitio web. ¿Podrían brindarme más detalles?",
+        gallery: [
+            "/placeholder.svg?height=200&width=300",
+            "/placeholder.svg?height=200&width=300",
+            "/placeholder.svg?height=200&width=300"
+        ]
     },
 ];
 
 const storeSlider = document.getElementById('store-slider');
 const filterButtons = document.querySelectorAll('.filter-btn');
+const galleryModal = document.getElementById('gallery-modal');
+const galleryImages = document.getElementById('gallery-images');
+const closeModal = document.getElementById('close-modal');
 
 function createStoreItem(item) {
     const storeItem = document.createElement('div');
@@ -155,6 +173,9 @@ function createStoreItem(item) {
                class="bg-green-500 text-white px-4 py-2 rounded mt-2 block text-center hover:bg-green-600 transition-colors">
                 Enviar por WhatsApp
             </a>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded mt-2 block text-center hover:bg-blue-600 transition-colors view-gallery-btn" data-gallery='${JSON.stringify(item.gallery)}'>
+                Ver Galería
+            </button>
         </div>
     `;
     
@@ -196,12 +217,37 @@ function filterStoreItems(category) {
     });
 }
 
+function openGallery(images) {
+    galleryImages.innerHTML = ''; // Limpiar las imágenes del modal
+    images.forEach(image => {
+        const imgElement = document.createElement('img');
+        imgElement.src = image;
+        imgElement.alt = 'Imagen de galería';
+        imgElement.className = 'w-40 h-40 object-cover'; // Ajustar el tamaño
+        galleryImages.appendChild(imgElement);
+    });
+    galleryModal.classList.remove('hidden');
+}
+
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
         filterButtons.forEach(btn => btn.classList.remove('bg-primary', 'text-white', 'bg-gray-800', 'text-white'));
         button.classList.add('bg-primary', 'text-white', 'bg-gray-800', 'text-white');
         filterStoreItems(button.dataset.filter);
     });
+});
+
+// Event listener para abrir la galería
+document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('view-gallery-btn')) {
+        const images = JSON.parse(event.target.dataset.gallery);
+        openGallery(images);
+    }
+});
+
+// Cerrar el modal al hacer clic en la 'X'
+closeModal.addEventListener('click', () => {
+    galleryModal.classList.add('hidden');
 });
 
 filterStoreItems('all'); // Filtro inicial
