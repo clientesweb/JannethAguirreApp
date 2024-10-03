@@ -85,23 +85,25 @@
         <h2 class="text-3xl font-bold text-center mb-8">Tienda de Propiedades</h2>
         
         <div class="flex justify-center mb-4">
-            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1" data-filter="all">Todo</button>
-            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1" data-filter="venta">Venta</button>
-            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1" data-filter="alquiler">Alquiler</button>
-            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1" data-filter="proyecto">Proyecto</button>
+            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="all">Todo</button>
+            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="venta">Venta</button>
+            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="alquiler">Alquiler</button>
+            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="proyecto">Proyecto</button>
         </div>
         
         <!-- Contenedor del Slider -->
-<div class="relative">
-    <div id="store-slider" class="flex space-x-4 overflow-hidden"> 
-        <!-- Las tarjetas se insertarán aquí mediante JavaScript -->
+        <div class="relative">
+            <div id="store-slider" class="flex space-x-4 overflow-hidden px-4"> 
+                <!-- Las tarjetas se insertarán aquí mediante JavaScript -->
+            </div>
+        </div>
     </div>
-</div>
 </section>
+
 <!-- Galería Modal -->
 <div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-75 hidden justify-center items-center z-50">
-    <div class="bg-white rounded-lg p-4 max-w-lg w-full">
-        <span id="close-modal" class="cursor-pointer text-gray-500 float-right">&times;</span>
+    <div class="bg-white rounded-lg p-4 max-w-lg w-full shadow-lg">
+        <span id="close-modal" class="cursor-pointer text-gray-500 float-right text-2xl">&times;</span>
         <h2 class="text-lg font-bold mb-4">Galería de Imágenes</h2>
         <div id="gallery-images" class="flex overflow-x-auto space-x-2">
             <!-- Las imágenes de la galería se insertarán aquí mediante JavaScript -->
