@@ -78,19 +78,21 @@
         </section>
 
         <section id="tienda" class="py-16">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8">Tienda Online</h2>
-                <div class="flex justify-center space-x-4 mb-8">
-                    <button class="filter-btn active bg-primary text-white px-4 py-2 rounded" data-filter="all">Todos</button>
-                    <button class="filter-btn bg-secondary text-gray-800 px-4 py-2 rounded" data-filter="venta">Venta</button>
-                    <button class="filter-btn bg-secondary text-gray-800 px-4 py-2 rounded" data-filter="alquiler">Alquiler</button>
-                    <button class="filter-btn bg-secondary text-gray-800 px-4 py-2 rounded" data-filter="proyecto">Proyectos</button>
-                </div>
-                <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Store items will be inserted here by JavaScript -->
-                </div>
-            </div>
-        </section>
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-8">Tienda de Propiedades</h2>
+        
+        <div class="flex justify-center mb-4">
+            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1" data-filter="all">Todo</button>
+            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1" data-filter="venta">Venta</button>
+            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1" data-filter="alquiler">Alquiler</button>
+            <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1" data-filter="proyecto">Proyecto</button>
+        </div>
+        
+        <div id="store-slider" class="property-slider slick-slider">
+            <!-- Store items will be inserted here by JavaScript -->
+        </div>
+    </div>
+</section>
 
         <section id="promo-banner" class="bg-primary text-white py-16">
             <div class="container mx-auto px-4 text-center">
