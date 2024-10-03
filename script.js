@@ -1,3 +1,6 @@
+Hola en español por favor! Tengo las imágenes cargadas en mi hero pero como que un fondo gris no deja visualizar las imágenes 
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
     const promoItems = [
@@ -49,18 +52,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Inicializar el slider del hero
     const heroSlider = $('.hero-slider');
-
     heroImages.forEach(image => {
         heroSlider.append(`<div style="background-image: url(${image}); background-size: cover; background-position: center; height: 100%;"></div>`);
     });
-
     heroSlider.slick({
         autoplay: true,
         autoplaySpeed: 5000,
         arrows: false,
         dots: true
     });
-});
 
     // Función para crear el botón de WhatsApp
     function createWhatsAppButton(property) {
