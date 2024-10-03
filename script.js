@@ -36,36 +36,44 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     // Inicializar el slider de promociones
-    const promoSlider = $('.promo-slider');
+    const promoSlider = document.querySelector('.promo-slider');
     promoItems.forEach(item => {
-        promoSlider.append(`<div>${item}</div>`);
+        const div = document.createElement('div');
+        div.textContent = item;
+        promoSlider.appendChild(div);
     });
-    promoSlider.slick({
-        autoplay: true,
-        autoplaySpeed: 3000,
-        arrows: false,
-        dots: false
-    });
+    
+    // Asumiendo que estás usando una librería de slider como Slick
+    // Si no, necesitarás implementar tu propio slider en vanilla JS
+    if (typeof $.fn.slick === 'function') {
+        $('.promo-slider').slick({
+            autoplay: true,
+            autoplaySpeed: 3000,
+            arrows: false,
+            dots: false
+        });
+    }
 
-    const heroSlider = $('.hero-slider');
+    // Inicializar el slider del hero
+    const heroSlider = document.querySelector('.hero-slider');
     heroImages.forEach(image => {
-        heroSlider.append(`
-            <div class="w-full h-full">
-                <img src="${image}" alt="Hero image" class="w-full h-full object-cover">
-            </div>
-        `);
+        const div = document.createElement('div');
+        div.className = 'w-full h-full';
+        div.innerHTML = `<img src="${image}" alt="Hero image" class="w-full h-full object-cover">`;
+        heroSlider.appendChild(div);
     });
 
-    heroSlider.slick({
-        autoplay: true,
-        autoplaySpeed: 5000,
-        arrows: false,
-        dots: true,
-        fade: true,
-        cssEase: 'linear',
-        speed: 1000
-    });
-});
+    if (typeof $.fn.slick === 'function') {
+        $('.hero-slider').slick({
+            autoplay: true,
+            autoplaySpeed: 5000,
+            arrows: false,
+            dots: true,
+            fade: true,
+            cssEase: 'linear',
+            speed: 1000
+        });
+    }
 
     // Función para crear el botón de WhatsApp
     function createWhatsAppButton(property) {
@@ -76,111 +84,130 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Inicializar el slider de propiedades destacadas
-    const propertySlider = $('.property-slider');
+    const propertySlider = document.querySelector('.property-slider');
     properties.forEach(property => {
-        propertySlider.append(`
-            <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden">
-                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                    <p class="text-gray-700 mb-2">${property.price}</p>
-                    ${createWhatsAppButton(property)}
-                </div>
+        const div = document.createElement('div');
+        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
+        div.innerHTML = `
+            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                <p class="text-gray-700 mb-2">${property.price}</p>
+                ${createWhatsAppButton(property)}
             </div>
-        `);
-    });
-    propertySlider.slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        arrows: true,
-        dots: true,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2
-                }
-            },
-            {
-                breakpoint: 640,
-                settings: {
-                    slidesToShow: 1
-                }
-            }
-        ]
+        `;
+        propertySlider.appendChild(div);
     });
 
+    if (typeof $.fn.slick === 'function') {
+        $('.property-slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            arrows: true,
+            dots: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 640,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    }
+
     // Renderizar las tarjetas de servicios
-    const serviceGrid = $('#service-grid');
+    const serviceGrid = document.getElementById('service-grid');
     services.forEach(service => {
-        serviceGrid.append(`
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">${service.title}</h3>
-                <p>${service.description}</p>
-            </div>
-        `);
+        const div = document.createElement('div');
+        div.className = 'bg-white p-6 rounded-lg shadow-md';
+        div.innerHTML = `
+            <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">${service.title}</h3>
+            <p>${service.description}</p>
+        `;
+        serviceGrid.appendChild(div);
     });
 
     // Inicializar el slider de la tienda
-    const storeSlider = $('#store-slider');
+    const storeSlider = document.getElementById('store-slider');
     properties.forEach(property => {
-        storeSlider.append(`
-            <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden" data-type="${property.type}">
-                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                    <p class="text-gray-700 mb-2">${property.price}</p>
-                    ${createWhatsAppButton(property)}
-                    <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
-                </div>
+        const div = document.createElement('div');
+        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
+        div.dataset.type = property.type;
+        div.innerHTML = `
+            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                <p class="text-gray-700 mb-2">${property.price}</p>
+                ${createWhatsAppButton(property)}
+                <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
             </div>
-        `);
-    });
-    storeSlider.slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: false,
-        arrows: true,
-        dots: false,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2
-                }
-            },
-            {
-                breakpoint: 640,
-                settings: {
-                    slidesToShow: 1
-                }
-            }
-        ]
+        `;
+        storeSlider.appendChild(div);
     });
 
+    if (typeof $.fn.slick === 'function') {
+        $('#store-slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: false,
+            arrows: true,
+            dots: false,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 640,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    }
+
     // Filtrado de propiedades
-    $('.filter-btn').on('click', function() {
-        const filter = $(this).data('filter');
-        if (filter === 'all') {
-            $('.property-card').show();
-        } else {
-            $('.property-card').hide();
-            $(`.property-card[data-type="${filter}"]`).show();
-        }
-        storeSlider.slick('setPosition');
+    document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.dataset.filter;
+            const propertyCards = document.querySelectorAll('.property-card');
+            propertyCards.forEach(card => {
+                if (filter === 'all' || card.dataset.type === filter) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            if (typeof $.fn.slick === 'function') {
+                $('#store-slider').slick('setPosition');
+            }
+        });
     });
 
     // Modal de galería
-    $('.view-gallery').on('click', function() {
-        const propertyId = $(this).data('id');
-        openGallery(propertyId);
+    document.querySelectorAll('.view-gallery').forEach(button => {
+        button.addEventListener('click', function() {
+            const propertyId = this.dataset.id;
+            openGallery(propertyId);
+        });
     });
 
-    $('#close-modal').on('click', function() {
-        $('#gallery-modal').addClass('hidden').removeClass('flex');
+    document.getElementById('close-modal').addEventListener('click', function() {
+        document.getElementById('gallery-modal').classList.add('hidden');
+        document.getElementById('gallery-modal').classList.remove('flex');
     });
 
     function openGallery(propertyId) {
@@ -190,17 +217,21 @@ document.addEventListener('DOMContentLoaded', function() {
             "/placeholder.svg?height=200&width=300"
         ];
 
-        const galleryImages = $('#gallery-images');
-        galleryImages.empty();
+        const galleryImages = document.getElementById('gallery-images');
+        galleryImages.innerHTML = '';
         galleryImagesUrls.forEach(url => {
-            galleryImages.append(`<img src="${url}" class="w-full h-auto">`);
+            const img = document.createElement('img');
+            img.src = url;
+            img.className = 'w-full h-auto';
+            galleryImages.appendChild(img);
         });
 
-        $('#gallery-modal').removeClass('hidden').addClass('flex');
+        document.getElementById('gallery-modal').classList.remove('hidden');
+        document.getElementById('gallery-modal').classList.add('flex');
     }
 
     // Formulario de contacto
-    $('#contact-form').on('submit', function(e) {
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
         e.preventDefault();
         alert('Gracias por tu mensaje. Te contactaremos pronto.');
         this.reset();
@@ -208,15 +239,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Instalación de la PWA
     let deferredPrompt;
-    const installButton = $('#install-app');
+    const installButton = document.getElementById('install-app');
 
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        installButton.show();
+        installButton.style.display = 'block';
     });
 
-    installButton.on('click', async function() {
+    installButton.addEventListener('click', async function() {
         if (deferredPrompt) {
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
@@ -228,39 +259,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Inicializar el slider de Instagram
-    const instagramSlider = $('#instagram-slider');
+    const instagramSlider = document.getElementById('instagram-slider');
     instagramPosts.forEach(post => {
-        instagramSlider.append(`
-            <div class="instagram-item">
-                <blockquote class="instagram-media" data-instgrm-permalink="${post.url}" data-instgrm-version="14">
-                    <div style="padding:16px;">
-                        <a href="${post.url}" target="_blank">Ver esta publicación en Instagram</a>
-                    </div>
-                </blockquote>
-            </div>
-        `);
+        const div = document.createElement('div');
+        div.className = 'instagram-item';
+        div.innerHTML = `
+            <blockquote class="instagram-media" data-instgrm-permalink="${post.url}" data-instgrm-version="14">
+                <div style="padding:16px;">
+                    <a href="${post.url}" target="_blank">Ver esta publicación en Instagram</a>
+                </div>
+            </blockquote>
+        `;
+        instagramSlider.appendChild(div);
     });
-    instagramSlider.slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: false,
-        arrows: true,
-        dots: true,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2
+
+    if (typeof $.fn.slick === 'function') {
+        $('#instagram-slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: false,
+            arrows: true,
+            dots: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 640,
+                    settings: {
+                        slidesToShow: 1
+                    }
                 }
-            },
-            {
-                breakpoint: 640,
-                settings: {
-                    slidesToShow: 1
-                }
-            }
-        ]
-    });
+            ]
+        });
+    }
 
     // Cargar el script de Instagram
     (function(d, s, id) {
@@ -273,18 +308,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Hacer el menú inferior responsivo
     function adjustBottomNav() {
-        const bottomNav = $('nav.fixed.bottom-0');
+        const bottomNav = document.querySelector('nav.fixed.bottom-0');
         if (window.innerWidth < 640) {
-            bottomNav.addClass('text-xs');
-            bottomNav.find('i').removeClass('mb-1').addClass('text-lg');
-            bottomNav.find('span').addClass('hidden');
+            bottomNav.classList.add('text-xs');
+            bottomNav.querySelectorAll('i').forEach(icon => {
+                icon.classList.remove('mb-1');
+                icon.classList.add('text-lg');
+            });
+            bottomNav.querySelectorAll('span').forEach(span => {
+                span.classList.add('hidden');
+            });
         } else {
-            bottomNav.removeClass('text-xs');
-            bottomNav.find('i').addClass('mb-1').removeClass('text-lg');
-            bottomNav.find('span').removeClass('hidden');
+            bottomNav.classList.remove('text-xs');
+            bottomNav.querySelectorAll('i').forEach(icon => {
+                icon.classList.add('mb-1');
+                icon.classList.remove('text-lg');
+            });
+            bottomNav.querySelectorAll('span').forEach(span => {
+                span.classList.remove('hidden');
+            });
         }
     }
 
     adjustBottomNav();
-    $(window).on('resize', adjustBottomNav);
+    window.addEventListener('resize', adjustBottomNav);
 });
