@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
+    // Asegurarse de que jQuery está cargado
+    if (typeof jQuery === 'undefined') {
+        console.error('jQuery no está cargado. Por favor, incluye jQuery antes de este script.');
+        return;
+    }
+
+    // Datos de ejemplo
     const promoItems = [
         "¡Oferta especial! 10% de descuento en propiedades seleccionadas",
         "Nueva propiedad disponible en el centro de la ciudad",
@@ -28,13 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     // Inicializar el slider de promociones
-    const promoSlider = document.querySelector('.promo-slider');
+    const promoSlider = $('.promo-slider');
     promoItems.forEach(item => {
-        const div = document.createElement('div');
-        div.textContent = item;
-        promoSlider.appendChild(div);
+        promoSlider.append(`<div>${item}</div>`);
     });
-    $(promoSlider).slick({
+    promoSlider.slick({
         autoplay: true,
         autoplaySpeed: 3000,
         arrows: false,
@@ -42,16 +46,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Inicializar el slider del hero
-    const heroSlider = document.querySelector('.hero-slider');
+    const heroSlider = $('.hero-slider');
     heroImages.forEach(image => {
-        const div = document.createElement('div');
-        div.style.backgroundImage = `url(${image})`;
-        div.style.backgroundSize = 'cover';
-        div.style.backgroundPosition = 'center';
-        div.style.height = '100%';
-        heroSlider.appendChild(div);
+        heroSlider.append(`<div style="background-image: url(${image}); background-size: cover; background-position: center; height: 100%;"></div>`);
     });
-    $(heroSlider).slick({
+    heroSlider.slick({
         autoplay: true,
         autoplaySpeed: 5000,
         arrows: false,
@@ -59,20 +58,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Inicializar el slider de propiedades
-    const propertySlider = document.querySelector('.property-slider');
+    const propertySlider = $('.property-slider');
     properties.forEach(property => {
-        const div = document.createElement('div');
-        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
-        div.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                <p class="text-gray-700">${property.price}</p>
+        propertySlider.append(`
+            <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                    <p class="text-gray-700">${property.price}</p>
+                </div>
             </div>
-        `;
-        propertySlider.appendChild(div);
+        `);
     });
-    $(propertySlider).slick({
+    propertySlider.slick({
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
@@ -96,35 +94,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Renderizar las tarjetas de servicios
-    const serviceGrid = document.getElementById('service-grid');
+    const serviceGrid = $('#service-grid');
     services.forEach(service => {
-        const div = document.createElement('div');
-        div.className = 'bg-white p-6 rounded-lg shadow-md';
-        div.innerHTML = `
-            <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
-            <h3 class="text-xl font-bold mb-2">${service.title}</h3>
-            <p>${service.description}</p>
-        `;
-        serviceGrid.appendChild(div);
+        serviceGrid.append(`
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">${service.title}</h3>
+                <p>${service.description}</p>
+            </div>
+        `);
     });
 
     // Inicializar el slider de la tienda
-    const storeSlider = document.getElementById('store-slider');
+    const storeSlider = $('#store-slider');
     properties.forEach(property => {
-        const div = document.createElement('div');
-        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
-        div.setAttribute('data-type', property.type);
-        div.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                <p class="text-gray-700">${property.price}</p>
-                <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
+        storeSlider.append(`
+            <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden" data-type="${property.type}">
+                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                    <p class="text-gray-700">${property.price}</p>
+                    <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
+                </div>
             </div>
-        `;
-        storeSlider.appendChild(div);
+        `);
     });
-    $(storeSlider).slick({
+    storeSlider.slick({
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: false,
@@ -147,82 +142,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Filtrado de propiedades
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filter = button.getAttribute('data-filter');
-            filterProperties(filter);
-        });
+    $('.filter-btn').on('click', function() {
+        const filter = $(this).data('filter');
+        if (filter === 'all') {
+            $('.property-card').show();
+        } else {
+            $('.property-card').hide();
+            $(`.property-card[data-type="${filter}"]`).show();
+        }
+        storeSlider.slick('setPosition');
     });
-
-    function filterProperties(filter) {
-        const propertyCards = document.querySelectorAll('.property-card');
-        propertyCards.forEach(card => {
-            if (filter === 'all' || card.getAttribute('data-type') === filter) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-        $(storeSlider).slick('setPosition');
-    }
 
     // Modal de galería
-    const modal = document.getElementById('gallery-modal');
-    const closeModal = document.getElementById('close-modal');
-    const galleryImages = document.getElementById('gallery-images');
-
-    document.querySelectorAll('.view-gallery').forEach(button => {
-        button.addEventListener('click', () => {
-            const propertyId = button.getAttribute('data-id');
-            openGallery(propertyId);
-        });
+    $('.view-gallery').on('click', function() {
+        const propertyId = $(this).data('id');
+        openGallery(propertyId);
     });
 
-    closeModal.addEventListener('click', () => {
-        modal.classList.add('hidden');
+    $('#close-modal').on('click', function() {
+        $('#gallery-modal').addClass('hidden').removeClass('flex');
     });
 
     function openGallery(propertyId) {
-        // En una aplicación real, aquí cargarías las imágenes de la galería desde una API
         const galleryImagesUrls = [
             "/placeholder.svg?height=200&width=300",
             "/placeholder.svg?height=200&width=300",
             "/placeholder.svg?height=200&width=300"
         ];
 
-        galleryImages.innerHTML = '';
+        const galleryImages = $('#gallery-images');
+        galleryImages.empty();
         galleryImagesUrls.forEach(url => {
-            const img = document.createElement('img');
-            img.src = url;
-            img.className = 'w-full h-auto';
-            galleryImages.appendChild(img);
+            galleryImages.append(`<img src="${url}" class="w-full h-auto">`);
         });
 
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
+        $('#gallery-modal').removeClass('hidden').addClass('flex');
     }
 
     // Formulario de contacto
-    const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', (e) => {
+    $('#contact-form').on('submit', function(e) {
         e.preventDefault();
-        // Aquí irían la lógica para enviar el formulario
         alert('Gracias por tu mensaje. Te contactaremos pronto.');
-        contactForm.reset();
+        this.reset();
     });
 
     // Instalación de la PWA
     let deferredPrompt;
-    const installButton = document.getElementById('install-app');
+    const installButton = $('#install-app');
 
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        installButton.style.display = 'block';
+        installButton.show();
     });
 
-    installButton.addEventListener('click', async () => {
+    installButton.on('click', async function() {
         if (deferredPrompt) {
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
