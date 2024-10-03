@@ -116,9 +116,27 @@ services.forEach(service => {
 
 // Store
 const storeItems = [
-    { image: "/placeholder.svg?height=200&width=300", title: "Casa Familiar", price: "$300,000", category: "venta" },
-    { image: "/placeholder.svg?height=200&width=300", title: "Apartamento Estudio", price: "$800/mes", category: "alquiler" },
-    { image: "/placeholder.svg?height=200&width=300", title: "Condominio Nuevo", price: "Desde $200,000", category: "proyecto" },
+    { 
+        image: "/placeholder.svg?height=200&width=300", 
+        title: "Casa Familiar", 
+        price: "$300,000", 
+        category: "venta",
+        whatsappMessage: "Hola, estoy interesado en la Casa Familiar que vi en su sitio web. ¿Podrían darme más información?"
+    },
+    { 
+        image: "/placeholder.svg?height=200&width=300", 
+        title: "Apartamento Estudio", 
+        price: "$800/mes", 
+        category: "alquiler",
+        whatsappMessage: "Hola, me gustaría saber más sobre el Apartamento Estudio que vi en su sitio web."
+    },
+    { 
+        image: "/placeholder.svg?height=200&width=300", 
+        title: "Condominio Nuevo", 
+        price: "Desde $200,000", 
+        category: "proyecto",
+        whatsappMessage: "Hola, estoy interesado en el Condominio Nuevo que vi en su sitio web. ¿Podrían brindarme más detalles?"
+    },
 ];
 
 const storeSlider = document.getElementById('store-slider');
@@ -133,6 +151,10 @@ function createStoreItem(item) {
         <div class="p-4">
             <h3 class="font-bold text-lg mb-2">${item.title}</h3>
             <p class="text-primary font-bold">${item.price}</p>
+            <a href="https://wa.me/?text=${encodeURIComponent(item.whatsappMessage)}" 
+               class="bg-green-500 text-white px-4 py-2 rounded mt-2 block text-center hover:bg-green-600 transition-colors">
+                Enviar por WhatsApp
+            </a>
         </div>
     `;
     
