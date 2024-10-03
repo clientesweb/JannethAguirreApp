@@ -162,8 +162,8 @@ const closeModal = document.getElementById('close-modal');
 
 function createStoreItem(item) {
     const storeItem = document.createElement('div');
-    storeItem.className = 'bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105';
-    
+    storeItem.className = 'bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105 max-w-xs mx-auto'; // Ajustar tamaño y centrado
+
     storeItem.innerHTML = `
         <img src="${item.image}" alt="${item.title}" class="w-full h-48 object-cover">
         <div class="p-4">
