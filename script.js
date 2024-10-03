@@ -49,15 +49,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Inicializar el slider del hero
     const heroSlider = $('.hero-slider');
+
     heroImages.forEach(image => {
         heroSlider.append(`<div style="background-image: url(${image}); background-size: cover; background-position: center; height: 100%;"></div>`);
     });
+
     heroSlider.slick({
         autoplay: true,
         autoplaySpeed: 5000,
         arrows: false,
         dots: true
     });
+});
 
     // Función para crear el botón de WhatsApp
     function createWhatsAppButton(property) {
