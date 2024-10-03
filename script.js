@@ -1,289 +1,235 @@
-// Promo Banner
-const promos = [
-    "¡Oferta especial! 10% de descuento en propiedades seleccionadas",
-    "Nuevas propiedades disponibles en zonas exclusivas",
-    "Financiamiento disponible, ¡consúltanos!"
-];
-let currentPromo = 0;
-const promoSlider = document.querySelector('.promo-slider');
+document.addEventListener('DOMContentLoaded', function() {
+    // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
+    const promoItems = [
+        "¡Oferta especial! 10% de descuento en propiedades seleccionadas",
+        "Nueva propiedad disponible en el centro de la ciudad",
+        "¡Financiamiento disponible! Consulta nuestras opciones"
+    ];
 
-function updatePromo() {
-    promoSlider.innerHTML = `<p class="text-center">${promos[currentPromo]}</p>`;
-    currentPromo = (currentPromo + 1) % promos.length;
-}
+    const heroImages = [
+        "/img/hero1.jpg",
+        "/img/hero2.jpg",
+        "/img/hero3.jpg"
+    ];
 
-setInterval(updatePromo, 5000);
-updatePromo(); // Initial update
+    const properties = [
+        { id: 1, title: "Casa moderna", price: "$250,000", image: "/img/property1.jpg", type: "venta" },
+        { id: 2, title: "Apartamento céntrico", price: "$1,200/mes", image: "/img/property2.jpg", type: "alquiler" },
+        { id: 3, title: "Terreno en la playa", price: "$100,000", image: "/img/property3.jpg", type: "venta" },
+        { id: 4, title: "Oficina ejecutiva", price: "$2,000/mes", image: "/img/property4.jpg", type: "alquiler" },
+        { id: 5, title: "Casa de campo", price: "$180,000", image: "/img/property5.jpg", type: "venta" },
+        { id: 6, title: "Condominio de lujo", price: "$500,000", image: "/img/property6.jpg", type: "proyecto" }
+    ];
 
-// Hero Slider
-const heroImages = [
-    "/img/paisaje-analogico-ciudad-edificios_23-2149661457.jpg",
-    "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg",
-    "/img/casa-moderna-encantadora-villa-3d-render_1015255-30058.jpg"
-];
-let currentImage = 0;
-const heroSlider = document.querySelector('.hero-slider');
+    const services = [
+        { title: "Asesoría Legal", description: "Asistencia legal en todas las transacciones", icon: "fa-gavel" },
+        { title: "Valuación de Propiedades", description: "Tasaciones precisas y profesionales", icon: "fa-calculator" },
+        { title: "Gestión de Alquileres", description: "Administramos sus propiedades en alquiler", icon: "fa-key" }
+    ];
 
-function createImageElement(src, index) {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = `Hero image ${index + 1}`;
-    img.className = `absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === 0 ? 'opacity-100' : 'opacity-0'}`;
-    return img;
-}
-
-heroImages.forEach((src, index) => {
-    heroSlider.appendChild(createImageElement(src, index));
-});
-
-function updateHeroSlider() {
-    const images = heroSlider.querySelectorAll('img');
-    images.forEach((img, index) => {
-        img.style.opacity = index === currentImage ? '1' : '0';
+    // Inicializar el slider de promociones
+    const promoSlider = document.querySelector('.promo-slider');
+    promoItems.forEach(item => {
+        const div = document.createElement('div');
+        div.textContent = item;
+        promoSlider.appendChild(div);
     });
-    currentImage = (currentImage + 1) % heroImages.length;
-}
-
-setInterval(updateHeroSlider, 5000);
-
-const properties = [
-    {
-        image: '/img/property1.jpg',
-        title: 'Casa en la Playa',
-        price: '$350,000',
-        bedrooms: 3,
-        bathrooms: 2,
-        area: '120 m²'
-    },
-    {
-        image: '/img/property2.jpg',
-        title: 'Apartamento Moderno',
-        price: '$250,000',
-        bedrooms: 2,
-        bathrooms: 1,
-        area: '85 m²'
-    }
-    // Agrega más propiedades si es necesario
-];
-
-const propertySlider = document.querySelector('.property-slider');
-
-properties.forEach(property => {
-    const propertyCard = document.createElement('div');
-    propertyCard.className = 'property-card bg-white rounded-lg shadow-md flex-shrink-0 w-72';
-    
-    const whatsappMessage = `Hola, estoy interesado en la propiedad: ${property.title}, que cuesta ${property.price}. Tiene ${property.bedrooms} habitaciones y ${property.bathrooms} baños.`;
-    const whatsappLink = `https://api.whatsapp.com/send?phone=1234567890&text=${encodeURIComponent(whatsappMessage)}`; // Reemplaza con el número real
-
-    propertyCard.innerHTML = `
-        <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-        <div class="p-4">
-            <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-            <p class="text-primary font-bold mb-2">${property.price}</p>
-            <div class="flex justify-between text-sm text-gray-600 mb-2">
-                <span>${property.bedrooms} Habitaciones</span>
-                <span>${property.bathrooms} Baños</span>
-                <span>${property.area}</span>
-            </div>
-            <a href="${whatsappLink}" target="_blank" class="whatsapp-button bg-green-500 text-white rounded-full p-2 inline-block text-center shadow-lg">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-        </div>
-    `;
-    
-    propertySlider.appendChild(propertyCard);
-});
-
-// Services
-const services = [
-    { icon: 'fa-home', title: 'Compra y Venta', description: 'Asesoramiento experto en transacciones inmobiliarias.' },
-    { icon: 'fa-key', title: 'Alquiler', description: 'Gestión completa de alquileres residenciales y comerciales.' },
-    { icon: 'fa-chart-line', title: 'Inversiones', description: 'Oportunidades de inversión en el mercado inmobiliario.' },
-];
-
-const serviceGrid = document.getElementById('service-grid');
-
-services.forEach(service => {
-    const serviceCard = document.createElement('div');
-    serviceCard.className = 'bg-white p-6 rounded-lg shadow-md text-center';
-    serviceCard.innerHTML = `
-        <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
-        <h3 class="font-bold text-xl mb-2">${service.title}</h3>
-        <p>${service.description}</p>
-    `;
-    serviceGrid.appendChild(serviceCard);
-});
-
-// Store
-const storeItems = [
-    { 
-        image: "/placeholder.svg?height=200&width=300", 
-        title: "Casa Familiar", 
-        price: "$300,000", 
-        category: "venta",
-        whatsappMessage: "Hola, estoy interesado en la Casa Familiar que vi en su sitio web. ¿Podrían darme más información?",
-        gallery: [
-            "/placeholder.svg?height=200&width=300",
-            "/placeholder.svg?height=200&width=300",
-            "/placeholder.svg?height=200&width=300"
-        ]
-    },
-    { 
-        image: "/placeholder.svg?height=200&width=300", 
-        title: "Apartamento Estudio", 
-        price: "$800/mes", 
-        category: "alquiler",
-        whatsappMessage: "Hola, me gustaría saber más sobre el Apartamento Estudio que vi en su sitio web.",
-        gallery: [
-            "/placeholder.svg?height=200&width=300",
-            "/placeholder.svg?height=200&width=300",
-            "/placeholder.svg?height=200&width=300"
-        ]
-    },
-    { 
-        image: "/placeholder.svg?height=200&width=300", 
-        title: "Condominio Nuevo", 
-        price: "Desde $200,000", 
-        category: "proyecto",
-        whatsappMessage: "Hola, estoy interesado en el Condominio Nuevo que vi en su sitio web. ¿Podrían brindarme más detalles?",
-        gallery: [
-            "/placeholder.svg?height=200&width=300",
-            "/placeholder.svg?height=200&width=300",
-            "/placeholder.svg?height=200&width=300"
-        ]
-    },
-];
-
-const storeSlider = document.getElementById('store-slider');
-const filterButtons = document.querySelectorAll('.filter-btn');
-const galleryModal = document.getElementById('gallery-modal');
-const galleryImages = document.getElementById('gallery-images');
-const closeModal = document.getElementById('close-modal');
-
-function createStoreItem(item) {
-    const storeItem = document.createElement('div');
-    storeItem.className = 'bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105 mx-2'; // Añadir margen horizontal
-
-    storeItem.innerHTML = `
-        <img src="${item.image}" alt="${item.title}" class="w-full h-48 object-cover">
-        <div class="p-4">
-            <h3 class="font-bold text-lg mb-2">${item.title}</h3>
-            <p class="text-primary font-bold">${item.price}</p>
-            <a href="https://wa.me/?text=${encodeURIComponent(item.whatsappMessage)}" 
-               class="bg-green-500 text-white px-4 py-2 rounded mt-2 block text-center hover:bg-green-600 transition-colors">
-                Enviar por WhatsApp
-            </a>
-            <button class="bg-blue-500 text-white px-4 py-2 rounded mt-2 block text-center hover:bg-blue-600 transition-colors view-gallery-btn" data-gallery='${JSON.stringify(item.gallery)}'>
-                Ver Galería
-            </button>
-        </div>
-    `;
-    
-    return storeItem;
-}
-
-function filterStoreItems(category) {
-    storeSlider.innerHTML = ''; // Limpiar el slider
-    const filteredItems = category === 'all' ? storeItems : storeItems.filter(item => item.category === category);
-    
-    // Crear y agregar elementos filtrados
-    filteredItems.forEach(item => {
-        storeSlider.appendChild(createStoreItem(item));
-    });
-    
-    // Reiniciar el slider después de agregar elementos
-    $(storeSlider).slick('unslick'); // Destruir el slider si existe
-    $(storeSlider).slick({ // Inicializar el slider
-        slidesToShow: 2, // Ajustar el número de elementos visibles
-        slidesToScroll: 1,
-        infinite: true,
-        dots: true,
+    $(promoSlider).slick({
         autoplay: true,
-        autoplaySpeed: 2000,
-        responsive: [ // Configuraciones responsivas
+        autoplaySpeed: 3000,
+        arrows: false,
+        dots: false
+    });
+
+    // Inicializar el slider del hero
+    const heroSlider = document.querySelector('.hero-slider');
+    heroImages.forEach(image => {
+        const div = document.createElement('div');
+        div.style.backgroundImage = `url(${image})`;
+        div.style.backgroundSize = 'cover';
+        div.style.backgroundPosition = 'center';
+        div.style.height = '100%';
+        heroSlider.appendChild(div);
+    });
+    $(heroSlider).slick({
+        autoplay: true,
+        autoplaySpeed: 5000,
+        arrows: false,
+        dots: true
+    });
+
+    // Inicializar el slider de propiedades
+    const propertySlider = document.querySelector('.property-slider');
+    properties.forEach(property => {
+        const div = document.createElement('div');
+        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
+        div.innerHTML = `
+            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                <p class="text-gray-700">${property.price}</p>
+            </div>
+        `;
+        propertySlider.appendChild(div);
+    });
+    $(propertySlider).slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: true,
+        dots: true,
+        responsive: [
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 2, // Ajustar para pantallas grandes
-                    slidesToScroll: 1,
+                    slidesToShow: 2
                 }
             },
             {
                 breakpoint: 640,
                 settings: {
-                    slidesToShow: 1, // Un solo elemento en pantallas pequeñas
-                    slidesToScroll: 1,
+                    slidesToShow: 1
                 }
             }
         ]
     });
-}
 
-function openGallery(images) {
-    galleryImages.innerHTML = ''; // Limpiar las imágenes del modal
-    images.forEach(image => {
-        const imgElement = document.createElement('img');
-        imgElement.src = image;
-        imgElement.alt = 'Imagen de galería';
-        imgElement.className = 'w-40 h-40 object-cover'; // Ajustar el tamaño
-        galleryImages.appendChild(imgElement);
+    // Renderizar las tarjetas de servicios
+    const serviceGrid = document.getElementById('service-grid');
+    services.forEach(service => {
+        const div = document.createElement('div');
+        div.className = 'bg-white p-6 rounded-lg shadow-md';
+        div.innerHTML = `
+            <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">${service.title}</h3>
+            <p>${service.description}</p>
+        `;
+        serviceGrid.appendChild(div);
     });
-    galleryModal.classList.remove('hidden');
-}
 
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('bg-primary', 'text-white', 'bg-gray-800', 'text-white'));
-        button.classList.add('bg-primary', 'text-white', 'bg-gray-800', 'text-white');
-        filterStoreItems(button.dataset.filter);
+    // Inicializar el slider de la tienda
+    const storeSlider = document.getElementById('store-slider');
+    properties.forEach(property => {
+        const div = document.createElement('div');
+        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
+        div.setAttribute('data-type', property.type);
+        div.innerHTML = `
+            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                <p class="text-gray-700">${property.price}</p>
+                <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
+            </div>
+        `;
+        storeSlider.appendChild(div);
     });
-});
+    $(storeSlider).slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: false,
+        arrows: true,
+        dots: false,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
 
-// Event listener para abrir la galería
-document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('view-gallery-btn')) {
-        const images = JSON.parse(event.target.dataset.gallery);
-        openGallery(images);
-    }
-});
+    // Filtrado de propiedades
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.getAttribute('data-filter');
+            filterProperties(filter);
+        });
+    });
 
-// Cerrar el modal al hacer clic en la 'X'
-closeModal.addEventListener('click', () => {
-    galleryModal.classList.add('hidden');
-});
-
-filterStoreItems('all'); // Filtro inicial
-
-// Contact Form
-const contactForm = document.getElementById('contact-form');
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Here you would typically send the form data to a server
-    alert('Mensaje enviado. Gracias por contactarnos!');
-    contactForm.reset();
-});
-
-// Install App Button
-const installButton = document.getElementById('install-app');
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installButton.style.display = 'block';
-});
-
-installButton.addEventListener('click', () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the install prompt');
+    function filterProperties(filter) {
+        const propertyCards = document.querySelectorAll('.property-card');
+        propertyCards.forEach(card => {
+            if (filter === 'all' || card.getAttribute('data-type') === filter) {
+                card.style.display = 'block';
             } else {
-                console.log('User dismissed the install prompt');
+                card.style.display = 'none';
+            }
+        });
+        $(storeSlider).slick('setPosition');
+    }
+
+    // Modal de galería
+    const modal = document.getElementById('gallery-modal');
+    const closeModal = document.getElementById('close-modal');
+    const galleryImages = document.getElementById('gallery-images');
+
+    document.querySelectorAll('.view-gallery').forEach(button => {
+        button.addEventListener('click', () => {
+            const propertyId = button.getAttribute('data-id');
+            openGallery(propertyId);
+        });
+    });
+
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    function openGallery(propertyId) {
+        // En una aplicación real, aquí cargarías las imágenes de la galería desde una API
+        const galleryImagesUrls = [
+            "/img/gallery1.jpg",
+            "/img/gallery2.jpg",
+            "/img/gallery3.jpg"
+        ];
+
+        galleryImages.innerHTML = '';
+        galleryImagesUrls.forEach(url => {
+            const img = document.createElement('img');
+            img.src = url;
+            img.className = 'w-full h-auto';
+            galleryImages.appendChild(img);
+        });
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    // Formulario de contacto
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Aquí irían la lógica para enviar el formulario
+        alert('Gracias por tu mensaje. Te contactaremos pronto.');
+        contactForm.reset();
+    });
+
+    // Instalación de la PWA
+    let deferredPrompt;
+    const installButton = document.getElementById('install-app');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installButton.style.display = 'block';
+    });
+
+    installButton.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                console.log('User accepted the install prompt');
             }
             deferredPrompt = null;
-        });
-    }
+        }
+    });
 });
