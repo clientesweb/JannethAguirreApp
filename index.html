@@ -30,17 +30,48 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="font-poppins bg-background text-gray-800">
+    <!-- Chat Widget -->
+    <div id="chat-widget" class="fixed left-4 bottom-4 z-50 transition-all duration-300 ease-in-out">
+        <button id="chat-toggle" class="bg-primary text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div id="chat-container" class="hidden bg-white rounded-lg shadow-xl absolute bottom-16 left-0 w-80 h-96 flex flex-col transition-all duration-300 ease-in-out">
+            <div class="bg-primary text-white p-4 rounded-t-lg">
+                <h3 class="font-bold">Chat de Bienes Raíces</h3>
+            </div>
+            <div id="chat-messages" class="flex-grow overflow-auto p-4 space-y-4">
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <button class="quick-question bg-gray-200 text-sm px-3 py-1 rounded-full hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                        Busco una casa
+                    </button>
+                    <button class="quick-question bg-gray-200 text-sm px-3 py-1 rounded-full hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                        Precios de apartamentos
+                    </button>
+                    <button class="quick-question bg-gray-200 text-sm px-3 py-1 rounded-full hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                        Zonas disponibles
+                    </button>
+                </div>
+            </div>
+            <form id="chat-form" class="p-4 border-t flex">
+                <input id="chat-input" type="text" placeholder="Escribe un mensaje..." class="flex-grow p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <button type="submit" class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <div class="bg-primary text-white py-2 overflow-hidden">
         <div class="promo-slider container mx-auto px-4">
             <!-- Promo items will be inserted here by JavaScript -->
         </div>
     </div>
 
-    <header class="bg-secondary shadow-md sticky top-0 z-50">
+    <header class="bg-secondary shadow-md sticky top-0 z-40">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="h-12">
-                <button id="install-app" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">
+                <button id="install-app" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
                     <i class="fas fa-download mr-2"></i> Instalar App
                 </button>
             </div>
@@ -56,7 +87,7 @@
                 <div class="text-center text-white p-4">
                     <h2 class="text-4xl font-bold mb-4 drop-shadow-lg">Encuentra tu hogar ideal</h2>
                     <p class="text-xl mb-6 drop-shadow-lg">Expertos en bienes raíces a tu servicio</p>
-                    <a href="#propiedades" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Ver Propiedades</a>
+                    <a href="#propiedades" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Ver Propiedades</a>
                 </div>
             </div>
         </section>
@@ -84,10 +115,10 @@
                 <h2 class="text-3xl font-bold text-center mb-8">Tienda de Propiedades</h2>
                 
                 <div class="flex justify-center mb-4">
-                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="all">Todo</button>
-                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="venta">Venta</button>
-                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="alquiler">Alquiler</button>
-                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="proyecto">Proyecto</button>
+                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-primary" data-filter="all">Todo</button>
+                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-primary" data-filter="venta">Venta</button>
+                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-primary" data-filter="alquiler">Alquiler</button>
+                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-primary" data-filter="proyecto">Proyecto</button>
                 </div>
                 
                 <div class="relative">
@@ -112,7 +143,7 @@
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-3xl font-bold mb-4">Ofertas Especiales</h2>
                 <p class="text-xl mb-8">¡No te pierdas nuestras increíbles promociones en propiedades seleccionadas!</p>
-                <a href="#contacto" class="bg-white text-primary px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors">Contáctanos Ahora</a>
+                <a href="#contacto" class="bg-white text-primary px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Contáctanos Ahora</a>
             </div>
         </section> 
         
@@ -130,10 +161,10 @@
                 <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <form id="contact-form" class="space-y-4">
-                        <input type="text" name="name" placeholder="Nombre" required class="w-full px-4 py-2 border border-gray-300 rounded">
-                        <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border border-gray-300 rounded">
-                        <textarea name="message" placeholder="Mensaje" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded"></textarea>
-                        <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Enviar</button>
+                        <input type="text" name="name" placeholder="Nombre" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary">
+                        <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary">
+                        <textarea name="message" placeholder="Mensaje" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                        <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Enviar</button>
                     </form>
                     <div class="map-container">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.964560146161!2d-77.03196518561798!3d-12.046654545137994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8b5d35662c7%3A0x15f0bbc9023d16d7!2sPlaza%20Mayor%20de%20Lima!5e0!3m2!1ses-419!2spe!4v1623344892535!5m2!1ses-419!2spe" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -171,7 +202,7 @@
         </div>
     </footer>
 
-    <nav class="fixed bottom-0 left-0 right-0 bg-secondary py-2 px-4 flex justify-around items-center text-sm md:text-base">
+    <nav class="fixed bottom-0 left-0 right-0 bg-secondary py-2 px-4 flex justify-around items-center text-sm md:text-base z-40">
         <a href="#inicio" class="text-center flex flex-col items-center"><i class="fas fa-home text-xl md:text-2xl mb-1"></i><span>Inicio</span></a>
         <a href="#propiedades" class="text-center flex flex-col items-center"><i class="fas fa-building text-xl md:text-2xl mb-1"></i><span>Propiedades</span></a>
         <a href="#servicios" class="text-center flex flex-col items-center"><i class="fas fa-concierge-bell text-xl md:text-2xl mb-1"></i><span>Servicios</span></a>
@@ -179,40 +210,9 @@
         <a href="#contacto" class="text-center flex flex-col items-center"><i class="fas fa-envelope text-xl md:text-2xl mb-1"></i><span>Contacto</span></a>
     </nav>
 
-    <a href="https://wa.me/1234567890" class="fixed bottom-20 right-4 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl" aria-label="Contactar por WhatsApp">
+    <a href="https://wa.me/1234567890" class="fixed bottom-20 right-4 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl z-50" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
-
-    <!-- Chat Widget -->
-    <div id="chat-widget" class="fixed bottom-40 right-4 z-50">
-        <button id="chat-toggle" class="bg-primary text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:bg-primary/90 transition-colors">
-            <i class="fas fa-comments"></i>
-        </button>
-        <div id="chat-container" class="hidden bg-white rounded-lg shadow-xl absolute bottom-16 right-0 w-80 h-96 flex flex-col">
-            <div class="bg-primary text-white p-4 rounded-t-lg">
-                <h3 class="font-bold">Chat de Bienes Raíces</h3>
-            </div>
-            <div id="chat-messages" class="flex-grow overflow-auto p-4 space-y-4">
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <button class="quick-question bg-gray-200 text-sm px-3 py-1 rounded-full hover:bg-gray-300 transition-colors">
-                        Busco una casa
-                    </button>
-                    <button class="quick-question bg-gray-200 text-sm px-3 py-1 rounded-full hover:bg-gray-300 transition-colors">
-                        Precios de apartamentos
-                    </button>
-                    <button class="quick-question bg-gray-200 text-sm px-3 py-1 rounded-full hover:bg-gray-300 transition-colors">
-                        Zonas disponibles
-                    </button>
-                </div>
-            </div>
-            <form id="chat-form" class="p-4 border-t flex">
-                <input id="chat-input" type="text" placeholder="Escribe un mensaje..." class="flex-grow p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                <button type="submit" class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-primary/90 transition-colors">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </form>
-        </div>
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
