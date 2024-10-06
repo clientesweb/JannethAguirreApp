@@ -312,38 +312,37 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Chat Widget
-    const chatToggle = document.getElementById('chat-toggle');
-    const chatContainer = document.getElementById('chat-container');
-    const chatClose = document.getElementById('chat-close');
-    const chatForm = document.getElementById('chat-form');
-    const chatInput = document.getElementById('chat-input');
-    const chatMessages = document.getElementById('chat-messages');
+const chatToggle = document.getElementById('chat-toggle');
+const chatContainer = document.getElementById('chat-container');
+const chatClose = document.getElementById('chat-close');
+const chatForm = document.getElementById('chat-form');
+const chatInput = document.getElementById('chat-input');
+const chatMessages = document.getElementById('chat-messages');
 
-    chatToggle.addEventListener('click', () => {
-        chatContainer.classList.toggle('hidden');
-    });
+chatToggle.addEventListener('click', () => {
+    chatContainer.classList.toggle('hidden');
+});
 
-    chatClose.addEventListener('click', () => {
-        chatContainer.classList.add('hidden');
-    });
+chatClose.addEventListener('click', () => {
+    chatContainer.classList.add('hidden');
+});
 
-    chatForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        if (chatInput.value.trim() !== '') {
-            addMessage('user', chatInput.value);
-            // Here you would typically send the message to a server and get a response
-            setTimeout(() => {
-                addMessage('bot', 'Gracias por tu mensaje. Un agente se pondrá en contacto contigo pronto.');
-            }, 1000);
-            chatInput.value = '';
-        }
-    });
-
-    function addMessage(sender, message) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('chat-message', `${sender}-message`);
-        messageElement.textContent = message;
-        chatMessages.appendChild(messageElement);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+chatForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (chatInput.value.trim() !== '') {
+        addMessage('user', chatInput.value);
+        // Aquí normalmente enviarías el mensaje a un servidor y obtendrías una respuesta
+        setTimeout(() => {
+            addMessage('bot', 'Gracias por tu mensaje. Un agente se pondrá en contacto contigo pronto.');
+        }, 1000);
+        chatInput.value = '';
     }
 });
+
+function addMessage(sender, message) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('chat-message', `${sender}-message`);
+    messageElement.textContent = message;
+    chatMessages.appendChild(messageElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
