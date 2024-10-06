@@ -312,37 +312,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Chat Widget
-const chatToggle = document.getElementById('chat-toggle');
-const chatContainer = document.getElementById('chat-container');
-const chatClose = document.getElementById('chat-close');
-const chatForm = document.getElementById('chat-form');
-const chatInput = document.getElementById('chat-input');
-const chatMessages = document.getElementById('chat-messages');
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatContainer = document.getElementById('chat-container');
+    const chatClose = document.getElementById('chat-close');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
 
-chatToggle.addEventListener('click', () => {
-    chatContainer.classList.toggle('hidden');
-});
+    console.log('Chat elements:', { chatToggle, chatContainer, chatClose, chatForm, chatInput, chatMessages });
 
-chatClose.addEventListener('click', () => {
-    chatContainer.classList.add('hidden');
-});
-
-chatForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (chatInput.value.trim() !== '') {
-        addMessage('user', chatInput.value);
-        // Aquí normalmente enviarías el mensaje a un servidor y obtendrías una respuesta
-        setTimeout(() => {
-            addMessage('bot', 'Gracias por tu mensaje. Un agente se pondrá en contacto contigo pronto.');
-        }, 1000);
-        chatInput.value = '';
+    if (chatToggle) {
+        chatToggle.addEventListener('click', () => {
+            console.log('Chat toggle clicked');
+            chatContainer.classList.toggle('hidden');
+        });
+    } else {
+        console.error('Chat toggle button not found');
     }
-});
 
-function addMessage(sender, message) {
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('chat-message', `${sender}-message`);
-    messageElement.textContent = message;
-    chatMessages.appendChild(messageElement);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
+    if (chatClose) {
+        chatClose.addEventListener('click', () => {
+            console.log('Chat close clicked');
+            chatContainer.classList.add('hidden');
+        });
+    } else {
+        console.error('Chat close button not found');
+    }
+
+    if (chatForm) {
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Chat form submitted');
+            if (chatInput.value.trim() !== '') {
+                addMessage('user', chatInput.value);
+                // Aquí normalmente enviarías el mensaje a un servidor y obtendrías una respuesta
+                setTimeout(() => {
+                    addMessage('bot', 'Gracias por tu mensaje. Un agente se pondrá en contacto contigo pronto.');
+                }, 1000);
+                chatInput.value = '';
+            }
+        });
+    } else {
+        console.error('Chat form not found');
+    }
+
+    function addMessage(sender, message) {
+        console.log('Adding message:', { sender, message });
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message', `${sender}-message`);
+        messageElement.textContent = message;
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Mensaje de bienvenida
+    setTimeout(() => {
+        addMessage('bot', '¡Hola! ¿En qué puedo ayudarte hoy?');
+    }, 1000);
+});
