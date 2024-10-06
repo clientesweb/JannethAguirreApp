@@ -1,241 +1,294 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
-    const promoItems = [
-        "¡Oferta especial! 10% de descuento en propiedades seleccionadas",
-        "Nueva propiedad disponible en el centro de la ciudad",
-        "¡Financiamiento disponible! Consulta nuestras opciones"
-    ];
-
-    const heroImages = [
-        "/img/paisaje-analogico-ciudad-edificios_23-2149661457.jpg",
-        "/img/casa-moderna-encantadora-villa-3d-render_1015255-30058.jpg",
-        "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg"
-    ];
-
-    const properties = [
-        { id: 1, title: "Casa moderna", price: "$250,000", image: "/img/clase-media-contemporanea-hermosa-casa-moderna_1096167-115673.jpg", type: "venta" },
-        { id: 2, title: "Apartamento céntrico", price: "$1,200/mes", image: "/img/elegante-diseno-interiores-sala-estar-mesa-sofa-accesorios-creativos_741910-16017.jpg", type: "alquiler" },
-        { id: 3, title: "Terreno en la playa", price: "$100,000", image: "/img/concepto-playa-quitasol_23-2147796212.jpg", type: "venta" },
-        { id: 4, title: "Oficina ejecutiva", price: "$2,000/mes", image: "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", type: "alquiler" },
-        { id: 5, title: "Casa de campo", price: "$180,000", image: "/img/pareja-caminando-cabina_23-2147833123.jpg", type: "venta" },
-        { id: 6, title: "Condominio de lujo", price: "$500,000", image: "/img/gran-hotel-palmeras-playa-tailandia_1253-929.jpg", type: "proyecto" }
-    ];
-
-    const services = [
-        { title: "Asesoría Legal", description: "Asistencia legal en todas las transacciones", icon: "fa-gavel" },
-        { title: "Valuación de Propiedades", description: "Tasaciones precisas y profesionales", icon: "fa-calculator" },
-        { title: "Gestión de Alquileres", description: "Administramos sus propiedades en alquiler", icon: "fa-key" }
-    ];
-
-    const instagramPosts = [
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE1/' },
-        { type: 'reel', url: 'https://www.instagram.com/reel/EXAMPLE2/' },
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE3/' },
-        { type: 'reel', url: 'https://www.instagram.com/reel/EXAMPLE4/' },
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE5/' }
-    ];
-
-    // Inicializar el slider de promociones
+    // Promo Slider
     const promoSlider = document.querySelector('.promo-slider');
+    const promoItems = [
+        'Nuevas propiedades disponibles',
+        'Ofertas especiales en apartamentos',
+        'Financiamiento disponible',
+        'Asesoría gratuita'
+    ];
+
     promoItems.forEach(item => {
         const div = document.createElement('div');
+        div.className = 'promo-item';
         div.textContent = item;
         promoSlider.appendChild(div);
     });
-    
-    if (typeof $.fn.slick === 'function') {
-        $('.promo-slider').slick({
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: false
-        });
-    }
 
-    // Inicializar el slider del hero
+    // Hero Slider
     const heroSlider = document.querySelector('.hero-slider');
-    heroImages.forEach(image => {
-        const div = document.createElement('div');
-        div.className = 'w-full h-full';
-        div.innerHTML = `<img src="${image}" alt="Hero image" class="w-full h-full object-cover">`;
-        heroSlider.appendChild(div);
+    const heroImages = [
+        '/img/hero1.jpg',
+        '/img/hero2.jpg',
+        '/img/hero3.jpg'
+    ];
+
+    heroImages.forEach((src, index) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Hero Image ${index + 1}`;
+        img.className = index === 0 ? 'active' : '';
+        heroSlider.appendChild(img);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.hero-slider').slick({
-            autoplay: true,
-            autoplaySpeed: 5000,
-            arrows: false,
-            dots: true,
-            fade: true,
-            cssEase: 'linear',
-            speed: 1000
-        });
-    }
+    let currentSlide = 0;
+    setInterval(() => {
+        const slides = heroSlider.querySelectorAll('img');
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }, 5000);
 
-    // Función para crear el botón de WhatsApp
-    function createWhatsAppButton(property) {
-        const message = encodeURIComponent(`Hola, estoy interesado en la propiedad "${property.title}" con precio ${property.price}. ¿Podrían darme más información?`);
-        return `<a href="https://wa.me/1234567890?text=${message}" class="bg-green-500 text-white px-4 py-2 rounded mt-2 inline-block" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-whatsapp mr-2"></i>Consultar por WhatsApp
-        </a>`;
-    }
-
-    // Inicializar el slider de propiedades destacadas
+    // Property Slider
     const propertySlider = document.querySelector('.property-slider');
+    const properties = [
+        { image: '/img/property1.jpg', title: 'Casa Moderna', price: '$250,000', bedrooms: 3, bathrooms: 2, area: '200m²' },
+        { image: '/img/property2.jpg', title: 'Apartamento de Lujo', price: '$180,000', bedrooms: 2, bathrooms: 2, area: '120m²' },
+        { image: '/img/property3.jpg', title: 'Casa de Campo', price: '$320,000', bedrooms: 4, bathrooms: 3, area: '300m²' },
+        { image: '/img/property4.jpg', title: 'Penthouse', price: '$400,000', bedrooms: 3, bathrooms: 3, area: '250m²' }
+    ];
+
     properties.forEach(property => {
-        const div = document.createElement('div');
-        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
-        div.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                <p class="text-gray-700 mb-2">${property.price}</p>
-                ${createWhatsAppButton(property)}
+        const propertyCard = document.createElement('div');
+        propertyCard.className = 'property-card';
+        propertyCard.innerHTML = `
+            <img src="${property.image}" alt="${property.title}">
+            <div class="property-info">
+                <h3>${property.title}</h3>
+                <p class="price">${property.price}</p>
+                <div class="property-details">
+                    <span><i class="fas fa-bed"></i> ${property.bedrooms} hab</span>
+                    <span><i class="fas fa-bath"></i> ${property.bathrooms} baños</span>
+                    <span><i class="fas fa-ruler-combined"></i> ${property.area}</span>
+                </div>
+                <a href="#contacto" class="contact-button">Contactar</a>
             </div>
         `;
-        propertySlider.appendChild(div);
+        propertySlider.appendChild(propertyCard);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.property-slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: true,
-            dots: true,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
-
-    // Renderizar las tarjetas de servicios
+    // Services
     const serviceGrid = document.getElementById('service-grid');
+    const services = [
+        { icon: 'fas fa-home', title: 'Compra y Venta', description: 'Asesoría en compra y venta de propiedades' },
+        { icon: 'fas fa-key', title: 'Alquiler', description: 'Gestión de alquileres y arrendamientos' },
+        { icon: 'fas fa-chart-line', title: 'Inversiones', description: 'Asesoría en inversiones inmobiliarias' },
+        { icon: 'fas fa-building', title: 'Administración', description: 'Administración de propiedades' },
+        { icon: 'fas fa-search', title: 'Tasaciones', description: 'Tasaciones y valoraciones de inmuebles' },
+        { icon: 'fas fa-file-contract', title: 'Legal', description: 'Asesoría legal inmobiliaria' }
+    ];
+
     services.forEach(service => {
-        const div = document.createElement('div');
-        div.className = 'bg-white p-6 rounded-lg shadow-md';
-        div.innerHTML = `
-            <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
-            <h3 class="text-xl font-bold mb-2">${service.title}</h3>
+        const serviceCard = document.createElement('div');
+        serviceCard.className = 'service-card';
+        serviceCard.innerHTML = `
+            <i class="${service.icon}"></i>
+            <h3>${service.title}</h3>
             <p>${service.description}</p>
         `;
-        serviceGrid.appendChild(div);
+        serviceGrid.appendChild(serviceCard);
     });
 
-    // Inicializar el slider de la tienda
+    // Store
     const storeSlider = document.getElementById('store-slider');
-    properties.forEach(property => {
-        const div = document.createElement('div');
-        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
-        div.dataset.type = property.type;
-        div.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                <p class="text-gray-700 mb-2">${property.price}</p>
-                ${createWhatsAppButton(property)}
-                <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
+    const storeItems = [
+        { image: '/img/store1.jpg', title: 'Casa Familiar', price: '$280,000', category: 'venta' },
+        { image: '/img/store2.jpg', title: 'Apartamento Céntrico', price: '$1,200/mes', category: 'alquiler' },
+        { image: '/img/store3.jpg', title: 'Terreno Urbano', price: '$150,000', category: 'venta' },
+        { image: '/img/store4.jpg', title: 'Oficina Moderna', price: '$1,500/mes', category: 'alquiler' },
+        { image: '/img/store5.jpg', title: 'Casa de Playa', price: '$350,000', category: 'venta' },
+        { image: '/img/store6.jpg', title: 'Proyecto Residencial', price: 'Desde $200,000', category: 'proyecto' }
+    ];
+
+    storeItems.forEach(item => {
+        const storeItem = document.createElement('div');
+        storeItem.className = 'store-item';
+        storeItem.dataset.category = item.category;
+        storeItem.innerHTML = `
+            <img src="${item.image}" alt="${item.title}">
+            <div class="store-item-info">
+                <h3>${item.title}</h3>
+                <p class="price">${item.price}</p>
+                <p class="category">${item.category}</p>
+                <button class="view-gallery">Ver Galería</button>
             </div>
         `;
-        storeSlider.appendChild(div);
+        storeSlider.appendChild(storeItem);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('#store-slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: false,
-            arrows: true,
-            dots: false,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.dataset.filter;
+            const items = storeSlider.querySelectorAll('.store-item');
+            
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-    // Filtrado de propiedades
-    document.querySelectorAll('.filter-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const filter = this.dataset.filter;
-            const propertyCards = document.querySelectorAll('.property-card');
-            propertyCards.forEach(card => {
-                if (filter === 'all' || card.dataset.type === filter) {
-                    card.style.display = '';
+            items.forEach(item => {
+                if (filter === 'all' || item.dataset.category === filter) {
+                    item.style.display = 'block';
                 } else {
-                    card.style.display = 'none';
+                    item.style.display = 'none';
                 }
             });
-            if (typeof $.fn.slick === 'function') {
-                $('#store-slider').slick('setPosition');
-            }
         });
     });
 
-    // Modal de galería
+    // Gallery Modal
+    const modal = document.getElementById('gallery-modal');
+    const closeModal = document.getElementById('close-modal');
+    const galleryImages = document.getElementById('gallery-images');
+
     document.querySelectorAll('.view-gallery').forEach(button => {
-        button.addEventListener('click', function() {
-            const propertyId = this.dataset.id;
-            openGallery(propertyId);
+        button.addEventListener('click', () => {
+            const storeItem = button.closest('.store-item');
+            const mainImage = storeItem.querySelector('img').src;
+            
+            // Clear previous images
+            galleryImages.innerHTML = '';
+            
+            // Add main image and some variations (you can replace these with actual gallery images)
+            [mainImage, '/img/gallery1.jpg', '/img/gallery2.jpg', '/img/gallery3.jpg'].forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = 'Gallery Image';
+                img.className = 'w-1/2 p-2';
+                galleryImages.appendChild(img);
+            });
+            
+            modal.classList.remove('hidden');
         });
     });
 
-    document.getElementById('close-modal').addEventListener('click', function() {
-        document.getElementById('gallery-modal').classList.add('hidden');
-        document.getElementById('gallery-modal').classList.remove('flex');
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('hidden');
     });
 
-    function openGallery(propertyId) {
-        const galleryImagesUrls = [
-            "/placeholder.svg?height=200&width=300",
-            "/placeholder.svg?height=200&width=300",
-            "/placeholder.svg?height=200&width=300"
-        ];
+    // Instagram Feed
+    const instagramSlider = document.getElementById('instagram-slider');
+    const instagramPosts = [
+        { image: '/img/instagram1.jpg', likes: 120, comments: 15 },
+        { image: '/img/instagram2.jpg', likes: 85, comments: 8 },
+        { image: '/img/instagram3.jpg', likes: 200, comments: 25 },
+        { image: '/img/instagram4.jpg', likes: 150, comments: 18 }
+    ];
 
-        const galleryImages = document.getElementById('gallery-images');
-        galleryImages.innerHTML = '';
-        galleryImagesUrls.forEach(url => {
-            const img = document.createElement('img');
-            img.src = url;
-            img.className = 'w-full h-auto';
-            galleryImages.appendChild(img);
-        });
+    instagramPosts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = 'instagram-post';
+        postElement.innerHTML = `
+            <img src="${post.image}" alt="Instagram Post">
+            <div class="instagram-post-info">
+                <span><i class="fas fa-heart"></i> ${post.likes}</span>
+                <span><i class="fas fa-comment"></i> ${post.comments}</span>
+            </div>
+        `;
+        instagramSlider.appendChild(postElement);
+    });
 
-        document.getElementById('gallery-modal').classList.remove('hidden');
-        document.getElementById('gallery-modal').classList.add('flex');
-    }
+    // Initialize sliders
+    $('.property-slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
 
-    // Formulario de contacto
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
+    $('#service-grid').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+
+    $('#store-slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+
+    $('#instagram-slider').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+
+    // Contact Form Submission
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        alert('Gracias por tu mensaje. Te contactaremos pronto.');
-        this.reset();
+        // Here you would typically send the form data to a server
+        alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+        contactForm.reset();
     });
 
-    // Instalación de la PWA
+    // PWA Installation
     let deferredPrompt;
     const installButton = document.getElementById('install-app');
 
@@ -245,154 +298,52 @@ document.addEventListener('DOMContentLoaded', function() {
         installButton.style.display = 'block';
     });
 
-    installButton.addEventListener('click', async function() {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') {
-                console.log('User accepted the install prompt');
+    installButton.addEventListener('click', (e) => {
+        installButton.style.display = 'none';
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the A2HS prompt');
+            } else {
+                console.log('User dismissed the A2HS prompt');
             }
             deferredPrompt = null;
-        }
-    });
-
-    // Inicializar el slider de Instagram
-    const instagramSlider = document.getElementById('instagram-slider');
-    instagramPosts.forEach(post => {
-        const div = document.createElement('div');
-        div.className = 'instagram-item';
-        div.innerHTML = `
-            <blockquote class="instagram-media" data-instgrm-permalink="${post.url}" data-instgrm-version="14">
-                <div style="padding:16px;">
-                    <a href="${post.url}" target="_blank">Ver esta publicación en Instagram</a>
-                </div>
-            </blockquote>
-        `;
-        instagramSlider.appendChild(div);
-    });
-
-    if (typeof $.fn.slick === 'function') {
-        $('#instagram-slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: false,
-            arrows: true,
-            dots: true,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
         });
-    }
+    });
 
-    // Cargar el script de Instagram
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//www.instagram.com/embed.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'instagram-embed-sdk'));
-
-    // Hacer el menú inferior responsivo
-    function adjustBottomNav() {
-        const bottomNav = document.querySelector('nav.fixed.bottom-0');
-        if (window.innerWidth < 640) {
-            bottomNav.classList.add('text-xs');
-            bottomNav.querySelectorAll('i').forEach(icon => {
-                icon.classList.remove('mb-1');
-                icon.classList.add('text-lg');
-            });
-            bottomNav.querySelectorAll('span').forEach(span => {
-                span.classList.add('hidden');
-            });
-        } else {
-            bottomNav.classList.remove('text-xs');
-            bottomNav.querySelectorAll('i').forEach(icon => {
-                icon.classList.add('mb-1');
-                icon.classList.remove('text-lg');
-            });
-            bottomNav.querySelectorAll('span').forEach(span => {
-                span.classList.remove('hidden');
-            });
-        }
-    }
-
-    adjustBottomNav();
-    window.addEventListener('resize', adjustBottomNav);
-
-    // AI Chat
-    const openChatButton = document.getElementById('open-chat');
-    const aiChat =  document.getElementById('ai-chat');
+    // Chat Widget
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatContainer = document.getElementById('chat-container');
+    const chatClose = document.getElementById('chat-close');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
     const chatMessages = document.getElementById('chat-messages');
-    const userInput = document.getElementById('user-input');
-    const sendMessageButton = document.getElementById('send-message');
 
-    openChatButton.addEventListener('click', () => {
-        aiChat.classList.toggle('hidden');
+    chatToggle.addEventListener('click', () => {
+        chatContainer.classList.toggle('hidden');
     });
 
-    sendMessageButton.addEventListener('click', sendMessage);
-    userInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
+    chatClose.addEventListener('click', () => {
+        chatContainer.classList.add('hidden');
     });
 
-    function sendMessage() {
-        const message = userInput.value.trim();
-        if (message) {
-            addMessageToChat('Usuario', message);
-            // Aquí iría la lógica para enviar el mensaje a la IA y recibir una respuesta
-            // Por ahora, simularemos una respuesta después de un breve retraso
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (chatInput.value.trim() !== '') {
+            addMessage('user', chatInput.value);
+            // Here you would typically send the message to a server and get a response
             setTimeout(() => {
-                const aiResponse = getAIResponse(message);
-                addMessageToChat('IA', aiResponse);
+                addMessage('bot', 'Gracias por tu mensaje. Un agente se pondrá en contacto contigo pronto.');
             }, 1000);
-            userInput.value = '';
+            chatInput.value = '';
         }
-    }
+    });
 
-    function addMessageToChat(sender, message) {
+    function addMessage(sender, message) {
         const messageElement = document.createElement('div');
-        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        messageElement.classList.add('chat-message', `${sender}-message`);
+        messageElement.textContent = message;
         chatMessages.appendChild(messageElement);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-
-    function getAIResponse(message) {
-        // Aquí iría la lógica real para obtener una respuesta de la IA
-        // Por ahora, usaremos respuestas predefinidas basadas en palabras clave
-        const lowercaseMessage = message.toLowerCase();
-        if (lowercaseMessage.includes('precio') || lowercaseMessage.includes('costo')) {
-            return "Los precios de nuestras propiedades varían según la ubicación y características. ¿Hay alguna propiedad específica que te interese?";
-        } else if (lowercaseMessage.includes('ubicación') || lowercaseMessage.includes('zona')) {
-            return "Tenemos propiedades en diversas zonas de la ciudad. ¿Tienes alguna preferencia de ubicación?";
-        } else if (lowercaseMessage.includes('visita') || lowercaseMessage.includes('ver')) {
-            return "¡Claro! Podemos programar una visita a la propiedad que te interese. ¿Qué día te vendría bien?";
-        } else {
-            return "Gracias por tu interés. ¿Puedes ser más específico sobre qué información necesitas? Estaré encantado de ayudarte.";
-        }
-    }
 });
-
-// Service Worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) {
-            console.log('ServiceWorker registration failed: ', err);
-        });
-    });
-}
