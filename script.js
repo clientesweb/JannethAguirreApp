@@ -311,6 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
     // Chat Widget
     const chatToggle = document.getElementById('chat-toggle');
     const chatContainer = document.getElementById('chat-container');
@@ -319,31 +320,81 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatInput = document.getElementById('chat-input');
     const chatMessages = document.getElementById('chat-messages');
 
-    chatToggle.addEventListener('click', () => {
-        chatContainer.classList.toggle('hidden');
-    });
+    console.log('Chat elements:', { chatToggle, chatContainer, chatClose, chatForm, chatInput, chatMessages });
 
-    chatClose.addEventListener('click', () => {
-        chatContainer.classList.add('hidden');
-    });
+    if (chatToggle) {
+        chatToggle.addEventListener('click', () => {
+            console.log('Chat toggle clicked');
+            chatContainer.classList.toggle('hidden');
+            if (!chatContainer.classList.contains('hidden')) {
+                chatInput.focus();
+            }
+        });
+    } else {
+        console.error('Chat toggle button not found');
+    }
 
-    chatForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        if (chatInput.value.trim() !== '') {
-            addMessage('user', chatInput.value);
-            // Here you would typically send the message to a server and get a response
-            setTimeout(() => {
-                addMessage('bot', 'Gracias por tu mensaje. Un agente se pondrá en contacto contigo pronto.');
-            }, 1000);
-            chatInput.value = '';
-        }
-    });
+    if (chatClose) {
+        chatClose.addEventListener('click', () => {
+            console.log('Chat close clicked');
+            chatContainer.classList.add('hidden');
+        });
+    } else {
+        console.error('Chat close button not found');
+    }
+
+    if (chatForm) {
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Chat form submitted');
+            if (chatInput.value.trim() !== '') {
+                addMessage('user', chatInput.value);
+                processUserMessage(chatInput.value);
+                chatInput.value = '';
+            }
+        });
+    } else {
+        console.error('Chat form not found');
+    }
 
     function addMessage(sender, message) {
+        console.log('Adding message:', { sender, message });
         const messageElement = document.createElement('div');
         messageElement.classList.add('chat-message', `${sender}-message`);
         messageElement.textContent = message;
         chatMessages.appendChild(messageElement);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
+
+    function processUserMessage(message) {
+        console.log('Processing user message:', message);
+        // Simular procesamiento de IA
+        setTimeout(() => {
+            let response;
+            message = message.toLowerCase();
+
+            if (message.includes('hola') || message.includes('buenos días') || message.includes('buenas tardes')) {
+                response = "¡Hola! Soy el asistente virtual de Janneth Aguirre Bienes Raíces. ¿En qué puedo ayudarte hoy con tus consultas inmobiliarias?";
+            } else if (message.includes('comprar') || message.includes('vender')) {
+                response = "Excelente, ¿estás interesado en comprar o vender una propiedad? Puedo ayudarte con información sobre el mercado actual y nuestros servicios. ¿Tienes alguna zona o tipo de propiedad en mente?";
+            } else if (message.includes('alquilar') || message.includes('rentar')) {
+                response = "Tenemos varias opciones de alquiler disponibles. ¿Buscas algo en particular, como un apartamento o una casa? ¿Tienes preferencias de ubicación o presupuesto?";
+            } else if (message.includes('precio') || message.includes('costo')) {
+                response = "Los precios varían según la ubicación y el tipo de propiedad. ¿Podrías darme más detalles sobre qué tipo de propiedad te interesa y en qué zona? Así podré proporcionarte información más precisa.";
+            } else if (message.includes('cita') || message.includes('visita')) {
+                response = "¡Claro! Estaré encantado de ayudarte a programar una cita para que veas algunas propiedades. ¿Qué días y horarios te vendrían mejor? También, ¿hay alguna propiedad específica que te gustaría visitar?";
+            } else if (message.includes('gracias')) {
+                response = "¡De nada! Ha sido un placer ayudarte. Si tienes más preguntas en el futuro sobre bienes raíces o nuestros servicios, no dudes en volver a contactarnos. ¡Que tengas un excelente día!";
+            } else {
+                response = "Gracias por tu mensaje. Para poder ayudarte mejor con tus necesidades inmobiliarias, ¿podrías darme más detalles sobre lo que estás buscando? Por ejemplo, ¿buscas comprar, vender, o alquilar? ¿Tienes alguna zona o tipo de propiedad en mente?";
+            }
+
+            addMessage('bot', response);
+        }, 1000);
+    }
+
+    // Mensaje de bienvenida
+    setTimeout(() => {
+        addMessage('bot', '¡Hola! Soy el asistente virtual de Janneth Aguirre Bienes Raíces. ¿En qué puedo ayudarte hoy con tus consultas inmobiliarias?');
+    }, 1000);
 });
