@@ -5,6 +5,9 @@ const urlsToCache = [
   'script.js',
   'img/Logo-Janneth-Aguirre-2020-ecuador.png',
   'img/favicon-32x32.png',
+  'img/icon-192x192.png',
+  'img/icon-512x512.png',
+  'img/icon-maskable.png',
   'img/favicon-16x16.png',
   'img/apple-touch-icon.png',
   'manifest.json'
