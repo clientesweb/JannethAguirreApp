@@ -245,15 +245,22 @@ document.addEventListener('DOMContentLoaded', function() {
         installButton.style.display = 'block';
     });
 
-    installButton.addEventListener('click', async function() {
+    installButton.addEventListener('click', async () => {
         if (deferredPrompt) {
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
             if (outcome === 'accepted') {
-                console.log('User accepted the install prompt');
+                console.log('Usuario aceptó la instalación de la PWA');
+            } else {
+                console.log('Usuario rechazó la instalación de la PWA');
             }
             deferredPrompt = null;
         }
+    });
+
+    window.addEventListener('appinstalled', () => {
+        installButton.style.display = 'none';
+        console.log('PWA instalada exitosamente');
     });
 
     // YouTube Playlist
