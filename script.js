@@ -235,65 +235,36 @@ document.addEventListener('DOMContentLoaded', function() {
         this.reset();
     });
 
-    // Instalación de la PWA
-    let deferredPrompt;
-    const installButton = document.getElementById('install-app');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installButton.style.display = 'block';
-    });
-
-    installButton.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          console.log('Usuario aceptó la instalación de la PWA');
-        } else {
-          console.log('Usuario rechazó la instalación de la PWA');
-        }
-        deferredPrompt = null;
-      }
-    });
-
-    window.addEventListener('appinstalled', () => {
-      installButton.style.display = 'none';
-      console.log('PWA instalada exitosamente');
-    });
-
     // YouTube Playlist
-    const youtubePlaylistId = 'TU_ID_DE_PLAYLIST_AQUI';
-    const youtubeApiKey = 'TU_API_KEY_AQUI';
-    const maxResults = 10; // Número de videos a mostrar
+    const youtubePlaylistId = 'PLAYLIST_ID';
+    const youtubeApiKey = 'YOUR_YOUTUBE_API_KEY';
+    const youtubeSlider = document.getElementById('youtube-slider');
 
-    fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${maxResults}&playlistId=${youtubePlaylistId}&key=${youtubeApiKey}`)
+    fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${youtubePlaylistId}&key=${youtubeApiKey}`)
         .then(response => response.json())
         .then(data => {
-            const youtubeSlider = document.getElementById('youtube-slider');
             data.items.forEach(item => {
                 const videoId = item.snippet.resourceId.videoId;
                 const title = item.snippet.title;
                 const thumbnailUrl = item.snippet.thumbnails.medium.url;
 
                 const div = document.createElement('div');
-                div.className = 'youtube-item';
+                div.className = 'youtube-video';
                 div.innerHTML = `
                     <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener noreferrer">
                         <img src="${thumbnailUrl}" alt="${title}" class="w-full h-auto">
-                        <p class="mt-2 text-sm font-semibold">${title}</p>
+                        <p class="mt-2 text-center">${title}</p>
                     </a>
                 `;
                 youtubeSlider.appendChild(div);
             });
 
-            // Inicializar el slider de YouTube
             if (typeof $.fn.slick === 'function') {
-                $('#youtube-slider').slick({
+                $('.youtube-slider').slick({
                     slidesToShow: 3,
                     slidesToScroll: 1,
-                    autoplay: false,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
                     arrows: true,
                     dots: true,
                     responsive: [
@@ -315,26 +286,26 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching YouTube playlist:', error));
 
-    // Inicializar el slider de Instagram
+    // Instagram Feed
     const instagramSlider = document.getElementById('instagram-slider');
+
     instagramPosts.forEach(post => {
         const div = document.createElement('div');
-        div.className = 'instagram-item';
+        div.className = 'instagram-post';
         div.innerHTML = `
             <blockquote class="instagram-media" data-instgrm-permalink="${post.url}" data-instgrm-version="14">
-                <div style="padding:16px;">
-                    <a href="${post.url}" target="_blank">Ver esta publicación en Instagram</a>
-                </div>
+                <a href="${post.url}" target="_blank" rel="noopener noreferrer">Ver en Instagram</a>
             </blockquote>
         `;
         instagramSlider.appendChild(div);
     });
 
     if (typeof $.fn.slick === 'function') {
-        $('#instagram-slider').slick({
+        $('.instagram-slider').slick({
             slidesToShow: 3,
             slidesToScroll: 1,
-            autoplay: false,
+            autoplay: true,
+            autoplaySpeed: 3000,
             arrows: true,
             dots: true,
             responsive: [
@@ -355,38 +326,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Cargar el script de Instagram
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//www.instagram.com/embed.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'instagram-embed-sdk'));
+    const instagramScript = document.createElement('script');
+    instagramScript.src = 'https://www.instagram.com/embed.js';
+    document.body.appendChild(instagramScript);
 
-    // Hacer el menú inferior responsivo
-    function adjustBottomNav() {
-        const bottomNav = document.querySelector('nav.fixed.bottom-0');
-        if (window.innerWidth < 640) {
-            bottomNav.classList.add('text-xs');
-            bottomNav.querySelectorAll('i').forEach(icon => {
-                icon.classList.remove('mb-1');
-                icon.classList.add('text-lg');
-            });
-            bottomNav.querySelectorAll('span').forEach(span => {
-                span.classList.add('hidden');
-            });
-        } else {
-            bottomNav.classList.remove('text-xs');
-            bottomNav.querySelectorAll('i').forEach(icon => {
-                icon.classList.add('mb-1');
-                icon.classList.remove('text-lg');
-            });
-            bottomNav.querySelectorAll('span').forEach(span => {
-                span.classList.remove('hidden');
-            });
+    // Instalación de la PWA
+    let deferredPrompt;
+    const installButton = document.getElementById('install-app');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installButton.style.display = 'block';
+    });
+
+    installButton.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
+            deferredPrompt = null;
         }
-    }
+    });
 
-    adjustBottomNav();
-    window.addEventListener('resize', adjustBottomNav);
+    window.addEventListener('appinstalled', () => {
+        console.log('PWA was installed');
+    });
 });
+
+// Renderizar el componente del chatbot
+ReactDOM.render(
+    React.createElement(AIRealEstateExpertChatbot),
+    document.getElementById('ai-real-estate-expert-chatbot')
+);
