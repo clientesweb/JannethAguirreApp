@@ -43,8 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
         promoSlider.appendChild(div);
     });
     
-    // Asumiendo que estás usando una librería de slider como Slick
-    // Si no, necesitarás implementar tu propio slider en vanilla JS
     if (typeof $.fn.slick === 'function') {
         $('.promo-slider').slick({
             autoplay: true,
@@ -257,6 +255,58 @@ document.addEventListener('DOMContentLoaded', function() {
             deferredPrompt = null;
         }
     });
+
+    // YouTube Playlist
+    const youtubePlaylistId = 'TU_ID_DE_PLAYLIST_AQUI';
+    const youtubeApiKey = 'TU_API_KEY_AQUI';
+    const maxResults = 10; // Número de videos a mostrar
+
+    fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${maxResults}&playlistId=${youtubePlaylistId}&key=${youtubeApiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            const youtubeSlider = document.getElementById('youtube-slider');
+            data.items.forEach(item => {
+                const videoId = item.snippet.resourceId.videoId;
+                const title = item.snippet.title;
+                const thumbnailUrl = item.snippet.thumbnails.medium.url;
+
+                const div = document.createElement('div');
+                div.className = 'youtube-item';
+                div.innerHTML = `
+                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener noreferrer">
+                        <img src="${thumbnailUrl}" alt="${title}" class="w-full h-auto">
+                        <p class="mt-2 text-sm font-semibold">${title}</p>
+                    </a>
+                `;
+                youtubeSlider.appendChild(div);
+            });
+
+            // Inicializar el slider de YouTube
+            if (typeof $.fn.slick === 'function') {
+                $('#youtube-slider').slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    autoplay: false,
+                    arrows: true,
+                    dots: true,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        },
+                        {
+                            breakpoint: 640,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching YouTube playlist:', error));
 
     // Inicializar el slider de Instagram
     const instagramSlider = document.getElementById('instagram-slider');
