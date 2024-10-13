@@ -1,13 +1,13 @@
 const CACHE_NAME = 'ja-bienes-raices-v1';
 const urlsToCache = [
   '/',
-  '/index.html',
-  '/script.js',
-  '/img/Logo-Janneth-Aguirre-2020-ecuador.png',
-  '/img/favicon-32x32.png',
-  '/img/favicon-16x16.png',
-  '/img/apple-touch-icon.png',
-  '/manifest.json'
+  'index.html',
+  'script.js',
+  'img/Logo-Janneth-Aguirre-2020-ecuador.png',
+  'img/favicon-32x32.png',
+  'img/favicon-16x16.png',
+  'img/apple-touch-icon.png',
+  'manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
