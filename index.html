@@ -3,7 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janneth Aguirre Bienes Raíces</title>
+    <title>Janneth Aguirre Bienes Raíces - Expertos en Propiedades en Ecuador</title>
+    <meta name="description" content="Janneth Aguirre Bienes Raíces ofrece las mejores propiedades en venta y alquiler en Ecuador. Encuentra tu hogar ideal con nuestros expertos en bienes raíces.">
+    <meta name="keywords" content="bienes raíces, propiedades, venta de casas, alquiler de apartamentos, Ecuador, Janneth Aguirre">
+    <meta name="author" content="Janneth Aguirre">
+    <link rel="canonical" href="https://www.jannethaguirre.com/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#FF0000">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.jannethaguirre.com/">
+    <meta property="og:title" content="Janneth Aguirre Bienes Raíces - Expertos en Propiedades en Ecuador">
+    <meta property="og:description" content="Encuentra tu hogar ideal con Janneth Aguirre Bienes Raíces. Ofrecemos las mejores propiedades en venta y alquiler en Ecuador.">
+    <meta property="og:image" content="https://www.jannethaguirre.com/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.jannethaguirre.com/">
+    <meta property="twitter:title" content="Janneth Aguirre Bienes Raíces - Expertos en Propiedades en Ecuador">
+    <meta property="twitter:description" content="Encuentra tu hogar ideal con Janneth Aguirre Bienes Raíces. Ofrecemos las mejores propiedades en venta y alquiler en Ecuador.">
+    <meta property="twitter:image" content="https://www.jannethaguirre.com/twitter-image.jpg">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
@@ -13,9 +39,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#c69c6d',
-                        secondary: '#f0e6d2',
-                        background: '#faf7f2',
+                        primary: '#FF0000',
+                        secondary: '#808080',
+                        background: '#FFFFFF',
                     },
                     fontFamily: {
                         'poppins': ['Poppins', 'sans-serif'],
@@ -27,8 +53,6 @@
     <!-- Slick CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#f0e6d2">
 </head>
 <body class="font-poppins bg-background text-gray-800">
     <div class="bg-primary text-white py-2 overflow-hidden">
@@ -49,20 +73,18 @@
     </header>
 
     <main>
-        
-
-<section id="inicio" class="relative h-[calc(100vh-80px)] overflow-hidden">
-    <div class="hero-slider absolute inset-0">
-        <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
-    </div>
-    <div class="absolute inset-0 flex items-center justify-center z-10">
-        <div class="text-center text-white p-4">
-            <h2 class="text-4xl font-bold mb-4 drop-shadow-lg">Encuentra tu hogar ideal</h2>
-            <p class="text-xl mb-6 drop-shadow-lg">Expertos en bienes raíces a tu servicio</p>
-            <a href="#propiedades" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Ver Propiedades</a>
-        </div>
-    </div>
-</section>
+        <section id="inicio" class="relative h-[calc(100vh-80px)] overflow-hidden">
+            <div class="hero-slider absolute inset-0">
+                <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
+            </div>
+            <div class="absolute inset-0 flex items-center justify-center z-10">
+                <div class="text-center text-white p-4">
+                    <h1 class="text-4xl font-bold mb-4 drop-shadow-lg">Encuentra tu hogar ideal</h1>
+                    <p class="text-xl mb-6 drop-shadow-lg">Expertos en bienes raíces a tu servicio</p>
+                    <a href="#propiedades" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Ver Propiedades</a>
+                </div>
+            </div>
+        </section>
 
         <section id="propiedades" class="py-16">
             <div class="container mx-auto px-4">
@@ -93,7 +115,6 @@
                     <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="proyecto">Proyecto</button>
                 </div>
                 
-                <!-- Contenedor del Slider -->
                 <div class="relative">
                     <div id="store-slider" class="flex space-x-4 overflow-hidden px-4"> 
                         <!-- Las tarjetas se insertarán aquí mediante JavaScript -->
@@ -102,7 +123,6 @@
             </div>
         </section>
 
-        <!-- Galería Modal -->
         <div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-75 hidden justify-center items-center z-50">
             <div class="bg-white rounded-lg p-4 max-w-lg w-full shadow-lg">
                 <span id="close-modal" class="cursor-pointer text-gray-500 float-right text-2xl">&times;</span>
@@ -119,16 +139,25 @@
                 <p class="text-xl mb-8">¡No te pierdas nuestras increíbles promociones en propiedades seleccionadas!</p>
                 <a href="#contacto" class="bg-white text-primary px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors">Contáctanos Ahora</a>
             </div>
-        </section> 
+        </section>
+
+        <section id="youtube-playlist" class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Nuestro Canal de YouTube</h2>
+                <div id="youtube-slider" class="youtube-slider">
+                    <!-- YouTube videos will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
         
         <section id="instagram" class="py-16 bg-gray-100">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8">Síguenos en Instagram</h2>
-        <div id="instagram-slider" class="instagram-slider">
-            <!-- Instagram posts will be inserted here by JavaScript -->
-        </div>
-    </div>
-</section>
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Síguenos en Instagram</h2>
+                <div id="instagram-slider" class="instagram-slider">
+                    <!-- Instagram posts will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
 
         <section id="contacto" class="py-16">
             <div class="container mx-auto px-4">
@@ -158,7 +187,7 @@
                 <div>
                     <h3 class="text-xl font-bold mb-4">Contacto</h3>
                     <p class="mb-2"><i class="fas fa-phone mr-2"></i> (123) 456-7890</p>
-                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> info@jannethaguirre.com</p>
+                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4cdcac2cbe4cec5cacac1d0ccc5c3d1cdd6d6c18ac7cbc9">[email&#160;protected]</a></p>
                     <p><i class="fas fa-map-marker-alt mr-2"></i> Av. Principal 123, Lima, Perú</p>
                 </div>
                 <div>
@@ -171,18 +200,18 @@
                     </div>
                 </div>
             </div>
-            <p class="text-center mt-8">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
+            <p class="text-center mt-8">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos  reservados.</p>
             <p class="text-center mt-2">Powered by <a href="https://dualitydomain.github.io/Dualitydomain/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Duality Domain</a></p>
         </div>
     </footer>
 
     <nav class="fixed bottom-0 left-0 right-0 bg-secondary py-2 px-4 flex justify-around items-center text-sm md:text-base">
-    <a href="#inicio" class="text-center flex flex-col items-center"><i class="fas fa-home text-xl md:text-2xl mb-1"></i><span>Inicio</span></a>
-    <a href="#propiedades" class="text-center flex flex-col items-center"><i class="fas fa-building text-xl md:text-2xl mb-1"></i><span>Propiedades</span></a>
-    <a href="#servicios" class="text-center flex flex-col items-center"><i class="fas fa-concierge-bell text-xl md:text-2xl mb-1"></i><span>Servicios</span></a>
-    <a href="#tienda" class="text-center flex flex-col items-center"><i class="fas fa-store text-xl md:text-2xl mb-1"></i><span>Tienda</span></a>
-    <a href="#contacto" class="text-center flex flex-col items-center"><i class="fas fa-envelope text-xl md:text-2xl mb-1"></i><span>Contacto</span></a>
-</nav>
+        <a href="#inicio" class="text-center flex flex-col items-center"><i class="fas fa-home text-xl md:text-2xl mb-1"></i><span>Inicio</span></a>
+        <a href="#propiedades" class="text-center flex flex-col items-center"><i class="fas fa-building text-xl md:text-2xl mb-1"></i><span>Propiedades</span></a>
+        <a href="#servicios" class="text-center flex flex-col items-center"><i class="fas fa-concierge-bell text-xl md:text-2xl mb-1"></i><span>Servicios</span></a>
+        <a href="#tienda" class="text-center flex flex-col items-center"><i class="fas fa-store text-xl md:text-2xl mb-1"></i><span>Tienda</span></a>
+        <a href="#contacto" class="text-center flex flex-col items-center"><i class="fas fa-envelope text-xl md:text-2xl mb-1"></i><span>Contacto</span></a>
+    </nav>
     <a href="https://wa.me/1234567890" class="fixed bottom-20 right-4 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
