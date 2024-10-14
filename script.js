@@ -237,8 +237,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // YouTube Channel Videos
-    const youtubeChannelId = 'YOUR_CHANNEL_ID';
-    const youtubeApiKey = 'YOUR_API_KEY';
+    const youtubeChannelId = 'UCiahlQJxCgPY-tEfjvkab8g';
+    const youtubeApiKey = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
     const youtubeSlider = document.getElementById('youtube-slider');
 
     fetch(`https://www.googleapis.com/youtube/v3/search?key=${youtubeApiKey}&channelId=${youtubeChannelId}&part=snippet,id&order=date&maxResults=5`)
