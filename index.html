@@ -31,7 +31,6 @@
     <meta property="twitter:image" content="https://www.jannethaguirre.com/twitter-image.jpg">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -72,6 +71,56 @@
         
         #ai-real-estate-expert-chatbot .ring-primary {
             --tw-ring-color: #FF0000;
+        }
+
+        #ai-real-estate-expert-chatbot .suggested-query {
+            cursor: pointer;
+            padding: 5px 10px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #ai-real-estate-expert-chatbot .suggested-query:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        #ai-real-estate-expert-chatbot .chat-message {
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        #ai-real-estate-expert-chatbot .user-message {
+            background-color: #FF0000;
+            color: white;
+            border-radius: 18px 18px 0 18px;
+            padding: 10px 15px;
+            margin-left: auto;
+            margin-bottom: 10px;
+        }
+
+        #ai-real-estate-expert-chatbot .bot-message {
+            background-color: #f0f0f0;
+            color: black;
+            border-radius: 18px 18px 18px 0;
+            padding: 10px 15px;
+            margin-right: auto;
+            margin-bottom: 10px;
+        }
+
+        .property-card {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .property-card:hover {
+            transform: scale(1.05);
+        }
+
+        .slick-prev:before, .slick-next:before {
+            color: #FF0000;
         }
     </style>
 </head>
@@ -191,7 +240,7 @@
                         <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Enviar</button>
                     </form>
                     <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.964560146161!2d-77.03196518561798!3d-12.046654545137994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8b5d35662c7%3A0x15f0bbc9023d16d7!2sPlaza%20Mayor%20de%20Lima!5e0!3m2!1ses-419!2spe!4v1623344892535!5m2!1ses-419!2spe" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7985190693837!2d-78.49956708524931!3d-0.18034999984937408!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a4002427c9f%3A0x44b991e158ef5572!2sQuito%2C%20Ecuador!5e0!3m2!1sen!2sus!4v1623345892535!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
@@ -203,16 +252,15 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="h-16 mb-4">
-                    <p>Expertos en bienes raíces con años de experiencia en el mercado.</p>
+                    <p>Expertos en bienes raíces con años de experiencia en el mercado ecuatoriano.</p>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-4">Contacto</h3>
-                    <p class="mb-2"><i class="fas fa-phone mr-2"></i> (123) 456-7890</p>
-                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4cdcac2cbe4cec5cacac1d0ccc5c3d1cdd6d6c18ac7cbc9">[email&#160;protected]</a></p>
-                    <p><i class="fas fa-map-marker-alt mr-2"></i> Av. Principal  123, Lima, Perú</p>
+                    <p class="mb-2"><i class="fas fa-phone mr-2"></i> (+593) 99 123 4567</p>
+                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> info@jannethaguirre.com</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> Av. Amazonas N32-87, Quito, Ecuador</p>
                 </div>
                 <div>
-                
                     <h3 class="text-xl font-bold mb-4">Síguenos</h3>
                     <div class="flex space-x-4">
                         <a href="#" aria-label="Facebook" class="text-primary hover:text-primary/80"><i class="fab fa-facebook-f"></i></a>
@@ -222,7 +270,7 @@
                     </div>
                 </div>
             </div>
-            <p class="text-center mt-8">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos  reservados.</p>
+            <p class="text-center mt-8">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
             <p class="text-center mt-2">Powered by <a href="https://dualitydomain.github.io/Dualitydomain/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Duality Domain</a></p>
         </div>
     </footer>
@@ -234,10 +282,10 @@
         <a href="#tienda" class="text-center flex flex-col items-center"><i class="fas fa-store text-xl md:text-2xl mb-1"></i><span>Tienda</span></a>
         <a href="#contacto" class="text-center flex flex-col items-center"><i class="fas fa-envelope text-xl md:text-2xl mb-1"></i><span>Contacto</span></a>
     </nav>
-    
+
     <div id="ai-real-estate-expert-chatbot" class="fixed bottom-20 left-4 z-50"></div>
-    
-    <a href="https://wa.me/1234567890" class="fixed bottom-20 right-4 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl" aria-label="Contactar por WhatsApp">
+
+    <a href="https://wa.me/593991234567" class="fixed bottom-20 right-4 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -245,6 +293,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Slick JS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="chatbot.js"></script>
     <script src="script.js"></script>
     <script>
       if ('serviceWorker' in navigator) {
