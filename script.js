@@ -236,16 +236,16 @@ document.addEventListener('DOMContentLoaded', function() {
         this.reset();
     });
 
-    // YouTube Playlist
-    const youtubePlaylistId = 'PLAYLIST_ID';
-    const youtubeApiKey = 'YOUR_YOUTUBE_API_KEY';
+    // YouTube Channel Videos
+    const youtubeChannelId = 'YOUR_CHANNEL_ID';
+    const youtubeApiKey = 'YOUR_API_KEY';
     const youtubeSlider = document.getElementById('youtube-slider');
 
-    fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${youtubePlaylistId}&key=${youtubeApiKey}`)
+    fetch(`https://www.googleapis.com/youtube/v3/search?key=${youtubeApiKey}&channelId=${youtubeChannelId}&part=snippet,id&order=date&maxResults=5`)
         .then(response => response.json())
         .then(data => {
             data.items.forEach(item => {
-                const videoId = item.snippet.resourceId.videoId;
+                const videoId = item.id.videoId;
                 const title = item.snippet.title;
                 const thumbnailUrl = item.snippet.thumbnails.medium.url;
 
@@ -285,7 +285,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         })
-        .catch(error => console.error('Error fetching YouTube playlist:', error));
+        .catch(error => console.error('Error fetching YouTube videos:', error));
+
 
     // Instagram Feed
     const instagramSlider = document.getElementById('instagram-slider');
