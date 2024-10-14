@@ -237,50 +237,35 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // YouTube Channel Videos
-const youtubeChannelId = 'UCiahlQJxCgPY-tEfjvkab8g';
-const youtubeApiKey = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
-const youtubeSlider = document.getElementById('youtube-slider');
+    const youtubeChannelId = 'UCiahlQJxCgPY-tEfjvkab8g';
+    const youtubeApiKey = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
+    const youtubeSlider = document.getElementById('youtube-slider');
 
-// Load the YouTube API script
-const tag = document.createElement('script');
-tag.src = 'https://www.youtube.com/iframe_api';
-const firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-let players = [];
-
-function onYouTubeIframeAPIReady() {
     fetch(`https://www.googleapis.com/youtube/v3/search?key=${youtubeApiKey}&channelId=${youtubeChannelId}&part=snippet,id&order=date&maxResults=5`)
         .then(response => response.json())
         .then(data => {
-            data.items.forEach((item, index) => {
+            data.items.forEach(item => {
                 const videoId = item.id.videoId;
                 const title = item.snippet.title;
+                const thumbnailUrl = item.snippet.thumbnails.medium.url;
 
                 const div = document.createElement('div');
                 div.className = 'youtube-video';
                 div.innerHTML = `
-                    <h3 class="mt-2 text-center text-sm font-semibold">${title}</h3>
-                    <div id="player-${index}" class="w-full aspect-video"></div>
+                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener noreferrer">
+                        <img src="${thumbnailUrl}" alt="${title}" class="w-full h-auto">
+                        <p class="mt-2 text-center">${title}</p>
+                    </a>
                 `;
                 youtubeSlider.appendChild(div);
-
-                players[index] = new YT.Player(`player-${index}`, {
-                    height: '100%',
-                    width: '100%',
-                    videoId: videoId,
-                    playerVars: {
-                        'playsinline': 1,
-                        'rel': 0
-                    }
-                });
             });
 
             if (typeof $.fn.slick === 'function') {
                 $('.youtube-slider').slick({
                     slidesToShow: 3,
                     slidesToScroll: 1,
-                    autoplay: false,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
                     arrows: true,
                     dots: true,
                     responsive: [
@@ -298,19 +283,9 @@ function onYouTubeIframeAPIReady() {
                         }
                     ]
                 });
-
-                // Pause all videos when sliding
-                $('.youtube-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide){
-                    players.forEach(player => {
-                        if (player.pauseVideo) {
-                            player.pauseVideo();
-                        }
-                    });
-                });
             }
         })
         .catch(error => console.error('Error fetching YouTube videos:', error));
-}
 
 
     // Instagram Feed
