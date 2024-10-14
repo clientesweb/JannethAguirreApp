@@ -352,10 +352,175 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('appinstalled', () => {
         console.log('PWA was installed');
     });
-});
 
-// Renderizar el componente del chatbot
-ReactDOM.render(
-    React.createElement(AIRealEstateExpertChatbot),
-    document.getElementById('ai-real-estate-expert-chatbot')
-);
+    // Chatbot functionality
+    const chatbotContainer = document.getElementById('ai-real-estate-expert-chatbot');
+    let isOpen = false;
+    let messages = [];
+    let context = '';
+
+    function toggleChatbot() {
+        isOpen = !isOpen;
+        renderChatbot();
+    }
+
+    function addMessage(sender, text) {
+        messages.push({ id: Date.now(), text, sender });
+        renderChatbot();
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        const input = e.target.querySelector('input');
+        const userInput = input.value.trim();
+        if (userInput) {
+            addMessage('user', userInput);
+            processUserInput(userInput);
+            input.value = '';
+        }
+    }
+
+    function processUserInput(userInput) {
+        const input = userInput.toLowerCase();
+        let response = '';
+
+        // Actualizar el contexto basado en la entrada del usuario
+        if (input.includes('propiedad') || input.includes('casa') || input.includes('apartamento') || input.includes('oficina')) {
+            context = 'propiedades';
+        } else if (input.includes('tendencia') || input.includes('mercado') || input.includes('inversión')) {
+            context = 'tendencias';
+        } else if (input.includes('legal') || input.includes('ley') || input.includes('impuesto')) {
+            context = 'legal';
+        } else if (input.includes('contacto') || input.includes('whatsapp') || input.includes('teléfono') || input.includes('email')) {
+            context = 'contacto';
+        }
+
+        // Generar respuesta basada en el contexto y la entrada del usuario
+        switch (context) {
+            case 'propiedades':
+                response = handlePropertyQuery(input);
+                break;
+            case 'tendencias':
+                response = handleMarketTrendQuery(input);
+                break;
+            case 'legal':
+                response = handleLegalQuery(input);
+                break;
+            case 'contacto':
+                response = handleContactQuery(input);
+                break;
+            default:
+                response = handleGeneralQuery(input);
+        }
+
+        setTimeout(() => addMessage('bot', response), 500);
+    }
+
+    function handlePropertyQuery(input) {
+        const matchingProperties = properties.filter(property => 
+            input.includes(property.type) || input.includes(property.title.toLowerCase())
+        );
+
+        if (matchingProperties.length > 0) {
+            const property = matchingProperties[0];
+            return `He encontrado una propiedad que podría interesarte: ${property.title}. 
+                    Precio: ${property.price}. 
+                    ¿Te gustaría ver imágenes de esta propiedad o conocer más detalles? También puedo mostrarte otras opciones similares.`;
+        } else {
+            return `Entiendo que estás buscando una propiedad. Para ayudarte mejor, ¿podrías especificar:
+                    1. ¿Buscas para comprar o alquilar?
+                    2. ¿Tienes preferencia por algún tipo de propiedad (casa, apartamento, oficina)?
+                    3. ¿Tienes un presupuesto aproximado en mente?
+                    Con esta información, podré mostrarte las mejores opciones que se ajusten a tus necesidades.`;
+        }
+    }
+
+    function handleMarketTrendQuery(input) {
+        return `El mercado inmobiliario actual muestra tendencias interesantes:
+                - Crecimiento en la demanda de propiedades en zonas suburbanas.
+                - Aumento en el interés por espacios de trabajo en casa.
+                - Estabilidad en los precios de propiedades de lujo.
+                ¿Te interesa alguna tendencia específica o quieres saber más sobre oportunidades de inversión?`;
+    }
+
+    function handleLegalQuery(input) {
+        return `Los aspectos legales son cruciales en las transacciones inmobiliarias. Algunos puntos importantes:
+                - Asegúrate de revisar todos los documentos legales antes de firmar.
+                - Considera contratar a un abogado especializado en bienes raíces.
+                - Infórmate sobre los impuestos y tasas asociados a la compra o venta de propiedades.
+                ¿Tienes alguna pregunta específica sobre el proceso legal de compra o venta?`;
+    }
+
+    function handleContactQuery(input) {
+        return `Estamos disponibles para atenderte por varios medios:
+                - WhatsApp: +1234567890
+                - Teléfono: (123) 456-7890
+                - Email: info@jannethaguirre.com
+                ¿Qué método de contacto prefieres? Puedo ayudarte a iniciar el contacto de inmediato.`;
+    }
+
+    function handleGeneralQuery(input) {
+        if (input.includes('hola') || input.includes('buenos días') || input.includes('buenas tardes')) {
+            return '¡Hola! Es un placer saludarte. Soy tu asistente virtual experto en bienes raíces. ¿En qué puedo ayudarte hoy?';
+        } else if (input.includes('gracias')) {
+            return '¡Es un placer ayudarte! Si tienes más preguntas en el futuro, no dudes en consultarme. Estoy aquí para asistirte en todo lo relacionado con bienes raíces.';
+        } else {
+            return `Gracias por tu pregunta. Como experto en bienes raíces, puedo ayudarte con:
+                    - Búsqueda de propiedades
+                    - Información sobre el mercado inmobiliario
+                    - Asesoramiento sobre inversiones
+                    - Proceso de compra y venta de propiedades
+                    ¿En cuál de estas áreas te gustaría profundizar?`;
+        }
+    }
+
+    function renderChatbot() {
+        let html = '';
+        if (!isOpen) {
+            html = `
+                <button onclick="toggleChatbot()" class="bg-white text-primary w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors border-2 border-primary" aria-label="Abrir chat">
+                    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre" class="w-12 h-12 object-contain" />
+                </button>
+            `;
+        } else {
+            html = `
+                <div class="bg-white rounded-lg shadow-lg w-96 h-[36rem] flex flex-col">
+                    <div class="bg-primary text-white p-4 rounded-t-lg flex justify-between items-center">
+                        <div class="flex items-center">
+                            <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre" class="w-8 h-8 object-contain mr-2" />
+                            <h3 class="font-bold text-lg">ARIA - Experta en Bienes Raíces</h3>
+                        </div>
+                        <button onclick="toggleChatbot()" class="text-white hover:text-gray-200">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="flex-1 overflow-auto p-4 bg-gray-50">
+                        ${messages.map(m => `
+                            <div class="mb-4 ${m.sender === 'user' ? 'text-right' : 'text-left'}">
+                                <span class="inline-block p-3 rounded-lg ${m.sender === 'user' ? 'bg-primary text-white' : 'bg-white shadow'}">
+                                    ${m.text}
+                                </span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <form onsubmit="handleSubmit(event)" class="p-4 border-t bg-white">
+                        <div class="flex">
+                            <input type="text" placeholder="Escribe tu pregunta..." class="flex-1 border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary" />
+                            <button type="submit" class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-primary/90 transition-colors">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+        }
+        chatbotContainer.innerHTML = html;
+    }
+
+    // Inicializar el chatbot
+    renderChatbot();
+
+    // Exponer funciones públicas
+    window.toggleChatbot = toggleChatbot;
+    window.handleSubmit = handleSubmit;
+});
