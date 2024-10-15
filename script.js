@@ -68,8 +68,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroSlider = document.querySelector('.hero-slider');
     heroImages.forEach(image => {
         const div = document.createElement('div');
-        div.className = 'w-full h-full';
-        div.innerHTML = `<img src="${image}" alt="Hero image" class="w-full h-full object-cover" loading="lazy">`;
+        div.style.backgroundImage = `url(${image})`;
+        div.style.backgroundSize = 'cover';
+        div.style.backgroundPosition = 'center';
+        div.style.height = '100%';
         heroSlider.appendChild(div);
     });
 
@@ -78,32 +80,21 @@ document.addEventListener('DOMContentLoaded', function() {
             autoplay: true,
             autoplaySpeed: 5000,
             arrows: false,
-            dots: true,
-            fade: true,
-            cssEase: 'linear',
-            speed: 1000
+            dots: true
         });
     }
 
-    // Función para crear el botón de WhatsApp
-    function createWhatsAppButton(property) {
-        const message = encodeURIComponent(`Hola, estoy interesado en la propiedad "${property.title}" con precio ${property.price}. ¿Podrían darme más información?`);
-        return `<a href="https://wa.me/593987167782?text=${message}" class="bg-green-500 text-white px-4 py-2 rounded mt-2 inline-block" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-whatsapp mr-2"></i>Consultar por WhatsApp
-        </a>`;
-    }
-
-    // Inicializar el slider de propiedades destacadas
+    // Inicializar el slider de propiedades
     const propertySlider = document.querySelector('.property-slider');
     properties.forEach(property => {
         const div = document.createElement('div');
-        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
+        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden mx-2';
         div.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover" loading="lazy">
+            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
             <div class="p-4">
                 <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                <p class="text-gray-700 mb-2">${property.price}</p>
-                ${createWhatsAppButton(property)}
+                <p class="text-gray-700">${property.price}</p>
+                <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Ver Detalles</button>
             </div>
         `;
         propertySlider.appendChild(div);
@@ -112,12 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof $.fn.slick === 'function') {
         $('.property-slider').slick({
             slidesToShow: 3,
-            sli
-desToScroll: 1,
+            slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 3000,
-            arrows: true,
-            dots: true,
             responsive: [
                 {
                     breakpoint: 1024,
@@ -143,7 +131,7 @@ desToScroll: 1,
         div.innerHTML = `
             <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
             <h3 class="text-xl font-bold mb-2">${service.title}</h3>
-            <p>${service.description}</p>
+            <p class="text-gray-600">${service.description}</p>
         `;
         serviceGrid.appendChild(div);
     });
@@ -152,34 +140,120 @@ desToScroll: 1,
     const storeSlider = document.getElementById('store-slider');
     properties.forEach(property => {
         const div = document.createElement('div');
-        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
-        div.dataset.type = property.type;
+        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden flex-shrink-0 w-64';
+        div.setAttribute('data-type', property.type);
         div.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover" loading="lazy">
+            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
             <div class="p-4">
                 <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                <p class="text-gray-700 mb-2">${property.price}</p>
-                ${createWhatsAppButton(property)}
-                <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
+                <p class="text-gray-700">${property.price}</p>
+                <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
             </div>
         `;
         storeSlider.appendChild(div);
     });
 
+    // Funcionalidad de filtrado
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.getAttribute('data-filter');
+            const cards = document.querySelectorAll('.property-card');
+            cards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-type') === filter) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Funcionalidad de búsqueda
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const cards = document.querySelectorAll('.property-card');
+        cards.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            if (title.includes(searchTerm)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+
+    // Funcionalidad de galería modal
+    const modal = document.getElementById('gallery-modal');
+    const closeModal = document.getElementById('close-modal');
+    const galleryImages = document.getElementById('gallery-images');
+    const galleryInfo = document.getElementById('gallery-info');
+
+    document.querySelectorAll('.view-gallery').forEach(button => {
+        button.addEventListener('click', () => {
+            const propertyId = button.getAttribute('data-id');
+            const property = properties.find(p => p.id === parseInt(propertyId));
+            
+            // Limpiar imágenes anteriores
+            galleryImages.innerHTML = '';
+            
+            // Agregar imágenes a la galería (aquí usamos la misma imagen varias veces como ejemplo)
+            for (let i = 0; i < 5; i++) {
+                const img = document.createElement('img');
+                img.src = property.image;
+                img.alt = `${property.title} - Imagen ${i + 1}`;
+                img.className = 'w-32 h-32 object-cover rounded';
+                galleryImages.appendChild(img);
+            }
+            
+            // Actualizar información de la propiedad
+            galleryInfo.innerHTML = `
+                <h3 class="text-xl font-bold">${property.title}</h3>
+                <p class="text-lg">${property.price}</p>
+                <p>Tipo: ${property.type}</p>
+            `;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        });
+    });
+
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    });
+
+    // Cerrar el modal si se hace clic fuera de él
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    });
+
+    // Inicializar el slider de testimonios
+    const testimonialsSlider = document.getElementById('testimonials-slider');
+    testimonials.forEach(testimonial => {
+        const div = document.createElement('div');
+        div.className = 'bg-white p-6 rounded-lg shadow-md mx-2';
+        div.innerHTML = `
+            <div class="flex items-center mb-4">
+                <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4">
+                <h3 class="font-bold">${testimonial.name}</h3>
+            </div>
+            <p class="text-gray-600">"${testimonial.text}"</p>
+        `;
+        testimonialsSlider.appendChild(div);
+    });
+
     if (typeof $.fn.slick === 'function') {
-        $('#store-slider').slick({
-            slidesToShow: 3,
+        $('.testimonials-slider').slick({
+            slidesToShow: 2,
             slidesToScroll: 1,
-            autoplay: false,
-            arrows: true,
-            dots: false,
+            autoplay: true,
+            autoplaySpeed: 3000,
             responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
                 {
                     breakpoint: 640,
                     settings: {
@@ -190,167 +264,16 @@ desToScroll: 1,
         });
     }
 
-    // Filtrado de propiedades
-    document.querySelectorAll('.filter-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const filter = this.dataset.filter;
-            const propertyCards = document.querySelectorAll('.property-card');
-            propertyCards.forEach(card => {
-                if (filter === 'all' || card.dataset.type === filter) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-            if (typeof $.fn.slick === 'function') {
-                $('#store-slider').slick('setPosition');
-            }
-        });
-    });
-
-    // Modal de galería mejorado
-    document.querySelectorAll('.view-gallery').forEach(button => {
-        button.addEventListener('click', function() {
-            const propertyId = this.dataset.id;
-            openGallery(propertyId);
-        });
-    });
-
-    document.getElementById('close-modal').addEventListener('click', function() {
-        document.getElementById('gallery-modal').classList.add('hidden');
-        document.getElementById('gallery-modal').classList.remove('flex');
-    });
-
-    function openGallery(propertyId) {
-        const property = properties.find(p => p.id === parseInt(propertyId));
-        const galleryImagesUrls = [
-            property.image,
-            "/placeholder.svg?height=200&width=300",
-            "/placeholder.svg?height=200&width=300"
-        ];
-
-        const galleryModal = document.getElementById('gallery-modal');
-        const galleryImages = document.getElementById('gallery-images');
-        const galleryInfo = document.getElementById('gallery-info');
-
-        galleryImages.innerHTML = '';
-        galleryImagesUrls.forEach(url => {
-            const img = document.createElement('img');
-            img.src = url;
-            img.className = 'w-full h-auto';
-            img.loading = 'lazy';
-            galleryImages.appendChild(img);
-        });
-
-        galleryInfo.innerHTML = `
-            <h2 class="text-2xl font-bold mb-2">${property.title}</h2>
-            <p class="text-xl mb-4">${property.price}</p>
-            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        `;
-
-        galleryModal.classList.remove('hidden');
-        galleryModal.classList.add('flex');
-
-        if (typeof $.fn.slick === 'function') {
-            $('#gallery-images').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: true,
-                dots: true
-            });
-        }
-    }
-
-    // Formulario de contacto
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Gracias por tu mensaje. Te contactaremos pronto.');
-        this.reset();
-    });
-
-    // YouTube Channel Videos
-    const youtubeChannelId = 'UCiahlQJxCgPY-tEfjvkab8g';
-    const youtubeApiKey = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
-    const youtubeSlider = document.getElementById('youtube-slider');
-
-    fetch(`https://www.googleapis.com/youtube/v3/search?key=${youtubeApiKey}&channelId=${youtubeChannelId}&part=snippet,id&order=date&maxResults=5&type=video`)
-        .then(response => response.json())
-        .then(data => {
-            data.items.forEach(item => {
-                const videoId = item.id.videoId;
-                const title = item.snippet.title;
-                const thumbnailUrl = item.snippet.thumbnails.medium.url;
-
-                const div = document.createElement('div');
-                div.className = 'youtube-video';
-                div.innerHTML = `
-                    <div class="aspect-w-16 aspect-h-9">
-                        <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <p class="mt-2 text-center">${title}</p>
-                `;
-                youtubeSlider.appendChild(div);
-            });
-
-            if (typeof $.fn.slick === 'function') {
-                $('.youtube-slider').slick({
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                    autoplay: false,
-                    arrows: true,
-                    dots: true,
-                    responsive: [
-                        {
-                            breakpoint: 1024,
-                            settings: {
-                                slidesToShow: 2
-                            }
-                        },
-                        {
-                            breakpoint: 640,
-                            settings: {
-                                slidesToShow: 1
-                            }
-                        }
-                    ]
-                });
-            }
-        })
-        .catch(error => console.error('Error fetching YouTube videos:', error));
-
-    // Testimonials
-    const testimonialSlider = document.getElementById('testimonials-slider');
-    testimonials.forEach(testimonial => {
-        const div = document.createElement('div');
-        div.className = 'testimonial-card bg-white shadow-lg rounded-lg p-6';
-        div.innerHTML = `
-            <img src="${testimonial.image}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4" loading="lazy">
-            <p class="text-gray-600 mb-4 italic">"${testimonial.text}"</p>
-            <p class="font-semibold text-center">${testimonial.name}</p>
-        `;
-        testimonialSlider.appendChild(div);
-    });
-
-    if (typeof $.fn.slick === 'function') {
-        $('.testimonials-slider').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 5000,
-            arrows: true,
-            dots: true
-        });
-    }
-
-    // Instagram Feed
+    // Inicializar el slider de Instagram
     const instagramSlider = document.getElementById('instagram-slider');
-
     instagramPosts.forEach(post => {
         const div = document.createElement('div');
-        div.className = 'instagram-post';
+        div.className = 'instagram-post mx-2';
         div.innerHTML = `
-            <blockquote class="instagram-media" data-instgrm-permalink="${post.url}" data-instgrm-version="14">
-                <a href="${post.url}" target="_blank" rel="noopener noreferrer">Ver en Instagram</a>
+            <blockquote class="instagram-media" data-instgrm-permalink="${post.url}">
+                <div style="padding:16px;">
+                    <a href="${post.url}" target="_blank">Ver esta publicación en Instagram</a>
+                </div>
             </blockquote>
         `;
         instagramSlider.appendChild(div);
@@ -362,8 +285,6 @@ desToScroll: 1,
             slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 3000,
-            arrows: true,
-            dots: true,
             responsive: [
                 {
                     breakpoint: 1024,
@@ -382,9 +303,91 @@ desToScroll: 1,
     }
 
     // Cargar el script de Instagram
-    const instagramScript = document.createElement('script');
-    instagramScript.src = 'https://www.instagram.com/embed.js';
-    document.body.appendChild(instagramScript);
+    const script = document.createElement('script');
+    script.src = 'https://www.instagram.com/embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Inicializar el mapa
+    const mapContainer = document.getElementById('map-container');
+    const loadMap = () => {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY`;
+        script.onload = () => {
+            const map = new google.maps.Map(mapContainer, {
+                center: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
+                zoom: 15
+            });
+            new google.maps.Marker({
+                position: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
+                map: map,
+                title: 'Janneth Aguirre Bienes Raíces'
+            });
+        };
+        document.body.appendChild(script);
+    };
+
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadMap();
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { rootMargin: '100px' }
+    );
+
+    observer.observe(mapContainer);
+
+    // Manejar el envío del formulario de contacto
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(contactForm);
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                body: formData
+            });
+            if (response.ok) {
+                alert('Mensaje enviado con éxito. Nos pondremos en contacto contigo pronto.');
+                contactForm.reset();
+            } else {
+                throw new Error('Error al enviar el mensaje');
+            }
+        } catch (error) {
+            alert('Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.');
+            console.error('Error:', error);
+        }
+    });
+
+    // Efecto de aparición al hacer scroll
+    const fadeElems = document.querySelectorAll('.fade-in-section');
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    fadeElems.forEach(elem => fadeObserver.observe(elem));
+
+    // Botón "Volver arriba"
+    const backToTopButton = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     // Instalación de la PWA
     let deferredPrompt;
@@ -400,75 +403,19 @@ desToScroll: 1,
         if (deferredPrompt) {
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
-            console.log(`User response to the install prompt: ${outcome}`);
+            if (outcome === 'accepted') {
+                console.log('Usuario aceptó la instalación de la PWA');
+            }
             deferredPrompt = null;
         }
     });
 
-    window.addEventListener('appinstalled', () => {
-        console.log('PWA was installed');
-    });
-
-    // Chatbot initialization
-    if (typeof AIRealEstateExpertChatbot !== 'undefined') {
-        AIRealEstateExpertChatbot.toggleChatbot();
-    }
-
-    // Efecto de aparición al hacer scroll
-    const faders = document.querySelectorAll('.fade-in-section');
-    const appearOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -100px 0px"
-    };
-
-    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-                return;
-            } else {
-                entry.target.classList.add('is-visible');
-                appearOnScroll.unobserve(entry.target);
-            }
-        });
-    }, appearOptions);
-
-    faders.forEach(fader => {
-        appearOnScroll.observe(fader);
-    });
-
-    // Menú inferior responsivo
-    const bottomNav = document.querySelector('.bottom-nav');
-    let lastScrollTop = 0;
-
-    window.addEventListener('scroll', () => {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop) {
-            bottomNav.style.transform = 'translateY(100%)';
-        } else {
-            bottomNav.style.transform = 'translateY(0)';
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    }, { passive: true });
-
-    // Lazy loading de imágenes
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const image = entry.target;
-                    image.src = image.dataset.src;
-                    image.classList.remove('lazy');
-                    imageObserver.unobserve(image);
-                }
-            });
-        });
-
-        document.querySelectorAll('img.lazy').forEach(img => imageObserver.observe(img));
-    } else {
-        // Fallback para navegadores que no soportan IntersectionObserver
-        document.querySelectorAll('img.lazy').forEach(img => {
-            img.src = img.dataset.src;
-            img.classList.remove('lazy');
-        });
-    }
+    // Inicializar el chatbot
+    initChatbot();
 });
+
+// Función para inicializar el chatbot (definida en chatbot.js)
+function initChatbot() {
+    // La lógica del chatbot se implementará en chatbot.js
+    console.log('Chatbot inicializado');
+}
