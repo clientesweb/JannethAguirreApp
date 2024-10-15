@@ -251,67 +251,59 @@
         .breadcrumbs {
             padding: 10px 0;
             margin-bottom: 20px;
-            background-color: #f8f8f8;
-            border-bottom: 1px solid #e0e0e0;
         }
 
         .breadcrumbs ol {
             list-style: none;
             padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
         }
 
         .breadcrumbs li {
             display: inline;
             font-size: 14px;
-            color: #666;
         }
 
         .breadcrumbs li+li:before {
             padding: 8px;
-            color: #ccc;
+            color: black;
             content: "/\00a0";
         }
 
         .breadcrumbs li a {
-            color: #FF0000;
+            color: #0275d8;
             text-decoration: none;
-            transition: color 0.3s ease;
         }
 
         .breadcrumbs li a:hover {
-            color: #cc0000;
             text-decoration: underline;
         }
 
-        /* Estilos para el hero */
-        .hero-slider {
-            width: 100%;
-            height: 100%;
-        }
+           /* Estilos para el hero */
+    .hero-slider {
+        width: 100%;
+        height: 100%;
+    }
 
-        .hero-slider .slick-list,
-        .hero-slider .slick-track {
-            height: 100%;
-        }
+    .hero-slider .slick-list,
+    .hero-slider .slick-track {
+        height: 100%;
+    }
 
-        .hero-slider .slick-slide {
-            height: calc(100vh - 80px);
-            background-size: cover;
-            background-position: center;
-        }
+    .hero-slider .slick-slide {
+        height: calc(100vh - 80px);
+        background-size: cover;
+        background-position: center;
+    }
 
-        .hero-slider .slick-dots {
-            bottom: 20px;
-        }
+    .hero-slider .slick-dots {
+        bottom: 20px;
+    }
 
-        .hero-slider .slick-dots li button:before {
-            color: white;
-        }
+    .hero-slider .slick-dots li button:before {
+        color: white;
+    }
 
-        /* Nuevos estilos para la sección de YouTube */
+          /* Nuevos estilos para la sección de YouTube */
         .youtube-video {
             width: 300px;
             margin-right: 20px;
@@ -349,29 +341,6 @@
             width: 300px;
             margin-right: 20px;
             scroll-snap-align: start;
-        }
-
-        /* Estilos para la sección FAQ */
-        .faq-item {
-            border-bottom: 1px solid #e0e0e0;
-            padding: 1rem 0;
-        }
-
-        .faq-question {
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-answer {
-            margin-top: 1rem;
-            display: none;
-        }
-
-        .faq-answer.active {
-            display: block;
         }
     </style>
 
@@ -412,7 +381,6 @@
       },
       "sameAs": [
         "https://www.facebook.com/JannethAguirreBienesRaices",
-        
         "https://www.instagram.com/jannethaguirrebienesraices",
         "https://www.linkedin.com/in/jannethaguirre"
       ]
@@ -455,19 +423,19 @@
         </ol>
     </nav>
 
-    <main id="main-content">
+        <main id="main-content">
         <section id="inicio" class="relative h-[calc(100vh-80px)] overflow-hidden fade-in-section">
-            <div class="hero-slider absolute inset-0">
-                <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
-            </div>
-            <div class="absolute inset-0 flex items-center justify-center z-10">
-                <div class="text-center text-white p-4">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg">Encuentra tu hogar ideal</h1>
-                    <p class="text-xl md:text-2xl mb-6 drop-shadow-lg">Lo mejor en Bienes Raíces en el Ecuador</p>
-                    <a href="#propiedades" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Ver Propiedades</a>
-                </div>
-            </div>
-        </section>
+    <div class="hero-slider absolute inset-0">
+        <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
+    </div>
+    <div class="absolute inset-0 flex items-center justify-center z-10">
+        <div class="text-center text-white p-4">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg">Encuentra tu hogar ideal</h1>
+            <p class="text-xl md:text-2xl mb-6 drop-shadow-lg">Lo mejor en Bienes Raíces en el Ecuador</p>
+            <a href="#propiedades" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Ver Propiedades</a>
+        </div>
+    </div>
+</section>
 
         <section id="propiedades" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
@@ -527,7 +495,7 @@
             </div>
         </section>
 
-        <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
+           <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Nuestro Canal de YouTube</h2>
                 <div id="youtube-slider" class="youtube-slider">
@@ -550,15 +518,6 @@
                 <h2 class="text-3xl font-bold text-center mb-8">Síguenos en Instagram</h2>
                 <div id="instagram-slider" class="instagram-slider">
                     <!-- Instagram posts will be inserted here by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="py-16 fade-in-section">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8">Preguntas Frecuentes</h2>
-                <div id="faq-container" class="space-y-4">
-                    <!-- FAQ items will be inserted here by JavaScript -->
                 </div>
             </div>
         </section>
@@ -589,7 +548,7 @@
                 <div class="fade-in-section">
                     <h3 class="text-xl font-bold mb-4">Contacto</h3>
                     <p class="mb-2"><i class="fas fa-phone mr-2"></i> +593 98 716 7782</p>
-                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> info@jannethaguirre.com</p>
+                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a0a7afa689a3a8a7a7acbda1a8aebca0bbbbace7aaa6a4">[email&#160;protected]</a></p>
                     <p><i class="fas fa-map-marker-alt mr-2"></i> Guayaquil-Ecuador</p>
                 </div>
                 <div class="fade-in-section">
