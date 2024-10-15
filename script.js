@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const heroImages = [
-        "/img/paisaje-analogico-ciudad-edificios_23-2149661457.jpg",
-        "/img/casa-moderna-encantadora-villa-3d-render_1015255-30058.jpg",
-        "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg"
+        "/img/Janneth-Aguirre-M-bienes-raices-ecuador-Licencia-Profesional-609-G-CRS-Realtor-NAR-ID-61242209-350x350.png",
+        "/img/Janneth-Aguirre-bienes-raices-Samborondon-corredora-guayaquil.jpg",
+        "/img/Janneth-Aguirre-bienes-raices-constructora-samborondon-1024x514.png"
     ];
 
     const properties = [
