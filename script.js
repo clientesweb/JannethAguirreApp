@@ -84,7 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
             autoplay: true,
             autoplaySpeed: 5000,
             arrows: false,
-            dots: true
+            dots: true,
+            fade: true,
+            cssEase: 'linear'
         });
     }
 
