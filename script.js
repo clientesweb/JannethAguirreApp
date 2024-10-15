@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para crear el botón de WhatsApp
     function createWhatsAppButton(property) {
         const message = encodeURIComponent(`Hola, estoy interesado en la propiedad "${property.title}" con precio ${property.price}. ¿Podrían darme más información?`);
-        return `<a href="https://wa.me/593991234567?text=${message}" class="bg-green-500 text-white px-4 py-2 rounded mt-2 inline-block" target="_blank" rel="noopener noreferrer">
+        return `<a href="https://wa.me/593987167782?text=${message}" class="bg-green-500 text-white px-4 py-2 rounded mt-2 inline-block" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-whatsapp mr-2"></i>Consultar por WhatsApp
         </a>`;
     }
