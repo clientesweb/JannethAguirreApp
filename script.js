@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const properties = [
         { id: 1, title: "Departamentos en venta – Orlando Florida – Condo Hotel – Inversion de alta rentabilidad", price: "$350,000", image: "/img/orlandoflorida.jpg", type: "venta" },
-        
         { id: 2, title: "Departamento vista al rio – Via Samborondon", price: "$1,500/mes", image: "/img/departamentos.jpg", type: "alquiler" },
         { id: 3, title: "Locales comerciales y oficinas – Via Samborondon", price: "$120,000", image: "/img/locales.jpg", type: "venta" },
         { id: 4, title: "Oficina ejecutiva en Quito", price: "$2,200/mes", image: "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", type: "alquiler" },
@@ -32,6 +31,12 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Asesoría Legal", description: "Asistencia legal en todas las transacciones inmobiliarias", icon: "fa-gavel" },
         { title: "Valuación de Propiedades", description: "Tasaciones precisas y profesionales de bienes raíces", icon: "fa-calculator" },
         { title: "Gestión de Alquileres", description: "Administramos sus propiedades en alquiler de manera eficiente", icon: "fa-key" }
+    ];
+
+    const testimonials = [
+        { id: 1, name: "Juan Pérez", text: "Janneth Aguirre me ayudó a encontrar la casa de mis sueños. Su profesionalismo y dedicación son incomparables.", image: "/placeholder.svg?height=100&width=100" },
+        { id: 2, name: "María González", text: "Gracias a Janneth, vender mi propiedad fue un proceso rápido y sin complicaciones. ¡Altamente recomendada!", image: "/placeholder.svg?height=100&width=100" },
+        { id: 3, name: "Carlos Rodríguez", text: "La atención al cliente de Janneth Aguirre es excepcional. Siempre está disponible para responder preguntas y ofrecer asesoramiento.", image: "/placeholder.svg?height=100&width=100" }
     ];
 
     const instagramPosts = [
@@ -266,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const youtubeApiKey = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
     const youtubeSlider = document.getElementById('youtube-slider');
 
-    fetch(`https://www.googleapis.com/youtube/v3/search?key=${youtubeApiKey}&channelId=${youtubeChannelId}&part=snippet,id&order=date&maxResults=5`)
+    fetch(`https://www.googleapis.com/youtube/v3/search?key=${youtubeApiKey}&channelId=${youtubeChannelId}&part=snippet,id&order=date&maxResults=5&type=video`)
         .then(response => response.json())
         .then(data => {
             data.items.forEach(item => {
@@ -277,10 +282,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const div = document.createElement('div');
                 div.className = 'youtube-video';
                 div.innerHTML = `
-                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener noreferrer">
-                        <img src="${thumbnailUrl}" alt="${title}" class="w-full h-auto">
-                        <p class="mt-2 text-center">${title}</p>
-                    </a>
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <p class="mt-2 text-center">${title}</p>
                 `;
                 youtubeSlider.appendChild(div);
             });
@@ -289,8 +294,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 $('.youtube-slider').slick({
                     slidesToShow: 3,
                     slidesToScroll: 1,
-                    autoplay: true,
-                    autoplaySpeed: 3000,
+                    autoplay: false,
                     arrows: true,
                     dots: true,
                     responsive: [
@@ -311,6 +315,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(error => console.error('Error fetching YouTube videos:', error));
+
+    // Testimonials
+    const testimonialSlider = document.getElementById('testimonials-slider');
+    testimonials.forEach(testimonial => {
+        const div = document.createElement('div');
+        div.className = 'testimonial-card bg-white shadow-lg rounded-lg p-6';
+        div.innerHTML = `
+            <img src="${testimonial.image}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4">
+            <p class="text-gray-600 mb-4 italic">"${testimonial.text}"</p>
+            <p class="font-semibold text-center">${testimonial.name}</p>
+        `;
+        testimonialSlider.appendChild(div);
+    });
+
+    if (typeof $.fn.slick === 'function') {
+        $('.testimonials-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            arrows: true,
+            dots: true
+        });
+    }
 
     // Instagram Feed
     const instagramSlider = document.getElementById('instagram-slider');
