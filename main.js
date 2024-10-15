@@ -10,9 +10,18 @@ import { setupPWAInstallation } from './modules/pwaInstallation.js';
 import { initializeChatbot } from './modules/chatbot.js';
 import { setupScrollEffects } from './modules/scrollEffects.js';
 
-document.addEventListener('DOMContentLoaded', async function() {
+function hidePreloader() {
+    const preloader = document.querySelector('.preloader');
+    if (preloader) {
+        preloader.classList.add('hidden');
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 300); // Espera a que termine la transición antes de ocultarlo completamente
+    }
+}
+
+async function initializeModules() {
     try {
-        // Initialize all modules
         await Promise.all([
             initializeSliders(),
             setupPropertyFilters(),
@@ -26,20 +35,16 @@ document.addEventListener('DOMContentLoaded', async function() {
             initializeChatbot(),
             setupScrollEffects()
         ]);
-
-        // Remove preloader after all modules are initialized
-        document.querySelector('.preloader').style.display = 'none';
     } catch (error) {
         console.error('Error initializing modules:', error);
-        // Remove preloader even if there's an error, to prevent it from being stuck
-        document.querySelector('.preloader').style.display = 'none';
+    } finally {
+        hidePreloader();
     }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializeModules();
 });
 
-// Fallback to remove preloader if it's still visible after 10 seconds
-setTimeout(() => {
-    if (document.querySelector('.preloader').style.display !== 'none') {
-        console.warn('Preloader removed by timeout');
-        document.querySelector('.preloader').style.display = 'none';
-    }
-}, 10000);
+// Fallback para ocultar el preloader si tarda demasiado
+setTimeout(hidePreloader, 10000);
