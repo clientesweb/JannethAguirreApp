@@ -31,7 +31,9 @@
     <meta property="twitter:image" content="https://www.jannethaguirre.com/twitter-image.jpg">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" media="print" onload="this.media='all'">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -53,6 +55,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
     <style>
+        /* Estilos existentes */
         #ai-real-estate-expert-chatbot {
             z-index: 1000;
         }
@@ -295,12 +298,11 @@
             </div>
         </section>
 
-        <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
+        <section  id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Nuestro Canal de YouTube</h2>
                 <div id="youtube-slider" class="youtube-slider">
                     <!-- YouTube videos will be inserted here by JavaScript -->
-                
                 </div>
             </div>
         </section>
@@ -384,7 +386,7 @@
     </a>
 
     <!-- jQuery -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Slick JS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="chatbot.js"></script>
