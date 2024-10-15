@@ -39,9 +39,8 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" media="print" onload="this.media='all'">
     
-    <!-- Slick CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -126,10 +125,6 @@
 
         .property-card:hover {
             transform: scale(1.05);
-        }
-
-        .slick-prev:before, .slick-next:before {
-            color: #FF0000;
         }
 
         /* Nuevos estilos para el menú inferior responsivo */
@@ -277,6 +272,21 @@
         .breadcrumbs li a:hover {
             text-decoration: underline;
         }
+
+        /* Estilos para el slider de YouTube */
+        .youtube-slider .swiper-slide {
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            position: relative;
+        }
+
+        .youtube-slider .swiper-slide iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body class="font-poppins bg-background text-gray-800">
@@ -317,8 +327,13 @@
 
     <main id="main-content">
         <section id="inicio" class="relative h-[calc(100vh-80px)] overflow-hidden fade-in-section">
-            <div class="hero-slider absolute inset-0">
-                <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
+            <div class="hero-slider swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
             <div class="absolute inset-0 flex items-center justify-center z-10">
                 <div class="text-center text-white p-4">
@@ -332,8 +347,13 @@
         <section id="propiedades" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Propiedades Destacadas</h2>
-                <div class="property-slider">
-                    <!-- Property cards will be inserted here by JavaScript -->
+                <div class="property-slider swiper-container">
+                    <div class="swiper-wrapper">
+                        <!-- Property cards will be inserted here by JavaScript -->
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
         </section>
@@ -341,7 +361,7 @@
         <section id="servicios" class="bg-secondary py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Nuestros Servicios</h2>
-                <div id="service-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div id="service-grid" class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Service cards will be inserted here by JavaScript -->
                 </div>
             </div>
@@ -352,7 +372,6 @@
                 <h2 class="text-3xl font-bold text-center mb-8">Tienda de Propiedades</h2>
                 
                 <div class="flex justify-center mb-4">
-                    
                     <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="all">Todo</button>
                     <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="venta">Venta</button>
                     <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="alquiler">Alquiler</button>
@@ -362,8 +381,11 @@
                 <input type="text" id="search-input" placeholder="Buscar propiedades..." class="w-full px-4 py-2 mb-4 border border-gray-300 rounded">
                 
                 <div class="relative">
-                    <div id="store-slider" class="flex space-x-4 overflow-hidden px-4"> 
-                        <!-- Las tarjetas se insertarán aquí mediante JavaScript -->
+                    <div id="store-slider" class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <!-- Las tarjetas se insertarán aquí mediante JavaScript -->
+                        </div>
+                        <div class="swiper-scrollbar"></div>
                     </div>
                 </div>
             </div>
@@ -391,8 +413,13 @@
         <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Nuestro Canal de YouTube</h2>
-                <div id="youtube-slider" class="youtube-slider">
-                    <!-- YouTube videos will be inserted here by JavaScript -->
+                <div class="youtube-slider swiper-container">
+                    <div class="swiper-wrapper">
+                        <!-- YouTube videos will be inserted here by JavaScript -->
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
         </section>
@@ -400,8 +427,11 @@
         <section id="testimonials" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Lo que dicen nuestros clientes</h2>
-                <div id="testimonials-slider" class="testimonials-slider">
-                    <!-- Testimonials will be inserted here by JavaScript -->
+                <div id="testimonials-slider" class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <!-- Testimonials will be inserted here by JavaScript -->
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </section>
@@ -409,8 +439,11 @@
         <section id="instagram" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Síguenos en Instagram</h2>
-                <div id="instagram-slider" class="instagram-slider">
-                    <!-- Instagram posts will be inserted here by JavaScript -->
+                <div id="instagram-slider" class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <!-- Instagram posts will be inserted here by JavaScript -->
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </section>
@@ -477,10 +510,8 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Slick JS -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="chatbot.js"></script>
     <script src="script.js"></script>
     <script>
