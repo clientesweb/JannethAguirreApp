@@ -52,7 +52,155 @@
     <!-- Slick CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        #ai-real-estate-expert-chatbot {
+            z-index: 1000;
+        }
+        
+        #ai-real-estate-expert-chatbot .bg-primary {
+            background-color: #FF0000;
+        }
+        
+        #ai-real-estate-expert-chatbot .text-primary {
+            color: #FF0000;
+        }
+        
+        #ai-real-estate-expert-chatbot .border-primary {
+            border-color: #FF0000;
+        }
+        
+        #ai-real-estate-expert-chatbot .ring-primary {
+            --tw-ring-color: #FF0000;
+        }
+
+        #ai-real-estate-expert-chatbot .suggested-query {
+            cursor: pointer;
+            padding: 5px 10px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #ai-real-estate-expert-chatbot .suggested-query:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        #ai-real-estate-expert-chatbot .chat-message {
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        #ai-real-estate-expert-chatbot .user-message {
+            background-color: #FF0000;
+            color: white;
+            border-radius: 18px 18px 0 18px;
+            padding: 10px 15px;
+            margin-left: auto;
+            margin-bottom: 10px;
+        }
+
+        #ai-real-estate-expert-chatbot .bot-message {
+            background-color: #f0f0f0;
+            color: black;
+            border-radius: 18px 18px 18px 0;
+            padding: 10px 15px;
+            margin-right: auto;
+            margin-bottom: 10px;
+        }
+
+        .property-card {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .property-card:hover {
+            transform: scale(1.05);
+        }
+
+        .slick-prev:before, .slick-next:before {
+            color: #FF0000;
+        }
+
+        /* Nuevos estilos para el menú inferior responsivo */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #FF0000;
+            padding: 10px;
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .bottom-nav a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        .bottom-nav i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav {
+                display: none;
+            }
+        }
+
+        /* Estilos para el efecto de aparición al hacer scroll */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20vh);
+            visibility: hidden;
+            transition: opacity 0.6s ease-out, transform 1.2s ease-out;
+            will-change: opacity, visibility;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+            visibility: visible;
+        }
+
+        /* Estilos para el preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .preloader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #FF0000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body class="font-poppins bg-background text-gray-800">
     <!-- Preloader -->
@@ -113,15 +261,15 @@
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Tienda de Propiedades</h2>
                 
-                <div class="flex flex-wrap justify-center mb-4">
-                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 m-1 hover:bg-gray-400" data-filter="all">Todo</button>
-                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 m-1 hover:bg-gray-400" data-filter="venta">Venta</button>
-                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 m-1 hover:bg-gray-400" data-filter="alquiler">Alquiler</button>
-                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 m-1 hover:bg-gray-400" data-filter="proyecto">Proyecto</button>
+                <div class="flex justify-center mb-4">
+                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="all">Todo</button>
+                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="venta">Venta</button>
+                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="alquiler">Alquiler</button>
+                    <button class="filter-btn bg-gray-300 text-gray-800 rounded px-4 py-2 mx-1 hover:bg-gray-400" data-filter="proyecto">Proyecto</button>
                 </div>
                 
                 <div class="relative">
-                    <div id="store-slider" class="flex flex-wrap justify-center"> 
+                    <div id="store-slider" class="flex space-x-4 overflow-hidden px-4"> 
                         <!-- Las tarjetas se insertarán aquí mediante JavaScript -->
                     </div>
                 </div>
@@ -150,8 +298,9 @@
         <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Nuestro Canal de YouTube</h2>
-                <div id="youtube-slider" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div id="youtube-slider" class="youtube-slider">
                     <!-- YouTube videos will be inserted here by JavaScript -->
+                
                 </div>
             </div>
         </section>
@@ -165,16 +314,7 @@
             </div>
         </section>
 
-        <section id="faq" class="py-16 bg-gray-100 fade-in-section">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8">Preguntas Frecuentes</h2>
-                <div id="faq-accordion" class="space-y-4">
-                    <!-- FAQ items will be inserted here by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <section id="instagram" class="py-16 fade-in-section">
+        <section id="instagram" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2  class="text-3xl font-bold text-center mb-8">Síguenos en Instagram</h2>
                 <div id="instagram-slider" class="instagram-slider">
@@ -211,7 +351,7 @@
                 <div class="fade-in-section">
                     <h3 class="text-xl font-bold mb-4">Contacto</h3>
                     <p class="mb-2"><i class="fas fa-phone mr-2"></i> +593 98 716 7782</p>
-                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> info@jannethaguirre.com</p>
+                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a0a7afa689a3a8a7a7acbda1a8aebca0bbbbace7aaa6a4">[email&#160;protected]</a></p>
                     <p><i class="fas fa-map-marker-alt mr-2"></i> Guayaquil-Ecuador</p>
                 </div>
                 <div class="fade-in-section">
@@ -244,11 +384,11 @@
     </a>
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Slick JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="chatbot.js"></script>
-    <script src="main.js" type="module"></script>
+    <script src="script.js"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
