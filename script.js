@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const heroImages = [
-        "/img/banner.png",
+        "/img/banner1.png",
         "/img/Janneth-Aguirre-bienes-raices-Samborondon-corredora-guayaquil.jpg",
         "/img/Janneth-Aguirre-bienes-raices-constructora-samborondon-1024x514.png"
     ];
