@@ -139,6 +139,10 @@
     border-top: 3px solid #FF0000;
     border-radius: 50%;
     animation: spin 1s linear infinite;
+    transition: opacity 0.3s ease-out;
+}
+.preloader.hidden {
+    opacity: 0;
 }
 
 @keyframes spin {
