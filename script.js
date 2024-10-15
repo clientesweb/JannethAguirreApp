@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const heroImages = [
-        "/img/Janneth-Aguirre-M-bienes-raices-ecuador-Licencia-Profesional-609-G-CRS-Realtor-NAR-ID-61242209-350x350.png",
+        "/img/banner.png",
         "/img/Janneth-Aguirre-bienes-raices-Samborondon-corredora-guayaquil.jpg",
         "/img/Janneth-Aguirre-bienes-raices-constructora-samborondon-1024x514.png"
     ];
