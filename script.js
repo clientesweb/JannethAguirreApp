@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     heroImages.forEach(image => {
         const div = document.createElement('div');
         div.className = 'w-full h-full';
-        div.innerHTML = `<img src="${image}" alt="Hero image" class="w-full h-full object-cover">`;
+        div.innerHTML = `<img src="${image}" alt="Hero image" class="w-full h-full object-cover" loading="lazy">`;
         heroSlider.appendChild(div);
     });
 
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const div = document.createElement('div');
         div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
         div.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover" loading="lazy">
             <div class="p-4">
                 <h3 class="font-bold text-lg mb-2">${property.title}</h3>
                 <p class="text-gray-700 mb-2">${property.price}</p>
@@ -112,7 +112,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof $.fn.slick === 'function') {
         $('.property-slider').slick({
             slidesToShow: 3,
-            slidesToScroll: 1,
+            sli
+desToScroll: 1,
             autoplay: true,
             autoplaySpeed: 3000,
             arrows: true,
@@ -154,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
         div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
         div.dataset.type = property.type;
         div.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover" loading="lazy">
             <div class="p-4">
                 <h3 class="font-bold text-lg mb-2">${property.title}</h3>
                 <p class="text-gray-700 mb-2">${property.price}</p>
@@ -237,6 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const img = document.createElement('img');
             img.src = url;
             img.className = 'w-full h-auto';
+            img.loading = 'lazy';
             galleryImages.appendChild(img);
         });
 
@@ -283,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 div.className = 'youtube-video';
                 div.innerHTML = `
                     <div class="aspect-w-16 aspect-h-9">
-                        <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
                     </div>
                     <p class="mt-2 text-center">${title}</p>
                 `;
@@ -322,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const div = document.createElement('div');
         div.className = 'testimonial-card bg-white shadow-lg rounded-lg p-6';
         div.innerHTML = `
-            <img src="${testimonial.image}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4">
+            <img src="${testimonial.image}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4" loading="lazy">
             <p class="text-gray-600 mb-4 italic">"${testimonial.text}"</p>
             <p class="font-semibold text-center">${testimonial.name}</p>
         `;
@@ -408,7 +410,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Chatbot initialization
-    AIRealEstateExpertChatbot.toggleChatbot();
+    if (typeof AIRealEstateExpertChatbot !== 'undefined') {
+        AIRealEstateExpertChatbot.toggleChatbot();
+    }
 
     // Efecto de aparición al hacer scroll
     const faders = document.querySelectorAll('.fade-in-section');
@@ -444,5 +448,27 @@ document.addEventListener('DOMContentLoaded', function() {
             bottomNav.style.transform = 'translateY(0)';
         }
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    }, false);
+    }, { passive: true });
+
+    // Lazy loading de imágenes
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const image = entry.target;
+                    image.src = image.dataset.src;
+                    image.classList.remove('lazy');
+                    imageObserver.unobserve(image);
+                }
+            });
+        });
+
+        document.querySelectorAll('img.lazy').forEach(img => imageObserver.observe(img));
+    } else {
+        // Fallback para navegadores que no soportan IntersectionObserver
+        document.querySelectorAll('img.lazy').forEach(img => {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+        });
+    }
 });
