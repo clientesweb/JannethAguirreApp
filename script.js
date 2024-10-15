@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Preloader
+    window.addEventListener('load', function() {
+        document.querySelector('.preloader').style.display = 'none';
+    });
+
     // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
     const promoItems = [
         "¡Oferta especial! 10% de descuento en propiedades seleccionadas",
@@ -15,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const properties = [
         { id: 1, title: "Departamentos en venta – Orlando Florida – Condo Hotel – Inversion de alta rentabilidad", price: "$350,000", image: "/img/orlandoflorida.jpg", type: "venta" },
+        
         { id: 2, title: "Departamento vista al rio – Via Samborondon", price: "$1,500/mes", image: "/img/departamentos.jpg", type: "alquiler" },
         { id: 3, title: "Locales comerciales y oficinas – Via Samborondon", price: "$120,000", image: "/img/locales.jpg", type: "venta" },
         { id: 4, title: "Oficina ejecutiva en Quito", price: "$2,200/mes", image: "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", type: "alquiler" },
@@ -196,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Modal de galería
+    // Modal de galería mejorado
     document.querySelectorAll('.view-gallery').forEach(button => {
         button.addEventListener('click', function() {
             const propertyId = this.dataset.id;
@@ -210,13 +216,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function openGallery(propertyId) {
+        const property = properties.find(p => p.id === parseInt(propertyId));
         const galleryImagesUrls = [
-            "/placeholder.svg?height=200&width=300",
+            property.image,
             "/placeholder.svg?height=200&width=300",
             "/placeholder.svg?height=200&width=300"
         ];
 
+        const galleryModal = document.getElementById('gallery-modal');
         const galleryImages = document.getElementById('gallery-images');
+        const galleryInfo = document.getElementById('gallery-info');
+
         galleryImages.innerHTML = '';
         galleryImagesUrls.forEach(url => {
             const img = document.createElement('img');
@@ -225,8 +235,23 @@ document.addEventListener('DOMContentLoaded', function() {
             galleryImages.appendChild(img);
         });
 
-        document.getElementById('gallery-modal').classList.remove('hidden');
-        document.getElementById('gallery-modal').classList.add('flex');
+        galleryInfo.innerHTML = `
+            <h2 class="text-2xl font-bold mb-2">${property.title}</h2>
+            <p class="text-xl mb-4">${property.price}</p>
+            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        `;
+
+        galleryModal.classList.remove('hidden');
+        galleryModal.classList.add('flex');
+
+        if (typeof $.fn.slick === 'function') {
+            $('#gallery-images').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                dots: true
+            });
+        }
     }
 
     // Formulario de contacto
@@ -286,7 +311,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(error => console.error('Error fetching YouTube videos:', error));
-
 
     // Instagram Feed
     const instagramSlider = document.getElementById('instagram-slider');
@@ -357,4 +381,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Chatbot initialization
     AIRealEstateExpertChatbot.toggleChatbot();
+
+    // Efecto de aparición al hacer scroll
+    const faders = document.querySelectorAll('.fade-in-section');
+    const appearOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return;
+            } else {
+                entry.target.classList.add('is-visible');
+                appearOnScroll.unobserve(entry.target);
+            }
+        });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
+
+    // Menú inferior responsivo
+    const bottomNav = document.querySelector('.bottom-nav');
+    let lastScrollTop = 0;
+
+    window.addEventListener('scroll', () => {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+            bottomNav.style.transform = 'translateY(100%)';
+        } else {
+            bottomNav.style.transform = 'translateY(0)';
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    }, false);
 });
