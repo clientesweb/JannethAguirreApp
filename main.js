@@ -10,22 +10,36 @@ import { setupPWAInstallation } from './modules/pwaInstallation.js';
 import { initializeChatbot } from './modules/chatbot.js';
 import { setupScrollEffects } from './modules/scrollEffects.js';
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Preloader
-    window.addEventListener('load', function() {
-        document.querySelector('.preloader').style.display = 'none';
-    });
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Initialize all modules
+        await Promise.all([
+            initializeSliders(),
+            setupPropertyFilters(),
+            setupGalleryModal(),
+            setupContactForm(),
+            loadYouTubeVideos(),
+            loadTestimonials(),
+            loadFAQ(),
+            loadInstagramFeed(),
+            setupPWAInstallation(),
+            initializeChatbot(),
+            setupScrollEffects()
+        ]);
 
-    // Initialize all modules
-    initializeSliders();
-    setupPropertyFilters();
-    setupGalleryModal();
-    setupContactForm();
-    loadYouTubeVideos();
-    loadTestimonials();
-    loadFAQ();
-    loadInstagramFeed();
-    setupPWAInstallation();
-    initializeChatbot();
-    setupScrollEffects();
+        // Remove preloader after all modules are initialized
+        document.querySelector('.preloader').style.display = 'none';
+    } catch (error) {
+        console.error('Error initializing modules:', error);
+        // Remove preloader even if there's an error, to prevent it from being stuck
+        document.querySelector('.preloader').style.display = 'none';
+    }
 });
+
+// Fallback to remove preloader if it's still visible after 10 seconds
+setTimeout(() => {
+    if (document.querySelector('.preloader').style.display !== 'none') {
+        console.warn('Preloader removed by timeout');
+        document.querySelector('.preloader').style.display = 'none';
+    }
+}, 10000);
