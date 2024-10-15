@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
         script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY`;
         script.onload = () => {
             const map = new google.maps.Map(mapContainer, {
-                center: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
+                center: { lat:  parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
                 zoom: 15
             });
             new google.maps.Marker({
@@ -402,26 +402,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para cargar videos de YouTube
     async function loadYouTubeVideos() {
         try {
-            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`);
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=10&type=video`);
             const data = await response.json();
             const youtubeSlider = document.getElementById('youtube-slider');
             
             data.items.forEach(item => {
-                if (item.id.kind === "youtube#video") {
-                    const videoId = item.id.videoId;
-                    const videoTitle = item.snippet.title;
-                    const videoThumbnail = item.snippet.thumbnails.medium.url;
-                    
-                    const videoElement = document.createElement('div');
-                    videoElement.className = 'youtube-video';
-                    videoElement.innerHTML = `
-                        <img src="${videoThumbnail}" alt="${videoTitle}" class="w-full h-auto">
-                        <h3 class="text-lg font-semibold mt-2">${videoTitle}</h3>
-                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="text-primary hover:underline">Ver video</a>
-                    `;
-                    
-                    youtubeSlider.appendChild(videoElement);
-                }
+                const videoId = item.id.videoId;
+                const videoTitle = item.snippet.title;
+                
+                const videoElement = document.createElement('div');
+                videoElement.className = 'youtube-video';
+                videoElement.innerHTML = `
+                    <iframe width="300" height="169" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <h3 class="text-lg font-semibold mt-2">${videoTitle}</h3>
+                `;
+                
+                youtubeSlider.appendChild(videoElement);
             });
         } catch (error) {
             console.error('Error al cargar los videos de YouTube:', error);
