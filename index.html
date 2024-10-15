@@ -278,14 +278,19 @@
             text-decoration: underline;
         }
 
-        /* Nuevos estilos para el hero */
+           /* Nuevos estilos para el hero */
         .hero-slider .slick-slide {
             height: calc(100vh - 80px);
             background-size: cover;
             background-position: center;
         }
 
-        /* Nuevos estilos para el slider de YouTube */
+          /* Nuevos estilos para la sección de YouTube */
+        .youtube-video {
+            width: 300px;
+            margin-right: 20px;
+        }
+
         .youtube-slider {
             display: flex;
             overflow-x: auto;
@@ -297,13 +302,6 @@
 
         .youtube-slider::-webkit-scrollbar {
             display: none;
-        }
-
-        .youtube-video {
-            flex: 0 0 auto;
-            width: 300px;
-            margin-right: 20px;
-            scroll-snap-align: start;
         }
 
         /* Nuevos estilos para la sección de tienda */
@@ -407,12 +405,12 @@
         </ol>
     </nav>
 
-    <main id="main-content">
+        <main id="main-content">
         <section id="inicio" class="relative h-[calc(100vh-80px)] overflow-hidden fade-in-section">
             <div class="hero-slider absolute inset-0">
                 <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
             </div>
-            <div class="absolute inset-0 flex items-center justify-center z-10 bg-black bg-opacity-50">
+            <div class="absolute inset-0 flex items-center justify-center z-10">
                 <div class="text-center text-white p-4">
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg">Encuentra tu hogar ideal</h1>
                     <p class="text-xl md:text-2xl mb-6 drop-shadow-lg">Lo mejor en Bienes Raíces en el Ecuador</p>
@@ -479,11 +477,11 @@
             </div>
         </section>
 
-        <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
+           <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Nuestro Canal de YouTube</h2>
                 <div id="youtube-slider" class="youtube-slider">
-                    <!-- YouTube videos will be inserted here by JavaScript -->
+                    <!-- Los videos de YouTube se insertarán aquí mediante JavaScript -->
                 </div>
             </div>
         </section>
