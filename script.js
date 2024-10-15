@@ -39,152 +39,179 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: 3, name: "Carlos Rodríguez", text: "La atención al cliente de Janneth Aguirre es excepcional. Siempre está disponible para responder preguntas y ofrecer asesoramiento.", image: "/placeholder.svg?height=100&width=100" }
     ];
 
-    const instagramPosts = [
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE1/' },
-        { type: 'reel', url: 'https://www.instagram.com/reel/EXAMPLE2/' },
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE3/' },
-        { type: 'reel', url: 'https://www.instagram.com/reel/EXAMPLE4/' },
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE5/' }
+    const youtubeVideos = [
+        { id: 'dQw4w9WgXcQ', title: 'Video 1' },
+        { id: 'dQw4w9WgXcQ', title: 'Video 2' },
+        { id: 'dQw4w9WgXcQ', title: 'Video 3' },
+        { id: 'dQw4w9WgXcQ', title: 'Video 4' },
+        { id: 'dQw4w9WgXcQ', title: 'Video 5' }
     ];
 
-    // Inicializar el slider de promociones
-    const promoSlider = document.querySelector('.promo-slider');
-    promoItems.forEach(item => {
-        const div = document.createElement('div');
-        div.textContent = item;
-        promoSlider.appendChild(div);
+    // Inicializar Swiper para el slider de promociones
+    new Swiper('.promo-slider', {
+        direction: 'vertical',
+        loop: true,
+        autoplay: {
+            delay: 3000,
+        },
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.promo-slider').slick({
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: false
-        });
-    }
-
-    // Inicializar el slider del hero
-    const heroSlider = document.querySelector('.hero-slider');
-    heroImages.forEach(image => {
-        const div = document.createElement('div');
-        div.style.backgroundImage = `url(${image})`;
-        div.style.backgroundSize = 'cover';
-        div.style.backgroundPosition = 'center';
-        div.style.height = '100%';
-        heroSlider.appendChild(div);
+    // Inicializar Swiper para el hero slider
+    new Swiper('.hero-slider', {
+        slidesPerView: 1,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.hero-slider').slick({
-            autoplay: true,
-            autoplaySpeed: 5000,
-            arrows: false,
-            dots: true
-        });
-    }
+    // Poblar el hero slider
+    const heroSliderWrapper = document.querySelector('.hero-slider .swiper-wrapper');
+    heroImages.forEach((image, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.innerHTML = `
+            <img src="${image}" alt="Hero image ${index + 1}" class="w-full h-full object-cover">
+        `;
+        heroSliderWrapper.appendChild(slide);
+    });
 
-    // Inicializar el slider de propiedades
-    const propertySlider = document.querySelector('.property-slider');
+    // Inicializar Swiper para el slider de propiedades
+    new Swiper('.property-slider', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+            },
+            1024: {
+                slidesPerView: 3,
+            },
+        },
+    });
+
+    // Poblar el slider de propiedades
+    const propertySliderWrapper = document.querySelector('.property-slider .swiper-wrapper');
     properties.forEach(property => {
-        const div = document.createElement('div');
-        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden mx-2';
-        div.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                <p class="text-gray-700">${property.price}</p>
-                <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Ver Detalles</button>
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.innerHTML = `
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden property-card">
+                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                    <p class="text-gray-700">${property.price}</p>
+                    <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Ver Detalles</button>
+                </div>
             </div>
         `;
-        propertySlider.appendChild(div);
+        propertySliderWrapper.appendChild(slide);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.property-slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
-
-    // Renderizar las tarjetas de servicios
+    // Poblar la sección de servicios
     const serviceGrid = document.getElementById('service-grid');
     services.forEach(service => {
-        const div = document.createElement('div');
-        div.className = 'bg-white p-6 rounded-lg shadow-md';
-        div.innerHTML = `
+        const serviceCard = document.createElement('div');
+        serviceCard.className = 'bg-white p-6 rounded-lg shadow-md';
+        serviceCard.innerHTML = `
             <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
             <h3 class="text-xl font-bold mb-2">${service.title}</h3>
             <p class="text-gray-600">${service.description}</p>
         `;
-        serviceGrid.appendChild(div);
+        serviceGrid.appendChild(serviceCard);
     });
 
-    // Inicializar el slider de la tienda
-    const storeSlider = document.getElementById('store-slider');
+    // Inicializar Swiper para el slider de la tienda
+    const storeSlider = new Swiper('#store-slider', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        scrollbar: {
+            el: '.swiper-scrollbar',
+            draggable: true,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+            },
+            1024: {
+                slidesPerView: 3,
+            },
+        },
+    });
+
+    // Poblar el slider de la tienda
+    const storeSliderWrapper = document.querySelector('#store-slider .swiper-wrapper');
     properties.forEach(property => {
-        const div = document.createElement('div');
-        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden flex-shrink-0 w-64';
-        div.setAttribute('data-type', property.type);
-        div.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                <p class="text-gray-700">${property.price}</p>
-                <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.innerHTML = `
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden property-card" data-type="${property.type}">
+                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                    <p class="text-gray-700">${property.price}</p>
+                    <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-property-id="${property.id}">Ver Galería</button>
+                </div>
             </div>
         `;
-        storeSlider.appendChild(div);
+        storeSliderWrapper.appendChild(slide);
     });
 
-    // Funcionalidad de filtrado
+    // Filtrado de propiedades
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const filter = button.getAttribute('data-filter');
-            const cards = document.querySelectorAll('.property-card');
-            cards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-type') === filter) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            filterProperties(filter);
         });
     });
 
-    // Funcionalidad de búsqueda
-    const searchInput = document.getElementById('search-input');
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const cards = document.querySelectorAll('.property-card');
-        cards.forEach(card => {
-            const title = card.querySelector('h3').textContent.toLowerCase();
-            if (title.includes(searchTerm)) {
-                card.style.display = '';
+    function filterProperties(filter) {
+        const propertyCards = document.querySelectorAll('.property-card');
+        propertyCards.forEach(card => {
+            if (filter === 'all' || card.getAttribute('data-type') === filter) {
+                card.style.display = 'block';
             } else {
                 card.style.display = 'none';
             }
         });
+        storeSlider.update();
+    }
+
+    // Búsqueda de propiedades
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const propertyCards = document.querySelectorAll('.property-card');
+        propertyCards.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            if (title.includes(searchTerm)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        storeSlider.update();
     });
 
-    // Funcionalidad de galería modal
+    // Modal de galería
     const modal = document.getElementById('gallery-modal');
     const closeModal = document.getElementById('close-modal');
     const galleryImages = document.getElementById('gallery-images');
@@ -192,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelectorAll('.view-gallery').forEach(button => {
         button.addEventListener('click', () => {
-            const propertyId = button.getAttribute('data-id');
+            const propertyId = button.getAttribute('data-property-id');
             const property = properties.find(p => p.id === parseInt(propertyId));
             
             // Limpiar imágenes anteriores
@@ -203,15 +230,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const img = document.createElement('img');
                 img.src = property.image;
                 img.alt = `${property.title} - Imagen ${i + 1}`;
-                img.className = 'w-32 h-32 object-cover rounded';
+                img.className = 'w-40 h-40 object-cover rounded';
                 galleryImages.appendChild(img);
             }
             
             // Actualizar información de la propiedad
             galleryInfo.innerHTML = `
-                <h3 class="text-xl font-bold">${property.title}</h3>
-                <p class="text-lg">${property.price}</p>
-                <p>Tipo: ${property.type}</p>
+                <h3 class="text-xl font-bold mb-2">${property.title}</h3>
+                <p class="text-gray-700 mb-2">${property.price}</p>
+                <p class="text-gray-600">Tipo: ${property.type}</p>
             `;
             
             modal.classList.remove('hidden');
@@ -220,165 +247,114 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     closeModal.addEventListener('click', () => {
-        modal.classList.add('hidden');
         modal.classList.remove('flex');
+        modal.classList.add('hidden');
     });
 
-    // Cerrar el modal si se hace clic fuera de él
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-    });
-
-    // Inicializar el slider de testimonios
-    const testimonialsSlider = document.getElementById('testimonials-slider');
-    testimonials.forEach(testimonial => {
-        const div = document.createElement('div');
-        div.className = 'bg-white p-6 rounded-lg shadow-md mx-2';
-        div.innerHTML = `
-            <div class="flex items-center mb-4">
-                <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4">
-                <h3 class="font-bold">${testimonial.name}</h3>
-            </div>
-            <p class="text-gray-600">"${testimonial.text}"</p>
-        `;
-        testimonialsSlider.appendChild(div);
-    });
-
-    if (typeof $.fn.slick === 'function') {
-        $('.testimonials-slider').slick({
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            responsive: [
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
-
-    // Inicializar el slider de Instagram
-    const instagramSlider = document.getElementById('instagram-slider');
-    instagramPosts.forEach(post => {
-        const div = document.createElement('div');
-        div.className = 'instagram-post mx-2';
-        div.innerHTML = `
-            <blockquote class="instagram-media" data-instgrm-permalink="${post.url}">
-                <div style="padding:16px;">
-                    <a href="${post.url}" target="_blank">Ver esta publicación en Instagram</a>
-                </div>
-            </blockquote>
-        `;
-        instagramSlider.appendChild(div);
-    });
-
-    if (typeof $.fn.slick === 'function') {
-        $('.instagram-slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
-
-    // Cargar el script de Instagram
-    const script = document.createElement('script');
-    script.src = 'https://www.instagram.com/embed.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    // Inicializar el mapa
-    const mapContainer = document.getElementById('map-container');
-    const loadMap = () => {
-        const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY`;
-        script.onload = () => {
-            const map = new google.maps.Map(mapContainer, {
-                center: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
-                zoom: 15
-            });
-            new google.maps.Marker({
-                position: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
-                map: map,
-                title: 'Janneth Aguirre Bienes Raíces'
-            });
-        };
-        document.body.appendChild(script);
-    };
-
-    const observer = new IntersectionObserver(
-        (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    loadMap();
-                    observer.unobserve(entry.target);
-                }
-            });
+    // Inicializar Swiper para el slider de YouTube
+    new Swiper('.youtube-slider', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
         },
-        { rootMargin: '100px' }
-    );
+        scrollbar: {
+            el: '.swiper-scrollbar',
+            draggable: true,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+            },
+            1024: {
+                slidesPerView: 3,
+            },
+        },
+    });
 
-    observer.observe(mapContainer);
+    // Poblar el slider de YouTube
+    const youtubeSliderWrapper = document.querySelector('.youtube-slider .swiper-wrapper');
+    youtubeVideos.forEach(video => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.innerHTML = `
+            <div class="aspect-w-16 aspect-h-9">
+                <iframe
+                    src="https://www.youtube.com/embed/${video.id}"
+                    title="${video.title}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </div>
+            <h3 class="mt-2 text-lg font-semibold">${video.title}</h3>
+        `;
+        youtubeSliderWrapper.appendChild(slide);
+    });
+
+    // Inicializar Swiper para el slider de testimonios
+    new Swiper('#testimonials-slider', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+            },
+            1024: {
+                slidesPerView: 3,
+            },
+        },
+    });
+
+    // Poblar el slider de testimonios
+    const testimonialsSliderWrapper = document.querySelector('#testimonials-slider .swiper-wrapper');
+    testimonials.forEach(testimonial => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.innerHTML = `
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center mb-4">
+                    <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4">
+                    <h3 class="font-bold">${testimonial.name}</h3>
+                </div>
+                <p class="text-gray-600">"${testimonial.text}"</p>
+            </div>
+        `;
+        testimonialsSliderWrapper.appendChild(slide);
+    });
+
+    // Inicializar el mapa (ejemplo con Leaflet)
+    const mapContainer = document.getElementById('map-container');
+    const lat = parseFloat(mapContainer.getAttribute('data-lat'));
+    const lng = parseFloat(mapContainer.getAttribute('data-lng'));
+
+    const map = L.map(mapContainer).setView([lat, lng], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([lat, lng]).addTo(map)
+        .bindPopup('Janneth Aguirre Bienes Raíces')
+        .openPopup();
 
     // Manejar el envío del formulario de contacto
     const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', async (e) => {
+    contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const formData = new FormData(contactForm);
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                body: formData
-            });
-            if (response.ok) {
-                alert('Mensaje enviado con éxito. Nos pondremos en contacto contigo pronto.');
-                contactForm.reset();
-            } else {
-                throw new Error('Error al enviar el mensaje');
-            }
-        } catch (error) {
-            alert('Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.');
-            console.error('Error:', error);
-        }
+        // Aquí iría la lógica para enviar el formulario, por ejemplo, usando fetch para una API
+        alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+        contactForm.reset();
     });
-
-    // Efecto de aparición al hacer scroll
-    const fadeElems = document.querySelectorAll('.fade-in-section');
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    fadeElems.forEach(elem => fadeObserver.observe(elem));
 
     // Botón "Volver arriba"
     const backToTopButton = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
+        if (window.pageYOffset > 100) {
             backToTopButton.style.display = 'block';
         } else {
             backToTopButton.style.display = 'none';
@@ -389,7 +365,19 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Instalación de la PWA
+    // Efecto de aparición al hacer scroll
+    const fadeElems = document.querySelectorAll('.fade-in-section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    });
+
+    fadeElems.forEach(elem => observer.observe(elem));
+
+    // Manejar la instalación de la PWA
     let deferredPrompt;
     const installButton = document.getElementById('install-app');
 
@@ -404,18 +392,9 @@ document.addEventListener('DOMContentLoaded', function() {
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
             if (outcome === 'accepted') {
-                console.log('Usuario aceptó la instalación de la PWA');
+                console.log('User accepted the install prompt');
             }
             deferredPrompt = null;
         }
     });
-
-    // Inicializar el chatbot
-    initChatbot();
 });
-
-// Función para inicializar el chatbot (definida en chatbot.js)
-function initChatbot() {
-    // La lógica del chatbot se implementará en chatbot.js
-    console.log('Chatbot inicializado');
-}
