@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const properties = [
         { id: 1, title: "Departamentos en venta – Orlando Florida – Condo Hotel – Inversion de alta rentabilidad", price: "$350,000", image: "/img/clase-media-contemporanea-hermosa-casa-moderna_1096167-115673.jpg", type: "venta" },
-        { id: 2, title: "Apartamento céntrico en Guayaquil", price: "$1,500/mes", image: "/img/elegante-diseno-interiores-sala-estar-mesa-sofa-accesorios-creativos_741910-16017.jpg", type: "alquiler" },
-        { id: 3, title: "Terreno en Montañita", price: "$120,000", image: "/img/concepto-playa-quitasol_23-2147796212.jpg", type: "venta" },
+        { id: 2, title: "Departamento vista al rio – Via Samborondon", price: "$1,500/mes", image: "/img/elegante-diseno-interiores-sala-estar-mesa-sofa-accesorios-creativos_741910-16017.jpg", type: "alquiler" },
+        { id: 3, title: "Locales comerciales y oficinas – Via Samborondon", price: "$120,000", image: "/img/concepto-playa-quitasol_23-2147796212.jpg", type: "venta" },
         { id: 4, title: "Oficina ejecutiva en Quito", price: "$2,200/mes", image: "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", type: "alquiler" },
         { id: 5, title: "Casa de campo en Cuenca", price: "$220,000", image: "/img/pareja-caminando-cabina_23-2147833123.jpg", type: "venta" },
         { id: 6, title: "Condominio de lujo en Manta", price: "$450,000", image: "/img/gran-hotel-palmeras-playa-tailandia_1253-929.jpg", type: "proyecto" }
