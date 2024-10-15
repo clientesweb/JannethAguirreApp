@@ -48,8 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     // Constantes para YouTube
-    const YOUTUBE_CHANNEL_ID = 'TU_ID_DE_CANAL_AQUI';
-    const YOUTUBE_API_KEY = 'TU_API_KEY_AQUI';
+    const YOUTUBE_CHANNEL_ID = 'UCiahlQJxCgPY-tEfjvkab8g';
+    const YOUTUBE_API_KEY = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
 
     // Inicializar el slider de promociones
     const promoSlider = document.querySelector('.promo-slider');
