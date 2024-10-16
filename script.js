@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 3, 
             title: "Locales comerciales y oficinas – Via Samborondon", 
-            price: "$120,000", 
+            price: "Consultar", 
             image: "/img/locales.jpg", 
             type: "venta",
             description: "Proyecto en pre-construcción, estratégicamente ubicado en el nuevo Samborondón, cerca de centros comerciales, iglesias, clínicas, escuelas, universidades, restaurantes y el Parque Bicentenario. Venta directa con plusvalía garantizada por el alto movimiento del sector. Ofrecemos crédito directo a 16 meses sin intereses y apoyo en la gestión de crédito bancario. Al ser un proyecto en planos, facilita la organización financiera. Cuenta con ascensor, excelente precio y ubicación, y oficina de administración.",
