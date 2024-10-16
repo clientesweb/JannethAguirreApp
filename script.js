@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 1, 
             title: "Depart. en venta – Orlando Florida – Condo Hotel", 
-            price: "$350,000", 
+            price: "Consultar", 
             image: "/img/orlandoflorida.jpg", 
             type: "venta",
-            description: "Inversión de alta rentabilidad en Orlando, Florida. Condominio hotel con excelentes amenidades. Este lujoso apartamento ofrece una combinación perfecta de comodidad y estilo, ideal para inversores que buscan una propiedad en una de las zonas más dinámicas de Florida. Con acceso a instalaciones de primer nivel y ubicado cerca de las principales atracciones turísticas, este condominio promete una experiencia única tanto para residentes como para visitantes.",
+            description: ".",
             images: ["/img/orlandoflorida.jpg", "/img/orlandoflorida2.jpg", "/img/orlandoflorida3.jpg", "/img/orlandoflorida4.jpg", "/img/orlandoflorida5.jpg", "/img/orlandoflorida6.jpg", "/img/orlandoflorida7.jpg", "/img/orlandoflorida8.jpg", "/img/orlandoflorida9.jpg", "/img/orlandoflorida10.jpg"]
         },
         { 
