@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const instagramPosts = [
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE1/' },
-        { type: 'reel', url: 'https://www.instagram.com/reel/EXAMPLE2/' },
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE3/' },
+        { type: 'post', url: 'https://www.instagram.com/p/DBJS7yhM4_P/' },
+        { type: 'reel', url: 'https://www.instagram.com/reel/DA08gfysclf/' },
+        { type: 'post', url: 'https://www.instagram.com/p/DApTvIhBidr/' },
         { type: 'reel', url: 'https://www.instagram.com/reel/EXAMPLE4/' },
         { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE5/' }
     ];
