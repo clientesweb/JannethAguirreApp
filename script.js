@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "$120,000", 
             image: "/img/locales.jpg", 
             type: "venta",
-            description: "Excelente oportunidad de inversión. Locales comerciales y oficinas en zona de alto tráfico. Ubicados estratégicamente en la vía Samborondón, estos espacios ofrecen una oportunidad única para establecer o expandir su negocio. Con un diseño versátil y moderno, estos locales se adaptan a una variedad de usos comerciales. Benefíciese de una ubicación privilegiada con alto flujo de clientes potenciales, amplios estacionamientos y todas las comodidades necesarias para el éxito de su empresa.",
-            images: ["/img/locales.jpg", "/img/locales2.jpg", "/img/locales3.jpg", "/img/locales4.jpg", "/img/locales5.jpg", "/img/locales6.jpg", "/img/locales7.jpg", "/img/locales8.jpg", "/img/locales9.jpg", "/img/locales10.jpg"]
+            description: "Proyecto en pre-construcción, estratégicamente ubicado en el nuevo Samborondón, cerca de centros comerciales, iglesias, clínicas, escuelas, universidades, restaurantes y el Parque Bicentenario. Venta directa con plusvalía garantizada por el alto movimiento del sector. Ofrecemos crédito directo a 16 meses sin intereses y apoyo en la gestión de crédito bancario. Al ser un proyecto en planos, facilita la organización financiera. Cuenta con ascensor, excelente precio y ubicación, y oficina de administración.",
+            images: ["/img/locales1.jpg", "/img/locales2.jpg", "/img/locales3.jpeg", "/img/locales4.jpg", "/img/localea5.jpg", "/img/locales6.jpg", "/img/locales7.jpg", "/img/locales8.jpg", "/img/locales9.jpg", "/img/locales10.jpg"]
         },
         { 
             id: 4, 
