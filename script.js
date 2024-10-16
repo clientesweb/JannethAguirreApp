@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "/img/orlandoflorida.jpg", 
             type: "venta",
             description: "Inversión de alta rentabilidad en Orlando, Florida. Condominio hotel con excelentes amenidades. Este lujoso apartamento ofrece una combinación perfecta de comodidad y estilo, ideal para inversores que buscan una propiedad en una de las zonas más dinámicas de Florida. Con acceso a instalaciones de primer nivel y ubicado cerca de las principales atracciones turísticas, este condominio promete una experiencia única tanto para residentes como para visitantes.",
-            images: ["/img/orlandoflorida.jpg", "/img/orlandoflorida2.jpg", "/img/orlandoflorida3.jpg", "/img/orlandoflorida4.jpg", "/img/orlandoflorida5.jpg", "/img/orlandoflorida6.jpg", "/img/orlandoflorida7.jpg", "/img/orlandoflorida8.jpg", "/img/orlandoflorida9.jpg", "/img/orlandoflorida10.jpg"]
+            images: ["/img/orlando1.jpg", "/img/orlando8.png", "/img/orlando10.png", "/imgorlando9.png", "/img/orlando3.jpg", "/img/orlando7.jpeg", "/img/orlando6.png", "/img/orlandoflorida8.jpg", "/img/orlandoflorida9.jpg", "/img/orlandoflorida10.jpg"]
         },
         { 
             id: 2, 
