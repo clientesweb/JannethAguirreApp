@@ -36,7 +36,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" media="print" onload="this.media='all'">
     
     <!-- Slick CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
@@ -311,42 +312,37 @@
             scroll-snap-align: start;
         }
 
-        /* Estilos para la sección de FAQ */
+        /* Estilos para la sección de FAQs */
         .faq-item {
             border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 0;
         }
 
         .faq-question {
+            font-weight: 600;
             cursor: pointer;
-            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .faq-answer {
-            padding: 1rem;
-            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
         }
 
-        .faq-answer.active {
-            display: block;
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
         }
 
-        /* Mejoras de responsividad */
-        @media (max-width: 640px) {
-            .container {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            
-            h1, h2 {
-                font-size: 1.5rem;
-            }
-            
-            .property-card, .service-card {
-                width: 100%;
-            }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
         }
     </style>
 
@@ -366,7 +362,6 @@
         "addressLocality": "Guayaquil",
         "addressRegion": "Guayas",
         "postalCode": "Código Postal",
-        
         "addressCountry": "EC"
       },
       "geo": {
@@ -395,7 +390,7 @@
     </script>
 </head>
 <body class="font-poppins bg-background text-gray-800">
-    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    <a  href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
     <!-- Preloader -->
     <div class="preloader">
@@ -518,7 +513,7 @@
             </div>
         </section>
 
-        <section id="faq" class="py-16 fade-in-section">
+        <section id="faqs" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Preguntas Frecuentes</h2>
                 <div id="faq-container">
