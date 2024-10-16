@@ -33,6 +33,13 @@ const AIRealEstateExpertChatbot = (function() {
         { type: "Diversificación", advice: "Una estrategia de diversificación podría incluir una mezcla de propiedades residenciales para alquiler en Quito o Guayaquil, junto con inversiones en proyectos turísticos en la costa o en Cuenca." }
     ];
 
+    const specialProjects = [
+        { name: "Ciudad de 15 minutos", description: "Un concepto urbanístico que busca que todos los servicios esenciales estén a 15 minutos a pie o en bicicleta desde cualquier punto de la ciudad. Este modelo promueve la sostenibilidad, reduce la dependencia del automóvil y mejora la calidad de vida de los residentes." },
+        { name: "Acqua Shops", description: "Un innovador centro comercial con temática acuática ubicado en Guayaquil. Ofrece una experiencia única de compras y entretenimiento, combinando tiendas, restaurantes y atracciones relacionadas con el agua." },
+        { name: "Casole", description: "Un exclusivo desarrollo residencial en Cumbayá, Quito, que combina lujo, comodidad y diseño sostenible. Ofrece apartamentos de alta gama con amenidades premium y vistas panorámicas." },
+        { name: "Plazole", description: "Un proyecto de uso mixto en el centro de Cuenca que integra espacios comerciales, oficinas y áreas residenciales en un entorno urbano moderno. Destaca por su arquitectura que combina elementos coloniales con diseño contemporáneo." }
+    ];
+
     function toggleChatbot() {
         isOpen = !isOpen;
         render();
@@ -73,6 +80,12 @@ const AIRealEstateExpertChatbot = (function() {
         } else if (input.includes('contacto') || input.includes('whatsapp') || input.includes('teléfono') || input.includes('email') || input.includes('agente')) {
             context = 'contacto';
             response = handleContactQuery(input);
+        } else if (input.includes('ciudad de 15 minutos') || input.includes('acqua shops') || input.includes('casole') || input.includes('plazole')) {
+            context = 'proyectos_especiales';
+            response = handleSpecialProjectsQuery(input);
+        } else if (input.includes('asesora') || input.includes('atienda')) {
+            context = 'asesora';
+            response = handleAdvisorQuery(input);
         } else {
             response = handleGeneralQuery(input);
         }
@@ -194,7 +207,7 @@ const AIRealEstateExpertChatbot = (function() {
                     Sugerencias:
                     [Inversión a corto plazo]
                     [Inversión a mediano plazo]
-                    [Inversión a largo plazo]
+                    [Inversión a largo  plazo]
                     [Estrategias de diversificación]
                     [Análisis de rentabilidad]`;
         }
@@ -215,6 +228,56 @@ const AIRealEstateExpertChatbot = (function() {
                 [Enviar un email]
                 [Agendar una cita presencial]
                 [Solicitar una videollamada]`;
+    }
+
+    function handleSpecialProjectsQuery(input) {
+        const project = specialProjects.find(p => input.toLowerCase().includes(p.name.toLowerCase()));
+        if (project) {
+            return `${project.name}: ${project.description}
+                    
+                    ¿Te gustaría saber más sobre este proyecto o explorar propiedades relacionadas?
+                    
+                    Sugerencias:
+                    [Más detalles del proyecto]
+                    [Ver propiedades disponibles]
+                    [Comparar con otros proyectos]
+                    [Proceso de compra o inversión]
+                    [Contactar a un agente especializado]`;
+        } else {
+            return `Tenemos varios proyectos especiales en Ecuador que podrían interesarte:
+                    - Ciudad de 15 minutos: Un concepto urbanístico innovador.
+                    - Acqua Shops: Centro comercial temático en Guayaquil.
+                    - Casole: Desarrollo residencial de lujo en Cumbayá.
+                    - Plazole: Proyecto de uso mixto en Cuenca.
+                    
+                    ¿Sobre cuál proyecto te gustaría más información?
+                    
+                    Sugerencias:
+                    [Ciudad de 15 minutos]
+                    [Acqua Shops]
+                    [Casole]
+                    [Plazole]
+                    [Comparar todos los proyectos]`;
+        }
+    }
+
+    function handleAdvisorQuery(input) {
+        return `Entiendo que deseas ser atendido por una asesora especializada. Nuestro equipo de expertas en bienes raíces está listo para ayudarte:
+
+                1. Asesoramiento personalizado: Adaptamos nuestro servicio a tus necesidades específicas.
+                2. Conocimiento local: Nuestras asesoras tienen un profundo entendimiento del mercado ecuatoriano.
+                3. Experiencia en transacciones internacionales: Si eres extranjero, podemos guiarte en todo el proceso.
+                4. Servicios integrales: Desde la búsqueda de propiedades hasta el cierre de la transacción.
+                5. Soporte post-venta: Seguimos a tu disposición después de la compra o venta.
+
+                ¿Cómo te gustaría proceder para conectarte con una de nuestras asesoras?
+
+                Sugerencias:
+                [Agendar una llamada]
+                [Consulta por videollamada]
+                [Visita a la oficina]
+                [Enviar mis requerimientos por email]
+                [Chatear con una asesora ahora]`;
     }
 
     function handleGeneralQuery(input) {
@@ -295,6 +358,9 @@ const AIRealEstateExpertChatbot = (function() {
                             </button>
                         </div>
                     </form>
+                    <div class="text-center text-xs text-gray-500 py-2">
+                        Powered By Duality Domain
+                    </div>
                 </div>
             `;
         }
@@ -305,9 +371,9 @@ const AIRealEstateExpertChatbot = (function() {
         const suggestedQueries = message.match(/\[(.*?)\]/g);
         if (suggestedQueries) {
             return `
-                <div class="mt-2 flex flex-wrap">
+                <div class="mt-2 flex flex-wrap gap-2">
                     ${suggestedQueries.map(query => `
-                        <span class="suggested-query" onclick="AIRealEstateExpertChatbot.handleSuggestedQuery('${query.slice(1, -1)}')">${query.slice(1, -1)}</span>
+                        <button class="bg-secondary text-secondary-foreground px-2 py-1 rounded text-sm hover:bg-secondary/80 transition-colors" onclick="AIRealEstateExpertChatbot.handleSuggestedQuery('${query.slice(1, -1)}')">${query.slice(1, -1)}</button>
                     `).join('')}
                 </div>
             `;
