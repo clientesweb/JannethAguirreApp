@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "$350,000", 
             image: "/img/orlandoflorida.jpg", 
             type: "venta",
-            description: "Inversión de alta rentabilidad en Orlando, Florida. Condominio hotel con excelentes amenidades.",
-            images: ["/img/orlandoflorida.jpg", "/img/orlandoflorida2.jpg", "/img/orlandoflorida3.jpg"]
+            description: "Inversión de alta rentabilidad en Orlando, Florida. Condominio hotel con excelentes amenidades. Este lujoso apartamento ofrece una combinación perfecta de comodidad y estilo, ideal para inversores que buscan una propiedad en una de las zonas más dinámicas de Florida. Con acceso a instalaciones de primer nivel y ubicado cerca de las principales atracciones turísticas, este condominio promete una experiencia única tanto para residentes como para visitantes.",
+            images: ["/img/orlandoflorida.jpg", "/img/orlandoflorida2.jpg", "/img/orlandoflorida3.jpg", "/img/orlandoflorida4.jpg", "/img/orlandoflorida5.jpg", "/img/orlandoflorida6.jpg", "/img/orlandoflorida7.jpg", "/img/orlandoflorida8.jpg", "/img/orlandoflorida9.jpg", "/img/orlandoflorida10.jpg"]
         },
         { 
             id: 2, 
@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "$1,500/mes", 
             image: "/img/departamentos.jpg", 
             type: "alquiler",
-            description: "Hermoso departamento con vista al río en la exclusiva zona de Samborondón.",
-            images: ["/img/departamentos.jpg", "/img/departamentos2.jpg", "/img/departamentos3.jpg"]
+            description: "Hermoso departamento con vista al río en la exclusiva zona de Samborondón. Este espacioso apartamento ofrece una vista panorámica impresionante del río, creando un ambiente tranquilo y lujoso. Con acabados de alta calidad y diseño moderno, este departamento es perfecto para aquellos que buscan un estilo de vida sofisticado en una de las áreas más prestigiosas de la ciudad. Disfrute de amplias áreas comunes, seguridad las 24 horas y fácil acceso a centros comerciales y restaurantes de primera categoría.",
+            images: ["/img/departamentos.jpg", "/img/departamentos2.jpg", "/img/departamentos3.jpg", "/img/departamentos4.jpg", "/img/departamentos5.jpg", "/img/departamentos6.jpg", "/img/departamentos7.jpg", "/img/departamentos8.jpg", "/img/departamentos9.jpg", "/img/departamentos10.jpg"]
         },
         { 
             id: 3, 
@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "$120,000", 
             image: "/img/locales.jpg", 
             type: "venta",
-            description: "Excelente oportunidad de inversión. Locales comerciales y oficinas en zona de alto tráfico.",
-            images: ["/img/locales.jpg", "/img/locales2.jpg", "/img/locales3.jpg"]
+            description: "Excelente oportunidad de inversión. Locales comerciales y oficinas en zona de alto tráfico. Ubicados estratégicamente en la vía Samborondón, estos espacios ofrecen una oportunidad única para establecer o expandir su negocio. Con un diseño versátil y moderno, estos locales se adaptan a una variedad de usos comerciales. Benefíciese de una ubicación privilegiada con alto flujo de clientes potenciales, amplios estacionamientos y todas las comodidades necesarias para el éxito de su empresa.",
+            images: ["/img/locales.jpg", "/img/locales2.jpg", "/img/locales3.jpg", "/img/locales4.jpg", "/img/locales5.jpg", "/img/locales6.jpg", "/img/locales7.jpg", "/img/locales8.jpg", "/img/locales9.jpg", "/img/locales10.jpg"]
         },
         { 
             id: 4, 
@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "$2,200/mes", 
             image: "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", 
             type: "alquiler",
-            description: "Oficina ejecutiva de lujo en el corazón financiero de Quito.",
-            images: ["/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", "/img/oficina2.jpg", "/img/oficina3.jpg"]
+            description: "Oficina ejecutiva de lujo en el corazón financiero de Quito. Este espacio de trabajo premium ofrece un ambiente profesional y sofisticado, ideal para empresas que buscan proyectar una imagen de éxito. Con vistas impresionantes de la ciudad, la oficina cuenta con tecnología de punta, salas de conferencias equipadas y áreas comunes elegantes. Ubicada en un edificio de prestigio con seguridad 24/7, esta oficina proporciona el entorno perfecto para impulsar su negocio al siguiente nivel.",
+            images: ["/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", "/img/oficina2.jpg", "/img/oficina3.jpg", "/img/oficina4.jpg", "/img/oficina5.jpg", "/img/oficina6.jpg", "/img/oficina7.jpg", "/img/oficina8.jpg", "/img/oficina9.jpg", "/img/oficina10.jpg"]
         },
         { 
             id: 5, 
@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "$220,000", 
             image: "/img/pareja-caminando-cabina_23-2147833123.jpg", 
             type: "venta",
-            description: "Encantadora casa de campo en las afueras de Cuenca. Perfecta para escapar de la ciudad.",
-            images: ["/img/pareja-caminando-cabina_23-2147833123.jpg", "/img/casa-campo2.jpg", "/img/casa-campo3.jpg"]
+            description: "Encantadora casa de campo en las afueras de Cuenca. Perfecta para escapar de la ciudad. Esta propiedad única combina el encanto rústico con comodidades modernas, ofreciendo un refugio tranquilo rodeado de naturaleza. Con amplios espacios verdes, la casa cuenta con detalles arquitectónicos tradicionales y acabados de calidad. Disfrute de impresionantes vistas a las montañas, aire puro y la serenidad del campo, todo a poca distancia de las comodidades de la ciudad de Cuenca. Ideal para quienes buscan un estilo de vida relajado o una segunda residencia de ensueño.",
+            images: ["/img/pareja-caminando-cabina_23-2147833123.jpg", "/img/casa-campo2.jpg", "/img/casa-campo3.jpg", "/img/casa-campo4.jpg", "/img/casa-campo5.jpg", "/img/casa-campo6.jpg", "/img/casa-campo7.jpg", "/img/casa-campo8.jpg", "/img/casa-campo9.jpg", "/img/casa-campo10.jpg"]
         },
         { 
             id: 6, 
@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "$450,000", 
             image: "/img/gran-hotel-palmeras-playa-tailandia_1253-929.jpg", 
             type: "proyecto",
-            description: "Proyecto de condominio de lujo frente al mar en Manta. Entrega en 2025.",
-            images: ["/img/gran-hotel-palmeras-playa-tailandia_1253-929.jpg", "/img/condominio2.jpg", "/img/condominio3.jpg"]
+            description: "Proyecto de condominio de lujo frente al mar en Manta. Entrega en 2025. Este exclusivo desarrollo ofrece una oportunidad única de vivir el sueño de una vida frente al océano. Con un diseño vanguardista y amenidades de clase mundial, el condominio promete un estilo de vida de resort todo el año. Disfrute de espectaculares puestas de sol desde su balcón privado, relájese en la piscina infinity con vista al mar, y acceda directamente a una hermosa playa. Incluye gimnasio, spa, restaurantes y seguridad las 24 horas. Una inversión perfecta para aquellos que buscan lo mejor en vida costera.",
+            images: ["/img/gran-hotel-palmeras-playa-tailandia_1253-929.jpg", "/img/condominio2.jpg", "/img/condominio3.jpg", "/img/condominio4.jpg", "/img/condominio5.jpg", "/img/condominio6.jpg", "/img/condominio7.jpg", "/img/condominio8.jpg", "/img/condominio9.jpg", "/img/condominio10.jpg"]
         }
     ];
 
@@ -268,21 +268,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeModal = document.getElementById('close-modal');
     const galleryImages = document.getElementById('gallery-images');
     const galleryInfo = document.getElementById('gallery-info');
+    const fullImageContainer = document.getElementById('full-image-container');
+    const fullImage = document.getElementById('full-image');
+    const prevImage = document.getElementById('prev-image');
+    const nextImage = document.getElementById('next-image');
+
+    let currentPropertyId = null;
+    let currentImageIndex = 0;
 
     document.querySelectorAll('.view-gallery, .view-details').forEach(button => {
         button.addEventListener('click', () => {
             const propertyId = button.getAttribute('data-id');
             const property = properties.find(p => p.id === parseInt(propertyId));
             
+            currentPropertyId = property.id;
+            currentImageIndex = 0;
+            
             // Limpiar imágenes anteriores
             galleryImages.innerHTML = '';
             
             // Agregar imágenes a la galería
-            property.images.forEach(image => {
+            property.images.forEach((image, index) => {
                 const img = document.createElement('img');
                 img.src = image;
-                img.alt = property.title;
-                img.className = 'w-32 h-32 object-cover rounded';
+                img.alt = `${property.title} - Imagen ${index + 1}`;
+                img.className = 'w-24 h-24 object-cover rounded cursor-pointer';
+                img.addEventListener('click', () => showFullImage(index));
                 galleryImages.appendChild(img);
             });
             
@@ -309,6 +320,32 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target === modal) {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
+        }
+    });
+
+    function showFullImage(index) {
+        const property = properties.find(p => p.id === currentPropertyId);
+        currentImageIndex = index;
+        fullImage.src = property.images[index];
+        fullImage.alt = `${property.title} - Imagen ${index + 1}`;
+        fullImageContainer.style.display = 'flex';
+    }
+
+    prevImage.addEventListener('click', () => {
+        const property = properties.find(p => p.id === currentPropertyId);
+        currentImageIndex = (currentImageIndex - 1 + property.images.length) % property.images.length;
+        showFullImage(currentImageIndex);
+    });
+
+    nextImage.addEventListener('click', () => {
+        const property = properties.find(p => p.id === currentPropertyId);
+        currentImageIndex = (currentImageIndex + 1) % property.images.length;
+        showFullImage(currentImageIndex);
+    });
+
+    fullImageContainer.addEventListener('click', (e) => {
+        if (e.target === fullImageContainer) {
+            fullImageContainer.style.display = 'none';
         }
     });
 
@@ -512,13 +549,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 const videoElement = document.createElement('div');
                 videoElement.className = 'youtube-video';
                 videoElement.innerHTML = `
-                    <img src="${thumbnail}" alt="${title}" class="w-full h-auto">
+                    <iframe width="280" height="157" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h3 class="text-sm font-semibold mt-2">${title}</h3>
-                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="text-primary hover:underline">Ver video</a>
                 `;
                 
                 youtubeSlider.appendChild(videoElement);
             });
+
+            // Inicializar el slider de YouTube
+            if (typeof $.fn.slick === 'function') {
+                $('.youtube-slider').slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    autoplay: false,
+                    arrows: true,
+                    dots: true,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        },
+                        {
+                            breakpoint: 640,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                });
+            }
         } catch (error) {
             console.error('Error al cargar videos de YouTube:', error);
         }
