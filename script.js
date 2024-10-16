@@ -25,8 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "Consultar", 
             image: "/img/orlandoflorida.jpg", 
             type: "venta",
-            description: ".",
-            images: ["/img/orlandoflorida.jpg", "/img/orlandoflorida2.jpg", "/img/orlandoflorida3.jpg", "/img/orlandoflorida4.jpg", "/img/orlandoflorida5.jpg", "/img/orlandoflorida6.jpg", "/img/orlandoflorida7.jpg", "/img/orlandoflorida8.jpg", "/img/orlandoflorida9.jpg", "/img/orlandoflorida10.jpg"]
+            description: "PRE- CONSTRUCCIÓN- PROYECTO EN PLANOS
+
+Crédito Hipotecario para inversionistas latinoamericanos (nos encargamos de este trámite)
+
+Alto porcentaje de rentabilidad.",
+            images: ["/img/orlando1.jpg", "/img/orlando3.jpg", "/img/orlando10.png", "/img/orlando6.png", "/img/orlando7.jpeg", "/img/orlando8.png", "/img/orlando9.png", "/img/orlandoflorida8.jpg", "/img/orlandoflorida9.jpg", "/img/orlandoflorida10.jpg"]
         },
         { 
             id: 2, 
