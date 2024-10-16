@@ -31,11 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 2, 
             title: "Departamento vista al rio – Via Samborondon", 
-            price: "$1,500/mes", 
+            price: "Consultar", 
             image: "/img/departamentos.jpg", 
             type: "alquiler",
-            description: "Hermoso departamento con vista al río en la exclusiva zona de Samborondón. Este espacioso apartamento ofrece una vista panorámica impresionante del río, creando un ambiente tranquilo y lujoso. Con acabados de alta calidad y diseño moderno, este departamento es perfecto para aquellos que buscan un estilo de vida sofisticado en una de las áreas más prestigiosas de la ciudad. Disfrute de amplias áreas comunes, seguridad las 24 horas y fácil acceso a centros comerciales y restaurantes de primera categoría.",
-            images: ["/img/departamentos.jpg", "/img/departamentos2.jpg", "/img/departamentos3.jpg", "/img/departamentos4.jpg", "/img/departamentos5.jpg", "/img/departamentos6.jpg", "/img/departamentos7.jpg", "/img/departamentos8.jpg", "/img/departamentos9.jpg", "/img/departamentos10.jpg"]
+            description: "Últimas unidades disponibles de 2 y 3 habitaciones con balcones, master y áreas sociales con vista al río. Incluyen dormitorio secundario completo, sala, comedor, cocina tipo americana, lavandería, parqueo, piscina, pérgola y malecón. Trabajamos con todas las instituciones financieras y gestionamos su crédito hipotecario. Crédito directo disponible, consulte nuestras opciones de financiamiento.",
+            images: ["/img/i1.jpeg", "/img/i2-768x1024.jpeg", "/img/i3.jpeg", "/img/i4-1024x576.jpeg", "/img/i5-1024x682.jpeg", "/img/i6.jpeg", "/img/departamentos7.jpg", "/img/departamentos8.jpg", "/img/departamentos9.jpg", "/img/departamentos10.jpg"]
         },
         { 
             id: 3, 
