@@ -22,43 +22,29 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 1, 
             title: "Depart. en venta – Orlando Florida – Condo Hotel", 
-            price: "Consultar", 
+            price: "$350,000", 
             image: "/img/orlandoflorida.jpg", 
             type: "venta",
-            description: "PRE- CONSTRUCCIÓN- PROYECTO EN PLANOS
-Crédito Hipotecario para inversionistas latinoamericanos (nos encargamos de este trámite)
-Alto porcentaje de rentabilidad.",
-            images: ["/img/orlando1.jpg", "/img/orlando8.png", "/img/orlando10.png", "/imgorlando9.png", "/img/orlando3.jpg", "/img/orlando7.jpeg", "/img/orlando6.png", "/img/orlandoflorida8.jpg", "/img/orlandoflorida9.jpg", "/img/orlandoflorida10.jpg"]
+            description: "Inversión de alta rentabilidad en Orlando, Florida. Condominio hotel con excelentes amenidades. Este lujoso apartamento ofrece una combinación perfecta de comodidad y estilo, ideal para inversores que buscan una propiedad en una de las zonas más dinámicas de Florida. Con acceso a instalaciones de primer nivel y ubicado cerca de las principales atracciones turísticas, este condominio promete una experiencia única tanto para residentes como para visitantes.",
+            images: ["/img/orlandoflorida.jpg", "/img/orlandoflorida2.jpg", "/img/orlandoflorida3.jpg", "/img/orlandoflorida4.jpg", "/img/orlandoflorida5.jpg", "/img/orlandoflorida6.jpg", "/img/orlandoflorida7.jpg", "/img/orlandoflorida8.jpg", "/img/orlandoflorida9.jpg", "/img/orlandoflorida10.jpg"]
         },
         { 
             id: 2, 
             title: "Departamento vista al rio – Via Samborondon", 
-            price: "Consultar", 
+            price: "$1,500/mes", 
             image: "/img/departamentos.jpg", 
             type: "alquiler",
-            description: "ULTIMAS UNIDADES DISPONIBLES.
-2 y 3 Habitaciones
-Balcones
-Master completo con VISTA AL RIO
-Dormitorio secundario completo
-Sala, comedor cocina tipo americana VISTA AL RIO
-Área de lavandería
-Parqueo
-Área Social con piscina, pérgola, malecón VISTA AL RIO
-Trabajamos con todas las instituciones FINANCIERAS
-Gestionamos su CREDITO HIPOTECARIO.",
-            images: ["/img/i1.jpeg", "/img/i2-768x1024.jpeg", "/img/i3.jpeg", "/img/i4-1024x576.jpeg", "/img/i5-1024x682.jpeg", "/img/i6.jpeg"]
+            description: "Hermoso departamento con vista al río en la exclusiva zona de Samborondón. Este espacioso apartamento ofrece una vista panorámica impresionante del río, creando un ambiente tranquilo y lujoso. Con acabados de alta calidad y diseño moderno, este departamento es perfecto para aquellos que buscan un estilo de vida sofisticado en una de las áreas más prestigiosas de la ciudad. Disfrute de amplias áreas comunes, seguridad las 24 horas y fácil acceso a centros comerciales y restaurantes de primera categoría.",
+            images: ["/img/departamentos.jpg", "/img/departamentos2.jpg", "/img/departamentos3.jpg", "/img/departamentos4.jpg", "/img/departamentos5.jpg", "/img/departamentos6.jpg", "/img/departamentos7.jpg", "/img/departamentos8.jpg", "/img/departamentos9.jpg", "/img/departamentos10.jpg"]
         },
         { 
             id: 3, 
             title: "Locales comerciales y oficinas – Via Samborondon", 
-            price: "Consultar", 
+            price: "$120,000", 
             image: "/img/locales.jpg", 
             type: "venta",
-            description: "Pre construcción - Proyecto en planos.
-Estratégicamente Ubicado sin duda alguna será su mejor inversión.
-Cerca de otros centros comerciales, Iglesias, Clínica, escuelas, colegios, universidades, restaurantes, Parque bicentenario de Samborondon .",
-            images: ["/img/locales1.jpg", "/img/locales2.jpg", "/img/locales3.jpeg", "/img/locales4.jpg", "/img/locales5.jpg", "/img/locales6.jpg"]
+            description: "Excelente oportunidad de inversión. Locales comerciales y oficinas en zona de alto tráfico. Ubicados estratégicamente en la vía Samborondón, estos espacios ofrecen una oportunidad única para establecer o expandir su negocio. Con un diseño versátil y moderno, estos locales se adaptan a una variedad de usos comerciales. Benefíciese de una ubicación privilegiada con alto flujo de clientes potenciales, amplios estacionamientos y todas las comodidades necesarias para el éxito de su empresa.",
+            images: ["/img/locales.jpg", "/img/locales2.jpg", "/img/locales3.jpg", "/img/locales4.jpg", "/img/locales5.jpg", "/img/locales6.jpg", "/img/locales7.jpg", "/img/locales8.jpg", "/img/locales9.jpg", "/img/locales10.jpg"]
         },
         { 
             id: 4, 
