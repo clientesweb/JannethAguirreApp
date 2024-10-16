@@ -156,7 +156,7 @@ const AIRealEstateExpertChatbot = (function() {
                     <div class="bg-primary text-white p-4 rounded-t-lg flex justify-between items-center">
                         <div class="flex items-center">
                             <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre" class="w-8 h-8 object-contain mr-2" />
-                            <h3 class="font-bold text-lg">Asistente de Janneth Aguirre</h3>
+                            <h3 class="font-bold text-lg">ARIA - IA BIENES RAICES</h3>
                         </div>
                         <button onclick="AIRealEstateExpertChatbot.toggleChatbot()" class="text-white hover:text-gray-200">
                             <i class="fas fa-times"></i>
