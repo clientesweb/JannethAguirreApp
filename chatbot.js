@@ -4,40 +4,26 @@ const AIRealEstateExpertChatbot = (function() {
     let context = '';
 
     const properties = [
-        { id: 1, title: "Casa moderna en Cumbayá", price: "$350,000", location: "Cumbayá, Quito", type: "venta", features: ["3 dormitorios", "2.5 baños", "Jardín", "Piscina"] },
-        { id: 2, title: "Apartamento céntrico en Guayaquil", price: "$1,500/mes", location: "Centro, Guayaquil", type: "alquiler", features: ["2 dormitorios", "2 baños", "Vista al río", "Gimnasio"] },
-        { id: 3, title: "Terreno en Montañita", price: "$120,000", location: "Montañita, Santa Elena", type: "venta", features: ["500m2", "Vista al mar", "Ideal para hotel"] },
-        { id: 4, title: "Oficina ejecutiva en Quito", price: "$2,200/mes", location: "La Carolina, Quito", type: "alquiler", features: ["100m2", "5 oficinas", "Sala de juntas", "Estacionamiento"] },
-        { id: 5, title: "Casa de campo en Cuenca", price: "$220,000", location: "Yunguilla, Cuenca", type: "venta", features: ["4 dormitorios", "3 baños", "Terreno de 1000m2", "Huerto orgánico"] },
-        { id: 6, title: "Condominio de lujo en Manta", price: "$450,000", location: "Barbasquillo, Manta", type: "proyecto", features: ["3 dormitorios", "Vista al mar", "Piscina infinity", "Entrega en 2025"] }
+        { id: 1, title: "Depart. en venta – Orlando Florida – Condo Hotel", price: "Consultar", type: "venta", location: "Orlando, Florida" },
+        { id: 2, title: "Departamento vista al rio – Via Samborondon", price: "Consultar", type: "alquiler", location: "Samborondón" },
+        { id: 3, title: "Locales comerciales y oficinas – Via Samborondon", price: "Consultar", type: "venta", location: "Samborondón" },
+        { id: 4, title: "Oficina ejecutiva en Quito", price: "$2,200/mes", type: "alquiler", location: "Quito" },
+        { id: 5, title: "Casa de campo en Cuenca", price: "$220,000", type: "venta", location: "Cuenca" },
+        { id: 6, title: "Condominio de lujo en Manta", price: "$450,000", type: "proyecto", location: "Manta" }
     ];
 
-    const marketTrends = [
-        { location: "Quito", trend: "Crecimiento estable", description: "El mercado inmobiliario en Quito muestra un crecimiento estable, con un aumento en la demanda de propiedades en zonas residenciales como Cumbayá y Tumbaco. Los precios han aumentado un 5% en el último año." },
-        { location: "Guayaquil", trend: "Auge en desarrollo costero", description: "Guayaquil experimenta un boom en el desarrollo de propiedades frente al mar y en zonas regeneradas del centro de la ciudad. Se espera un crecimiento del 8% en el valor de las propiedades para el próximo año." },
-        { location: "Cuenca", trend: "Popular entre expatriados", description: "Cuenca sigue siendo un destino popular para expatriados, impulsando el mercado de alquileres y ventas de propiedades. Los precios se han estabilizado después de un aumento del 10% en los últimos dos años." },
-        { location: "Costa", trend: "Inversión en turismo", description: "Las zonas costeras como Manta, Salinas y Montañita ven un aumento en la inversión en propiedades turísticas y segundas residencias. Se proyecta un crecimiento del 12% en el valor de las propiedades costeras en los próximos 3 años." }
+    const services = [
+        { title: "Asesoría Legal", description: "Asistencia legal en todas las transacciones inmobiliarias" },
+        { title: "Valuación de Propiedades", description: "Tasaciones precisas y profesionales de bienes raíces" },
+        { title: "Gestión de Alquileres", description: "Administramos sus propiedades en alquiler de manera eficiente" }
     ];
 
-    const legalInfo = [
-        { topic: "Compra para extranjeros", description: "Los extranjeros pueden comprar propiedades en Ecuador sin restricciones, excepto en áreas fronterizas y tierras comunales. Se requiere obtener un RUC (Registro Único de Contribuyentes) y una visa de residencia no es obligatoria para la compra." },
-        { topic: "Impuestos", description: "La compra de propiedades está sujeta a impuestos de transferencia (1% del valor de la propiedad) y registro (0.5% del valor). Los propietarios deben pagar impuestos anuales sobre la propiedad, que varían según el municipio y el valor catastral." },
-        { topic: "Proceso de compra", description: "El proceso incluye la firma de una promesa de compraventa, la obtención de un certificado de gravámenes, y la firma de la escritura pública ante un notario. Es recomendable realizar un estudio de títulos y contar con un abogado especializado." },
-        { topic: "Alquileres", description: "Los contratos de alquiler deben ser registrados en el municipio correspondiente. La ley ecuatoriana protege tanto a inquilinos como a propietarios con regulaciones específicas. El plazo mínimo de alquiler es de 2 años para viviendas y 1 año para locales comerciales." }
-    ];
-
-    const investmentAdvice = [
-        { type: "Corto plazo", advice: "Para inversiones a corto plazo, considere propiedades en zonas turísticas como Montañita o Baños para alquiler vacacional. El retorno de inversión puede ser alto, pero tenga en cuenta la estacionalidad." },
-        { type: "Mediano plazo", advice: "Las propiedades en desarrollo en Guayaquil o Manta pueden ofrecer buenas oportunidades de apreciación en 3-5 años. Busque proyectos en zonas con mejoras de infraestructura planificadas." },
-        { type: "Largo plazo", advice: "Para inversiones a largo plazo, las propiedades en Quito o Cuenca en zonas residenciales establecidas tienden a mantener su valor y apreciarse de manera constante. Considere también terrenos en áreas de expansión urbana." },
-        { type: "Diversificación", advice: "Una estrategia de diversificación podría incluir una mezcla de propiedades residenciales para alquiler en Quito o Guayaquil, junto con inversiones en proyectos turísticos en la costa o en Cuenca." }
-    ];
-
-    const specialProjects = [
-        { name: "Ciudad de 15 minutos", description: "Un concepto urbanístico que busca que todos los servicios esenciales estén a 15 minutos a pie o en bicicleta desde cualquier punto de la ciudad. Este modelo promueve la sostenibilidad, reduce la dependencia del automóvil y mejora la calidad de vida de los residentes." },
-        { name: "Acqua Shops", description: "Un innovador centro comercial con temática acuática ubicado en Guayaquil. Ofrece una experiencia única de compras y entretenimiento, combinando tiendas, restaurantes y atracciones relacionadas con el agua." },
-        { name: "Casole", description: "Un exclusivo desarrollo residencial en Cumbayá, Quito, que combina lujo, comodidad y diseño sostenible. Ofrece apartamentos de alta gama con amenidades premium y vistas panorámicas." },
-        { name: "Plazole", description: "Un proyecto de uso mixto en el centro de Cuenca que integra espacios comerciales, oficinas y áreas residenciales en un entorno urbano moderno. Destaca por su arquitectura que combina elementos coloniales con diseño contemporáneo." }
+    const faqs = [
+        { question: "¿Cómo puedo comenzar a buscar una propiedad?", answer: "Puede comenzar explorando nuestro catálogo en línea o contactarnos directamente para una consulta personalizada." },
+        { question: "¿Qué documentos necesito para comprar una propiedad?", answer: "Generalmente, necesitará una identificación válida, comprobante de ingresos y, en algunos casos, un historial crediticio." },
+        { question: "¿Ofrecen opciones de financiamiento?", answer: "Sí, trabajamos con varios bancos y entidades financieras para ofrecer opciones de financiamiento a nuestros clientes." },
+        { question: "¿Cuánto tiempo toma normalmente el proceso de compra?", answer: "El proceso puede variar, pero generalmente toma entre 30 y 90 días desde la oferta inicial hasta el cierre." },
+        { question: "¿Qué servicios post-venta ofrecen?", answer: "Ofrecemos asesoría legal, gestión de documentación y apoyo en trámites relacionados con la propiedad después de la compra." }
     ];
 
     function toggleChatbot() {
@@ -65,27 +51,21 @@ const AIRealEstateExpertChatbot = (function() {
         const input = userInput.toLowerCase();
         let response = '';
 
-        if (input.includes('propiedad') || input.includes('casa') || input.includes('apartamento') || input.includes('oficina') || input.includes('terreno')) {
+        if (input.includes('propiedad') || input.includes('casa') || input.includes('departamento') || input.includes('oficina') || input.includes('local')) {
             context = 'propiedades';
             response = handlePropertyQuery(input);
-        } else if (input.includes('tendencia') || input.includes('mercado') || input.includes('precio')) {
-            context = 'tendencias';
-            response = handleMarketTrendQuery(input);
-        } else if (input.includes('legal') || input.includes('ley') || input.includes('impuesto') || input.includes('compra') || input.includes('alquiler')) {
-            context = 'legal';
-            response = handleLegalQuery(input);
-        } else if (input.includes('inversión') || input.includes('retorno') || input.includes('rentabilidad')) {
-            context = 'inversión';
-            response = handleInvestmentQuery(input);
-        } else if (input.includes('contacto') || input.includes('whatsapp') || input.includes('teléfono') || input.includes('email') || input.includes('agente')) {
-            context = 'contacto';
-            response = handleContactQuery(input);
-        } else if (input.includes('ciudad de 15 minutos') || input.includes('acqua shops') || input.includes('casole') || input.includes('plazole')) {
-            context = 'proyectos_especiales';
-            response = handleSpecialProjectsQuery(input);
-        } else if (input.includes('asesora') || input.includes('atienda')) {
-            context = 'asesora';
-            response = handleAdvisorQuery(input);
+        } else if (input.includes('servicio') || input.includes('asesoría') || input.includes('valuación') || input.includes('alquiler')) {
+            context = 'servicios';
+            response = handleServiceQuery(input);
+        } else if (input.includes('financiamiento') || input.includes('crédito') || input.includes('pago')) {
+            context = 'financiamiento';
+            response = handleFinancingQuery(input);
+        } else if (input.includes('compra') || input.includes('venta') || input.includes('proceso')) {
+            context = 'proceso';
+            response = handleProcessQuery(input);
+        } else if (input.includes('ubicación') || input.includes('zona') || input.includes('área')) {
+            context = 'ubicación';
+            response = handleLocationQuery(input);
         } else {
             response = handleGeneralQuery(input);
         }
@@ -94,228 +74,70 @@ const AIRealEstateExpertChatbot = (function() {
     }
 
     function handlePropertyQuery(input) {
+        const propertyTypes = ['casa', 'departamento', 'oficina', 'local', 'condominio'];
+        const matchingType = propertyTypes.find(type => input.includes(type));
         const matchingProperties = properties.filter(property => 
-            input.includes(property.type) || input.includes(property.location.toLowerCase()) || input.includes(property.title.toLowerCase())
+            (matchingType && property.title.toLowerCase().includes(matchingType)) ||
+            input.includes(property.location.toLowerCase())
         );
 
         if (matchingProperties.length > 0) {
             const property = matchingProperties[0];
             return `He encontrado una propiedad que podría interesarte: ${property.title} en ${property.location}. 
                     Precio: ${property.price}
-                    Características: ${property.features.join(', ')}
+                    Tipo: ${property.type}
                     
-                    ¿Te gustaría saber más sobre esta propiedad o ver otras opciones similares?
-                    
-                    Sugerencias:
-                    [Ver más detalles de esta propiedad]
-                    [Mostrar opciones similares]
-                    [Programar una visita]
-                    [Consultar sobre financiamiento]`;
+                    ¿Te gustaría más detalles sobre esta propiedad o ver otras opciones similares?`;
         } else {
-            return `Entiendo que estás buscando una propiedad. Para ayudarte mejor, ¿podrías darme más detalles sobre tus preferencias?
-                    
-                    Sugerencias:
-                    [Buscar casas en venta]
-                    [Buscar apartamentos en alquiler]
-                    [Ver propiedades en Quito]
-                    [Ver propiedades en Guayaquil]
-                    [Propiedades de lujo]
-                    [Propiedades para inversión]`;
+            return `Entiendo que estás buscando una propiedad. En Janneth Aguirre Bienes Raíces ofrecemos una variedad de opciones, desde departamentos en Orlando hasta condominios de lujo en Manta. ¿Podrías especificar qué tipo de propiedad te interesa o en qué zona estás buscando?`;
         }
     }
 
-    function handleMarketTrendQuery(input) {
-        const trend = marketTrends.find(t => input.includes(t.location.toLowerCase()));
-        if (trend) {
-            return `Sobre el mercado inmobiliario en ${trend.location}:
-                    ${trend.trend} - ${trend.description}
-                    
-                    Sugerencias: 
-                    [Ver oportunidades de inversión en ${trend.location}]
-                    [Comparar con otras ciudades]
-                    [Proyecciones a futuro del mercado]
-                    [Factores que influyen en los precios]`;
+    function handleServiceQuery(input) {
+        const matchingService = services.find(service => input.includes(service.title.toLowerCase()));
+        if (matchingService) {
+            return `Sobre nuestro servicio de ${matchingService.title}: ${matchingService.description}. ¿Te gustaría más información sobre este servicio o conocer otros servicios que ofrecemos?`;
         } else {
-            return `El mercado inmobiliario en Ecuador muestra diversas tendencias según la región:
-                    - Quito: Crecimiento estable en zonas residenciales.
-                    - Guayaquil: Auge en desarrollo costero y centro de la ciudad.
-                    - Cuenca: Popular entre expatriados.
-                    - Costa: Inversión en propiedades turísticas.
-                    
-                    ¿Sobre qué zona te gustaría saber más?
-                    
-                    Sugerencias:
-                    [Detalles sobre Quito]
-                    [Detalles sobre Guayaquil]
-                    [Detalles sobre Cuenca]
-                    [Tendencias en la costa]
-                    [Comparativa de precios por ciudad]`;
+            return `En Janneth Aguirre Bienes Raíces ofrecemos varios servicios, incluyendo asesoría legal, valuación de propiedades y gestión de alquileres. ¿Sobre cuál de estos servicios te gustaría más información?`;
         }
     }
 
-    function handleLegalQuery(input) {
-        const info = legalInfo.find(i => input.includes(i.topic.toLowerCase()));
-        if (info) {
-            return `Sobre ${info.topic}:
-                    ${info.description}
-                    
-                    Sugerencias:
-                    [Más detalles legales]
-                    [Proceso de compra paso a paso]
-                    [Consultar con un abogado]
-                    [Impuestos en la compra de propiedades]
-                    [Regulaciones para alquileres]`;
+    function handleFinancingQuery(input) {
+        return `En Janneth Aguirre Bienes Raíces trabajamos con varias instituciones financieras para ofrecer opciones de financiamiento a nuestros clientes. Ofrecemos crédito directo en algunos proyectos y podemos ayudarte a gestionar créditos hipotecarios. ¿Te gustaría que te explique más sobre las opciones de financiamiento disponibles o prefieres hablar con uno de nuestros asesores financieros?`;
+    }
+
+    function handleProcessQuery(input) {
+        if (input.includes('compra')) {
+            return `El proceso de compra generalmente incluye los siguientes pasos: búsqueda de la propiedad, negociación, firma de promesa de compraventa, obtención de financiamiento (si es necesario), y cierre de la transacción. Todo el proceso suele tomar entre 30 y 90 días. ¿Sobre qué parte del proceso te gustaría más información?`;
+        } else if (input.includes('venta')) {
+            return `Para vender tu propiedad, podemos ayudarte con la valoración, marketing, negociación y todos los trámites legales. Nuestro objetivo es conseguir el mejor precio en el menor tiempo posible. ¿Te gustaría programar una valoración de tu propiedad?`;
         } else {
-            return `Los aspectos legales son cruciales en las transacciones inmobiliarias en Ecuador. Algunos puntos importantes:
-                    - Los extranjeros pueden comprar propiedades con pocas restricciones.
-                    - Existen impuestos de transferencia y registro en la compra.
-                    - El proceso de compra incluye varios pasos legales.
-                    - Hay regulaciones específicas para alquileres.
-                    
-                    ¿Sobre qué aspecto legal te gustaría más información?
-                    
-                    Sugerencias:
-                    [Compra para extranjeros]
-                    [Impuestos en bienes raíces]
-                    [Proceso de compra]
-                    [Leyes de alquiler]
-                    [Permisos y licencias]`;
+            return `En Janneth Aguirre Bienes Raíces nos encargamos de todo el proceso de compra y venta de propiedades. Desde la búsqueda inicial hasta el cierre de la transacción, estamos aquí para ayudarte. ¿Tienes alguna pregunta específica sobre el proceso?`;
         }
     }
 
-    function handleInvestmentQuery(input) {
-        const advice = investmentAdvice.find(a => input.includes(a.type.toLowerCase()));
-        if (advice) {
-            return `Consejo de inversión para ${advice.type}:
-                    ${advice.advice}
-                    
-                    Sugerencias:
-                    [Más detalles sobre esta estrategia]
-                    [Comparar con otras estrategias]
-                    [Riesgos y beneficios]
-                    [Ejemplos de propiedades para esta estrategia]
-                    [Consultar con un asesor de inversiones]`;
+    function handleLocationQuery(input) {
+        const locations = ['Orlando', 'Samborondón', 'Quito', 'Cuenca', 'Manta'];
+        const matchingLocation = locations.find(location => input.includes(location.toLowerCase()));
+        if (matchingLocation) {
+            return `Tenemos varias propiedades disponibles en ${matchingLocation}. Esta es una zona muy solicitada debido a su [característica relevante]. ¿Te gustaría ver algunas opciones de propiedades en ${matchingLocation}?`;
         } else {
-            return `La inversión en bienes raíces en Ecuador puede ser muy rentable si se hace de manera informada. Algunas estrategias incluyen:
-                    - Inversiones a corto plazo en propiedades turísticas.
-                    - Inversiones a mediano plazo en zonas en desarrollo.
-                    - Inversiones a largo plazo en áreas residenciales establecidas.
-                    - Diversificación de la cartera inmobiliaria.
-                    
-                    ¿Qué tipo de inversión te interesa más?
-                    
-                    Sugerencias:
-                    [Inversión a corto plazo]
-                    [Inversión a mediano plazo]
-                    [Inversión a largo  plazo]
-                    [Estrategias de diversificación]
-                    [Análisis de rentabilidad]`;
+            return `Janneth Aguirre Bienes Raíces tiene propiedades en varias ubicaciones privilegiadas, incluyendo Orlando (Florida), Samborondón, Quito, Cuenca y Manta. Cada zona tiene sus propias características y ventajas. ¿En qué área específicamente estás interesado?`;
         }
-    }
-
-    function handleContactQuery(input) {
-        return `Estamos disponibles para atenderte por varios medios:
-                - WhatsApp: +593 99 123 4567
-                - Teléfono: (+593) 2 234-5678
-                - Email: info@jannethaguirre.com
-                - Visita nuestra oficina: Av. Amazonas N32-87, Quito, Ecuador
-                
-                ¿Cómo prefieres que te contactemos?
-                
-                Sugerencias:
-                [Contactar por WhatsApp]
-                [Llamar ahora]
-                [Enviar un email]
-                [Agendar una cita presencial]
-                [Solicitar una videollamada]`;
-    }
-
-    function handleSpecialProjectsQuery(input) {
-        const project = specialProjects.find(p => input.toLowerCase().includes(p.name.toLowerCase()));
-        if (project) {
-            return `${project.name}: ${project.description}
-                    
-                    ¿Te gustaría saber más sobre este proyecto o explorar propiedades relacionadas?
-                    
-                    Sugerencias:
-                    [Más detalles del proyecto]
-                    [Ver propiedades disponibles]
-                    [Comparar con otros proyectos]
-                    [Proceso de compra o inversión]
-                    [Contactar a un agente especializado]`;
-        } else {
-            return `Tenemos varios proyectos especiales en Ecuador que podrían interesarte:
-                    - Ciudad de 15 minutos: Un concepto urbanístico innovador.
-                    - Acqua Shops: Centro comercial temático en Guayaquil.
-                    - Casole: Desarrollo residencial de lujo en Cumbayá.
-                    - Plazole: Proyecto de uso mixto en Cuenca.
-                    
-                    ¿Sobre cuál proyecto te gustaría más información?
-                    
-                    Sugerencias:
-                    [Ciudad de 15 minutos]
-                    [Acqua Shops]
-                    [Casole]
-                    [Plazole]
-                    [Comparar todos los proyectos]`;
-        }
-    }
-
-    function handleAdvisorQuery(input) {
-        return `Entiendo que deseas ser atendido por una asesora especializada. Nuestro equipo de expertas en bienes raíces está listo para ayudarte:
-
-                1. Asesoramiento personalizado: Adaptamos nuestro servicio a tus necesidades específicas.
-                2. Conocimiento local: Nuestras asesoras tienen un profundo entendimiento del mercado ecuatoriano.
-                3. Experiencia en transacciones internacionales: Si eres extranjero, podemos guiarte en todo el proceso.
-                4. Servicios integrales: Desde la búsqueda de propiedades hasta el cierre de la transacción.
-                5. Soporte post-venta: Seguimos a tu disposición después de la compra o venta.
-
-                ¿Cómo te gustaría proceder para conectarte con una de nuestras asesoras?
-
-                Sugerencias:
-                [Agendar una llamada]
-                [Consulta por videollamada]
-                [Visita a la oficina]
-                [Enviar mis requerimientos por email]
-                [Chatear con una asesora ahora]`;
     }
 
     function handleGeneralQuery(input) {
         if (input.includes('hola') || input.includes('buenos días') || input.includes('buenas tardes')) {
-            return `¡Hola! Soy ARIA, tu asistente virtual experta en bienes raíces en Ecuador. Estoy aquí para ayudarte con cualquier consulta sobre propiedades, mercado inmobiliario, inversiones y más. ¿En qué puedo ayudarte hoy?
-                    
-                    Sugerencias:
-                    [Buscar propiedades]
-                    [Información del mercado]
-                    [Asesoría legal]
-                    [Consejos de inversión]
-                    [Contactar a un agente]`;
+            return `¡Hola! Soy el asistente virtual de Janneth Aguirre Bienes Raíces. Estoy aquí para ayudarte con cualquier consulta sobre propiedades, servicios inmobiliarios, financiamiento y más. ¿En qué puedo ayudarte hoy?`;
         } else if (input.includes('gracias')) {
-            return `¡Es un placer ayudarte! Si tienes más preguntas, no dudes en consultarme. Estoy aquí para asistirte en todo lo relacionado con bienes raíces en Ecuador. ¿Hay algo más en lo que pueda ayudarte?
-                    
-                    Sugerencias:
-                    [Explorar más propiedades]
-                    [Consejos de inversión]
-                    [Noticias del mercado]
-                    [Programar una consulta personalizada]
-                    [Finalizar conversación]`;
+            return `¡Es un placer ayudarte! Si tienes más preguntas, no dudes en consultarme. Estamos comprometidos a brindarte el mejor servicio en tu búsqueda de propiedades o servicios inmobiliarios. ¿Hay algo más en lo que pueda asistirte?`;
         } else {
-            return `Como experta en bienes raíces en Ecuador, puedo ayudarte con una amplia gama de temas:
-                    - Búsqueda y comparación de propiedades
-                    - Información detallada sobre el mercado inmobiliario
-                    - Asesoramiento sobre inversiones y rentabilidad
-                    - Aspectos legales de compra, venta y alquiler
-                    - Tendencias y proyecciones del mercado
-                    - Contacto con agentes especializados
-                    
-                    ¿Sobre qué tema te gustaría más información?
-                    
-                    Sugerencias:
-                    [Buscar propiedades]
-                    [Tendencias del mercado]
-                    [Asesoría legal]
-                    [Estrategias de inversión]
-                    [Contactar a un agente]`;
+            const matchingFaq = faqs.find(faq => input.includes(faq.question.toLowerCase()));
+            if (matchingFaq) {
+                return matchingFaq.answer;
+            } else {
+                return `Como experto en bienes raíces, puedo ayudarte con una amplia gama de temas, incluyendo búsqueda de propiedades, asesoría legal, financiamiento, y más. ¿Podrías ser más específico sobre qué tipo de información estás buscando?`;
+            }
         }
     }
 
@@ -334,7 +156,7 @@ const AIRealEstateExpertChatbot = (function() {
                     <div class="bg-primary text-white p-4 rounded-t-lg flex justify-between items-center">
                         <div class="flex items-center">
                             <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre" class="w-8 h-8 object-contain mr-2" />
-                            <h3 class="font-bold text-lg">ARIA - Experta en Bienes Raíces</h3>
+                            <h3 class="font-bold text-lg">Asistente de Janneth Aguirre</h3>
                         </div>
                         <button onclick="AIRealEstateExpertChatbot.toggleChatbot()" class="text-white hover:text-gray-200">
                             <i class="fas fa-times"></i>
@@ -347,7 +169,6 @@ const AIRealEstateExpertChatbot = (function() {
                                     ${m.text}
                                 </span>
                             </div>
-                            ${m.sender === 'bot' ? renderSuggestedQueries(m.text) : ''}
                         `).join('')}
                     </div>
                     <form onsubmit="AIRealEstateExpertChatbot.handleSubmit(event)" class="p-4 border-t bg-white">
@@ -359,31 +180,12 @@ const AIRealEstateExpertChatbot = (function() {
                         </div>
                     </form>
                     <div class="text-center text-xs text-gray-500 py-2">
-                        Powered By Duality Domain
+                        Janneth Aguirre Bienes Raíces
                     </div>
                 </div>
             `;
         }
         chatbotContainer.innerHTML = html;
-    }
-
-    function renderSuggestedQueries(message) {
-        const suggestedQueries = message.match(/\[(.*?)\]/g);
-        if (suggestedQueries) {
-            return `
-                <div class="mt-2 flex flex-wrap gap-2">
-                    ${suggestedQueries.map(query => `
-                        <button class="bg-secondary text-secondary-foreground px-2 py-1 rounded text-sm hover:bg-secondary/80 transition-colors" onclick="AIRealEstateExpertChatbot.handleSuggestedQuery('${query.slice(1, -1)}')">${query.slice(1, -1)}</button>
-                    `).join('')}
-                </div>
-            `;
-        }
-        return '';
-    }
-
-    function handleSuggestedQuery(query) {
-        addMessage('user', query);
-        processUserInput(query);
     }
 
     // Inicializar el chatbot
@@ -392,7 +194,6 @@ const AIRealEstateExpertChatbot = (function() {
     // Exponer funciones públicas
     return {
         toggleChatbot,
-        handleSubmit,
-        handleSuggestedQuery
+        handleSubmit
     };
 })();
