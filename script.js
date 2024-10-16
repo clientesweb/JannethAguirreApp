@@ -19,157 +19,276 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const properties = [
-        { id: 1, title: "Departamentos en venta – Orlando Florida – Condo Hotel – Inversion de alta rentabilidad", price: "$350,000", image: "/img/orlandoflorida.jpg", type: "venta" },
-        { id: 2, title: "Departamento vista al rio – Via Samborondon", price: "$1,500/mes", image: "/img/departamentos.jpg", type: "alquiler" },
-        { id: 3, title: "Locales comerciales y oficinas – Via Samborondon", price: "$120,000", image: "/img/locales.jpg", type: "venta" },
-        { id: 4, title: "Oficina ejecutiva en Quito", price: "$2,200/mes", image: "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", type: "alquiler" },
-        { id: 5, title: "Casa de campo en Cuenca", price: "$220,000", image: "/img/pareja-caminando-cabina_23-2147833123.jpg", type: "venta" },
-        { id: 6, title: "Condominio de lujo en Manta", price: "$450,000", image: "/img/gran-hotel-palmeras-playa-tailandia_1253-929.jpg", type: "proyecto" }
+        { 
+            id: 1, 
+            title: "Departamentos en venta – Orlando Florida – Condo Hotel – Inversion de alta rentabilidad", 
+            price: "$350,000", 
+            image: "/img/orlandoflorida.jpg", 
+            type: "venta",
+            description: "Lujosos departamentos en Orlando, Florida. Ideal para inversión con alta rentabilidad. Ubicados en una zona privilegiada con acceso a atracciones turísticas.",
+            gallery: ["/img/orlandoflorida.jpg", "/img/orlandoflorida-2.jpg", "/img/orlandoflorida-3.jpg"]
+        },
+        { 
+            id: 2, 
+            title: "Departamento vista al rio – Via Samborondon", 
+            price: "$1,500/mes", 
+            image: "/img/departamentos.jpg", 
+            type: "alquiler",
+            description: "Hermoso departamento con vista al río en la exclusiva zona de Samborondón. Amplios espacios y acabados de lujo.",
+            gallery: ["/img/departamentos.jpg", "/img/departamentos-2.jpg", "/img/departamentos-3.jpg"]
+        },
+        { 
+            id: 3, 
+            title: "Casa en Urb. Castilla", 
+            price: "$180,000", 
+            image: "/img/casa-urb-castilla.jpg", 
+            type: "venta",
+            description: "Acogedora casa en la Urbanización Castilla. Perfecta para familias, con amplias áreas verdes y seguridad 24/7.",
+            gallery: ["/img/casa-urb-castilla.jpg", "/img/casa-urb-castilla-2.jpg", "/img/casa-urb-castilla-3.jpg"]
+        },
+        { 
+            id: 4, 
+            title: "Terreno en Vía a la Costa", 
+            price: "$80/m²", 
+            image: "/img/terreno-via-costa.jpg", 
+            type: "venta",
+            description: "Amplio terreno en Vía a la Costa, ideal para proyectos residenciales o comerciales. Excelente ubicación y potencial de desarrollo.",
+            gallery: ["/img/terreno-via-costa.jpg", "/img/terreno-via-costa-2.jpg", "/img/terreno-via-costa-3.jpg"]
+        },
+        { 
+            id: 5, 
+            title: "Oficina en Torre Empresarial", 
+            price: "$800/mes", 
+            image: "/img/oficina-torre.jpg", 
+            type: "alquiler",
+            description: "Moderna oficina en prestigiosa Torre Empresarial. Espacios flexibles y servicios de primera clase para su negocio.",
+            gallery: ["/img/oficina-torre.jpg", "/img/oficina-torre-2.jpg", "/img/oficina-torre-3.jpg"]
+        },
+        { 
+            id: 6, 
+            title: "Proyecto Residencial 'Los Ceibos'", 
+            price: "Desde $120,000", 
+            image: "/img/proyecto-los-ceibos.jpg", 
+            type: "proyecto",
+            description: "Nuevo proyecto residencial 'Los Ceibos'. Departamentos modernos con áreas comunes y excelente ubicación.",
+            gallery: ["/img/proyecto-los-ceibos.jpg", "/img/proyecto-los-ceibos-2.jpg", "/img/proyecto-los-ceibos-3.jpg"]
+        }
     ];
 
     const services = [
-        { title: "Asesoría Legal", description: "Asistencia legal en todas las transacciones inmobiliarias", icon: "fa-gavel" },
-        { title: "Valuación de Propiedades", description: "Tasaciones precisas y profesionales de bienes raíces", icon: "fa-calculator" },
-        { title: "Gestión de Alquileres", description: "Administramos sus propiedades en alquiler de manera eficiente", icon: "fa-key" }
+        { title: "Compra y Venta", icon: "fas fa-home", description: "Asesoramiento experto en la compra y venta de propiedades" },
+        { title: "Alquiler", icon: "fas fa-key", description: "Gestión de alquileres residenciales y comerciales" },
+        { title: "Inversiones", icon: "fas fa-chart-line", description: "Oportunidades de inversión en bienes raíces" },
+        { title: "Tasaciones", icon: "fas fa-calculator", description: "Valoración profesional de propiedades" },
+        { title: "Asesoría Legal", icon: "fas fa-gavel", description: "Asistencia legal en transacciones inmobiliarias" },
+        { title: "Proyectos", icon: "fas fa-building", description: "Desarrollo y gestión de proyectos inmobiliarios" }
     ];
 
     const testimonials = [
-        { id: 1, name: "Juan Pérez", text: "Janneth Aguirre me ayudó a encontrar la casa de mis sueños. Su profesionalismo y dedicación son incomparables.", image: "/placeholder.svg?height=100&width=100" },
-        { id: 2, name: "María González", text: "Gracias a Janneth, vender mi propiedad fue un proceso rápido y sin complicaciones. ¡Altamente recomendada!", image: "/placeholder.svg?height=100&width=100" },
-        { id: 3, name: "Carlos Rodríguez", text: "La atención al cliente de Janneth Aguirre es excepcional. Siempre está disponible para responder preguntas y ofrecer asesoramiento.", image: "/placeholder.svg?height=100&width=100" }
+        { name: "María González", text: "Excelente servicio. Janneth me ayudó a encontrar la casa de mis sueños.", image: "/img/testimonial-1.jpg" },
+        { name: "Juan Pérez", text: "Profesionalismo y dedicación. Recomiendo 100% los servicios de Janneth Aguirre.", image: "/img/testimonial-2.jpg" },
+        { name: "Ana Rodríguez", text: "Gracias a Janneth, vender mi propiedad fue un proceso rápido y sin complicaciones.", image: "/img/testimonial-3.jpg" }
     ];
 
     const instagramPosts = [
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE1/' },
-        { type: 'reel', url: 'https://www.instagram.com/reel/EXAMPLE2/' },
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE3/' },
-        { type: 'reel', url: 'https://www.instagram.com/reel/EXAMPLE4/' },
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE5/' }
+        { image: "/img/instagram-1.jpg", link: "#", caption: "Nueva propiedad disponible en el centro de Guayaquil" },
+        { image: "/img/instagram-2.jpg", link: "#", caption: "Tips para invertir en bienes raíces" },
+        { image: "/img/instagram-3.jpg", link: "#", caption: "Conoce nuestro equipo de asesores inmobiliarios" }
     ];
 
-    // Constantes para YouTube
-    const YOUTUBE_CHANNEL_ID = 'UCiahlQJxCgPY-tEfjvkab8g';
-    const YOUTUBE_API_KEY = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
+    const youtubeVideos = [
+        { id: "VIDEO_ID_1", title: "Consejos para comprar tu primera casa" },
+        { id: "VIDEO_ID_2", title: "Tour por una lujosa propiedad en Guayaquil" },
+        { id: "VIDEO_ID_3", title: "Inversiones inmobiliarias: Lo que debes saber" }
+    ];
+
+    const faqItems = [
+        {
+            question: "¿Cuál es el proceso para comprar una propiedad?",
+            answer: "El proceso generalmente incluye: búsqueda de propiedades, visitas, negociación, oferta formal, due diligence, financiamiento (si es necesario), y cierre de la transacción. Nuestro equipo le guiará en cada paso."
+        },
+        {
+            question: "¿Qué documentos necesito para vender mi propiedad?",
+            answer: "Generalmente necesitará: título de propiedad, certificado de gravámenes, impuestos al día, planos aprobados, y cédula de identidad. Podemos ayudarle a recopilar toda la documentación necesaria."
+        },
+        {
+            question: "¿Ofrecen servicios de administración de propiedades?",
+            answer: "Sí, ofrecemos servicios completos de administración de propiedades, incluyendo búsqueda de inquilinos, cobro de rentas, mantenimiento y más."
+        },
+        {
+            question: "¿Cómo determinan el precio de una propiedad?",
+            answer: "Utilizamos una combinación de análisis de mercado, comparables recientes, características únicas de la propiedad y tendencias del mercado para determinar un precio justo y competitivo."
+        }
+    ];
+
+    // Función para crear elementos HTML
+    function createElement(tag, className, text) {
+        const element = document.createElement(tag);
+        if (className) element.className = className;
+        if (text) element.textContent = text;
+        return element;
+    }
 
     // Inicializar el slider de promociones
     const promoSlider = document.querySelector('.promo-slider');
     promoItems.forEach(item => {
-        const div = document.createElement('div');
-        div.textContent = item;
-        promoSlider.appendChild(div);
+        const promoItem = createElement('div', 'promo-item', item);
+        promoSlider.appendChild(promoItem);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.promo-slider').slick({
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: false
-        });
-    }
+    $('.promo-slider').slick({
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: false,
+        dots: false,
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'linear'
+    });
 
-    // Inicializar el slider del hero
+    // Inicializar el hero slider
     const heroSlider = document.querySelector('.hero-slider');
     heroImages.forEach(image => {
-        const div = document.createElement('div');
-        div.style.backgroundImage = `url(${image})`;
-        div.style.backgroundSize = 'cover';
-        div.style.backgroundPosition = 'center';
-        div.style.height = '100%';
-        heroSlider.appendChild(div);
+        const slide = createElement('div', 'hero-slide');
+        slide.style.backgroundImage = `url(${image})`;
+        heroSlider.appendChild(slide);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.hero-slider').slick({
-            autoplay: true,
-            autoplaySpeed: 5000,
-            arrows: false,
-            dots: true,
-            fade: true,
-            cssEase: 'linear'
-        });
-    }
+    $('.hero-slider').slick({
+        autoplay: true,
+        autoplaySpeed: 5000,
+        arrows: false,
+        dots: true,
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'linear'
+    });
 
     // Inicializar el slider de propiedades
     const propertySlider = document.querySelector('.property-slider');
     properties.forEach(property => {
-        const div = document.createElement('div');
-        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden mx-2';
-        div.innerHTML = `
+        const propertyCard = createElement('div', 'property-card bg-white shadow-lg rounded-lg overflow-hidden');
+        propertyCard.innerHTML = `
             <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
             <div class="p-4">
                 <h3 class="font-bold text-lg mb-2">${property.title}</h3>
                 <p class="text-gray-700">${property.price}</p>
-                <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Ver Detalles</button>
             </div>
         `;
-        propertySlider.appendChild(div);
+        propertySlider.appendChild(propertyCard);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.property-slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: true,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
+    $('.property-slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: true,
+        dots: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
                 }
-            ]
-        });
-    }
+            },
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    });
 
-    // Renderizar las tarjetas de servicios
+    // Inicializar la sección de servicios
     const serviceGrid = document.getElementById('service-grid');
     services.forEach(service => {
-        const div = document.createElement('div');
-        div.className = 'bg-white p-6 rounded-lg shadow-md';
-        div.innerHTML = `
-            <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
-            <h3 class="text-xl font-bold mb-2">${service.title}</h3>
+        const serviceCard = createElement('div', 'service-card bg-white shadow-lg rounded-lg p-6 text-center');
+        serviceCard.innerHTML = `
+            <i class="${service.icon} text-4xl text-primary mb-4"></i>
+            <h3 class="font-bold text-xl mb-2">${service.title}</h3>
             <p class="text-gray-600">${service.description}</p>
         `;
-        serviceGrid.appendChild(div);
+        serviceGrid.appendChild(serviceCard);
     });
 
-    // Inicializar el slider de la tienda
+    // Inicializar la sección de tienda
     const storeSlider = document.getElementById('store-slider');
     properties.forEach(property => {
-        const div = document.createElement('div');
-        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden flex-shrink-0 w-64';
-        div.setAttribute('data-type', property.type);
-        div.innerHTML = `
+        const propertyCard = createElement('div', 'property-card bg-white shadow-lg rounded-lg overflow-hidden');
+        propertyCard.innerHTML = `
             <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
             <div class="p-4">
                 <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                <p class="text-gray-700">${property.price}</p>
-                <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
+                <p class="text-gray-700 mb-2">${property.price}</p>
+                <p class="text-sm text-gray-600 mb-4">${property.description}</p>
+                <button class="view-details bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors w-full mb-2" data-id="${property.id}">Ver Detalles</button>
+                <a href="https://wa.me/593987167782?text=Hola, estoy interesado en la propiedad: ${encodeURIComponent(property.title)}. ¿Podrías darme más información?" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors w-full inline-block text-center">
+                    <i class="fab fa-whatsapp mr-2"></i> Contactar por WhatsApp
+                </a>
             </div>
         `;
-        storeSlider.appendChild(div);
+        storeSlider.appendChild(propertyCard);
     });
 
-    // Funcionalidad de filtrado
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filter = button.getAttribute('data-filter');
-            const cards = document.querySelectorAll('.property-card');
-            cards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-type') === filter) {
-                    card.style.display = '';
+    // Manejador de eventos para el botón "Ver Detalles"
+    document.querySelectorAll('.view-details').forEach(button => {
+        button.addEventListener('click', function() {
+            const propertyId = this.getAttribute('data-id');
+            const property = properties.find(p => p.id == propertyId);
+            
+            const modal = document.getElementById('gallery-modal');
+            const galleryImages = document.getElementById('gallery-images');
+            const galleryInfo = document.getElementById('gallery-info');
+            
+            // Limpiar el contenido anterior
+            galleryImages.innerHTML = '';
+            galleryInfo.innerHTML = '';
+            
+            // Agregar imágenes a la galería
+            property.gallery.forEach(img => {
+                const imgElement = document.createElement('img');
+                imgElement.src = img;
+                imgElement.alt = property.title;
+                imgElement.className = 'w-full h-64 object-cover rounded';
+                galleryImages.appendChild(imgElement);
+            });
+            
+            // Agregar información de la propiedad
+            galleryInfo.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">${property.title}</h3>
+                <p class="mb-2"><strong>Precio:</strong> ${property.price}</p>
+                <p class="mb-2"><strong>Tipo:</strong> ${property.type}</p>
+                <p>${property.description}</p>
+            `;
+            
+            // Mostrar el modal
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        });
+    });
+
+    // Cerrar el modal
+    document.getElementById('close-modal').addEventListener('click', function() {
+        const modal = document.getElementById('gallery-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    });
+
+    // Filtrado de propiedades
+    document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            const propertyCards = document.querySelectorAll('.property-card');
+            
+            propertyCards.forEach(card => {
+                if (filter === 'all' || card.querySelector('img').alt.toLowerCase().includes(filter)) {
+                    card.style.display = 'block';
                 } else {
                     card.style.display = 'none';
                 }
@@ -177,220 +296,146 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Funcionalidad de búsqueda
-    const searchInput = document.getElementById('search-input');
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const cards = document.querySelectorAll('.property-card');
-        cards.forEach(card => {
+    // Búsqueda de propiedades
+    document.getElementById('search-input').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const propertyCards = document.querySelectorAll('.property-card');
+        
+        propertyCards.forEach(card => {
             const title = card.querySelector('h3').textContent.toLowerCase();
             if (title.includes(searchTerm)) {
-                card.style.display = '';
+                card.style.display = 'block';
             } else {
                 card.style.display = 'none';
             }
         });
     });
 
-    // Funcionalidad de galería modal
-    const modal = document.getElementById('gallery-modal');
-    const closeModal = document.getElementById('close-modal');
-    const galleryImages = document.getElementById('gallery-images');
-    const galleryInfo = document.getElementById('gallery-info');
-
-    document.querySelectorAll('.view-gallery').forEach(button => {
-        button.addEventListener('click', () => {
-            const propertyId = button.getAttribute('data-id');
-            const property = properties.find(p => p.id === parseInt(propertyId));
-            
-            // Limpiar imágenes anteriores
-            galleryImages.innerHTML = '';
-            
-            // Agregar imágenes a la galería (aquí usamos la misma imagen varias veces como ejemplo)
-            for (let i = 0; i < 5; i++) {
-                const img = document.createElement('img');
-                img.src = property.image;
-                img.alt = `${property.title} - Imagen ${i + 1}`;
-                img.className = 'w-32 h-32 object-cover rounded';
-                galleryImages.appendChild(img);
-            }
-            
-            // Actualizar información de la propiedad
-            galleryInfo.innerHTML = `
-                <h3 class="text-xl font-bold">${property.title}</h3>
-                <p class="text-lg">${property.price}</p>
-                <p>Tipo: ${property.type}</p>
-            `;
-            
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        });
-    });
-
-    closeModal.addEventListener('click', () => {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    });
-
-    // Cerrar el modal si se hace clic fuera de él
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-    });
-
     // Inicializar el slider de testimonios
-    const testimonialsSlider = document.getElementById('testimonials-slider');
+    const testimonialSlider = document.getElementById('testimonials-slider');
     testimonials.forEach(testimonial => {
-        const div = document.createElement('div');
-        div.className = 'bg-white p-6 rounded-lg shadow-md mx-2';
-        div.innerHTML = `
-            <div class="flex items-center mb-4">
-                <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4">
-                <h3 class="font-bold">${testimonial.name}</h3>
-            </div>
-            <p class="text-gray-600">"${testimonial.text}"</p>
+        const testimonialCard = createElement('div', 'testimonial-card bg-white shadow-lg rounded-lg p-6 text-center');
+        testimonialCard.innerHTML = `
+            <img src="${testimonial.image}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4">
+            <p class="text-gray-600 mb-4">"${testimonial.text}"</p>
+            <h4 class="font-bold">${testimonial.name}</h4>
         `;
-        testimonialsSlider.appendChild(div);
+        testimonialSlider.appendChild(testimonialCard);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.testimonials-slider').slick({
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: true,
-            responsive: [
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
+    $('#testimonials-slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        arrows: true,
+        dots: true
+    });
 
     // Inicializar el slider de Instagram
     const instagramSlider = document.getElementById('instagram-slider');
     instagramPosts.forEach(post => {
-        const div = document.createElement('div');
-        div.className = 'instagram-post mx-2';
-        div.innerHTML = `
-            <blockquote class="instagram-media" data-instgrm-permalink="${post.url}">
-                <div style="padding:16px;">
-                    <a href="${post.url}" target="_blank">Ver esta publicación en Instagram</a>
-                </div>
-            </blockquote>
+        const postCard = createElement('div', 'instagram-post bg-white shadow-lg rounded-lg overflow-hidden');
+        postCard.innerHTML = `
+            <img src="${post.image}" alt="${post.caption}" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <p class="text-sm text-gray-600">${post.caption}</p>
+                <a href="${post.link}" target="_blank" class="text-primary hover:underline">Ver en Instagram</a>
+            </div>
         `;
-        instagramSlider.appendChild(div);
+        instagramSlider.appendChild(postCard);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.instagram-slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: true,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
+    $('#instagram-slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: true,
+        dots: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
                 }
-            ]
+            },
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    });
+
+    // Inicializar la sección de YouTube
+    const youtubeSlider = document.getElementById('youtube-slider');
+    youtubeVideos.forEach(video => {
+        const videoCard = createElement('div', 'youtube-video');
+        videoCard.innerHTML = `
+            <iframe width="300" height="169" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p class="mt-2 text-sm text-gray-600">${video.title}</p>
+        `;
+        youtubeSlider.appendChild(videoCard);
+    });
+
+    // Inicializar la sección de FAQ
+    const faqContainer = document.getElementById('faq-container');
+    faqItems.forEach((item, index) => {
+        const faqItem = createElement('div', 'faq-item');
+        faqItem.innerHTML = `
+            <div class="faq-question" data-index="${index}">
+                <h3 class="text-lg font-semibold">${item.question}</h3>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>${item.answer}</p>
+            </div>
+        `;
+        faqContainer.appendChild(faqItem);
+    });
+
+    // Manejar clics en las preguntas del FAQ
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const icon = this.querySelector('i');
+            
+            answer.classList.toggle('active');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
         });
-    }
-
-    // Cargar el script de Instagram
-    const script = document.createElement('script');
-    script.src = 'https://www.instagram.com/embed.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    // Inicializar el mapa
-    const mapContainer = document.getElementById('map-container');
-    const loadMap = () => {
-        const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY`;
-        script.onload = () => {
-            const map = new google.maps.Map(mapContainer, {
-                center: { lat:  parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
-                zoom: 15
-            });
-            new google.maps.Marker({
-                position: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
-                map: map,
-                title: 'Janneth Aguirre Bienes Raíces'
-            });
-        };
-        document.body.appendChild(script);
-    };
-
-    const observer = new IntersectionObserver(
-        (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    loadMap();
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        { rootMargin: '100px' }
-    );
-
-    observer.observe(mapContainer);
+    });
 
     // Manejar el envío del formulario de contacto
-    const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', async (e) => {
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        const formData = new FormData(contactForm);
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                body: formData
-            });
-            if (response.ok) {
-                alert('Mensaje enviado con éxito. Nos pondremos en contacto contigo pronto.');
-                contactForm.reset();
-            } else {
-                throw new Error('Error al enviar el mensaje');
-            }
-        } catch (error) {
-            alert('Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.');
-            console.error('Error:', error);
-        }
+        // Aquí iría la lógica para enviar el formulario
+        alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+        this.reset();
     });
 
-    // Efecto de aparición al hacer scroll
-    const fadeElems = document.querySelectorAll('.fade-in-section');
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
-    }, { threshold: 0.1 });
+    // Inicializar el mapa (usando Leaflet como ejemplo)
+    const mapContainer = document.getElementById('map-container');
+    const lat = parseFloat(mapContainer.getAttribute('data-lat'));
+    const lng = parseFloat(mapContainer.getAttribute('data-lng'));
 
-    fadeElems.forEach(elem => fadeObserver.observe(elem));
+    const map = L.map(mapContainer).setView([lat, lng], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([lat, lng]).addTo(map)
+        .bindPopup('Janneth Aguirre Bienes Raíces')
+        .openPopup();
 
     // Botón "Volver arriba"
     const backToTopButton = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
+        if (window.pageYOffset > 100) {
             backToTopButton.style.display = 'block';
         } else {
             backToTopButton.style.display = 'none';
@@ -401,33 +446,17 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Función para cargar videos de YouTube
-    async function loadYouTubeVideos() {
-        try {
-            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=10&type=video`);
-            const data = await response.json();
-            const youtubeSlider = document.getElementById('youtube-slider');
-            
-            data.items.forEach(item => {
-                const videoId = item.id.videoId;
-                const videoTitle = item.snippet.title;
-                
-                const videoElement = document.createElement('div');
-                videoElement.className = 'youtube-video';
-                videoElement.innerHTML = `
-                    <iframe width="300" height="169" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <h3 class="text-lg font-semibold mt-2">${videoTitle}</h3>
-                `;
-                
-                youtubeSlider.appendChild(videoElement);
-            });
-        } catch (error) {
-            console.error('Error al cargar los videos de YouTube:', error);
-        }
-    }
+    // Efecto de aparición al hacer scroll
+    const fadeElems = document.querySelectorAll('.fade-in-section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    });
 
-    // Cargar videos de YouTube
-    loadYouTubeVideos();
+    fadeElems.forEach(elem => observer.observe(elem));
 
     // Instalación de la PWA
     let deferredPrompt;
@@ -448,10 +477,5 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             deferredPrompt = null;
         }
-    });
-
-    window.addEventListener('appinstalled', () => {
-        installButton.style.display = 'none';
-        console.log('PWA instalada exitosamente');
     });
 });
