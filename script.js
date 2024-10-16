@@ -4,6 +4,16 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.preloader').style.display = 'none';
     });
 
+    // Función para cargar imágenes de forma perezosa
+    function lazyLoadImage(url) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = url;
+        });
+    }
+
     // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
     const promoItems = [
         "¡Oferta especial! 10% de descuento en propiedades seleccionadas",
@@ -150,9 +160,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar el hero slider
     const heroSlider = document.querySelector('.hero-slider');
     heroImages.forEach(image => {
-        const slide = createElement('div', 'hero-slide');
-        slide.style.backgroundImage = `url(${image})`;
-        heroSlider.appendChild(slide);
+        lazyLoadImage(image).then(img => {
+            const slide = createElement('div', 'hero-slide');
+            slide.style.backgroundImage = `url(${img.src})`;
+            heroSlider.appendChild(slide);
+        });
     });
 
     $('.hero-slider').slick({
@@ -169,15 +181,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar el slider de propiedades
     const propertySlider = document.querySelector('.property-slider');
     properties.forEach(property => {
-        const propertyCard = createElement('div', 'property-card bg-white shadow-lg rounded-lg overflow-hidden');
-        propertyCard.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                <p class="text-gray-700">${property.price}</p>
-            </div>
-        `;
-        propertySlider.appendChild(propertyCard);
+        lazyLoadImage(property.image).then(img => {
+            const propertyCard = createElement('div', 'property-card bg-white shadow-lg rounded-lg overflow-hidden');
+            propertyCard.innerHTML = `
+                <img src="${img.src}" alt="${property.title}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                    <p class="text-gray-700">${property.price}</p>
+                </div>
+            `;
+            propertySlider.appendChild(propertyCard);
+        });
     });
 
     $('.property-slider').slick({
@@ -220,20 +234,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar la sección de tienda
     const storeSlider = document.getElementById('store-slider');
     properties.forEach(property => {
-        const propertyCard = createElement('div', 'property-card bg-white shadow-lg rounded-lg overflow-hidden');
-        propertyCard.innerHTML = `
-            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                <p class="text-gray-700 mb-2">${property.price}</p>
-                <p class="text-sm text-gray-600 mb-4">${property.description}</p>
-                <button class="view-details bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors w-full mb-2" data-id="${property.id}">Ver Detalles</button>
-                <a href="https://wa.me/593987167782?text=Hola, estoy interesado en la propiedad: ${encodeURIComponent(property.title)}. ¿Podrías darme más información?" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors w-full inline-block text-center">
-                    <i class="fab fa-whatsapp mr-2"></i> Contactar por WhatsApp
-                </a>
-            </div>
-        `;
-        storeSlider.appendChild(propertyCard);
+        lazyLoadImage(property.image).then(img => {
+            const propertyCard = createElement('div', 'property-card bg-white shadow-lg rounded-lg overflow-hidden');
+            propertyCard.innerHTML = `
+                <img src="${img.src}" alt="${property.title}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                    <p class="text-gray-700 mb-2">${property.price}</p>
+                    <p class="text-sm text-gray-600 mb-4">${property.description}</p>
+                    <button class="view-details bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors w-full mb-2" data-id="${property.id}">Ver Detalles</button>
+                    <a href="https://wa.me/593987167782?text=Hola, estoy interesado en la propiedad: ${encodeURIComponent(property.title)}. ¿Podrías darme más información?" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors w-full inline-block text-center">
+                        <i class="fab fa-whatsapp mr-2"></i> Contactar por WhatsApp
+                    </a>
+                </div>
+            `;
+            storeSlider.appendChild(propertyCard);
+        });
     });
 
     // Manejador de eventos para el botón "Ver Detalles"
@@ -252,12 +268,15 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Agregar imágenes a la galería
             property.gallery.forEach(img => {
-                const imgElement = document.createElement('img');
-                imgElement.src = img;
-                imgElement.alt = property.title;
-                imgElement.className = 'w-full h-64 object-cover rounded';
-                galleryImages.appendChild(imgElement);
+                lazyLoadImage(img).then(loadedImg => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = loadedImg.src;
+                    imgElement.alt = property.title;
+                    imgElement.className = 'w-full h-64 object-cover rounded';
+                    galleryImages.appendChild(imgElement);
+                });
             });
+            
             
             // Agregar información de la propiedad
             galleryInfo.innerHTML = `
@@ -297,7 +316,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Búsqueda de propiedades
-    document.getElementById('search-input').addEventListener('input', function() {
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    const debouncedSearch = debounce(function() {
         const searchTerm = this.value.toLowerCase();
         const propertyCards = document.querySelectorAll('.property-card');
         
@@ -309,18 +340,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.style.display = 'none';
             }
         });
-    });
+    }, 300);
+
+    document.getElementById('search-input').addEventListener('input', debouncedSearch);
 
     // Inicializar el slider de testimonios
     const testimonialSlider = document.getElementById('testimonials-slider');
     testimonials.forEach(testimonial => {
-        const testimonialCard = createElement('div', 'testimonial-card bg-white shadow-lg rounded-lg p-6 text-center');
-        testimonialCard.innerHTML = `
-            <img src="${testimonial.image}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4">
-            <p class="text-gray-600 mb-4">"${testimonial.text}"</p>
-            <h4 class="font-bold">${testimonial.name}</h4>
-        `;
-        testimonialSlider.appendChild(testimonialCard);
+        lazyLoadImage(testimonial.image).then(img => {
+            const testimonialCard = createElement('div', 'testimonial-card bg-white shadow-lg rounded-lg p-6 text-center');
+            testimonialCard.innerHTML = `
+                <img src="${img.src}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4">
+                <p class="text-gray-600 mb-4">"${testimonial.text}"</p>
+                <h4 class="font-bold">${testimonial.name}</h4>
+            `;
+            testimonialSlider.appendChild(testimonialCard);
+        });
     });
 
     $('#testimonials-slider').slick({
@@ -335,15 +370,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar el slider de Instagram
     const instagramSlider = document.getElementById('instagram-slider');
     instagramPosts.forEach(post => {
-        const postCard = createElement('div', 'instagram-post bg-white shadow-lg rounded-lg overflow-hidden');
-        postCard.innerHTML = `
-            <img src="${post.image}" alt="${post.caption}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <p class="text-sm text-gray-600">${post.caption}</p>
-                <a href="${post.link}" target="_blank" class="text-primary hover:underline">Ver en Instagram</a>
-            </div>
-        `;
-        instagramSlider.appendChild(postCard);
+        lazyLoadImage(post.image).then(img => {
+            const postCard = createElement('div', 'instagram-post bg-white shadow-lg rounded-lg overflow-hidden');
+            postCard.innerHTML = `
+                <img src="${img.src}" alt="${post.caption}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <p class="text-sm text-gray-600">${post.caption}</p>
+                    <a href="${post.link}" target="_blank" class="text-primary hover:underline">Ver en Instagram</a>
+                </div>
+            `;
+            instagramSlider.appendChild(postCard);
+        });
     });
 
     $('#instagram-slider').slick({
