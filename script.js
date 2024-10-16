@@ -25,35 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "$350,000", 
             image: "/img/orlandoflorida.jpg", 
             type: "venta",
-            description: "Departamentos en venta – Orlando Florida – Condo Hotel – Inversion de alta rentabilidad  .   
-PRE- CONSTRUCCIÓN- PROYECTO EN PLANOS
-Crédito Hipotecario para inversionistas latinoamericanos (nos encargamos de este trámite)
-Alto porcentaje de rentabilidad.
-Ventajas de invertir en Sycamore
-1– RENTABILIDAD GARANTIZADA
-2– EXCELENTE UBICACIÓN
-3– RECIBE CLIENTES CON MASCOTAS
-4– APARTAMENTOS AMPLIOS Y CÓMODOS
-5– SERVICIOS DE HOTEL 4 ESTRELLAS
-6– 8.000 M² DE ÁREAS DE COMPLETO ENTRETENIMIENTO
-7– ALTA TASA ESTIMADA DE RETORNO
-8– CENTRO DE CONVENCIONES
-9- MENOR COSTO OPERACIONAL
-6  Torres 
-378 apartamentos
-CASA CLUB NUESTRO 
-Sycamore Club tiene 3 pisos con muchas
-atracciones para el ocio y el entretenimiento
-Gastronomía;
-Deportes;
-Desviación;
-Club de niños;
-Convenciones, eventos y fiestas conmemorativas;
-Gimnasio;
-SPA y salón de belleza
-Estrategia exclusiva de Alquiler
-Orlando recibe 72 MILLONES DE TURISTAS AL AÑO.
-MÁS DEL 80% DE LAS RESERVAS DE HOTELES EN ORLANDO SON REALIZADAS POR INTERNET",
+            description: "Inversión de alta rentabilidad en Orlando, Florida. Condominio hotel con excelentes amenidades. Este lujoso apartamento ofrece una combinación perfecta de comodidad y estilo, ideal para inversores que buscan una propiedad en una de las zonas más dinámicas de Florida. Con acceso a instalaciones de primer nivel y ubicado cerca de las principales atracciones turísticas, este condominio promete una experiencia única tanto para residentes como para visitantes.",
             images: ["/img/orlandoflorida.jpg", "/img/orlandoflorida2.jpg", "/img/orlandoflorida3.jpg", "/img/orlandoflorida4.jpg", "/img/orlandoflorida5.jpg", "/img/orlandoflorida6.jpg", "/img/orlandoflorida7.jpg", "/img/orlandoflorida8.jpg", "/img/orlandoflorida9.jpg", "/img/orlandoflorida10.jpg"]
         },
         { 
