@@ -66,7 +66,7 @@
     transform: scale(1.05);
 }
 
-/* Estilos para los controles del slider */
+/* Estilos para los sliders */
 .slick-prev:before, .slick-next:before {
     color: #FF0000;
 }
@@ -284,7 +284,7 @@
     transform: rotate(180deg);
 }
 
-/* Estilos para el modal de galería */
+/* Estilos para el modal de galería mejorado */
 #gallery-modal {
     background-color: rgba(0, 0, 0, 0.9);
 }
