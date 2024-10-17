@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const YOUTUBE_CHANNEL_ID = 'UCiahlQJxCgPY-tEfjvkab8g';
-    const YOUTUBE_API_KEY = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
+    // Preloader
+    window.addEventListener('load', function() {
+        document.querySelector('.preloader').style.display = 'none';
+    });
 
-    // Data (in a real application, this would come from an API or database)
+    // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
     const promoItems = [
         "¡Oferta especial! 10% de descuento en propiedades seleccionadas",
         "Nueva propiedad disponible en el centro de Quito",
@@ -116,26 +118,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     ];
 
-    // Helper functions
-    function createElementFromHTML(htmlString) {
+    // Constantes para YouTube
+    const YOUTUBE_CHANNEL_ID = 'UCiahlQJxCgPY-tEfjvkab8g';
+    const YOUTUBE_API_KEY = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
+
+    // Inicializar el slider de promociones
+    const promoSlider = document.querySelector('.promo-slider');
+    promoItems.forEach(item => {
         const div = document.createElement('div');
-        div.innerHTML = htmlString.trim();
-        return div.firstChild;
-    }
+        div.textContent = item;
+        promoSlider.appendChild(div);
+    });
 
-    function initSlider(selector, options) {
-        if (typeof $.fn.slick === 'function') {
-            $(selector).slick(options);
-        }
-    }
-
-    // Initialize components
-    function initPromoSlider() {
-        const promoSlider = document.querySelector('.promo-slider');
-        promoItems.forEach(item => {
-            promoSlider.appendChild(createElementFromHTML(`<div>${item}</div>`));
-        });
-        initSlider('.promo-slider', {
+    if (typeof $.fn.slick === 'function') {
+        $('.promo-slider').slick({
             autoplay: true,
             autoplaySpeed: 3000,
             arrows: false,
@@ -143,14 +139,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function initHeroSlider() {
-        const heroSlider = document.querySelector('.hero-slider');
-        heroImages.forEach(image => {
-            heroSlider.appendChild(createElementFromHTML(`
-                <div style="background-image: url(${image}); background-size: cover; background-position: center; height: 100%;"></div>
-            `));
-        });
-        initSlider('.hero-slider', {
+    // Inicializar el slider del hero
+    const heroSlider = document.querySelector('.hero-slider');
+    heroImages.forEach(image => {
+        const div = document.createElement('div');
+        div.style.backgroundImage = `url(${image})`;
+        div.style.backgroundSize = 'cover';
+        div.style.backgroundPosition = 'center';
+        div.style.height = '100%';
+        heroSlider.appendChild(div);
+    });
+
+    if (typeof $.fn.slick === 'function') {
+        $('.hero-slider').slick({
             autoplay: true,
             autoplaySpeed: 5000,
             arrows: false,
@@ -160,361 +161,109 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function initPropertySlider() {
-        const propertySlider = document.querySelector('.property-slider');
-        properties.forEach(property => {
-            propertySlider.appendChild(createElementFromHTML(`
-                <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden mx-2">
-                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                        <p class="text-gray-700">${property.price}</p>
-                        <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-details" data-id="${property.id}">Ver Detalles</button>
-                    </div>
-                </div>
-            `));
-        });
-        initSlider('.property-slider', {
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: true,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
-
-    function initServices() {
-        const serviceGrid = document.getElementById('service-grid');
-        services.forEach(service => {
-            serviceGrid.appendChild(createElementFromHTML(`
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <i class="fas ${service.icon}   text-4xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">${service.title}</h3>
-                    <p class="text-gray-600">${service.description}</p>
-                </div>
-            `));
-        });
-    }
-
-    function initStoreSlider() {
-        const storeSlider = document.getElementById('store-slider');
-        properties.forEach(property => {
-            storeSlider.appendChild(createElementFromHTML(`
-                <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden flex-shrink-0 w-64" data-type="${property.type}">
-                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                        <p class="text-gray-700">${property.price}</p>
-                        <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
-                    </div>
-                </div>
-            `));
-        });
-    }
-
-    function initTestimonialSlider() {
-        const testimonialsSlider = document.getElementById('testimonials-slider');
-        testimonials.forEach(testimonial => {
-            testimonialsSlider.appendChild(createElementFromHTML(`
-                <div class="bg-white p-6 rounded-lg shadow-md mx-2">
-                    <div class="flex items-center mb-4">
-                        <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4">
-                        <h3 class="font-bold">${testimonial.name}</h3>
-                    </div>
-                    <p class="text-gray-600">"${testimonial.text}"</p>
-                </div>
-            `));
-        });
-        initSlider('.testimonials-slider', {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: true,
-            responsive: [
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
-
-    function initInstagramSlider() {
-        const instagramSlider = document.getElementById('instagram-slider');
-        instagramPosts.forEach(post => {
-            instagramSlider.appendChild(createElementFromHTML(`
-                <div class="instagram-post mx-2">
-                    <blockquote class="instagram-media" data-instgrm-permalink="${post.url}">
-                        <div style="padding:16px;">
-                            <a href="${post.url}" target="_blank">Ver esta publicación en Instagram</a>
-                        </div>
-                    </blockquote>
-                </div>
-            `));
-        });
-        initSlider('.instagram-slider', {
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: true,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-        loadInstagramScript();
-    }
-
-    function loadInstagramScript() {
-        const script = document.createElement('script');
-        script.src = 'https://www.instagram.com/embed.js';
-        script.async = true;
-        document.body.appendChild(script);
-    }
-
-    function initMap() {
-        const mapContainer = document.getElementById('map-container');
-        const observer = new IntersectionObserver(
-            (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        loadGoogleMapsScript();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            { rootMargin: '100px' }
-        );
-        observer.observe(mapContainer);
-    }
-
-    function loadGoogleMapsScript() {
-        const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initializeMap`;
-        script.async = true;
-        document.body.appendChild(script);
-    }
-
-    function initializeMap() {
-        const mapContainer = document.getElementById('map-container');
-        const map = new google.maps.Map(mapContainer, {
-            center: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
-            zoom: 15
-        });
-        new google.maps.Marker({
-            position: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
-            map: map,
-            title: 'Janneth Aguirre Bienes Raíces'
-        });
-    }
-
-    function initContactForm() {
-        const contactForm = document.getElementById('contact-form');
-        contactForm.addEventListener('submit', handleContactFormSubmit);
-    }
-
-    async function handleContactFormSubmit(e) {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                body: formData
-            });
-            if (response.ok) {
-                alert('Mensaje enviado con éxito. Nos pondremos en contacto contigo pronto.');
-                e.target.reset();
-            } else {
-                throw new Error('Error al enviar el mensaje');
-            }
-        } catch (error) {
-            alert('Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.');
-            console.error('Error:', error);
-        }
-    }
-
-    function initScrollAnimations() {
-        const fadeElems = document.querySelectorAll('.fade-in-section');
-        const fadeObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        fadeElems.forEach(elem => fadeObserver.observe(elem));
-    }
-
-    function initBackToTopButton() {
-        const backToTopButton = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            backToTopButton.style.display = window.pageYOffset > 300 ? 'block' : 'none';
-        });
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-
-    function initPWAInstallation() {
-        let deferredPrompt;
-        const installButton = document.getElementById('install-app');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installButton.style.display = 'block';
-        });
-
-        installButton.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    console.log('Usuario aceptó la instalación de la PWA');
-                }
-                deferredPrompt = null;
-            }
-        });
-    }
-
-    async function loadYouTubeVideos() {
-        try {
-            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`);
-            const data = await response.json();
-            const youtubeSlider = document.getElementById('youtube-slider');
-            
-            data.items.forEach(item => {
-                const videoId = item.id.videoId;
-                const title = item.snippet.title;
-                youtubeSlider.appendChild(createElementFromHTML(`
-                    <div class="youtube-video">
-                        <iframe width="280" height="157" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <h3 class="text-sm font-semibold mt-2">${title}</h3>
-                    </div>
-                `));
-            });
-
-            initSlider('.youtube-slider', {
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                autoplay: false,
-                arrows: true,
-                dots: true,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 640,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            });
-        } catch (error) {
-            console.error('Error al cargar videos de YouTube:', error);
-        }
-    }
-
-    function initFAQs() {
-        const faqContainer = document.getElementById('faq-container');
-        faqs.forEach((faq, index) => {
-            const faqItem = createElementFromHTML(`
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>${faq.question}</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>${faq.answer}</p>
-                    </div>
-                </div>
-            `);
-            faqContainer.appendChild(faqItem);
-
-            const question = faqItem.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                faqItem.classList.toggle('active');
-            });
-        });
-    }
-
-    // Initialize all components
-    window.addEventListener('load', () => {
-        document.querySelector('.preloader').style.display = 'none';
+    // Inicializar el slider de propiedades
+    const propertySlider = document.querySelector('.property-slider');
+    properties.forEach(property => {
+        const div = document.createElement('div');
+        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden mx-2';
+        div.innerHTML = `
+            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                <p class="text-gray-700">${property.price}</p>
+                <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-details" data-id="${property.id}">Ver Detalles</button>
+            </div>
+        `;
+        propertySlider.appendChild(div);
     });
 
-    initPromoSlider();
-    initHeroSlider();
-    initPropertySlider();
-    initServices();
-    initStoreSlider();
-    initTestimonialSlider();
-    initInstagramSlider();
-    initMap();
-    initContactForm();
-    initScrollAnimations();
-    initBackToTopButton();
-    initPWAInstallation();
-    loadYouTubeVideos();
-    initFAQs();
-    initChatbot();
+    if (typeof $.fn.slick === 'function') {
+        $('.property-slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            arrows: false,
+            dots: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 640,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    }
 
-    // Event listeners for property filtering and search
-    document.querySelectorAll('.filter-btn').forEach(button => {
+    // Renderizar las tarjetas de servicios
+    const serviceGrid = document.getElementById('service-grid');
+    services.forEach(service => {
+        const div = document.createElement('div');
+        div.className = 'bg-white p-6 rounded-lg shadow-md';
+        div.innerHTML = `
+            <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">${service.title}</h3>
+            <p class="text-gray-600">${service.description}</p>
+        `;
+        serviceGrid.appendChild(div);
+    });
+
+    // Inicializar el slider de la tienda
+    const storeSlider = document.getElementById('store-slider');
+    properties.forEach(property => {
+        const div = document.createElement('div');
+        div.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden flex-shrink-0 w-64';
+        div.setAttribute('data-type', property.type);
+        div.innerHTML = `
+            <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                <p class="text-gray-700">${property.price}</p>
+                <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
+            </div>
+        `;
+        storeSlider.appendChild(div);
+    });
+
+    // Funcionalidad de filtrado
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const filter = button.getAttribute('data-filter');
-            document.querySelectorAll('.property-card').forEach(card => {
-                card.style.display = (filter === 'all' || card.getAttribute('data-type') === filter) ? '' : 'none';
+            const cards = document.querySelectorAll('.property-card');
+            cards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-type') === filter) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         });
     });
 
-    document.getElementById('search-input').addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        document.querySelectorAll('.property-card').forEach(card => {
+    // Funcionalidad de búsqueda
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const cards = document.querySelectorAll('.property-card');
+        cards.forEach(card => {
             const title = card.querySelector('h3').textContent.toLowerCase();
-            card.style.display = title.includes(searchTerm) ? '' : 'none';
+            if (title.includes(searchTerm)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
         });
     });
 
-    // Gallery modal functionality
+    // Funcionalidad de galería modal
     const modal = document.getElementById('gallery-modal');
     const closeModal = document.getElementById('close-modal');
     const galleryImages = document.getElementById('gallery-images');
@@ -529,21 +278,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelectorAll('.view-gallery, .view-details').forEach(button => {
         button.addEventListener('click', () => {
-            const propertyId = parseInt(button.getAttribute('data-id'));
-            const property = properties.find(p => p.id === propertyId);
+            const propertyId = button.getAttribute('data-id');
+            const property = properties.find(p => p.id === parseInt(propertyId));
             
             currentPropertyId = property.id;
             currentImageIndex = 0;
             
+            // Limpiar imágenes anteriores
             galleryImages.innerHTML = '';
+            
+            // Agregar imágenes a la galería
             property.images.forEach((image, index) => {
-                const img = createElementFromHTML(`
-                    <img src="${image}" alt="${property.title} - Imagen ${index + 1}" class="w-24 h-24 object-cover rounded cursor-pointer">
-                `);
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = `${property.title} - Imagen ${index + 1}`;
+                img.className = 'w-24 h-24 object-cover rounded cursor-pointer';
                 img.addEventListener('click', () => showFullImage(index));
                 galleryImages.appendChild(img);
             });
             
+            // Actualizar información de la propiedad
             galleryInfo.innerHTML = `
                 <h3 class="text-xl font-bold">${property.title}</h3>
                 <p class="text-lg">${property.price}</p>
@@ -561,6 +315,7 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.classList.remove('flex');
     });
 
+    // Cerrar el modal si se hace clic fuera de él
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.classList.add('hidden');
@@ -593,9 +348,270 @@ document.addEventListener('DOMContentLoaded', function() {
             fullImageContainer.style.display = 'none';
         }
     });
+
+    // Inicializar el slider de testimonios
+    const testimonialsSlider = document.getElementById('testimonials-slider');
+    testimonials.forEach(testimonial => {
+        const div = document.createElement('div');
+        div.className = 'bg-white p-6 rounded-lg shadow-md mx-2';
+        div.innerHTML = `
+            <div class="flex items-center mb-4">
+                <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4">
+                <h3 class="font-bold">${testimonial.name}</h3>
+            </div>
+            <p class="text-gray-600">"${testimonial.text}"</p>
+        `;
+        testimonialsSlider.appendChild(div);
+    });
+
+    if (typeof $.fn.slick === 'function') {
+        $('.testimonials-slider').slick({
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            arrows: false,
+            dots: true,
+            responsive: [
+                {
+                    breakpoint: 640,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    }
+
+    // Inicializar el slider de Instagram
+    const instagramSlider = document.getElementById('instagram-slider');
+    instagramPosts.forEach(post => {
+        const div =  document.createElement('div');
+        div.className = 'instagram-post mx-2';
+        div.innerHTML = `
+            <blockquote class="instagram-media" data-instgrm-permalink="${post.url}">
+                <div style="padding:16px;">
+                    <a href="${post.url}" target="_blank">Ver esta publicación en Instagram</a>
+                </div>
+            </blockquote>
+        `;
+        instagramSlider.appendChild(div);
+    });
+
+    if (typeof $.fn.slick === 'function') {
+        $('.instagram-slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            arrows: false,
+            dots: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 640,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    }
+
+    // Cargar el script de Instagram
+    const script = document.createElement('script');
+    script.src = 'https://www.instagram.com/embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Inicializar el mapa
+    const mapContainer = document.getElementById('map-container');
+    const loadMap = () => {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY`;
+        script.onload = () => {
+            const map = new google.maps.Map(mapContainer, {
+                center: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
+                zoom: 15
+            });
+            new google.maps.Marker({
+                position: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
+                map: map,
+                title: 'Janneth Aguirre Bienes Raíces'
+            });
+        };
+        document.body.appendChild(script);
+    };
+
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadMap();
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { rootMargin: '100px' }
+    );
+
+    observer.observe(mapContainer);
+
+    // Manejar el envío del formulario de contacto
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(contactForm);
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                body: formData
+            });
+            if (response.ok) {
+                alert('Mensaje enviado con éxito. Nos pondremos en contacto contigo pronto.');
+                contactForm.reset();
+            } else {
+                throw new Error('Error al enviar el mensaje');
+            }
+        } catch (error) {
+            alert('Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.');
+            console.error('Error:', error);
+        }
+    });
+
+    // Efecto de aparición al hacer scroll
+    const fadeElems = document.querySelectorAll('.fade-in-section');
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    fadeElems.forEach(elem => fadeObserver.observe(elem));
+
+    // Botón "Volver arriba"
+    const backToTopButton = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Instalación de la PWA
+    let deferredPrompt;
+    const installButton = document.getElementById('install-app');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installButton.style.display = 'block';
+    });
+
+    installButton.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                console.log('Usuario aceptó la instalación de la PWA');
+            }
+            deferredPrompt = null;
+        }
+    });
+
+    // Inicializar el chatbot
+    initChatbot();
+
+    // Cargar videos de YouTube
+    async function loadYouTubeVideos() {
+        try {
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`);
+            const data = await response.json();
+            const youtubeSlider = document.getElementById('youtube-slider');
+            
+            data.items.forEach(item => {
+                const videoId = item.id.videoId;
+                const title = item.snippet.title;
+                const thumbnail = item.snippet.thumbnails.medium.url;
+                
+                const videoElement = document.createElement('div');
+                videoElement.className = 'youtube-video';
+                videoElement.innerHTML = `
+                    <iframe width="280" height="157" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <h3 class="text-sm font-semibold mt-2">${title}</h3>
+                `;
+                
+                youtubeSlider.appendChild(videoElement);
+            });
+
+            // Inicializar el slider de YouTube
+            if (typeof $.fn.slick === 'function') {
+                $('.youtube-slider').slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    autoplay: false,
+                    arrows: true,
+                    dots: true,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        },
+                        {
+                            breakpoint: 640,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                });
+            }
+        } catch (error) {
+            console.error('Error al cargar videos de YouTube:', error);
+        }
+    }
+
+    loadYouTubeVideos();
+
+    // Inicializar la sección de FAQs
+    const faqContainer = document.getElementById('faq-container');
+    faqs.forEach((faq, index) => {
+        const faqItem = document.createElement('div');
+        faqItem.className = 'faq-item';
+        faqItem.innerHTML = `
+            <div class="faq-question">
+                <span>${faq.question}</span>
+                <i class="fas fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+                <p>${faq.answer}</p>
+            </div>
+        `;
+        faqContainer.appendChild(faqItem);
+
+        const question = faqItem.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            faqItem.classList.toggle('active');
+        });
+    });
 });
 
-// Chatbot initialization (defined in chatbot.js)
+// Función para inicializar el chatbot (definida en chatbot.js)
 function initChatbot() {
+    // La lógica del chatbot se implementará en chatbot.js
     console.log('Chatbot inicializado');
 }
