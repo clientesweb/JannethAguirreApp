@@ -3,7 +3,6 @@ const urlsToCache = [
   '/',
   'index.html',
   'script.js',
-  'styles.css',
   'img/Logo-Janneth-Aguirre-2020-ecuador.png',
   'img/favicon-32x32.png',
   'img/icon-192x192.png',
