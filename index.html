@@ -32,16 +32,54 @@
 
     <!-- Preload critical resources -->
     <link rel="preload" href="/fonts/poppins-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/img/hero-image-1.jpg" as="image">
+    <link rel="preload" href="/img/hero-image-1.webp" as="image">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://code.jquery.com">
+
+    <!-- Critical CSS -->
+    <style>
+        /* Inlined critical CSS */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .preloader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #FF0000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
+    <!-- Non-critical CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" media="print" onload="this.media='all'">
-    
-    <!-- Slick CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" media="print" onload="this.media='all'"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" media="print" onload="this.media='all'"/>
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -60,400 +98,6 @@
             }
         }
     </script>
-    <style>
-        /* Estilos existentes */
-        #ai-real-estate-expert-chatbot {
-            z-index: 1000;
-        }
-        
-        #ai-real-estate-expert-chatbot .bg-primary {
-            background-color: #FF0000;
-        }
-        
-        #ai-real-estate-expert-chatbot .text-primary {
-            color: #FF0000;
-        }
-        
-        #ai-real-estate-expert-chatbot .border-primary {
-            border-color: #FF0000;
-        }
-        
-        #ai-real-estate-expert-chatbot .ring-primary {
-            --tw-ring-color: #FF0000;
-        }
-
-        #ai-real-estate-expert-chatbot .suggested-query {
-            cursor: pointer;
-            padding: 5px 10px;
-            margin: 5px;
-            background-color: #f0f0f0;
-            border-radius: 15px;
-            display: inline-block;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        #ai-real-estate-expert-chatbot .suggested-query:hover {
-            background-color: #e0e0e0;
-            transform: scale(1.05);
-        }
-
-        #ai-real-estate-expert-chatbot .chat-message {
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-
-        #ai-real-estate-expert-chatbot .user-message {
-            background-color: #FF0000;
-            color: white;
-            border-radius: 18px 18px 0 18px;
-            padding: 10px 15px;
-            margin-left: auto;
-            margin-bottom: 10px;
-        }
-
-        #ai-real-estate-expert-chatbot .bot-message {
-            background-color: #f0f0f0;
-            color: black;
-            border-radius: 18px 18px 18px 0;
-            padding: 10px 15px;
-            margin-right: auto;
-            margin-bottom: 10px;
-        }
-
-        .property-card {
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .property-card:hover {
-            transform: scale(1.05);
-        }
-
-        .slick-prev:before, .slick-next:before {
-            color: #FF0000;
-        }
-
-        /* Nuevos estilos para el menú inferior responsivo */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #FF0000;
-            padding: 10px;
-            z-index: 1000;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .bottom-nav a {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.8rem;
-        }
-
-        .bottom-nav i {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        @media (min-width: 768px) {
-            .bottom-nav {
-                display: none;
-            }
-        }
-
-        /* Estilos para el efecto de aparición al hacer scroll */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20vh);
-            visibility: hidden;
-            transition: opacity 0.6s ease-out, transform 1.2s ease-out;
-            will-change: opacity, visibility;
-        }
-
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: none;
-            visibility: visible;
-        }
-
-        /* Estilos para el preloader */
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .preloader-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #FF0000;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Estilos para el botón "Volver arriba" */
-        #back-to-top {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 30px;
-            z-index: 99;
-            border: none;
-            outline: none;
-            background-color: #FF0000;
-            color: white;
-            cursor: pointer;
-            padding: 15px;
-            border-radius: 50%;
-            font-size: 18px;
-            transition: opacity 0.3s;
-        }
-
-        #back-to-top:hover {
-            opacity: 0.8;
-        }
-
-        /* Estilos para el skip link */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: #000000;
-            color: white;
-            padding: 8px;
-            z-index: 100;
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* Estilos para el hero */
-        .hero-slider {
-            width: 100%;
-            height: 100%;
-        }
-
-        .hero-slider .slick-list,
-        .hero-slider .slick-track {
-            height: 100%;
-        }
-
-        .hero-slider .slick-slide {
-            height: calc(100vh - 80px);
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero-slider .slick-dots {
-            bottom: 20px;
-        }
-
-        .hero-slider .slick-dots li button:before {
-            color: white;
-        }
-
-        /* Nuevos estilos para la sección de YouTube */
-        .youtube-video {
-            width: 300px;
-            margin-right: 20px;
-        }
-
-        .youtube-slider {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .youtube-slider::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Nuevos estilos para la sección de tienda */
-        #store-slider {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        #store-slider::-webkit-scrollbar {
-            display: none;
-        }
-
-        #store-slider .property-card {
-            flex: 0 0 auto;
-            width: 300px;
-            margin-right: 20px;
-            scroll-snap-align: start;
-        }
-
-        /* Estilos para la sección de FAQs */
-        .faq-item {
-            border-bottom: 1px solid #e2e8f0;
-            padding: 1rem 0;
-        }
-
-        .faq-question {
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            transition: max-height 0.5s ease-in;
-        }
-
-        .faq-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-
-        /* Nuevos estilos para el modal de galería mejorado */
-        #gallery-modal {
-            background-color: rgba(0, 0, 0, 0.9);
-        }
-
-        #gallery-modal .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            overflow-y: auto;
-        }
-
-        #gallery-images {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        #gallery-images img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            margin: 5px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        #gallery-images img:hover {
-            transform: scale(1.1);
-        }
-
-        #full-image-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #full-image {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
-
-        .gallery-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        #prev-image {
-            left: 20px;
-        }
-
-        #next-image {
-            right: 20px;
-        }
-
-        /* Estilos para el slider de YouTube */
-        .youtube-slider {
-            position: relative;
-        }
-
-        .youtube-slider  .slick-prev,
-        .youtube-slider .slick-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1;
-            background-color: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .youtube-slider .slick-prev {
-            left: 10px;
-        }
-
-        .youtube-slider .slick-next {
-            right: 10px;
-        }
-
-        .youtube-slider .slick-prev:before,
-        .youtube-slider .slick-next:before {
-            color: #FF0000;
-        }
-
-        .youtube-video {
-            padding: 0 10px;
-        }
-
-        .youtube-video iframe {
-            width: 100%;
-            height: 200px;
-        }
-    </style>
 
     <!-- Datos estructurados para SEO local -->
     <script type="application/ld+json">
@@ -515,7 +159,7 @@
     <header class="bg-secondary shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
-                <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="h-12">
+                <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.webp" alt="Logo Janneth Aguirre Bienes Raíces" class="h-12" width="150" height="48">
                 <button id="install-app" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">
                     <i class="fas fa-download mr-2"></i> Instalar App
                 </button>
@@ -602,6 +246,7 @@
         </section>
 
         <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
+            
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Nuestro Canal de YouTube</h2>
                 <div id="youtube-slider" class="youtube-slider">
@@ -657,7 +302,7 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="fade-in-section">
-                    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="h-16 mb-4">
+                    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.webp" alt="Logo Janneth Aguirre Bienes Raíces" class="h-16 mb-4" width="200" height="64">
                     <p>Expertos en bienes raíces con años de experiencia en el mercado ecuatoriano.</p>
                 </div>
                 <div class="fade-in-section">
@@ -700,11 +345,11 @@
     </button>
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     <!-- Slick JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <script src="chatbot.js"></script>
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" defer></script>
+    <script src="chatbot.js" defer></script>
+    <script src="script.js" defer></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
