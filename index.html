@@ -34,27 +34,82 @@
     <link rel="preload" href="/fonts/poppins-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/img/hero-image-1.jpg" as="image">
 
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://code.jquery.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-
     <!-- Inline critical CSS -->
     <style>
         /* Estilos críticos inline */
-        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
+        body { font-family: 'Poppins', sans-serif; }
         .bg-primary { background-color: #FF0000; }
         .text-primary { color: #FF0000; }
-        .preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; display: flex; justify-content: center; align-items: center; z-index: 9999; }
-        .preloader-spinner { width: 50px; height: 50px; border: 3px solid #FF0000; border-top: 3px solid #fff; border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .hero-slider { height: calc(100vh - 80px); position: relative; overflow: hidden; }
-        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease-in-out; background-size: cover; background-position: center; }
-        .hero-slide.active { opacity: 1; }
     </style>
 
-    <!-- Defer non-critical CSS -->
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF0000',
+                        secondary: '#808080',
+                        background: '#FFFFFF',
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Slick CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+
+    <!-- Datos estructurados para SEO local -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "name": "Janneth Aguirre Bienes Raíces",
+      "image": "https://www.jannethaguirre.com/img/Logo-Janneth-Aguirre-2020-ecuador.png",
+      "@id": "https://www.jannethaguirre.com/",
+      "url": "https://www.jannethaguirre.com/",
+      "telephone": "+593987167782",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Dirección de la oficina",
+        "addressLocality": "Guayaquil",
+        "addressRegion": "Guayas",
+        "postalCode": "Código Postal",
+        "addressCountry": "EC"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -2.1894128,
+        "longitude": -79.8890662
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/JannethAguirreBienesRaices",
+        "https://www.instagram.com/jannethaguirrebienesraices",
+        "https://www.linkedin.com/in/jannethaguirre"
+      ]
+    }
+    </script>
 </head>
 <body class="font-poppins bg-background text-gray-800">
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
@@ -206,10 +261,7 @@
                         <textarea name="message" placeholder="Mensaje" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded"></textarea>
                         <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Enviar</button>
                     </form>
-                    <div id="map-container" class="h-64">
-                        
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.0145694803!2d-79.8912549!3d-2.1894128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTEnMjEuOSJTIDc5wrA1Myc0OC41Ilc!5e0!3m2!1ses!2sec!4v1621234567890!5m2!1ses!2sec" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
+                    <div id="map-container" class="h-64" data-lat="-2.1894128" data-lng="-79.8890662"></div>
                 </div>
             </div>
         </section>
@@ -225,7 +277,7 @@
                 <div class="fade-in-section">
                     <h3 class="text-xl font-bold mb-4">Contacto</h3>
                     <p class="mb-2"><i class="fas fa-phone mr-2"></i> +593 98 716 7782</p>
-                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> info@jannethaguirre.com</p>
+                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="71181f171e311b101f1f140519101604180303145f121e1c">[email&#160;protected]</a></p>
                     <p><i class="fas fa-map-marker-alt mr-2"></i> Guayaquil-Ecuador</p>
                 </div>
                 <div class="fade-in-section">
@@ -261,13 +313,27 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Defer non-critical scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" defer></script>
-    <script src="chatbot.js" defer></script>
-    <script src="script.js" defer></script>
+    <!-- jQuery -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Slick JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="chatbot.js"></script>
+    <script src="script.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+              console.log('Service Worker registrado con éxito:', registration.scope);
+            })
+            .catch(error => {
+              console.log('Falló el registro del Service Worker:', error);
+            });
+        });
+      }
+    </script>
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </body>
 </html>
