@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Preloader
+    // Remover el preloader cuando la página esté completamente cargada
     window.addEventListener('load', function() {
         document.querySelector('.preloader').style.display = 'none';
     });
@@ -88,11 +88,11 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const instagramPosts = [
-        { type: 'post', url: 'https://www.instagram.com/p/DBJS7yhM4_P/' },
-        { type: 'reel', url: 'https://www.instagram.com/reel/DA08gfysclf/' },
-        { type: 'post', url: 'https://www.instagram.com/p/DApTvIhBidr/' },
-        { type: 'reel', url: 'https://www.instagram.com/reel/EXAMPLE4/' },
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE5/' }
+        { type: 'post',  url: 'https://www.instagram.com/p/DBJS7yhM4_P/' },
+        { type: 'reel',  url: 'https://www.instagram.com/reel/DA08gfysclf/' },
+        { type: 'post',  url: 'https://www.instagram.com/p/DApTvIhBidr/' },
+        { type: 'reel',  url: 'https://www.instagram.com/reel/EXAMPLE4/' },
+        { type: 'post',  url: 'https://www.instagram.com/p/EXAMPLE5/' }
     ];
 
     const faqs = [
@@ -130,15 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
         promoSlider.appendChild(div);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.promo-slider').slick({
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: false
-        });
-    }
-
     // Inicializar el slider del hero
     const heroSlider = document.querySelector('.hero-slider');
     heroImages.forEach(image => {
@@ -149,17 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
         div.style.height = '100%';
         heroSlider.appendChild(div);
     });
-
-    if (typeof $.fn.slick === 'function') {
-        $('.hero-slider').slick({
-            autoplay: true,
-            autoplaySpeed: 5000,
-            arrows: false,
-            dots: true,
-            fade: true,
-            cssEase: 'linear'
-        });
-    }
 
     // Inicializar el slider de propiedades
     const propertySlider = document.querySelector('.property-slider');
@@ -176,31 +156,6 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         propertySlider.appendChild(div);
     });
-
-    if (typeof $.fn.slick === 'function') {
-        $('.property-slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: true,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
 
     // Renderizar las tarjetas de servicios
     const serviceGrid = document.getElementById('service-grid');
@@ -364,25 +319,6 @@ document.addEventListener('DOMContentLoaded', function() {
         testimonialsSlider.appendChild(div);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.testimonials-slider').slick({
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: true,
-            responsive: [
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
-
     // Inicializar el slider de Instagram
     const instagramSlider = document.getElementById('instagram-slider');
     instagramPosts.forEach(post => {
@@ -398,69 +334,11 @@ document.addEventListener('DOMContentLoaded', function() {
         instagramSlider.appendChild(div);
     });
 
-    if (typeof $.fn.slick === 'function') {
-        $('.instagram-slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            dots: true,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
-
     // Cargar el script de Instagram
     const script = document.createElement('script');
     script.src = 'https://www.instagram.com/embed.js';
     script.async = true;
     document.body.appendChild(script);
-
-    // Inicializar el mapa
-    const mapContainer = document.getElementById('map-container');
-    const loadMap = () => {
-        const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY`;
-        script.onload = () => {
-            const map = new google.maps.Map(mapContainer, {
-                center: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
-                zoom: 15
-            });
-            new google.maps.Marker({
-                position: { lat: parseFloat(mapContainer.dataset.lat), lng: parseFloat(mapContainer.dataset.lng) },
-                map: map,
-                title: 'Janneth Aguirre Bienes Raíces'
-            });
-        };
-        document.body.appendChild(script);
-    };
-
-    const observer = new IntersectionObserver(
-        (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    loadMap();
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        { rootMargin: '100px' }
-    );
-
-    observer.observe(mapContainer);
 
     // Manejar el envío del formulario de contacto
     const contactForm = document.getElementById('contact-form');
@@ -562,8 +440,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     slidesToShow: 3,
                     slidesToScroll: 1,
                     autoplay: false,
+                    autoplaySpeed: 3000,
                     arrows: true,
-                    dots: true,
                     responsive: [
                         {
                             breakpoint: 1024,
@@ -581,37 +459,138 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         } catch (error) {
-            console.error('Error al cargar videos de YouTube:', error);
+            console.error('Error al cargar los videos de YouTube:', error);
         }
     }
 
-    loadYouTubeVideos();
-
-    // Inicializar la sección de FAQs
+    // Renderizar las preguntas frecuentes
     const faqContainer = document.getElementById('faq-container');
     faqs.forEach((faq, index) => {
         const faqItem = document.createElement('div');
-        faqItem.className = 'faq-item';
+        faqItem.className = 'mb-4';
         faqItem.innerHTML = `
-            <div class="faq-question">
-                <span>${faq.question}</span>
-                <i class="fas fa-chevron-down faq-icon"></i>
-            </div>
-            <div class="faq-answer">
-                <p>${faq.answer}</p>
+            <button class="faq-question w-full text-left font-semibold py-2 px-4 bg-gray-100 hover:bg-gray-200 transition-colors rounded-lg focus:outline-none" aria-expanded="false" aria-controls="faq-answer-${index}">
+                ${faq.question}
+                <span class="float-right transform transition-transform duration-200">▼</span>
+            </button>
+            <div id="faq-answer-${index}" class="faq-answer hidden mt-2 pl-4">
+                ${faq.answer}
             </div>
         `;
         faqContainer.appendChild(faqItem);
+    });
 
-        const question = faqItem.querySelector('.faq-question');
+    // Manejar el clic en las preguntas del FAQ
+    document.querySelectorAll('.faq-question').forEach(question => {
         question.addEventListener('click', () => {
-            faqItem.classList.toggle('active');
+            const answer = question.nextElementSibling;
+            const icon = question.querySelector('span');
+            
+            answer.classList.toggle('hidden');
+            icon.style.transform = answer.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            question.setAttribute('aria-expanded', answer.classList.contains('hidden') ? 'false' : 'true');
         });
     });
-});
 
-// Función para inicializar el chatbot (definida en chatbot.js)
-function initChatbot() {
-    // La lógica del chatbot se implementará en chatbot.js
-    console.log('Chatbot inicializado');
-}
+    // Inicializar sliders
+    function initializeSliders() {
+        if (typeof $.fn.slick === 'function') {
+            $('.promo-slider').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                arrows: false,
+                fade: true
+            });
+
+            $('.hero-slider').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                arrows: false,
+                fade: true
+            });
+
+            $('.property-slider').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                arrows: true,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 640,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+
+            $('#testimonials-slider').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                arrows: true,
+                fade: true
+            });
+
+            $('#instagram-slider').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                arrows: true,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 640,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        }
+    }
+
+    // Función para cargar recursos de manera diferida
+    function loadDeferredResources() {
+        // Cargar estilos de Slick
+        loadCSS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
+        loadCSS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css');
+
+        // Inicializar componentes que requieren recursos externos
+        initializeSliders();
+        loadYouTubeVideos();
+    }
+
+    // Función para cargar CSS de manera asíncrona
+    function loadCSS(href) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        document.head.appendChild(link);
+    }
+
+    // Cargar recursos diferidos después de que el contenido principal esté listo
+    if (document.readyState === 'complete' || (document.readyState !== 'loading' && !document.documentElement.doScroll)) {
+        loadDeferredResources();
+    } else {
+        document.addEventListener('DOMContentLoaded', loadDeferredResources);
+    }
+});
