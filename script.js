@@ -142,9 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Renderizar propiedades destacadas
         const featuredProperties = document.querySelector('#propiedades .grid');
         if (featuredProperties) {
-            feat
-
-uredProperties.innerHTML = properties.slice(0, 4).map(property => `
+            featuredProperties.innerHTML = properties.slice(0, 4).map(property => `
                 <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden">
                     <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
                     <div class="p-4">
@@ -272,6 +270,7 @@ uredProperties.innerHTML = properties.slice(0, 4).map(property => `
                 `;
                 
                 modal.classList.remove('hidden');
+                
                 modal.classList.add('flex');
             });
         });
