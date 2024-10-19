@@ -97,7 +97,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Constantes para YouTube
     const YOUTUBE_CHANNEL_ID = 'UCiahlQJxCgPY-tEfjvkab8g';
-    const YOUTUBE_API_KEY = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
+    const YOUTUBE_API_KEY = 'AIzaSyBPsHN1pv1ZCeRipA
+
+JL0CY50VD08uC4Q_Y';
 
     // Inicializar componentes
     initSliders();
@@ -144,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (featuredProperties) {
             featuredProperties.innerHTML = properties.slice(0, 4).map(property => `
                 <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover" loading="lazy">
                     <div class="p-4">
                         <h3 class="font-bold text-lg mb-2">${property.title}</h3>
                         <p class="text-gray-700">${property.price}</p>
@@ -173,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (storeSlider) {
             storeSlider.innerHTML = properties.map(property => `
                 <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden flex-shrink-0 w-64" data-type="${property.type}">
-                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover" loading="lazy">
                     <div class="p-4">
                         <h3 class="font-bold text-lg mb-2">${property.title}</h3>
                         <p class="text-gray-700">${property.price}</p>
@@ -201,7 +203,15 @@ document.addEventListener('DOMContentLoaded', function() {
             // Funcionalidad de búsqueda
             const searchInput = document.getElementById('search-input');
             if (searchInput) {
-                searchInput.addEventListener('input', () => {
+                const debounce = (func, delay) => {
+                    let timeoutId;
+                    return (...args) => {
+                        clearTimeout(timeoutId);
+                        timeoutId = setTimeout(() => func.apply(this, args), delay);
+                    };
+                };
+
+                const performSearch = debounce(() => {
                     const searchTerm = searchInput.value.toLowerCase();
                     const cards = document.querySelectorAll('.property-card');
                     cards.forEach(card => {
@@ -212,7 +222,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             card.style.display = 'none';
                         }
                     });
-                });
+                }, 300);
+
+                searchInput.addEventListener('input', performSearch);
             }
         }
     }
@@ -257,6 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     img.src = image;
                     img.alt = `${property.title} - Imagen ${index + 1}`;
                     img.className = 'w-24 h-24 object-cover rounded cursor-pointer';
+                    img.loading = 'lazy';
                     img.addEventListener('click', () => showFullImage(index));
                     galleryImages.appendChild(img);
                 });
@@ -270,7 +283,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 
                 modal.classList.remove('hidden');
-                
                 modal.classList.add('flex');
             });
         });
@@ -324,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
             testimonialsSlider.innerHTML = testimonials.map(testimonial => `
                 <div class="bg-white p-6 rounded-lg shadow-md mx-2">
                     <div class="flex items-center mb-4">
-                        <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4">
+                        <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4" loading="lazy">
                         <h3 class="font-bold">${testimonial.name}</h3>
                     </div>
                     <p class="text-gray-600">"${testimonial.text}"</p>
@@ -398,9 +410,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (faqContainer) {
             faqContainer.innerHTML = faqs.map((faq, index) => `
                 <div class="faq-item mb-4">
-                    <button class="faq-question w-full text-left font-semibold py-2 px-4 bg-gray-100 rounded-t-lg" data-index="${index}">
+                    <button class="faq-question w-full text-left font-semibold py-2 px-4 bg-gray-100 rounded-t-lg flex justify-between items-center" data-index="${index}">
                         ${faq.question}
-                        <i class="fas fa-chevron-down float-right"></i>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
                     </button>
                     <div class="faq-answer hidden p-4 bg-white border border-gray-200 rounded-b-lg">
                         ${faq.answer}
@@ -415,8 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const answer = question.nextElementSibling;
                     const icon = question.querySelector('i');
                     answer.classList.toggle('hidden');
-                    icon.classList.toggle('fa-chevron-down');
-                    icon.classList.toggle('fa-chevron-up');
+                    icon.classList.toggle('rotate-180');
                 });
             });
         }
@@ -483,13 +494,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Botón "Volver arriba"
         const backToTopButton = document.getElementById('back-to-top');
         if (backToTopButton) {
-            window.addEventListener('scroll', () => {
+            const toggleBackToTopButton = () => {
                 if (window.pageYOffset > 300) {
-                    backToTopButton.style.display = 'block';
+                    backToTopButton.classList.add('opacity-100');
+                    backToTopButton.classList.remove('opacity-0');
                 } else {
-                    backToTopButton.style.display = 'none';
+                    backToTopButton.classList.add('opacity-0');
+                    backToTopButton.classList.remove('opacity-100');
                 }
-            });
+            };
+
+            window.addEventListener('scroll', toggleBackToTopButton);
 
             backToTopButton.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -557,7 +572,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .filter(item => item.id.kind === 'youtube#video')
                 .map(item => `
                     <div class="youtube-video">
-                        <iframe width="280" height="157" src="https://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <iframe width="280" height="157" src="https://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
                         <h3 class="text-lg font-semibold mt-2">${item.snippet.title}</h3>
                     </div>
                 `).join('');
