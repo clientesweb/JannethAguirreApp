@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (featuredProperties) {
             featuredProperties.innerHTML = properties.slice(0, 4).map(property => `
                 <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover" loading="lazy">
+                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="font-bold text-lg mb-2">${property.title}</h3>
                         <p class="text-gray-700">${property.price}</p>
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (storeSlider) {
             storeSlider.innerHTML = properties.map(property => `
                 <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden flex-shrink-0 w-64" data-type="${property.type}">
-                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover" loading="lazy">
+                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="font-bold text-lg mb-2">${property.title}</h3>
                         <p class="text-gray-700">${property.price}</p>
@@ -201,15 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Funcionalidad de búsqueda
             const searchInput = document.getElementById('search-input');
             if (searchInput) {
-                const debounce = (func, delay) => {
-                    let timeoutId;
-                    return (...args) => {
-                        clearTimeout(timeoutId);
-                        timeoutId = setTimeout(() => func.apply(this, args), delay);
-                    };
-                };
-
-                const performSearch = debounce(() => {
+                searchInput.addEventListener('input', () => {
                     const searchTerm = searchInput.value.toLowerCase();
                     const cards = document.querySelectorAll('.property-card');
                     cards.forEach(card => {
@@ -220,9 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             card.style.display = 'none';
                         }
                     });
-                }, 300);
-
-                searchInput.addEventListener('input', performSearch);
+                });
             }
         }
     }
@@ -267,11 +257,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     img.src = image;
                     img.alt = `${property.title} - Imagen ${index + 1}`;
                     img.className = 'w-24 h-24 object-cover rounded cursor-pointer';
-                    img.loading = 'lazy';
                     img.addEventListener('click', () => showFullImage(index));
                     galleryImages.appendChild(img);
                 });
-                
                 
                 // Actualizar información de la propiedad
                 galleryInfo.innerHTML = `
@@ -282,6 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 
                 modal.classList.remove('hidden');
+                
                 modal.classList.add('flex');
             });
         });
@@ -335,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
             testimonialsSlider.innerHTML = testimonials.map(testimonial => `
                 <div class="bg-white p-6 rounded-lg shadow-md mx-2">
                     <div class="flex items-center mb-4">
-                        <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4" loading="lazy">
+                        <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4">
                         <h3 class="font-bold">${testimonial.name}</h3>
                     </div>
                     <p class="text-gray-600">"${testimonial.text}"</p>
@@ -409,9 +398,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (faqContainer) {
             faqContainer.innerHTML = faqs.map((faq, index) => `
                 <div class="faq-item mb-4">
-                    <button class="faq-question w-full text-left font-semibold py-2 px-4 bg-gray-100 rounded-t-lg flex justify-between items-center" data-index="${index}">
+                    <button class="faq-question w-full text-left font-semibold py-2 px-4 bg-gray-100 rounded-t-lg" data-index="${index}">
                         ${faq.question}
-                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        <i class="fas fa-chevron-down float-right"></i>
                     </button>
                     <div class="faq-answer hidden p-4 bg-white border border-gray-200 rounded-b-lg">
                         ${faq.answer}
@@ -426,7 +415,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     const answer = question.nextElementSibling;
                     const icon = question.querySelector('i');
                     answer.classList.toggle('hidden');
-                    icon.classList.toggle('rotate-180');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
                 });
             });
         }
@@ -493,17 +483,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Botón "Volver arriba"
         const backToTopButton = document.getElementById('back-to-top');
         if (backToTopButton) {
-            const toggleBackToTopButton = () => {
+            window.addEventListener('scroll', () => {
                 if (window.pageYOffset > 300) {
-                    backToTopButton.classList.add('opacity-100');
-                    backToTopButton.classList.remove('opacity-0');
+                    backToTopButton.style.display = 'block';
                 } else {
-                    backToTopButton.classList.add('opacity-0');
-                    backToTopButton.classList.remove('opacity-100');
+                    backToTopButton.style.display = 'none';
                 }
-            };
-
-            window.addEventListener('scroll', toggleBackToTopButton);
+            });
 
             backToTopButton.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -565,16 +551,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`);
-            if (!response.ok) {
-                throw new Error('Error en la respuesta de la API de YouTube');
-            }
             const data = await response.json();
             
             youtubeSlider.innerHTML = data.items
                 .filter(item => item.id.kind === 'youtube#video')
                 .map(item => `
                     <div class="youtube-video">
-                        <iframe width="280" height="157" src="https://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
+                        <iframe width="280" height="157" src="https://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         <h3 class="text-lg font-semibold mt-2">${item.snippet.title}</h3>
                     </div>
                 `).join('');
@@ -604,7 +587,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         } catch (error) {
             console.error('Error al cargar videos de YouTube:', error);
-            youtubeSlider.innerHTML = '<p>Lo sentimos, no se pudieron cargar los videos en este momento.</p>';
         }
     }
 });
