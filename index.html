@@ -30,18 +30,11 @@
     <meta property="twitter:description" content="Encuentra tu hogar ideal con Janneth Aguirre Bienes Raíces. Ofrecemos las mejores propiedades en venta y alquiler en Ecuador.">
     <meta property="twitter:image" content="https://www.jannethaguirre.com/twitter-image.jpg">
 
-    <!-- Preload critical resources -->
-    <link rel="preload" href="/fonts/poppins-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/img/hero-image-1.jpg" as="image">
-
     <!-- Inline critical CSS -->
     <style>
         body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
         .bg-primary { background-color: #FF0000; }
         .text-primary { color: #FF0000; }
-        .preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; display: flex; justify-content: center; align-items: center; z-index: 9999; }
-        .preloader-spinner { width: 50px; height: 50px; border: 3px solid #f3f3f3; border-top: 3px solid #FF0000; border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 
     <!-- Defer non-critical CSS -->
@@ -116,11 +109,6 @@
 <body class="font-poppins bg-background text-gray-800">
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="preloader-spinner"></div>
-    </div>
-
     <div class="bg-primary text-white py-2 overflow-hidden">
         <div class="promo-slider container mx-auto px-4">
             <!-- Promo items will be inserted here by JavaScript -->
@@ -155,8 +143,8 @@
         <section id="propiedades" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Propiedades Destacadas</h2>
-                <div class="property-slider">
-                    <!-- Property cards will be inserted here by JavaScript -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- 4 propiedades destacadas se insertarán aquí mediante JavaScript -->
                 </div>
             </div>
         </section>
@@ -234,9 +222,7 @@
             </div>
         </section>
 
-        <section id="instagram" 
-
- class="py-16 bg-gray-100 fade-in-section">
+        <section id="instagram" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Síguenos en Instagram</h2>
                 <div id="instagram-slider" class="instagram-slider">
@@ -259,13 +245,14 @@
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
                     <form id="contact-form" class="space-y-4">
                         <input type="text" name="name" placeholder="Nombre" required class="w-full px-4 py-2 border border-gray-300 rounded">
                         <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border border-gray-300 rounded">
                         <textarea name="message" placeholder="Mensaje" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded"></textarea>
                         <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Enviar</button>
                     </form>
-                    <div id="map-container" class="h-64" data-lat="-2.1894128" data-lng="-79.8890662"></div>
+                    <div id="map-container" class="h-64"></div>
                 </div>
             </div>
         </section>
@@ -281,7 +268,7 @@
                 <div class="fade-in-section">
                     <h3 class="text-xl font-bold mb-4">Contacto</h3>
                     <p class="mb-2"><i class="fas fa-phone mr-2"></i> +593 98 716 7782</p>
-                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> info@jannethaguirre.com</p>
+                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c8cfc7cee1cbc0cfcfc4d5c9c0c6d4c8d3d3c48fc2cecc">[email&#160;protected]</a></p>
                     <p><i class="fas fa-map-marker-alt mr-2"></i> Guayaquil-Ecuador</p>
                 </div>
                 <div class="fade-in-section">
@@ -318,7 +305,7 @@
     </button>
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Slick JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="chatbot.js"></script>
@@ -339,5 +326,8 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY_AQUI&callback=initMap" async defer></script>
 </body>
 </html>
