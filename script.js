@@ -79,19 +79,19 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             question: "¿Qué documentos necesito para comprar una propiedad?",
-            answer: "Generalmente, necesitará una identificación válida, comprobantes de ingresos, declaraciones de impuestos y, en algunos casos, un historial crediticio. Nuestro equipo le guiará a través del proceso específico según su situación."
+            answer: "Generalmente, necesitará una identificación válida, comprobante de ingresos y, en algunos casos, un historial crediticio."
         },
         {
             question: "¿Ofrecen opciones de financiamiento?",
-            answer: "Sí, trabajamos con varios bancos y entidades financieras para ofrecer opciones de financiamiento. Podemos ayudarle a encontrar la mejor opción según su situación financiera."
+            answer: "Sí, trabajamos con varios bancos y entidades financieras para ofrecer opciones de financiamiento a nuestros clientes."
         },
         {
             question: "¿Cuánto tiempo toma normalmente el proceso de compra?",
-            answer: "El tiempo puede variar dependiendo de varios factores, pero en general, el proceso puede tomar entre 30 y 90 días desde la oferta inicial hasta el cierre de la venta."
+            answer: "El proceso puede variar, pero generalmente toma entre 30 y 90 días desde la oferta inicial hasta el cierre."
         },
         {
-            question: "¿Qué servicios ofrecen para propietarios que quieren alquilar su propiedad?",
-            answer: "Ofrecemos servicios completos de gestión de alquileres, incluyendo la búsqueda de inquilinos, mantenimiento de la propiedad, cobro de alquileres y manejo de problemas que puedan surgir."
+            question: "¿Qué servicios post-venta ofrecen?",
+            answer: "Ofrecemos asesoría legal, gestión de documentación y apoyo en trámites relacionados con la propiedad después de la compra."
         }
     ];
 
