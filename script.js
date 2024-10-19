@@ -97,9 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Constantes para YouTube
     const YOUTUBE_CHANNEL_ID = 'UCiahlQJxCgPY-tEfjvkab8g';
-    const YOUTUBE_API_KEY = 'AIzaSyBPsHN1pv1ZCeRipA
-
-JL0CY50VD08uC4Q_Y';
+    const YOUTUBE_API_KEY = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
 
     // Inicializar componentes
     initSliders();
@@ -273,6 +271,7 @@ JL0CY50VD08uC4Q_Y';
                     img.addEventListener('click', () => showFullImage(index));
                     galleryImages.appendChild(img);
                 });
+                
                 
                 // Actualizar información de la propiedad
                 galleryInfo.innerHTML = `
@@ -566,6 +565,9 @@ JL0CY50VD08uC4Q_Y';
 
         try {
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`);
+            if (!response.ok) {
+                throw new Error('Error en la respuesta de la API de YouTube');
+            }
             const data = await response.json();
             
             youtubeSlider.innerHTML = data.items
@@ -602,6 +604,7 @@ JL0CY50VD08uC4Q_Y';
             });
         } catch (error) {
             console.error('Error al cargar videos de YouTube:', error);
+            youtubeSlider.innerHTML = '<p>Lo sentimos, no se pudieron cargar los videos en este momento.</p>';
         }
     }
 });
