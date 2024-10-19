@@ -25,30 +25,30 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 2, 
-            title: "Casa de lujo en Guayaquil", 
-            price: "$500,000", 
-            image: "/img/casa-lujo-guayaquil.jpg", 
-            type: "venta",
-            description: "Hermosa casa de lujo con 5 habitaciones, piscina y jardín amplio en una de las zonas más exclusivas de Guayaquil.",
-            images: ["/img/casa-lujo-guayaquil-1.jpg", "/img/casa-lujo-guayaquil-2.jpg", "/img/casa-lujo-guayaquil-3.jpg"]
+            title: "Departamento vista al rio – Via Samborondon", 
+            price: "Consultar", 
+            image: "/img/departamentos.jpg", 
+            type: "alquiler",
+            description: "Últimas unidades disponibles de 2 y 3 habitaciones con balcones, master y áreas sociales con vista al río. Incluyen dormitorio secundario completo, sala, comedor, cocina tipo americana, lavandería, parqueo, piscina, pérgola y malecón. Trabajamos con todas las instituciones financieras y gestionamos su crédito hipotecario. Crédito directo disponible, consulte nuestras opciones de financiamiento.",
+            images: ["/img/i1.jpeg", "/img/i2-768x1024.jpeg", "/img/i3.jpeg", "/img/i4-1024x576.jpeg", "/img/i5-1024x682.jpeg", "/img/i6.jpeg", "/img/departamentos7.jpg", "/img/departamentos8.jpg", "/img/departamentos9.jpg", "/img/departamentos10.jpg"]
         },
         { 
             id: 3, 
-            title: "Apartamento en el centro de Quito", 
-            price: "$1,200/mes", 
-            image: "/img/apartamento-quito.jpg", 
-            type: "alquiler",
-            description: "Moderno apartamento de 2 habitaciones en el corazón de Quito, cerca de todos los servicios y transporte público.",
-            images: ["/img/apartamento-quito-1.jpg", "/img/apartamento-quito-2.jpg", "/img/apartamento-quito-3.jpg"]
+            title: "Locales comerciales y oficinas – Via Samborondon", 
+            price: "Consultar", 
+            image: "/img/locales.jpg", 
+            type: "venta",
+            description: "Proyecto en pre-construcción, estratégicamente ubicado en el nuevo Samborondón, cerca de centros comerciales, iglesias, clínicas, escuelas, universidades, restaurantes y el Parque Bicentenario. Venta directa con plusvalía garantizada por el alto movimiento del sector. Ofrecemos crédito directo a 16 meses sin intereses y apoyo en la gestión de crédito bancario. Al ser un proyecto en planos, facilita la organización financiera. Cuenta con ascensor, excelente precio y ubicación, y oficina de administración.",
+            images: ["/img/locales1.jpg", "/img/locales2.jpg", "/img/locales3.jpeg", "/img/locales4.jpg", "/img/localea5.jpg", "/img/locales6.jpg", "/img/locales7.jpg", "/img/locales8.jpg", "/img/locales9.jpg", "/img/locales10.jpg"]
         },
         { 
             id: 4, 
-            title: "Terreno en Cuenca", 
-            price: "$150,000", 
-            image: "/img/terreno-cuenca.jpg", 
-            type: "venta",
-            description: "Amplio terreno de 1000m2 en las afueras de Cuenca, perfecto para construir tu casa de campo o para inversión.",
-            images: ["/img/terreno-cuenca-1.jpg", "/img/terreno-cuenca-2.jpg", "/img/terreno-cuenca-3.jpg"]
+            title: "Oficina ejecutiva en Quito", 
+            price: "$2,200/mes", 
+            image: "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", 
+            type: "alquiler",
+            description: "Oficina ejecutiva de lujo en el corazón financiero de Quito. Este espacio de trabajo premium ofrece un ambiente profesional y sofisticado, ideal para empresas que buscan proyectar una imagen de éxito. Con vistas impresionantes de la ciudad, la oficina cuenta con tecnología de punta, salas de conferencias equipadas y áreas comunes elegantes. Ubicada en un edificio de prestigio con seguridad 24/7, esta oficina proporciona el entorno perfecto para impulsar su negocio al siguiente nivel.",
+            images: ["/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", "/img/oficina2.jpg", "/img/oficina3.jpg", "/img/oficina4.jpg", "/img/oficina5.jpg", "/img/oficina6.jpg", "/img/oficina7.jpg", "/img/oficina8.jpg", "/img/oficina9.jpg", "/img/oficina10.jpg"]
         }
     ];
 
