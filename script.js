@@ -1,9 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Preloader
-    window.addEventListener('load', function() {
-        document.querySelector('.preloader').style.display = 'none';
-    });
-
     // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
     const promoItems = [
         "¡Oferta especial! 10% de descuento en propiedades seleccionadas",
@@ -28,7 +23,33 @@ document.addEventListener('DOMContentLoaded', function() {
             description: "Proyecto en pre-construcción con 6 torres y 378 apartamentos, ofrecemos crédito hipotecario para inversionistas latinoamericanos. El Sycamore Club, con 3 pisos, cuenta con gastronomía, deportes, recreación, club de niños, espacio para eventos, gimnasio, spa y salón de belleza. Estrategia exclusiva de alquiler con alto porcentaje de rentabilidad.",
             images: ["/img/orlando1.jpg", "/img/orlando3.jpg", "/img/orlando10.png", "/img/orlando6.png", "/img/orlando7.jpeg", "/img/orlando8.png", "/img/orlando9.png", "/img/orlandoflorida8.jpg", "/img/orlandoflorida9.jpg", "/img/orlandoflorida10.jpg"]
         },
-        // Agrega más propiedades aquí
+        { 
+            id: 2, 
+            title: "Casa de lujo en Guayaquil", 
+            price: "$500,000", 
+            image: "/img/casa-lujo-guayaquil.jpg", 
+            type: "venta",
+            description: "Hermosa casa de lujo con 5 habitaciones, piscina y jardín amplio en una de las zonas más exclusivas de Guayaquil.",
+            images: ["/img/casa-lujo-guayaquil-1.jpg", "/img/casa-lujo-guayaquil-2.jpg", "/img/casa-lujo-guayaquil-3.jpg"]
+        },
+        { 
+            id: 3, 
+            title: "Apartamento en el centro de Quito", 
+            price: "$1,200/mes", 
+            image: "/img/apartamento-quito.jpg", 
+            type: "alquiler",
+            description: "Moderno apartamento de 2 habitaciones en el corazón de Quito, cerca de todos los servicios y transporte público.",
+            images: ["/img/apartamento-quito-1.jpg", "/img/apartamento-quito-2.jpg", "/img/apartamento-quito-3.jpg"]
+        },
+        { 
+            id: 4, 
+            title: "Terreno en Cuenca", 
+            price: "$150,000", 
+            image: "/img/terreno-cuenca.jpg", 
+            type: "venta",
+            description: "Amplio terreno de 1000m2 en las afueras de Cuenca, perfecto para construir tu casa de campo o para inversión.",
+            images: ["/img/terreno-cuenca-1.jpg", "/img/terreno-cuenca-2.jpg", "/img/terreno-cuenca-3.jpg"]
+        }
     ];
 
     const services = [
@@ -56,7 +77,22 @@ document.addEventListener('DOMContentLoaded', function() {
             question: "¿Cómo puedo comenzar a buscar una propiedad?",
             answer: "Puede comenzar explorando nuestro catálogo en línea o contactarnos directamente para una consulta personalizada."
         },
-        // Agrega más preguntas frecuentes aquí
+        {
+            question: "¿Qué documentos necesito para comprar una propiedad?",
+            answer: "Generalmente, necesitará una identificación válida, comprobantes de ingresos, declaraciones de impuestos y, en algunos casos, un historial crediticio. Nuestro equipo le guiará a través del proceso específico según su situación."
+        },
+        {
+            question: "¿Ofrecen opciones de financiamiento?",
+            answer: "Sí, trabajamos con varios bancos y entidades financieras para ofrecer opciones de financiamiento. Podemos ayudarle a encontrar la mejor opción según su situación financiera."
+        },
+        {
+            question: "¿Cuánto tiempo toma normalmente el proceso de compra?",
+            answer: "El tiempo puede variar dependiendo de varios factores, pero en general, el proceso puede tomar entre 30 y 90 días desde la oferta inicial hasta el cierre de la venta."
+        },
+        {
+            question: "¿Qué servicios ofrecen para propietarios que quieren alquilar su propiedad?",
+            answer: "Ofrecemos servicios completos de gestión de alquileres, incluyendo la búsqueda de inquilinos, mantenimiento de la propiedad, cobro de alquileres y manejo de problemas que puedan surgir."
+        }
     ];
 
     // Constantes para YouTube
@@ -103,9 +139,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Inicializar el slider de propiedades
-        if ($('.property-slider').length) {
-            $('.property-slider').html(properties.map(property => `
+        // Renderizar propiedades destacadas
+        const featuredProperties = document.querySelector('#propiedades .grid');
+        if (featuredProperties) {
+            feat
+
+uredProperties.innerHTML = properties.slice(0, 4).map(property => `
                 <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden">
                     <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
                     <div class="p-4">
@@ -114,29 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
                     </div>
                 </div>
-            `).join(''));
-            $('.property-slider').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                arrows: false,
-                dots: true,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 640,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            });
+            `).join('');
         }
     }
 
@@ -308,7 +325,6 @@ document.addEventListener('DOMContentLoaded', function() {
             testimonialsSlider.innerHTML = testimonials.map(testimonial => `
                 <div class="bg-white p-6 rounded-lg shadow-md mx-2">
                     <div class="flex items-center mb-4">
-                        
                         <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4">
                         <h3 class="font-bold">${testimonial.name}</h3>
                     </div>
@@ -382,12 +398,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const faqContainer = document.getElementById('faq-container');
         if (faqContainer) {
             faqContainer.innerHTML = faqs.map((faq, index) => `
-                <div class="faq-item">
-                    <div class="faq-question" data-index="${index}">
+                <div class="faq-item mb-4">
+                    <button class="faq-question w-full text-left font-semibold py-2 px-4 bg-gray-100 rounded-t-lg" data-index="${index}">
                         ${faq.question}
-                        <i class="fas fa-chevron-down faq-icon"></i>
+                        <i class="fas fa-chevron-down float-right"></i>
+                    </button>
+                    <div class="faq-answer hidden p-4 bg-white border border-gray-200 rounded-b-lg">
+                        ${faq.answer}
                     </div>
-                    <div class="faq-answer">${faq.answer}</div>
                 </div>
             `).join('');
 
@@ -395,8 +413,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const faqQuestions = document.querySelectorAll('.faq-question');
             faqQuestions.forEach(question => {
                 question.addEventListener('click', () => {
-                    const faqItem = question.parentElement;
-                    faqItem.classList.toggle('active');
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('i');
+                    answer.classList.toggle('hidden');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
                 });
             });
         }
@@ -405,8 +426,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function initMap() {
         const mapContainer = document.getElementById('map-container');
         if (mapContainer && typeof google !== 'undefined' && google.maps) {
-            const lat = parseFloat(mapContainer.getAttribute('data-lat'));
-            const lng = parseFloat(mapContainer.getAttribute('data-lng'));
+            const lat = -2.1894128; // Reemplaza con la latitud correcta
+            const lng = -79.8890662; // Reemplaza con la longitud correcta
 
             const map = new google.maps.Map(mapContainer, {
                 center: { lat, lng },
