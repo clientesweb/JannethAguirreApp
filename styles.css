@@ -10,14 +10,26 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--background-color);
     color: #333;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
 }
 
 /* Estilos para el chatbot */
 #ai-real-estate-expert-chatbot {
     position: fixed;
-    bottom: 140px; /* Ajustado para estar encima del botón de WhatsApp */
-    right: 20px; /* Cambiado a la derecha para alinearse con el botón de WhatsApp */
-    z-index: 1001; /* Asegura que esté por encima de otros elementos */
+    bottom: 140px;
+    right: 20px;
+    z-index: 1001;
 }
 
 #ai-real-estate-expert-chatbot .chat-button {
@@ -42,7 +54,7 @@ body {
 #ai-real-estate-expert-chatbot .chat-window {
     position: absolute;
     bottom: 70px;
-    right: 0; /* Alineado a la derecha */
+    right: 0;
     width: 300px;
     height: 400px;
     background-color: white;
@@ -54,7 +66,7 @@ body {
 /* Estilos para el botón de WhatsApp */
 .whatsapp-button {
     position: fixed;
-    bottom: 80px; /* Ajustado para estar encima del menú inferior */
+    bottom: 80px;
     right: 20px;
     background-color: #25D366;
     color: white;
@@ -77,7 +89,7 @@ body {
 
 /* Estilos para el menú inferior */
 .bottom-nav {
-    display: flex;
+    display: none;
     justify-content: space-around;
     align-items: center;
     position: fixed;
@@ -103,98 +115,20 @@ body {
     margin-bottom: 5px;
 }
 
-/* Estilos responsivos */
-@media (min-width: 769px) {
-    .bottom-nav {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    #ai-real-estate-expert-chatbot {
-        bottom: 160px; /* Ajustado para pantallas más pequeñas */
-        right: 10px;
-    }
-
-    #ai-real-estate-expert-chatbot .chat-button {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-    }
-
-    .whatsapp-button {
-        bottom: 100px; /* Ajustado para pantallas más pequeñas */
-        right: 10px;
-        width: 50px;
-        height: 50px;
-        font-size: 25px;
-    }
-
-    .bottom-nav {
-        display: flex;
-    }
-}
-
-/* Resto de los estilos (sin cambios) */
+/* Estilos para las tarjetas de propiedades */
 .property-card {
     transition: transform 0.3s ease-in-out;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .property-card:hover {
     transform: scale(1.05);
 }
 
+/* Estilos para los sliders */
 .slick-prev:before, .slick-next:before {
     color: var(--primary-color);
-}
-
-.fade-in-section {
-    opacity: 0;
-    transform: translateY(20vh);
-    visibility: hidden;
-    transition: opacity 0.6s ease-out, transform 1.2s ease-out;
-    will-change: opacity, visibility;
-}
-
-.fade-in-section.is-visible {
-    opacity: 1;
-    transform: none;
-    visibility: visible;
-}
-
-#back-to-top {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    z-index: 99;
-    border: none;
-    outline: none;
-    background-color: var(--primary-color);
-    color: white;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 50%;
-    font-size: 18px;
-    transition: opacity 0.3s;
-}
-
-#back-to-top:hover {
-    opacity: 0.8;
-}
-
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: #000000;
-    color: white;
-    padding: 8px;
-    z-index: 100;
-}
-
-.skip-link:focus {
-    top: 0;
 }
 
 .hero-slider {
@@ -221,44 +155,36 @@ body {
     color: white;
 }
 
+.youtube-slider, #store-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.youtube-slider::-webkit-scrollbar, #store-slider::-webkit-scrollbar {
+    display: none;
+}
+
 .youtube-video {
-    width: 300px;
-    margin-right: 20px;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    padding: 0 10px;
 }
 
-.youtube-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.youtube-slider::-webkit-scrollbar {
-    display: none;
-}
-
-#store-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-#store-slider::-webkit-scrollbar {
-    display: none;
+.youtube-video iframe {
+    width: 100%;
+    height: 200px;
 }
 
 #store-slider .property-card {
-    flex: 0 0 auto;
-    width: 300px;
-    margin-right: 20px;
+    flex: 0 0 100%;
     scroll-snap-align: start;
 }
 
+/* Estilos para las FAQ */
 .faq-item {
     border-bottom: 1px solid #e2e8f0;
     padding: 1rem 0;
@@ -291,6 +217,7 @@ body {
     transform: rotate(180deg);
 }
 
+/* Estilos para la galería */
 #gallery-modal {
     background-color: rgba(0, 0, 0, 0.9);
 }
@@ -357,49 +284,93 @@ body {
     right: 20px;
 }
 
-.youtube-slider {
-    position: relative;
+/* Estilos adicionales */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20vh);
+    visibility: hidden;
+    transition: opacity 0.6s ease-out, transform 1.2s ease-out;
+    will-change: opacity, visibility;
 }
 
-.youtube-slider .slick-prev,
-.youtube-slider .slick-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    background-color: rgba(255, 255, 255, 0.7);
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+}
+
+#back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    padding: 15px;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 18px;
+    transition: opacity 0.3s;
 }
 
-.youtube-slider .slick-prev {
-    left: 10px;
+#back-to-top:hover {
+    opacity: 0.8;
 }
 
-.youtube-slider .slick-next {
-    right: 10px;
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000000;
+    color: white;
+    padding: 8px;
+    z-index: 100;
 }
 
-.youtube-slider .slick-prev:before,
-.youtube-slider .slick-next:before {
-    color: var(--primary-color);
+.skip-link:focus {
+    top: 0;
 }
 
-.youtube-video {
-    padding: 0 10px;
+/* Media queries para responsividad */
+@media (min-width: 641px) {
+    .youtube-video, #store-slider .property-card {
+        flex: 0 0 50%;
+    }
 }
 
-.youtube-video iframe {
-    width: 100%;
-    height: 200px;
+@media (min-width: 1024px) {
+    .youtube-video, #store-slider .property-card {
+        flex: 0 0 33.333%;
+    }
 }
 
-/* Estilos adicionales para mejorar la responsividad */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+    #ai-real-estate-expert-chatbot {
+        bottom: 160px;
+        right: 10px;
+    }
+
+    #ai-real-estate-expert-chatbot .chat-button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .whatsapp-button {
+        bottom: 100px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+
+    .bottom-nav {
+        display: flex;
+    }
+
     .hero-slider .slick-slide {
         height: calc(100vh - 60px);
     }
@@ -407,15 +378,6 @@ body {
     #gallery-images img {
         width: 80px;
         height: 80px;
-    }
-
-    .youtube-video {
-        width: 100%;
-        margin-right: 0;
-    }
-
-    #store-slider .property-card {
-        width: 250px;
     }
 }
 
@@ -430,10 +392,10 @@ body {
     }
 
     #ai-real-estate-expert-chatbot {
-        bottom: 180px; /* Ajustado aún más para pantallas muy pequeñas */
+        bottom: 180px;
     }
 
     .whatsapp-button {
-        bottom: 120px; /* Ajustado aún más para pantallas muy pequeñas */
+        bottom: 120px;
     }
 }
