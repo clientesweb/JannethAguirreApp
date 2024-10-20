@@ -1,63 +1,107 @@
+<style>
+/* Estilos generales y variables */
+:root {
+    --primary-color: #FF0000;
+    --secondary-color: #808080;
+    --background-color: #FFFFFF;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: #333;
+}
+
 /* Estilos para el chatbot */
 #ai-real-estate-expert-chatbot {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
     z-index: 1000;
 }
 
-#ai-real-estate-expert-chatbot .bg-primary {
-    background-color: #FF0000;
-}
-
-#ai-real-estate-expert-chatbot .text-primary {
-    color: #FF0000;
-}
-
-#ai-real-estate-expert-chatbot .border-primary {
-    border-color: #FF0000;
-}
-
-#ai-real-estate-expert-chatbot .ring-primary {
-    --tw-ring-color: #FF0000;
-}
-
-#ai-real-estate-expert-chatbot .suggested-query {
-    cursor: pointer;
-    padding: 5px 10px;
-    margin: 5px;
-    background-color: #f0f0f0;
-    border-radius: 15px;
-    display: inline-block;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-#ai-real-estate-expert-chatbot .suggested-query:hover {
-    background-color: #e0e0e0;
-    transform: scale(1.05);
-}
-
-#ai-real-estate-expert-chatbot .chat-message {
-    max-width: 80%;
-    word-wrap: break-word;
-}
-
-#ai-real-estate-expert-chatbot .user-message {
-    background-color: #FF0000;
+#ai-real-estate-expert-chatbot .chat-button {
+    background-color: var(--primary-color);
     color: white;
-    border-radius: 18px 18px 0 18px;
-    padding: 10px 15px;
-    margin-left: auto;
-    margin-bottom: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
 }
 
-#ai-real-estate-expert-chatbot .bot-message {
-    background-color: #f0f0f0;
-    color: black;
-    border-radius: 18px 18px 18px 0;
-    padding: 10px 15px;
-    margin-right: auto;
-    margin-bottom: 10px;
+#ai-real-estate-expert-chatbot .chat-button:hover {
+    transform: scale(1.1);
 }
 
-/* Estilos para las tarjetas de propiedades */
+#ai-real-estate-expert-chatbot .chat-window {
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+/* Estilos para el botón de WhatsApp */
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.whatsapp-button:hover {
+    transform: scale(1.1);
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    #ai-real-estate-expert-chatbot {
+        bottom: 70px;
+        left: 10px;
+    }
+
+    #ai-real-estate-expert-chatbot .chat-button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .whatsapp-button {
+        bottom: 70px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+
+    .bottom-nav {
+        display: flex;
+    }
+}
+
+/* Resto de los estilos (sin cambios) */
 .property-card {
     transition: transform 0.3s ease-in-out;
 }
@@ -66,24 +110,21 @@
     transform: scale(1.05);
 }
 
-/* Estilos para los sliders */
 .slick-prev:before, .slick-next:before {
-    color: #FF0000;
+    color: var(--primary-color);
 }
 
-/* Estilos para el menú inferior responsivo */
 .bottom-nav {
-    display: flex;
+    display: none;
     justify-content: space-around;
     align-items: center;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #FF0000;
+    background-color: var(--primary-color);
     padding: 10px;
-    z-index: 1000;
-    transition: transform 0.3s ease-in-out;
+    z-index: 999;
 }
 
 .bottom-nav a {
@@ -100,13 +141,6 @@
     margin-bottom: 5px;
 }
 
-@media (min-width: 768px) {
-    .bottom-nav {
-        display: none;
-    }
-}
-
-/* Estilos para el efecto de aparición al hacer scroll */
 .fade-in-section {
     opacity: 0;
     transform: translateY(20vh);
@@ -121,7 +155,6 @@
     visibility: visible;
 }
 
-/* Estilos para el botón "Volver arriba" */
 #back-to-top {
     display: none;
     position: fixed;
@@ -130,7 +163,7 @@
     z-index: 99;
     border: none;
     outline: none;
-    background-color: #FF0000;
+    background-color: var(--primary-color);
     color: white;
     cursor: pointer;
     padding: 15px;
@@ -143,7 +176,6 @@
     opacity: 0.8;
 }
 
-/* Estilos para el skip link */
 .skip-link {
     position: absolute;
     top: -40px;
@@ -158,7 +190,6 @@
     top: 0;
 }
 
-/* Estilos para el hero */
 .hero-slider {
     width: 100%;
     height: 100%;
@@ -183,7 +214,6 @@
     color: white;
 }
 
-/* Estilos para la sección de YouTube */
 .youtube-video {
     width: 300px;
     margin-right: 20px;
@@ -202,7 +232,6 @@
     display: none;
 }
 
-/* Estilos para la sección de tienda */
 #store-slider {
     display: flex;
     overflow-x: auto;
@@ -223,7 +252,6 @@
     scroll-snap-align: start;
 }
 
-/* Estilos para la sección de FAQs */
 .faq-item {
     border-bottom: 1px solid #e2e8f0;
     padding: 1rem 0;
@@ -256,7 +284,6 @@
     transform: rotate(180deg);
 }
 
-/* Estilos para el modal de galería mejorado */
 #gallery-modal {
     background-color: rgba(0, 0, 0, 0.9);
 }
@@ -323,7 +350,6 @@
     right: 20px;
 }
 
-/* Estilos para el slider de YouTube */
 .youtube-slider {
     position: relative;
 }
@@ -353,7 +379,7 @@
 
 .youtube-slider .slick-prev:before,
 .youtube-slider .slick-next:before {
-    color: #FF0000;
+    color: var(--primary-color);
 }
 
 .youtube-video {
@@ -364,3 +390,36 @@
     width: 100%;
     height: 200px;
 }
+
+/* Estilos adicionales para mejorar la responsividad */
+@media (max-width: 640px) {
+    .hero-slider .slick-slide {
+        height: calc(100vh - 60px);
+    }
+
+    #gallery-images img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .youtube-video {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    #store-slider .property-card {
+        width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    #gallery-images img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .youtube-video iframe {
+        height: 180px;
+    }
+}
+</style>
