@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Configuración de la API de YouTube
             const API_KEY = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
             const CHANNEL_ID = 'UCiahlQJxCgPY-tEfjvkab8g';
-            const MAX_RESULTS = 5;
+            const MAX_RESULTS = 10;
 
             // Hacer la solicitud a la API de YouTube
             fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`)
