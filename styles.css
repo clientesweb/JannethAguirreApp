@@ -323,178 +323,44 @@
     right: 20px;
 }
 
-/* Estilos para el slider de Instagram */
-.instagram-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+/* Estilos para el slider de YouTube */
+.youtube-slider {
+    position: relative;
 }
 
-.instagram-slider::-webkit-scrollbar {
-    display: none;
-}
-
-.instagram-post {
-    flex: 0 0 auto;
-    width: 300px;
-    margin-right: 20px;
-    scroll-snap-align: start;
-}
-
-.instagram-post img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-}
-
-/* Estilos para el slider de testimonios */
-.testimonials-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.testimonials-slider::-webkit-scrollbar {
-    display: none;
-}
-
-.testimonial {
-    flex: 0 0 auto;
-    width: 300px;
-    margin-right: 20px;
-    scroll-snap-align: start;
-    background-color: #f8f8f8;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.testimonial img {
-    width: 60px;
-    height: 60px;
+.youtube-slider .slick-prev,
+.youtube-slider .slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.testimonial p {
-    font-style: italic;
-    margin-bottom: 10px;
+.youtube-slider .slick-prev {
+    left: 10px;
 }
 
-.testimonial h4 {
-    font-weight: bold;
+.youtube-slider .slick-next {
+    right: 10px;
 }
 
-/* Estilos para los botones de filtro */
-#filter-buttons button {
-    background-color: #f0f0f0;
-    border: none;
-    padding: 10px 15px;
-    margin: 5px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#filter-buttons button:hover,
-#filter-buttons button.active {
-    background-color: #FF0000;
-    color: white;
-}
-
-/* Estilos para el campo de búsqueda */
-#search-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Estilos para las tarjetas de servicios */
-.service-card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.service-card:hover {
-    transform: translateY(-10px);
-}
-
-.service-card i {
-    font-size: 3rem;
+.youtube-slider .slick-prev:before,
+.youtube-slider .slick-next:before {
     color: #FF0000;
-    margin-bottom: 15px;
 }
 
-.service-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+.youtube-video {
+    padding: 0 10px;
 }
 
-.service-card p {
-    font-size: 1rem;
-    color: #666;
-}
-
-/* Estilos para el botón de instalación de la PWA */
-#install-app {
-    display: none;
-    background-color: #FF0000;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#install-app:hover {
-    background-color: #CC0000;
-}
-
-/* Media queries para responsividad */
-@media (max-width: 768px) {
-    .container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .property-card,
-    .service-card {
-        width: 100%;
-    }
-
-    .youtube-video,
-    .instagram-post,
-    .testimonial {
-        width: 250px;
-    }
-}
-
-@media (max-width: 480px) {
-    .youtube-video,
-    .instagram-post,
-    .testimonial {
-        width: 200px;
-    }
+.youtube-video iframe {
+    width: 100%;
+    height: 200px;
 }
