@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
             propertyCard.innerHTML = `
                 <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
                 <div class="p-4">
-                    <h3 class="font-bold text-xl mb-2">${property.title}</h3>
+                    <h3  class="font-bold text-xl mb-2">${property.title}</h3>
                     <p class="text-gray-700 text-base mb-4">${property.price}</p>
                     <p class="text-gray-600 mb-4">${property.description}</p>
                     <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-details" data-id="${property.id}">Ver Detalles</button>
@@ -493,7 +493,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
     // Función para manejar el formulario de contacto
     function initContactForm() {
         const form = document.getElementById('contact-form');
@@ -502,7 +501,6 @@ document.addEventListener('DOMContentLoaded', function() {
             form.setAttribute('method', 'POST');
         }
     }
-
 
     // Función para el botón "Volver arriba"
     function handleBackToTop() {
@@ -583,8 +581,8 @@ document.addEventListener('DOMContentLoaded', function() {
     closeGalleryModal();
     closeFullImage();
     navigateFullImages();
-    createYouTubeSlider();
-    handleContactForm();
+    initYouTubeVideos();
+    initContactForm();
     handleBackToTop();
     handleScrollAnimation();
     handleInstallApp();
