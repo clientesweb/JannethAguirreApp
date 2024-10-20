@@ -469,8 +469,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const youtubeContainer = document.getElementById('youtube-slider');
         if (youtubeContainer) {
             // Configuración de la API de YouTube
-            const API_KEY = 'TU_API_KEY_DE_YOUTUBE';
-            const CHANNEL_ID = 'TU_ID_DE_CANAL_DE_YOUTUBE';
+            const API_KEY = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
+            const CHANNEL_ID = 'UCiahlQJxCgPY-tEfjvkab8g';
             const MAX_RESULTS = 5;
 
             // Hacer la solicitud a la API de YouTube
