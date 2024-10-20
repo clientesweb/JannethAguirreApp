@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 2, 
             title: "Isla Mocoli", 
-            price: "$250,000", 
+            price: "Consultar", 
             image: "/img/samborondon.jpg", 
             type: "venta",
             description: "Departamentos en planos - Departamentos listos de estreno",
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 3, 
             title: "Departamentos en planos y de estreno en el nuevo Samborondón", 
-            price: "$180,000", 
+            price: "Consultar", 
             image: "/img/guayaquil.jpg", 
             type: "venta",
             description: "Casa de dos plantas en Guayaquil, con 4 dormitorios, 3 baños, sala, comedor, cocina, patio y garaje para 2 vehículos.",
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 4, 
             title: "Locales Comerciales en nuevo Samborondón", 
-            price: "$800/mes", 
+            price: "Consultar", 
             image: "/img/quito.jpg", 
             type: "alquiler",
             description: "",
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 5, 
             title: "Terrenos Urbanizados residenciales", 
-            price: "$1,000/mes", 
+            price: "Consultar", 
             image: "/img/cuenca.jpg", 
             type: "alquiler",
             description: "",
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 6, 
             title: "Terrenos industriales", 
-            price: "$120,000", 
+            price: "Consultar", 
             image: "/img/manta.jpg", 
             type: "venta",
             description: "",
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 7, 
             title: "Terrenos Comerciales", 
-            price: "$1,500/mes", 
+            price: "Consultar", 
             image: "/img/oficina_guayaquil.jpg", 
             type: "alquiler",
             description: "",
