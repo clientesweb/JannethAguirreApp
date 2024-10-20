@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const properties = [
         { 
             id: 1, 
-            title: "Depart. en venta – Orlando Florida – Condo Hotel", 
+            title: "Guayaquil Samborondon", 
             price: "Consultar", 
-            image: "/img/orlandoflorida.jpg", 
+            image: "/img/Guayaquil.png", 
             type: "venta",
-            description: "Proyecto en pre-construcción con 6 torres y 378 apartamentos, ofrecemos crédito hipotecario para inversionistas latinoamericanos. El Sycamore Club,  es un proyecto de apartamentos de lujo en Orlando, Florida, ubicado a 10 minutos de Disney World y Universal Studios.",
+            description: "",
             gallery: [
                 "/img/orlandoflorida.jpg",
                 "/img/orlandoflorida2.jpg",
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 2, 
-            title: "Departamento en venta – Samborondón", 
+            title: "Isla Mocoli", 
             price: "$250,000", 
             image: "/img/samborondon.jpg", 
             type: "venta",
-            description: "Hermoso departamento en Samborondón, con vista al río. 3 dormitorios, 2 baños, sala, comedor, cocina y área de lavandería.",
+            description: "Departamentos en planos - Departamentos listos de estreno",
             gallery: [
                 "/img/samborondon.jpg",
                 "/img/samborondon2.jpg",
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 3, 
-            title: "Casa en venta – Guayaquil", 
+            title: "Departamentos en planos y de estreno en el nuevo Samborondón", 
             price: "$180,000", 
             image: "/img/guayaquil.jpg", 
             type: "venta",
@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 4, 
-            title: "Departamento en alquiler – Quito", 
+            title: "Locales Comerciales en nuevo Samborondón", 
             price: "$800/mes", 
             image: "/img/quito.jpg", 
             type: "alquiler",
-            description: "Moderno departamento en el centro de Quito, amoblado, con 2 dormitorios, 1 baño, sala, comedor y cocina.",
+            description: "",
             gallery: [
                 "/img/quito.jpg",
                 "/img/quito2.jpg",
@@ -61,11 +61,11 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 5, 
-            title: "Casa en alquiler – Cuenca", 
+            title: "Terrenos Urbanizados residenciales", 
             price: "$1,000/mes", 
             image: "/img/cuenca.jpg", 
             type: "alquiler",
-            description: "Hermosa casa en Cuenca, con 3 dormitorios, 2.5 baños, sala, comedor, cocina, jardín y garaje.",
+            description: "",
             gallery: [
                 "/img/cuenca.jpg",
                 "/img/cuenca2.jpg",
@@ -74,11 +74,11 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 6, 
-            title: "Terreno en venta – Manta", 
+            title: "Terrenos industriales", 
             price: "$120,000", 
             image: "/img/manta.jpg", 
             type: "venta",
-            description: "Amplio terreno en Manta, ideal para desarrollo residencial o comercial. 1000 m2 con todos los servicios básicos.",
+            description: "",
             gallery: [
                 "/img/manta.jpg",
                 "/img/manta2.jpg",
@@ -87,11 +87,11 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 7, 
-            title: "Oficina en alquiler – Guayaquil", 
+            title: "Terrenos Comerciales", 
             price: "$1,500/mes", 
             image: "/img/oficina_guayaquil.jpg", 
             type: "alquiler",
-            description: "Moderna oficina en el centro empresarial de Guayaquil. 100 m2, totalmente equipada y con excelente ubicación.",
+            description: "",
             gallery: [
                 "/img/oficina_guayaquil.jpg",
                 "/img/oficina_guayaquil2.jpg",
@@ -105,8 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Alquiler", icon: "fas fa-key", description: "Gestión de alquileres a corto y largo plazo." },
         { title: "Inversiones", icon: "fas fa-chart-line", description: "Oportunidades de inversión en bienes raíces." },
         { title: "Tasaciones", icon: "fas fa-calculator", description: "Valoración profesional de propiedades." },
-        { title: "Asesoría Legal", icon: "fas fa-gavel", description: "Asistencia legal en transacciones inmobiliarias." },
-        { title: "Remodelaciones", icon: "fas fa-hammer", description: "Servicios de remodelación y mejora de propiedades." }
+        { title: "Asesoría Legal", icon: "fas fa-gavel", description: "Asistencia legal en transacciones inmobiliarias." }
     ];
 
     const testimonials = [
