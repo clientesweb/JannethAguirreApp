@@ -144,12 +144,28 @@
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="h-12">
-                <button id="install-app" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">
-                    <i class="fas fa-download mr-2"></i> Instalar App
+                <nav class="hidden md:flex space-x-4">
+                    <a href="#inicio" class="text-white hover:text-primary transition-colors">Inicio</a>
+                    <a href="#propiedades" class="text-white hover:text-primary transition-colors">Propiedades</a>
+                    <a href="#servicios" class="text-white hover:text-primary transition-colors">Servicios</a>
+                    <a href="#contacto" class="text-white hover:text-primary transition-colors">Contacto</a>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden text-white">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
     </header>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-secondary fixed inset-0 z-50 flex flex-col items-center justify-center">
+        <button id="close-mobile-menu" class="absolute top-4 right-4 text-white">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#inicio" class="text-white text-2xl py-2">Inicio</a>
+        <a href="#propiedades" class="text-white text-2xl py-2">Propiedades</a>
+        <a href="#servicios" class="text-white text-2xl py-2">Servicios</a>
+        <a href="#contacto" class="text-white text-2xl py-2">Contacto</a>
+    </div>
 
     <main id="main-content">
         <section id="inicio" class="relative h-[calc(100vh-80px)] overflow-hidden fade-in-section">
@@ -176,7 +192,7 @@
 
         <section id="servicios" class="bg-secondary py-16 fade-in-section">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8">Nuestros Servicios</h2>
+                <h2 class="text-3xl font-bold text-center mb-8 text-white">Nuestros Servicios</h2>
                 <div id="service-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Service cards will be inserted here by JavaScript -->
                 </div>
@@ -187,7 +203,7 @@
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Tienda de Propiedades</h2>
                 
-                <div id="filter-buttons" class="flex justify-center space-x-4 mb-4">
+                <div id="filter-buttons" class="flex flex-wrap justify-center space-x-2 space-y-2 mb-4">
                     <!-- Los botones de filtro se insertarán aquí mediante JavaScript -->
                 </div>
                 
@@ -212,10 +228,11 @@
             </div>
         </div>
 
-        <div id="full-image-container" class="hidden">
-            <img id="full-image" src="" alt="Imagen completa">
-            <div id="prev-image" class="gallery-nav">&lt;</div>
-            <div id="next-image" class="gallery-nav">&gt;</div>
+        <div id="full-image-container" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex justify-center items-center">
+            <img id="full-image" src="" alt="Imagen completa" class="max-w-full max-h-full">
+            <div id="prev-image" class="gallery-nav absolute left-4">&lt;</div>
+            <div id="next-image" class="gallery-nav absolute right-4">&gt;</div>
+            <div id="close-full-image" class="absolute top-4 right-4 text-white text-2xl cursor-pointer">&times;</div>
         </div>
 
         <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
@@ -239,7 +256,7 @@
         <section id="instagram" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Síguenos en Instagram</h2>
-                <div id="instagram-slider" class="instagram-slider">
+                <div  id="instagram-slider" class="instagram-slider">
                     <!-- Instagram posts will be inserted here by JavaScript -->
                 </div>
             </div>
@@ -273,7 +290,7 @@
 
         <section id="contacto" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center  mb-8">Contáctanos</h2>
+                <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     
                     <form id="contact-form" class="space-y-4">
@@ -292,28 +309,28 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="fade-in-section">
                     <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="h-16 mb-4">
-                    <p>Expertos en bienes raíces con años de experiencia en el mercado ecuatoriano.</p>
+                    <p class="text-white">Expertos en bienes raíces con años de experiencia en el mercado ecuatoriano.</p>
                 </div>
                 <div class="fade-in-section">
-                    <h3 class="text-xl font-bold mb-4">Contacto</h3>
+                    <h3 class="text-xl font-bold mb-4 text-white">Contacto</h3>
                 
-                    <p class="mb-2"><i class="fas fa-phone mr-2"></i> +593 98 716 7782</p>
-                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c8cfc7cee1cbc0cfcfc4d5c9c0c6d4c8d3d3c48fc2cecc">[email&#160;protected]</a></p>
-                    <p><i class="fas fa-map-marker-alt mr-2"></i> Guayaquil-Ecuador</p>
+                    <p class="mb-2 text-white"><i class="fas fa-phone mr-2"></i> +593 98 716 7782</p>
+                    <p class="mb-2 text-white"><i class="fas fa-envelope mr-2"></i> <a href="mailto:info@jannethaguirre.com" class="text-white hover:text-primary">info@jannethaguirre.com</a></p>
+                    <p class="text-white"><i class="fas fa-map-marker-alt mr-2"></i> Guayaquil-Ecuador</p>
                 </div>
                 <div class="fade-in-section">
-                    <h3 class="text-xl font-bold mb-4">Síguenos</h3>
+                    <h3 class="text-xl font-bold mb-4 text-white">Síguenos</h3>
                     <div class="flex space-x-4">
-                        <a href="#" aria-label="Facebook" class="text-primary hover:text-primary/80"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram" class="text-primary hover:text-primary/80"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="Twitter" class="text-primary hover:text-primary/80"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn" class="text-primary hover:text-primary/80"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="TikTok" class="text-primary hover:text-primary/80"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Facebook" class="text-white hover:text-primary"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram" class="text-white hover:text-primary"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter" class="text-white hover:text-primary"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn" class="text-white hover:text-primary"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="TikTok" class="text-white hover:text-primary"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>
-            <p class="text-center mt-8 fade-in-section">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
-            <p class="text-center mt-2 fade-in-section">Powered by <a href="https://dualitydomain.github.io/Dualitydomain/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Duality Domain</a></p>
+            <p class="text-center mt-8 fade-in-section text-white">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
+            <p class="text-center mt-2 fade-in-section text-white">Powered by <a href="https://dualitydomain.github.io/Dualitydomain/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Duality Domain</a></p>
         </div>
     </footer>
 
@@ -325,18 +342,18 @@
         <a href="#contacto"><i class="fas fa-envelope"></i><span>Contacto</span></a>
     </nav>
 
-    <div id="ai-real-estate-expert-chatbot" class="fixed bottom-20 left-4 z-50"></div>
+    <div id="ai-real-estate-expert-chatbot" class="fixed bottom-24 right-4 z-50"></div>
 
     <a href="https://wa.me/593987167782" class="fixed bottom-20 right-4 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <button id="back-to-top" title="Volver arriba">
+    <button id="back-to-top" title="Volver arriba" class="fixed bottom-20 right-20 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-xl">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <!-- jQuery -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Slick JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="chatbot.js"></script>
