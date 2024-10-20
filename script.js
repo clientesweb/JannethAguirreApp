@@ -159,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initChatbot();
     initYouTubeVideos();
     initPropertyStore();
+    initMobileMenu();
 
     function initSliders() {
         // Hero slider
@@ -213,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const fullImage = document.getElementById('full-image');
         const prevImage = document.getElementById('prev-image');
         const nextImage = document.getElementById('next-image');
+        const closeFullImage = document.getElementById('close-full-image');
 
         let currentProperty = null;
         let currentImageIndex = 0;
@@ -266,6 +268,10 @@ document.addEventListener('DOMContentLoaded', function() {
             currentImageIndex = (currentImageIndex + 1) % currentProperty.gallery.length;
             fullImage.src = currentProperty.gallery[currentImageIndex];
         });
+
+        closeFullImage.addEventListener('click', function() {
+            fullImageContainer.style.display = 'none';
+        });
     }
 
     function initTestimonials() {
@@ -282,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dots: true,
                 arrows: false,
                 autoplay: true,
-                autoplaySpee d: 5000
+                autoplaySpeed: 5000
             });
         }
     }
@@ -417,7 +423,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const chatbotContainer = document.getElementById('ai-real-estate-expert-chatbot');
         if (chatbotContainer) {
             chatbotContainer.innerHTML = `
-                <div class="fixed bottom-20 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
+                <div class="fixed bottom-24 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold">ARIA - Experta en bienes raíces</h3>
                         <button id="close-chatbot" class="text-gray-500 hover:text-gray-700">
@@ -478,16 +484,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 { id: 'VIDEO_ID_5', title: 'Último video 5' }
             ];
 
-            youtubeContainer.innerHTML = `
-                <div class="flex overflow-x-auto space-x-4 pb-4">
-                    ${latestVideos.map(video => `
-                        <div class="flex-shrink-0 w-80">
-                            <iframe width="320" height="180" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            <h3 class="text-lg font-semibold mt-2">${video.title}</h3>
-                        </div>
-                    `).join('')}
+            youtubeContainer.innerHTML = latestVideos.map(video => `
+                <div class="youtube-video">
+                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <h3 class="text-lg font-semibold mt-2">${video.title}</h3>
                 </div>
-            `;
+            `).join('');
+
+            $(youtubeContainer).slick({
+                dots: false,
+                infinite: false,
+                speed: 300,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
         }
     }
 
@@ -502,9 +528,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Agregar botones de filtro
             filterButtons.innerHTML = `
-                <button class="filter-btn active" data-type="all">Todos</button>
-                <button class="filter-btn" data-type="venta">Venta</button>
-                <button class="filter-btn" data-type="alquiler">Alquiler</button>
+                <button class="filter-btn active bg-primary text-white px-4 py-2 rounded" data-type="all">Todos</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded" data-type="venta">Venta</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded" data-type="alquiler">Alquiler</button>
             `;
 
             // Evento de búsqueda
@@ -513,8 +539,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Evento de filtrado
             filterButtons.addEventListener('click', (e) => {
                 if (e.target.classList.contains('filter-btn')) {
-                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                    e.target.classList.add('active');
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('active', 'bg-primary', 'text-white');
+                        btn.classList.add('bg-gray-200', 'text-gray-700');
+                    });
+                    e.target.classList.add('active', 'bg-primary', 'text-white');
+                    e.target.classList.remove('bg-gray-200', 'text-gray-700');
                     filterProperties();
                 }
             });
@@ -581,5 +611,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 renderProperties(filteredProperties);
             }
         }
+    }
+
+    function initMobileMenu() {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+        });
+
+        // Cerrar el menú al hacer clic en un enlace
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
     }
 });
