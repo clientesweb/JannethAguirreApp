@@ -1,639 +1,449 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
-    const heroImages = [
-        "/img/casa-moderna-encantadora-villa-3d-render_1015255-30058.jpg",
-        "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg",
-        "/img/paisaje-analogico-ciudad-edificios_23-2149661457.jpg"
+// Función para inicializar los sliders
+function initSliders() {
+    $('.hero-slider').slick({
+        autoplay: true,
+        autoplaySpeed: 5000,
+        dots: true,
+        arrows: false,
+        fade: true,
+        cssEase: 'linear'
+    });
+
+    $('#youtube-slider, #instagram-slider, #testimonials-slider').slick({
+        infinite: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                }
+            }
+        ]
+    });
+}
+
+// Función para cargar las propiedades destacadas
+function loadFeaturedProperties() {
+    const featuredProperties = [
+        { id: 1, title: "Casa de lujo en la playa", price: "$500,000", image: "https://via.placeholder.com/300x200.png?text=Casa+de+lujo" },
+        { id: 2, title: "Apartamento céntrico", price: "$250,000", image: "https://via.placeholder.com/300x200.png?text=Apartamento+céntrico" },
+        { id: 3, title: "Villa con piscina", price: "$750,000", image: "https://via.placeholder.com/300x200.png?text=Villa+con+piscina" },
+        { id: 4, title: "Oficina moderna", price: "$300,000", image: "https://via.placeholder.com/300x200.png?text=Oficina+moderna" },
+        { id: 5, title: "Terreno con vista al mar", price: "$200,000", image: "https://via.placeholder.com/300x200.png?text=Terreno" },
+        { id: 6, title: "Casa de campo", price: "$400,000", image: "https://via.placeholder.com/300x200.png?text=Casa+de+campo" },
+        { id: 7, title: "Penthouse de lujo", price: "$1,000,000", image: "https://via.placeholder.com/300x200.png?text=Penthouse" },
     ];
 
-    const properties = [
-        { 
-            id: 1, 
-            title: "Depart. en venta – Orlando Florida – Condo Hotel", 
-            price: "Consultar", 
-            image: "/img/orlandoflorida.jpg", 
-            type: "venta",
-            description: "Proyecto en pre-construcción con 6 torres y 378 apartamentos, ofrecemos crédito hipotecario para inversionistas latinoamericanos. El Sycamore Club,  es un proyecto de apartamentos de lujo en Orlando, Florida, ubicado a 10 minutos de Disney World y Universal Studios.",
-            gallery: [
-                "/img/orlandoflorida.jpg",
-                "/img/orlandoflorida2.jpg",
-                "/img/orlandoflorida3.jpg"
-            ]
-        },
-        { 
-            id: 2, 
-            title: "Departamento en venta – Samborondón", 
-            price: "$250,000", 
-            image: "/img/samborondon.jpg", 
-            type: "venta",
-            description: "Hermoso departamento en Samborondón, con vista al río. 3 dormitorios, 2 baños, sala, comedor, cocina y área de lavandería.",
-            gallery: [
-                "/img/samborondon.jpg",
-                "/img/samborondon2.jpg",
-                "/img/samborondon3.jpg"
-            ]
-        },
-        { 
-            id: 3, 
-            title: "Casa en venta – Guayaquil", 
-            price: "$180,000", 
-            image: "/img/guayaquil.jpg", 
-            type: "venta",
-            description: "Casa de dos plantas en Guayaquil, con 4 dormitorios, 3 baños, sala, comedor, cocina, patio y garaje para 2 vehículos.",
-            gallery: [
-                "/img/guayaquil.jpg",
-                "/img/guayaquil2.jpg",
-                "/img/guayaquil3.jpg"
-            ]
-        },
-        { 
-            id: 4, 
-            title: "Departamento en alquiler – Quito", 
-            price: "$800/mes", 
-            image: "/img/quito.jpg", 
-            type: "alquiler",
-            description: "Moderno departamento en el centro de Quito, amoblado, con 2 dormitorios, 1 baño, sala, comedor y cocina.",
-            gallery: [
-                "/img/quito.jpg",
-                "/img/quito2.jpg",
-                "/img/quito3.jpg"
-            ]
-        },
-        { 
-            id: 5, 
-            title: "Casa en alquiler – Cuenca", 
-            price: "$1,000/mes", 
-            image: "/img/cuenca.jpg", 
-            type: "alquiler",
-            description: "Hermosa casa en Cuenca, con 3 dormitorios, 2.5 baños, sala, comedor, cocina, jardín y garaje.",
-            gallery: [
-                "/img/cuenca.jpg",
-                "/img/cuenca2.jpg",
-                "/img/cuenca3.jpg"
-            ]
-        },
-        { 
-            id: 6, 
-            title: "Terreno en venta – Manta", 
-            price: "$120,000", 
-            image: "/img/manta.jpg", 
-            type: "venta",
-            description: "Amplio terreno en Manta, ideal para desarrollo residencial o comercial. 1000 m2 con todos los servicios básicos.",
-            gallery: [
-                "/img/manta.jpg",
-                "/img/manta2.jpg",
-                "/img/manta3.jpg"
-            ]
-        },
-        { 
-            id: 7, 
-            title: "Oficina en alquiler – Guayaquil", 
-            price: "$1,500/mes", 
-            image: "/img/oficina_guayaquil.jpg", 
-            type: "alquiler",
-            description: "Moderna oficina en el centro empresarial de Guayaquil. 100 m2, totalmente equipada y con excelente ubicación.",
-            gallery: [
-                "/img/oficina_guayaquil.jpg",
-                "/img/oficina_guayaquil2.jpg",
-                "/img/oficina_guayaquil3.jpg"
-            ]
-        }
-    ];
+    const container = document.querySelector('#propiedades .grid');
+    featuredProperties.forEach(property => {
+        const propertyCard = `
+            <div class="property-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold mb-2">${property.title}</h3>
+                    <p class="text-gray-600">${property.price}</p>
+                    <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors" onclick="openGallery(${property.id})">Ver más</button>
+                </div>
+            </div>
+        `;
+        container.innerHTML += propertyCard;
+    });
+}
 
+// Función para cargar los servicios
+function loadServices() {
     const services = [
-        { title: "Compra y Venta", icon: "fas fa-home", description: "Asesoramiento experto en la compra y venta de propiedades." },
-        { title: "Alquiler", icon: "fas fa-key", description: "Gestión de alquileres a corto y largo plazo." },
-        { title: "Inversiones", icon: "fas fa-chart-line", description: "Oportunidades de inversión en bienes raíces." },
-        { title: "Tasaciones", icon: "fas fa-calculator", description: "Valoración profesional de propiedades." },
-        { title: "Asesoría Legal", icon: "fas fa-gavel", description: "Asistencia legal en transacciones inmobiliarias." },
-        { title: "Remodelaciones", icon: "fas fa-hammer", description: "Servicios de remodelación y mejora de propiedades." }
+        { icon: 'fa-home', title: 'Venta de Propiedades', description: 'Encuentre su hogar ideal con nuestra amplia selección de propiedades.' },
+        { icon: 'fa-key', title: 'Alquiler de Propiedades', description: 'Ofrecemos opciones de alquiler para todos los presupuestos y necesidades.' },
+        { icon: 'fa-chart-line', title: 'Inversiones Inmobiliarias', description: 'Asesoramos en las mejores oportunidades de inversión en el mercado.' },
+        { icon: 'fa-building', title: 'Administración de Propiedades', description: 'Gestionamos su propiedad para maximizar su rentabilidad.' },
+        { icon: 'fa-search', title: 'Búsqueda Personalizada', description: 'Encontramos la propiedad perfecta que se ajuste a sus requerimientos.' },
+        { icon: 'fa-handshake', title: 'Asesoría Legal', description: 'Brindamos apoyo legal en todas las transacciones inmobiliarias.' }
     ];
 
-    const testimonials = [
-        { name: "Juan Pérez", text: "Excelente servicio, encontré mi casa ideal gracias a Janneth Aguirre." },
-        { name: "María González", text: "Profesionalismo y dedicación en cada paso del proceso de compra." },
-        { name: "Carlos Rodríguez", text: "La mejor experiencia en venta de propiedades. Altamente recomendado." }
+    const container = document.getElementById('service-grid');
+    services.forEach(service => {
+        const serviceCard = `
+            <div class="service-card">
+                <i class="fas ${service.icon}"></i>
+                <h3>${service.title}</h3>
+                <p>${service.description}</p>
+            </div>
+        `;
+        container.innerHTML += serviceCard;
+    });
+}
+
+// Función para cargar los videos de YouTube
+function loadYouTubeVideos() {
+    const youtubeVideos = [
+        { id: 'VIDEO_ID_1', title: 'Tour por casa de lujo' },
+        { id: 'VIDEO_ID_2', title: 'Consejos para comprar tu primera casa' },
+        { id: 'VIDEO_ID_3', title: 'Inversiones inmobiliarias en Ecuador' },
+        { id: 'VIDEO_ID_4', title: 'Cómo elegir la mejor ubicación' },
+        { id: 'VIDEO_ID_5', title: 'Tendencias en diseño de interiores 2024' }
     ];
 
+    const container = document.getElementById('youtube-slider');
+    youtubeVideos.forEach(video => {
+        const videoElement = `
+            <div class="youtube-video">
+                <iframe width="300" height="169" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <h3 class="mt-2 text-lg font-semibold">${video.title}</h3>
+            </div>
+        `;
+        container.innerHTML += videoElement;
+    });
+}
+
+// Función para cargar los posts de Instagram
+function loadInstagramPosts() {
     const instagramPosts = [
-        { image: "/img/instagram1.jpg", link: "#" },
-        { image: "/img/instagram2.jpg", link: "#" },
-        { image: "/img/instagram3.jpg", link: "#" },
-        { image: "/img/instagram4.jpg", link: "#" }
+        { image: 'https://via.placeholder.com/300x300.png?text=Instagram+Post+1', caption: 'Hermosa vista desde nuestro último proyecto' },
+        { image: 'https://via.placeholder.com/300x300.png?text=Instagram+Post+2', caption: 'Diseño moderno en nuestro nuevo apartamento' },
+        { image: 'https://via.placeholder.com/300x300.png?text=Instagram+Post+3', caption: 'Celebrando la entrega de llaves con nuestros clientes' },
+        { image: 'https://via.placeholder.com/300x300.png?text=Instagram+Post+4', caption: 'Explorando nuevas áreas para desarrollo inmobiliario' },
+        { image: 'https://via.placeholder.com/300x300.png?text=Instagram+Post+5', caption: 'Tips para decorar tu nuevo hogar' }
     ];
 
+    const container = document.getElementById('instagram-slider');
+    instagramPosts.forEach(post => {
+        const postElement = `
+            <div class="instagram-post">
+                <img src="${post.image}" alt="Instagram post" class="w-full h-64 object-cover">
+                <p class="mt-2 text-sm">${post.caption}</p>
+            </div>
+        `;
+        container.innerHTML += postElement;
+    });
+}
+
+// Función para cargar los testimonios
+function loadTestimonials() {
+    const testimonials = [
+        { name: 'Juan Pérez', image: 'https://via.placeholder.com/60x60.png?text=JP', text: 'Excelente servicio, encontramos nuestra casa ideal gracias a Janneth Aguirre.' },
+        { name: 'María González', image: 'https://via.placeholder.com/60x60.png?text=MG', text: 'Profesionalismo y dedicación en cada paso del proceso de compra.' },
+        { name: 'Carlos Rodríguez', image: 'https://via.placeholder.com/60x60.png?text=CR', text: 'Asesoramiento experto que hizo la diferencia en nuestra inversión inmobiliaria.' },
+        { name: 'Ana Martínez', image: 'https://via.placeholder.com/60x60.png?text=AM', text: 'Atención personalizada y un conocimiento profundo del mercado.' },
+        { name: 'Luis Morales', image: 'https://via.placeholder.com/60x60.png?text=LM', text: 'Rapidez y eficiencia en la venta de nuestra propiedad. ¡Muy recomendados!' }
+    ];
+
+    const container = document.getElementById('testimonials-slider');
+    testimonials.forEach(testimonial => {
+        const testimonialElement = `
+            <div class="testimonial">
+                <img src="${testimonial.image}" alt="${testimonial.name}" class="rounded-full">
+                <p>"${testimonial.text}"</p>
+                <h4>${testimonial.name}</h4>
+            </div>
+        `;
+        container.innerHTML += testimonialElement;
+    });
+}
+
+// Función para cargar las FAQs
+function loadFAQs() {
     const faqs = [
-        { 
-            question: "¿Cuál es el proceso para comprar una propiedad?", 
-            answer: "El proceso generalmente incluye: búsqueda de la propiedad, negociación del precio, firma de un contrato de compraventa, obtención de financiamiento si es necesario, y cierre de la transacción. Nuestro equipo le guiará en cada paso." 
-        },
-        { 
-            question: "¿Qué documentos necesito para vender mi propiedad?", 
-            answer: "Generalmente necesitará: título de propiedad, certificado de gravámenes, pago de impuestos al día, y cédula de identidad. Podemos ayudarle a reunir toda la documentación necesaria." 
-        },
-        { 
-            question: "¿Cómo determino el precio de venta de mi propiedad?", 
-            answer: "El precio se determina considerando factores como la ubicación, tamaño, condición de la propiedad, y precios de propiedades similares en la zona. Ofrecemos servicios de tasación profesional para ayudarle a determinar un precio justo." 
-        },
-        { 
-            question: "¿Cuánto tiempo toma vender una propiedad?", 
-            answer: "El tiempo de venta puede variar dependiendo de factores como la ubicación, el precio, y las condiciones del mercado. En promedio, puede tomar entre 3 a 6 meses, pero algunas propiedades se venden más rápido." 
-        },
-        { 
-            question: "¿Qué servicios ofrecen para propietarios que quieren alquilar?", 
-            answer: "Ofrecemos servicios completos de gestión de alquileres, incluyendo: búsqueda de inquilinos, verificación de antecedentes, preparación de contratos, cobro de alquileres, y mantenimiento de la propiedad." 
-        }
+        { question: '¿Cuál es el proceso para comprar una propiedad?', answer: 'El proceso generalmente incluye: búsqueda de la propiedad, negociación, firma de contrato, pago y transferencia de título. Nuestro equipo le guiará en cada paso.' },
+        { question: '¿Qué documentos necesito para vender mi propiedad?', answer: 'Necesitará el título de propiedad, certificado de gravámenes, pago de impuestos al día, y cédula de identidad. Nosotros le ayudaremos a reunir toda la documentación necesaria.' },
+        { question: '¿Ofrecen financiamiento para la compra de propiedades?', answer: 'No ofrecemos financiamiento directo, pero trabajamos con varias instituciones financieras y podemos ayudarle a encontrar la mejor opción de crédito para su situación.' },
+        { question: '¿Cuánto tiempo toma normalmente vender una propiedad?', answer: 'El tiempo de venta puede variar dependiendo de factores como la ubicación, el precio y las condiciones del mercado. En promedio, puede tomar entre 3 a 6 meses.' },
+        { question: '¿Qué áreas de Ecuador cubren sus servicios?', answer: 'Nuestros servicios cubren principalmente Guayaquil y sus alrededores, pero también tenemos propiedades y ofrecemos servicios en otras ciudades importantes de Ecuador.' }
     ];
 
-    // Inicialización de componentes
-    initSliders();
-    renderServices();
-    initFeaturedProperties();
-    initGallery();
-    initTestimonials();
-    initInstagram();
-    initFAQs();
-    initContactForm();
-    initScrollEffects();
-    initPWA();
-    initChatbot();
-    initYouTubeVideos();
-    initPropertyStore();
-    initMobileMenu();
-
-    function initSliders() {
-        // Hero slider
-        if ($('.hero-slider').length) {
-            $('.hero-slider').html(heroImages.map(img => `<div style="background-image: url('${img}')"></div>`).join(''));
-            $('.hero-slider').slick({
-                autoplay: true,
-                autoplaySpeed: 5000,
-                arrows: false,
-                dots: true,
-                fade: true,
-                cssEase: 'linear'
-            });
-        }
-    }
-
-    function renderServices() {
-        const serviceGrid = document.getElementById('service-grid');
-        if (serviceGrid) {
-            serviceGrid.innerHTML = services.map(service => `
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <i class="${service.icon} text-4xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">${service.title}</h3>
-                    <p>${service.description}</p>
+    const container = document.getElementById('faq-container');
+    faqs.forEach((faq, index) => {
+        const faqElement = `
+            <div class="faq-item" id="faq-${index}">
+                <div class="faq-question" onclick="toggleFAQ(${index})">
+                    ${faq.question}
+                    <i class="fas fa-chevron-down faq-icon"></i>
                 </div>
-            `).join('');
-        }
-    }
-
-    function initFeaturedProperties() {
-        const featuredContainer = document.querySelector('#propiedades .grid');
-        if (featuredContainer) {
-            featuredContainer.innerHTML = properties.map(property => `
-                <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                        <p class="text-gray-700">${property.price}</p>
-                        <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
-                    </div>
+                <div class="faq-answer">
+                    <p>${faq.answer}</p>
                 </div>
-            `).join('');
-        }
-    }
+            </div>
+        `;
+        container.innerHTML += faqElement;
+    });
+}
 
-    function initGallery() {
-        const modal = document.getElementById('gallery-modal');
-        const closeModal = document.getElementById('close-modal');
+// Función para alternar la visibilidad de las respuestas de las FAQs
+function toggleFAQ(index) {
+    const faqItem = document.getElementById(`faq-${index}`);
+    faqItem.classList.toggle('active');
+}
+
+// Función para manejar el formulario de contacto
+function handleContactForm() {
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Aquí iría la lógica para enviar el formulario, por ejemplo, usando fetch para una API
+        alert('Gracias por su mensaje. Nos pondremos en contacto pronto.');
+        form.reset();
+    });
+}
+
+// Función para el efecto de aparición al hacer scroll
+function handleScrollAnimation() {
+    const sections = document.querySelectorAll('.fade-in-section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+}
+
+// Función para el botón "Volver arriba"
+function handleBackToTopButton() {
+    const backToTopButton = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 100) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// Función para manejar la galería de imágenes
+function handleImageGallery() {
+    const modal = document.getElementById('gallery-modal');
+    const closeModal = document.getElementById('close-modal');
+    const fullImageContainer = document.getElementById('full-image-container');
+    const fullImage = document.getElementById('full-image');
+    const prevImage = document.getElementById('prev-image');
+    const nextImage = document.getElementById('next-image');
+    let currentImageIndex = 0;
+    let images = [];
+
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+        fullImageContainer.style.display = 'none';
+    });
+
+    window.openGallery = (propertyId) => {
+        // Aquí deberías cargar las imágenes reales de la propiedad
+        images = [
+            'https://via.placeholder.com/800x600.png?text=Imagen+1',
+            'https://via.placeholder.com/800x600.png?text=Imagen+2',
+            'https://via.placeholder.com/800x600.png?text=Imagen+3',
+            'https://via.placeholder.com/800x600.png?text=Imagen+4',
+        ];
+
         const galleryImages = document.getElementById('gallery-images');
-        const galleryInfo = document.getElementById('gallery-info');
-        const fullImageContainer = document.getElementById('full-image-container');
-        const fullImage = document.getElementById('full-image');
-        const prevImage = document.getElementById('prev-image');
-        const nextImage = document.getElementById('next-image');
-        const closeFullImage = document.getElementById('close-full-image');
-
-        let currentProperty = null;
-        let currentImageIndex = 0;
-
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('view-gallery')) {
-                const propertyId = parseInt(e.target.getAttribute('data-id'));
-                currentProperty = properties.find(p => p.id === propertyId);
-                if (currentProperty) {
-                    openGallery(currentProperty);
-                }
-            }
+        galleryImages.innerHTML = '';
+        images.forEach((src, index) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `Imagen ${index + 1}`;
+            img.onclick = () => showFullImage(index);
+            galleryImages.appendChild(img);
         });
 
-        function openGallery(property) {
-            galleryImages.innerHTML = property.gallery.map((img, index) => `
-                <img src="${img}" alt="${property.title}" onclick="showFullImage(${index})">
-            `).join('');
-            galleryInfo.innerHTML = `
-                <h3 class="text-xl font-bold mb-2">${property.title}</h3>
-                <p class="mb-2">${property.price}</p>
-                <p>${property.description}</p>
-            `;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
+        document.getElementById('gallery-info').textContent = `Propiedad ID: ${propertyId}`;
+        modal.style.display = 'flex';
+    };
 
-        closeModal.addEventListener('click', function() {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        });
-
-        window.showFullImage = function(index) {
-            currentImageIndex = index;
-            fullImage.src = currentProperty.gallery[index];
-            fullImageContainer.style.display = 'flex';
-        }
-
-        fullImageContainer.addEventListener('click', function(e) {
-            if (e.target === fullImageContainer) {
-                fullImageContainer.style.display = 'none';
-            }
-        });
-
-        prevImage.addEventListener('click', function() {
-            currentImageIndex = (currentImageIndex - 1 + currentProperty.gallery.length) % currentProperty.gallery.length;
-            fullImage.src = currentProperty.gallery[currentImageIndex];
-        });
-
-        nextImage.addEventListener('click', function() {
-            currentImageIndex = (currentImageIndex + 1) % currentProperty.gallery.length;
-            fullImage.src = currentProperty.gallery[currentImageIndex];
-        });
-
-        closeFullImage.addEventListener('click', function() {
-            fullImageContainer.style.display = 'none';
-        });
+    function showFullImage(index) {
+        currentImageIndex = index;
+        fullImage.src = images[index];
+        fullImageContainer.style.display = 'flex';
     }
 
-    function initTestimonials() {
-        const testimonialsSlider = document.getElementById('testimonials-slider');
-        if (testimonialsSlider) {
-            testimonialsSlider.innerHTML = testimonials.map(testimonial => `
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <p class="mb-4">"${testimonial.text}"</p>
-                    <p class="font-bold">- ${testimonial.name}</p>
-                </div>
-            `).join('');
-            
-            $(testimonialsSlider).slick({
-                dots: true,
-                arrows: false,
-                autoplay: true,
-                autoplaySpeed: 5000
-            });
-        }
-    }
+    prevImage.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        showFullImage(currentImageIndex);
+    });
 
-    function initInstagram() {
-        const instagramSlider = document.getElementById('instagram-slider');
-        if (instagramSlider) {
-            instagramSlider.innerHTML = instagramPosts.map(post => `
-                <div>
-                    <a href="${post.link}" target="_blank" rel="noopener noreferrer">
-                        <img src="${post.image}" alt="Instagram post" class="w-full h-64 object-cover rounded-lg">
-                    </a>
-                </div>
-            `).join('');
-            
-            $(instagramSlider).slick({
-                dots: false,
-                arrows: true,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 3
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 640,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            });
-        }
-    }
+    nextImage.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        showFullImage(currentImageIndex);
+    });
+}
 
-    function initFAQs() {
-        const faqContainer = document.getElementById('faq-container');
-        if (faqContainer) {
-            faqContainer.innerHTML = faqs.map((faq, index) => `
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(${index})">
-                        ${faq.question}
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-answer">
-                        ${faq.answer}
-                    </div>
-                </div>
-            `).join('');
-        }
-    }
+// Función para manejar el filtrado y búsqueda en la tienda
+function handleStoreFiltering() {
+    const properties = [
+        { id: 1, title: "Casa de lujo en la playa", price: 500000, type: "casa", location: "playa" },
+        { id: 2, title: "Apartamento céntrico", price: 250000, type: "apartamento", location: "ciudad" },
+        { id: 3, title: "Villa con piscina", price: 750000, type: "casa", location: "suburbio" },
+        { id: 4, title: "Oficina moderna", price: 300000, type: "oficina", location: "ciudad" },
+        { id: 5, title: "Terreno con vista al mar", price: 200000, type: "terreno", location: "playa" },
+        { id: 6, title: "Casa de campo", price: 400000, type: "casa", location: "campo" },
+        { id: 7, title: "Penthouse de lujo", price: 1000000, type: "apartamento", location: "ciudad" },
+    ];
 
-    window.toggleFAQ = function(index) {
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems[index].classList.toggle('active');
-    }
+    const filterButtons = document.getElementById('filter-buttons');
+    const storeSlider = document.getElementById('store-slider');
+    const searchInput = document.getElementById('search-input');
 
-    function initContactForm() {
-        const form = document.getElementById('contact-form');
-        if (form) {
-            form.setAttribute('action', 'https://formspree.io/f/your_formspree_id');
-            form.setAttribute('method', 'POST');
-        }
-    }
+    // Crear botones de filtro
+    const types = [...new Set(properties.map(p => p.type))];
+    types.forEach(type => {
+        const button = document.createElement('button');
+        button.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+        button.addEventListener('click', () => filterProperties(type));
+        filterButtons.appendChild(button);
+    });
 
-    function initScrollEffects() {
-        const fadeElems = document.querySelectorAll('.fade-in-section');
+    // Función para filtrar propiedades
+    function filterProperties(type) {
+        const filteredProperties = type ? properties.filter(p => p.type === type) : properties;
+        renderProperties(filteredProperties);
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+        // Actualizar estilos de los botones
+        document.querySelectorAll('#filter-buttons button').forEach(btn => {
+            btn.classList.toggle('active', btn.textContent.toLowerCase() === type);
+        });
+    }
+
+    // Función para renderizar propiedades
+    function renderProperties(props) {
+        storeSlider.innerHTML = '';
+        props.forEach(property => {
+            const propertyCard = `
+                <div class="property-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://via.placeholder.com/300x200.png?text=${property.title}" alt="${property.title}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">${property.title}</h3>
+                        <p class="text-gray-600">$${property.price.toLocaleString()}</p>
+                        <p class="text-gray-500">${property.location}</p>
+                        <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors" onclick="openGallery(${property.id})">Ver más</button>
+                    </div>
+                </div>
+            `;
+            storeSlider.innerHTML += propertyCard;
+        });
+    }
+
+    // Manejar la búsqueda
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredProperties = properties.filter(p => 
+            p.title.toLowerCase().includes(searchTerm) ||
+            p.type.toLowerCase().includes(searchTerm) ||
+            p.location.toLowerCase().includes(searchTerm)
+        );
+        renderProperties(filteredProperties);
+    });
+
+    // Inicializar con todas las propiedades
+    renderProperties(properties);
+}
+
+// Función para manejar la instalación de la PWA
+function handlePWAInstallation() {
+    let deferredPrompt;
+    const installButton = document.getElementById('install-app');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installButton.style.display = 'block';
+    });
+
+    installButton.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                console.log('Usuario aceptó la instalación de la PWA');
+            }
+            deferredPrompt = null;
+        }
+        installButton.style.display = 'none';
+    });
+}
+
+// Inicialización cuando el DOM está listo
+document.addEventListener('DOMContentLoaded', function() {
+    initSliders();
+    loadFeaturedProperties();
+    loadServices();
+    loadYouTubeVideos();
+    loadInstagramPosts();
+    loadTestimonials();
+    loadFAQs();
+    handleContactForm();
+    handleScrollAnimation();
+    handleBackToTopButton();
+    handleImageGallery();
+    handleStoreFiltering();
+    handlePWAInstallation();
+});
+
+// Lazy loading de imágenes
+document.addEventListener("DOMContentLoaded", function() {
+    var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+    if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
+                    let lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove("lazy");
+                    lazyImageObserver.unobserve(lazyImage);
                 }
             });
         });
 
-        fadeElems.forEach(elem => observer.observe(elem));
-
-        // Botón "Volver arriba"
-        const backToTopButton = document.getElementById("back-to-top");
-        
-        window.onscroll = function() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                backToTopButton.style.display = "block";
-            } else {
-                backToTopButton.style.display = "none";
-            }
-        };
-
-        backToTopButton.onclick = function() {
-            document.body.scrollTop = 0; // Para Safari
-            document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
-        };
-    }
-
-    function initPWA() {
-        let deferredPrompt;
-        const installButton = document.getElementById('install-app');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installButton.style.display = 'block';
+        lazyImages.forEach(function(lazyImage) {
+            lazyImageObserver.observe(lazyImage);
         });
+    } else {
+        // Fallback para navegadores que no soportan IntersectionObserver
+        let active = false;
 
-        installButton.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                console.log(`User response to the install prompt: ${outcome}`);
-                deferredPrompt = null;
-            }
-        });
+        const lazyLoad = function() {
+            if (active === false) {
+                active = true;
 
-        window.addEventListener('appinstalled', () => {
-            console.log('PWA was installed');
-        });
-    }
+                setTimeout(function() {
+                    lazyImages.forEach(function(lazyImage) {
+                        if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.remove("lazy");
 
-    function initChatbot() {
-        const chatbotContainer = document.getElementById('ai-real-estate-expert-chatbot');
-        if (chatbotContainer) {
-            chatbotContainer.innerHTML = `
-                <div class="fixed bottom-24 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold">ARIA - Experta en bienes raíces</h3>
-                        <button id="close-chatbot" class="text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div id="chatbot-messages" class="h-60 overflow-y-auto mb-4"></div>
-                    <form id="chatbot-form" class="flex">
-                        <input type="text" id="chatbot-input" class="flex-grow border rounded-l px-2 py-1" placeholder="Escribe tu pregunta...">
-                        <button type="submit" class="bg-primary text-white px-4 py-1 rounded-r">Enviar</button>
-                    </form>
-                </div>
-            `;
+                            lazyImages = lazyImages.filter(function(image) {
+                                return image !== lazyImage;
+                            });
 
-            const closeButton = document.getElementById('close-chatbot');
-            closeButton.addEventListener('click', () => {
-                chatbotContainer.style.display = 'none';
-            });
-
-            const chatbotForm = document.getElementById('chatbot-form');
-            const chatbotInput = document.getElementById('chatbot-input');
-            const chatbotMessages = document.getElementById('chatbot-messages');
-
-            chatbotForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const message = chatbotInput.value.trim();
-                if (message) {
-                    addMessage('user', message);
-                    chatbotInput.value = '';
-                    // Aquí iría la lógica para procesar la pregunta y obtener una respuesta
-                    setTimeout(() => {
-                        addMessage('bot', 'Lo siento, aún estoy aprendiendo. Por favor, contacta con un agente para obtener información más precisa.');
-                    }, 1000);
-                }
-            });
-
-            function addMessage(sender, text) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('mb-2', 'p-2', 'rounded', sender === 'user' ? 'bg-primary' : 'bg-gray-200', sender === 'user' ? 'text-white' : 'text-gray-800', sender === 'user' ? 'ml-auto' : 'mr-auto');
-                messageElement.style.maxWidth = '80%';
-                messageElement.textContent = text;
-                chatbotMessages.appendChild(messageElement);
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            }
-        }
-    }
-
-    function initYouTubeVideos() {
-        const youtubeContainer = document.getElementById('youtube-slider');
-        if (youtubeContainer) {
-            // Aquí deberías hacer una llamada a la API de YouTube para obtener los últimos videos
-            // Por ahora, usaremos datos de ejemplo
-            const latestVideos = [
-                { id: 'VIDEO_ID_1', title: 'Último video 1' },
-                { id: 'VIDEO_ID_2', title: 'Último video 2' },
-                { id: 'VIDEO_ID_3', title: 'Último video 3' },
-                { id: 'VIDEO_ID_4', title: 'Último video 4' },
-                { id: 'VIDEO_ID_5', title: 'Último video 5' }
-            ];
-
-            youtubeContainer.innerHTML = latestVideos.map(video => `
-                <div class="youtube-video">
-                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    <h3 class="text-lg font-semibold mt-2">${video.title}</h3>
-                </div>
-            `).join('');
-
-            $(youtubeContainer).slick({
-                dots: false,
-                infinite: false,
-                speed: 300,
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1,
+                            if (lazyImages.length === 0) {
+                                document.removeEventListener("scroll", lazyLoad);
+                                window.removeEventListener("resize", lazyLoad);
+                                window.removeEventListener("orientationchange", lazyLoad);
+                            }
                         }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-            });
-        }
-    }
-
-    function initPropertyStore() {
-        const storeSlider = document.getElementById('store-slider');
-        const searchInput = document.getElementById('search-input');
-        const filterButtons = document.getElementById('filter-buttons');
-
-        if (storeSlider && searchInput && filterButtons) {
-            // Renderizar todas las propiedades inicialmente
-            renderProperties(properties);
-
-            // Agregar botones de filtro
-            filterButtons.innerHTML = `
-                <button class="filter-btn active bg-primary text-white px-4 py-2 rounded" data-type="all">Todos</button>
-                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded" data-type="venta">Venta</button>
-                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded" data-type="alquiler">Alquiler</button>
-            `;
-
-            // Evento de búsqueda
-            searchInput.addEventListener('input', filterProperties);
-
-            // Evento de filtrado
-            filterButtons.addEventListener('click', (e) => {
-                if (e.target.classList.contains('filter-btn')) {
-                    document.querySelectorAll('.filter-btn').forEach(btn => {
-                        btn.classList.remove('active', 'bg-primary', 'text-white');
-                        btn.classList.add('bg-gray-200', 'text-gray-700');
                     });
-                    e.target.classList.add('active', 'bg-primary', 'text-white');
-                    e.target.classList.remove('bg-gray-200', 'text-gray-700');
-                    filterProperties();
-                }
-            });
 
-            function renderProperties(propertiesToRender) {
-                storeSlider.innerHTML = propertiesToRender.map(property => `
-                    <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden flex-shrink-0 w-64 mx-2" data-type="${property.type}">
-                        <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                            <p class="text-gray-700">${property.price}</p>
-                            <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
-                        </div>
-                    </div>
-                `).join('');
-
-                // Inicializar o actualizar el slider
-                if ($('#store-slider').hasClass('slick-initialized')) {
-                    $('#store-slider').slick('unslick');
-                }
-                $('#store-slider').slick({
-                    dots: false,
-                    infinite: false,
-                    speed: 300,
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                    responsive: [
-                        {
-                            breakpoint: 1024,
-                            settings: {
-                                slidesToShow: 3,
-                                slidesToScroll: 1,
-                            }
-                        },
-                        {
-                            breakpoint: 600,
-                            settings: {
-                                slidesToShow: 2,
-                                slidesToScroll: 1
-                            }
-                        },
-                        {
-                            breakpoint: 480,
-                            settings: {
-                                slidesToShow: 1,
-                                slidesToScroll: 1
-                            }
-                        }
-                    ]
-                });
+                    active = false;
+                }, 200);
             }
+        };
 
-            function filterProperties() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const activeFilter = document.querySelector('.filter-btn.active').dataset.type;
-
-                const filteredProperties = properties.filter(property => {
-                    const matchesSearch = property.title.toLowerCase().includes(searchTerm) || 
-                                          property.description.toLowerCase().includes(searchTerm);
-                    const matchesType = activeFilter === 'all' || property.type === activeFilter;
-                    return matchesSearch && matchesType;
-                });
-
-                renderProperties(filteredProperties);
-            }
-        }
-    }
-
-    function initMobileMenu() {
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const closeMobileMenu = document.getElementById('close-mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('flex');
-        });
-
-        closeMobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            mobileMenu.classList.remove('flex');
-        });
-
-        // Cerrar el menú al hacer clic en un enlace
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
-            });
-        });
+        document.addEventListener("scroll", lazyLoad);
+        window.addEventListener("resize", lazyLoad);
+        window.addEventListener("orientationchange", lazyLoad);
     }
 });
