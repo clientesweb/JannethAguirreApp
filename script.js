@@ -496,7 +496,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function initContactForm() {
         const form = document.getElementById('contact-form');
         if (form) {
-            form.setAttribute('action', 'https://formspree.io/f/your_formspree_id');
+            form.setAttribute('action', 'https://formspree.io/f/xvgogpyz');
             form.setAttribute('method', 'POST');
         }
     }
