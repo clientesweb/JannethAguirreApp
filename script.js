@@ -128,356 +128,343 @@ document.addEventListener('DOMContentLoaded', function() {
             answer: "El proceso generalmente incluye: búsqueda de la propiedad, negociación del precio, firma de un contrato de compraventa, obtención de financiamiento si es necesario, y cierre de la transacción. Nuestro equipo le guiará en cada paso." 
         },
         { 
-            question: "¿Qué documentos necesito para vender mi propiedad?", 
+            question: "¿Qué documentos necesito para vender mi propieda?", 
             answer: "Generalmente necesitará: título de propiedad, certificado de gravámenes, pago de impuestos al día, y cédula de identidad. Podemos ayudarle a reunir toda la documentación necesaria." 
         },
         { 
             question: "¿Cómo determino el precio de venta de mi propiedad?", 
-            answer: "El precio se determina considerando factores como la ubicación, tamaño, condición de la propiedad, y precios de propiedades similares en la zona. Ofrecemos servicios de tasación profesional para ayudarle a determinar un precio justo." 
+            answer: "El precio se determina considerando factores como la ubicación, tamaño, condición de la propiedad, y precios de propiedades similares en la zona. Ofrecemos servicios de tasación profesional para ayudarle a establecer un precio justo." 
         },
         { 
             question: "¿Cuánto tiempo toma vender una propiedad?", 
             answer: "El tiempo de venta puede variar dependiendo de factores como la ubicación, el precio, y las condiciones del mercado. En promedio, puede tomar entre 3 a 6 meses, pero algunas propiedades se venden más rápido." 
         },
         { 
-            question: "¿Qué servicios ofrecen para propietarios que quieren alquilar?", 
-            answer: "Ofrecemos servicios completos de gestión de alquileres, incluyendo: búsqueda de inquilinos, verificación de antecedentes, preparación de contratos, cobro de alquileres, y mantenimiento de la propiedad." 
+            question: "¿Ofrecen servicios de administración de propiedades?", 
+            answer: "Sí, ofrecemos servicios completos de administración de propiedades, incluyendo búsqueda de inquilinos, cobro de alquileres, mantenimiento y reparaciones." 
         }
     ];
 
-    // Inicialización de componentes
-    initSliders();
-    renderServices();
-    initFeaturedProperties();
-    initGallery();
-    initTestimonials();
-    initInstagram();
-    initFAQs();
-    initContactForm();
-    initScrollEffects();
-    initPWA();
-    initChatbot();
-    initYouTubeVideos();
-    initPropertyStore();
-
-    function initSliders() {
-        // Hero slider
-        if ($('.hero-slider').length) {
-            $('.hero-slider').html(heroImages.map(img => `<div style="background-image: url('${img}')"></div>`).join(''));
-            $('.hero-slider').slick({
-                autoplay: true,
-                autoplaySpeed: 5000,
-                arrows: false,
-                dots: true,
-                fade: true,
-                cssEase: 'linear'
-            });
-        }
+    // Función para crear el slider de imágenes del hero
+    function createHeroSlider() {
+        const heroSlider = document.querySelector('.hero-slider');
+        heroImages.forEach(image => {
+            const slide = document.createElement('div');
+            slide.style.backgroundImage = `url(${image})`;
+            slide.style.backgroundSize = 'cover';
+            slide.style.backgroundPosition = 'center';
+            heroSlider.appendChild(slide);
+        });
+        
+        $('.hero-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            fade: true,
+            cssEase: 'linear',
+            autoplay: true,
+            autoplaySpeed: 5000
+        });
     }
 
-    function renderServices() {
+    // Función para crear las tarjetas de propiedades destacadas
+    function createFeaturedProperties() {
+        const propertiesContainer = document.querySelector('#propiedades .grid');
+        properties.forEach(property => {
+            const propertyCard = document.createElement('div');
+            propertyCard.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
+            propertyCard.innerHTML = `
+                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-xl mb-2">${property.title}</h3>
+                    <p class="text-gray-700 text-base mb-4">${property.price}</p>
+                    <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-details" data-id="${property.id}">Ver Detalles</button>
+                </div>
+            `;
+            propertiesContainer.appendChild(propertyCard);
+        });
+    }
+
+    // Función para crear las tarjetas de servicios
+    function createServiceCards() {
         const serviceGrid = document.getElementById('service-grid');
-        if (serviceGrid) {
-            serviceGrid.innerHTML = services.map(service => `
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <i class="${service.icon} text-4xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">${service.title}</h3>
-                    <p>${service.description}</p>
-                </div>
-            `).join('');
-        }
+        services.forEach(service => {
+            const serviceCard = document.createElement('div');
+            serviceCard.className = 'bg-white p-6 rounded-lg shadow-md text-center';
+            serviceCard.innerHTML = `
+                <i class="${service.icon} text-4xl text-primary mb-4"></i>
+                <h3 class="text-xl font-semibold mb-2">${service.title}</h3>
+                <p class="text-gray-600">${service.description}</p>
+            `;
+            serviceGrid.appendChild(serviceCard);
+        });
     }
 
-    function initFeaturedProperties() {
-        const featuredContainer = document.querySelector('#propiedades .grid');
-        if (featuredContainer) {
-            featuredContainer.innerHTML = properties.map(property => `
-                <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                        <p class="text-gray-700">${property.price}</p>
-                        <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
-                    </div>
-                </div>
-            `).join('');
-        }
+    // Función para crear el slider de testimonios
+    function createTestimonialsSlider() {
+        const testimonialsSlider = document.getElementById('testimonials-slider');
+        testimonials.forEach(testimonial => {
+            const slide = document.createElement('div');
+            slide.className = 'bg-white p-6 rounded-lg shadow-md';
+            slide.innerHTML = `
+                <p class="text-gray-600 mb-4">"${testimonial.text}"</p>
+                <p class="font-semibold">- ${testimonial.name}</p>
+            `;
+            testimonialsSlider.appendChild(slide);
+        });
+        
+        $('#testimonials-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000
+        });
     }
 
-    function initGallery() {
-        const modal = document.getElementById('gallery-modal');
-        const closeModal = document.getElementById('close-modal');
-        const galleryImages = document.getElementById('gallery-images');
-        const galleryInfo = document.getElementById('gallery-info');
-        const fullImageContainer = document.getElementById('full-image-container');
-        const fullImage = document.getElementById('full-image');
-        const prevImage = document.getElementById('prev-image');
-        const nextImage = document.getElementById('next-image');
-
-        let currentProperty = null;
-        let currentImageIndex = 0;
-
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('view-gallery')) {
-                const propertyId = parseInt(e.target.getAttribute('data-id'));
-                currentProperty = properties.find(p => p.id === propertyId);
-                if (currentProperty) {
-                    openGallery(currentProperty);
+    // Función para crear el slider de Instagram
+    function createInstagramSlider() {
+        const instagramSlider = document.getElementById('instagram-slider');
+        instagramPosts.forEach(post => {
+            const slide = document.createElement('div');
+            slide.className = 'px-2';
+            slide.innerHTML = `
+                <a href="${post.link}" target="_blank" rel="noopener noreferrer">
+                    <img src="${post.image}" alt="Instagram post" class="w-full h-64 object-cover rounded-lg">
+                </a>
+            `;
+            instagramSlider.appendChild(slide);
+        });
+        
+        $('#instagram-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
                 }
+            ]
+        });
+    }
+
+    // Función para crear las preguntas frecuentes
+    function createFAQs() {
+        const faqContainer = document.getElementById('faq-container');
+        faqs.forEach((faq, index) => {
+            const faqItem = document.createElement('div');
+            faqItem.className = 'faq-item';
+            faqItem.innerHTML = `
+                <div class="faq-question flex justify-between items-center cursor-pointer">
+                    <span>${faq.question}</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer mt-2 text-gray-600 hidden">
+                    ${faq.answer}
+                </div>
+            `;
+            faqContainer.appendChild(faqItem);
+
+            // Añadir evento de clic para mostrar/ocultar la respuesta
+            const question = faqItem.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                faqItem.classList.toggle('active');
+                const answer = faqItem.querySelector('.faq-answer');
+                answer.classList.toggle('hidden');
+            });
+        });
+    }
+
+    // Función para crear el slider de la tienda
+    function createStoreSlider() {
+        const storeSlider = document.getElementById('store-slider');
+        properties.forEach(property => {
+            const propertyCard = document.createElement('div');
+            propertyCard.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
+            propertyCard.innerHTML = `
+                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-xl mb-2">${property.title}</h3>
+                    <p class="text-gray-700 text-base mb-4">${property.price}</p>
+                    <p class="text-gray-600 mb-4">${property.description}</p>
+                    <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-details" data-id="${property.id}">Ver Detalles</button>
+                </div>
+            `;
+            storeSlider.appendChild(propertyCard);
+        });
+    }
+
+    // Función para crear los botones de filtro
+    function createFilterButtons() {
+        const filterButtons = document.getElementById('filter-buttons');
+        const types = ['todos', 'venta', 'alquiler'];
+        types.forEach(type => {
+            const button = document.createElement('button');
+            button.className = 'px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 transition-colors';
+            button.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+            button.addEventListener('click', () => filterProperties(type));
+            filterButtons.appendChild(button);
+        });
+    }
+
+    // Función para filtrar propiedades
+    function filterProperties(type) {
+        const propertyCards = document.querySelectorAll('.property-card');
+        propertyCards.forEach(card => {
+            const propertyType = properties.find(p => p.id === parseInt(card.querySelector('.view-details').dataset.id)).type;
+            if (type === 'todos' || propertyType === type) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
             }
         });
+    }
 
-        function openGallery(property) {
-            galleryImages.innerHTML = property.gallery.map((img, index) => `
-                <img src="${img}" alt="${property.title}" onclick="showFullImage(${index})">
-            `).join('');
-            galleryInfo.innerHTML = `
-                <h3 class="text-xl font-bold mb-2">${property.title}</h3>
-                <p class="mb-2">${property.price}</p>
-                <p>${property.description}</p>
-            `;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
+    // Función para buscar propiedades
+    function searchProperties() {
+        const searchInput = document.getElementById('search-input');
+        const propertyCards = document.querySelectorAll('.property-card');
+        
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            propertyCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p:nth-of-type(2)').textContent.toLowerCase();
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
 
-        closeModal.addEventListener('click', function() {
+    // Función para manejar el clic en "Ver Detalles"
+    function handleViewDetails() {
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('view-details')) {
+                const propertyId = parseInt(e.target.dataset.id);
+                const property = properties.find(p => p.id === propertyId);
+                showGalleryModal(property);
+            }
+        });
+    }
+
+    // Función para mostrar el modal de la galería
+    function showGalleryModal(property) {
+        const modal = document.getElementById('gallery-modal');
+        const galleryImages = document.getElementById('gallery-images');
+        const galleryInfo = document.getElementById('gallery-info');
+        
+        // Limpiar imágenes anteriores
+        galleryImages.innerHTML = '';
+        
+        // Agregar nuevas imágenes
+        property.gallery.forEach(image => {
+            const img = document.createElement('img');
+            img.src = image;
+            img.alt = property.title;
+            img.className = 'w-1/3 p-2 cursor-pointer';
+            img.addEventListener('click', () => showFullImage(image));
+            galleryImages.appendChild(img);
+        });
+        
+        // Actualizar información de la propiedad
+        galleryInfo.innerHTML = `
+            <h3 class="text-xl font-bold mb-2">${property.title}</h3>
+            <p class="mb-2"><strong>Precio:</strong> ${property.price}</p>
+            <p>${property.description}</p>
+        `;
+        
+        // Mostrar modal
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    // Función para mostrar imagen completa
+    function showFullImage(imageSrc) {
+        const fullImageContainer = document.getElementById('full-image-container');
+        const fullImage = document.getElementById('full-image');
+        
+        fullImage.src = imageSrc;
+        fullImageContainer.style.display = 'flex';
+    }
+
+    // Función para cerrar el modal de la galería
+    function closeGalleryModal() {
+        const modal = document.getElementById('gallery-modal');
+        const closeButton = document.getElementById('close-modal');
+        
+        closeButton.addEventListener('click', () => {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         });
-
-        window.showFullImage = function(index) {
-            currentImageIndex = index;
-            fullImage.src = currentProperty.gallery[index];
-            fullImageContainer.style.display = 'flex';
-        }
-
-        fullImageContainer.addEventListener('click', function(e) {
-            if (e.target === fullImageContainer) {
-                fullImageContainer.style.display = 'none';
-            }
-        });
-
-        prevImage.addEventListener('click', function() {
-            currentImageIndex = (currentImageIndex - 1 + currentProperty.gallery.length) % currentProperty.gallery.length;
-            fullImage.src = currentProperty.gallery[currentImageIndex];
-        });
-
-        nextImage.addEventListener('click', function() {
-            currentImageIndex = (currentImageIndex + 1) % currentProperty.gallery.length;
-            fullImage.src = currentProperty.gallery[currentImageIndex];
-        });
-    }
-
-    function initTestimonials() {
-        const testimonialsSlider = document.getElementById('testimonials-slider');
-        if (testimonialsSlider) {
-            testimonialsSlider.innerHTML = testimonials.map(testimonial => `
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <p class="mb-4">"${testimonial.text}"</p>
-                    <p class="font-bold">- ${testimonial.name}</p>
-                </div>
-            `).join('');
-            
-            $(testimonialsSlider).slick({
-                dots: true,
-                arrows: false,
-                autoplay: true,
-                autoplaySpeed: 5000
-            });
-        }
-    }
-
-    function initInstagram() {
-        const instagramSlider = document.getElementById('instagram-slider');
-        if (instagramSlider) {
-            instagramSlider.innerHTML = instagramPosts.map(post => `
-                <div>
-                    <a href="${post.link}" target="_blank" rel="noopener noreferrer">
-                        <img src="${post.image}" alt="Instagram post" class="w-full h-64 object-cover rounded-lg">
-                    </a>
-                </div>
-            `).join('');
-            
-            $(instagramSlider).slick({
-                dots: false,
-                arrows: true,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                responsive: [
-                    {
-                        breakpoint:  1024,
-                        settings: {
-                            slidesToShow: 3
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 640,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            });
-        }
-    }
-
-    function initFAQs() {
-        const faqContainer = document.getElementById('faq-container');
-        if (faqContainer) {
-            faqContainer.innerHTML = faqs.map((faq, index) => `
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(${index})">
-                        ${faq.question}
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-answer">
-                        ${faq.answer}
-                    </div>
-                </div>
-            `).join('');
-        }
-    }
-
-    window.toggleFAQ = function(index) {
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems[index].classList.toggle('active');
-    }
-
-    function initContactForm() {
-        const form = document.getElementById('contact-form');
-        if (form) {
-            form.setAttribute('action', 'https://formspree.io/f/your_formspree_id');
-            form.setAttribute('method', 'POST');
-        }
-    }
-
-    function initScrollEffects() {
-        const fadeElems = document.querySelectorAll('.fade-in-section');
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
+        // Cerrar modal al hacer clic fuera de él
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
         });
+    }
 
-        fadeElems.forEach(elem => observer.observe(elem));
-
-        // Botón "Volver arriba"
-        const backToTopButton = document.getElementById("back-to-top");
+    // Función para cerrar la imagen completa
+    function closeFullImage() {
+        const fullImageContainer = document.getElementById('full-image-container');
         
-        window.onscroll = function() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                backToTopButton.style.display = "block";
-            } else {
-                backToTopButton.style.display = "none";
-            }
-        };
-
-        backToTopButton.onclick = function() {
-            document.body.scrollTop = 0; // Para Safari
-            document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
-        };
-    }
-
-    function initPWA() {
-        let deferredPrompt;
-        const installButton = document.getElementById('install-app');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installButton.style.display = 'block';
-        });
-
-        installButton.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                console.log(`User response to the install prompt: ${outcome}`);
-                deferredPrompt = null;
-            }
-        });
-
-        window.addEventListener('appinstalled', () => {
-            console.log('PWA was installed');
+        fullImageContainer.addEventListener('click', () => {
+            fullImageContainer.style.display = 'none';
         });
     }
 
-    function initChatbot() {
-        const chatbotContainer = document.getElementById('ai-real-estate-expert-chatbot');
-        if (chatbotContainer) {
-            chatbotContainer.innerHTML = `
-                <button id="open-chatbot" class="bg-primary text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl">
-                    <i class="fas fa-comments"></i>
-                </button>
-                <div id="chatbot-window" class="hidden fixed bottom-28 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold">Chatbot Inmobiliario</h3>
-                        <button id="close-chatbot" class="text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div id="chatbot-messages" class="h-60 overflow-y-auto mb-4"></div>
-                    <form id="chatbot-form" class="flex">
-                        <input type="text" id="chatbot-input" class="flex-grow border rounded-l px-2 py-1" placeholder="Escribe tu pregunta...">
-                        <button type="submit" class="bg-primary text-white px-4 py-1 rounded-r">Enviar</button>
-                    </form>
-                </div>
-            `;
-
-            const openButton = document.getElementById('open-chatbot');
-            const closeButton = document.getElementById('close-chatbot');
-            const chatbotWindow = document.getElementById('chatbot-window');
-
-            openButton.addEventListener('click', () => {
-                chatbotWindow.classList.remove('hidden');
-                openButton.classList.add('hidden');
-            });
-
-            closeButton.addEventListener('click', () => {
-                chatbotWindow.classList.add('hidden');
-                openButton.classList.remove('hidden');
-            });
-
-            const chatbotForm = document.getElementById('chatbot-form');
-            const chatbotInput = document.getElementById('chatbot-input');
-            const chatbotMessages = document.getElementById('chatbot-messages');
-
-            chatbotForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const message = chatbotInput.value.trim();
-                if (message) {
-                    addMessage('user', message);
-                    chatbotInput.value = '';
-                    // Aquí iría la lógica para procesar la pregunta y obtener una respuesta
-                    setTimeout(() => {
-                        addMessage('bot', 'Lo siento, aún estoy aprendiendo. Por favor, contacta con un agente para obtener información más precisa.');
-                    }, 1000);
-                }
-            });
-
-            function addMessage(sender, text) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('mb-2', 'p-2', 'rounded', sender === 'user' ? 'bg-primary' : 'bg-gray-200', sender === 'user' ? 'text-white' : 'text-gray-800', sender === 'user' ? 'ml-auto' : 'mr-auto');
-                messageElement.style.maxWidth = '80%';
-                messageElement.textContent = text;
-                chatbotMessages.appendChild(messageElement);
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            }
-        }
+    // Función para navegar entre imágenes completas
+    function navigateFullImages() {
+        const prevButton = document.getElementById('prev-image');
+        const nextButton = document.getElementById('next-image');
+        const fullImage = document.getElementById('full-image');
+        
+        let currentIndex = 0;
+        const images = Array.from(document.querySelectorAll('#gallery-images img'));
+        
+        prevButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            fullImage.src = images[currentIndex].src;
+        });
+        
+        nextButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % images.length;
+            fullImage.src = images[currentIndex].src;
+        });
     }
 
-
+    // Función para crear el slider de YouTube
     function initYouTubeVideos() {
         const youtubeContainer = document.getElementById('youtube-slider');
         if (youtubeContainer) {
@@ -507,95 +494,98 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    function initPropertyStore() {
-        const storeSlider = document.getElementById('store-slider');
-        const searchInput = document.getElementById('search-input');
-        const filterButtons = document.getElementById('filter-buttons');
-
-        if (storeSlider && searchInput && filterButtons) {
-            // Renderizar todas las propiedades inicialmente
-            renderProperties(properties);
-
-            // Agregar botones de filtro
-            filterButtons.innerHTML = `
-                <button class="filter-btn active" data-type="all">Todos</button>
-                <button class="filter-btn" data-type="venta">Venta</button>
-                <button class="filter-btn" data-type="alquiler">Alquiler</button>
-            `;
-
-            // Evento de búsqueda
-            searchInput.addEventListener('input', filterProperties);
-
-            // Evento de filtrado
-            filterButtons.addEventListener('click', (e) => {
-                if (e.target.classList.contains('filter-btn')) {
-                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                    e.target.classList.add('active');
-                    filterProperties();
-                }
-            });
-
-            function renderProperties(propertiesToRender) {
-                storeSlider.innerHTML = propertiesToRender.map(property => `
-                    <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden flex-shrink-0 w-64 mx-2" data-type="${property.type}">
-                        <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                            <p class="text-gray-700">${property.price}</p>
-                            <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
-                        </div>
-                    </div>
-                `).join('');
-
-                // Inicializar o actualizar el slider
-                if ($('#store-slider').hasClass('slick-initialized')) {
-                    $('#store-slider').slick('unslick');
-                }
-                $('#store-slider').slick({
-                    dots: false,
-                    infinite: false,
-                    speed: 300,
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                    responsive: [
-                        {
-                            breakpoint: 1024,
-                            settings: {
-                                slidesToShow: 3,
-                                slidesToScroll: 1,
-                            }
-                        },
-                        {
-                            breakpoint: 600,
-                            settings: {
-                                slidesToShow: 2,
-                                slidesToScroll: 1
-                            }
-                        },
-                        {
-                            breakpoint: 480,
-                            settings: {
-                                slidesToShow: 1,
-                                slidesToScroll: 1
-                            }
-                        }
-                    ]
-                });
-            }
-
-            function filterProperties() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const activeFilter = document.querySelector('.filter-btn.active').dataset.type;
-
-                const filteredProperties = properties.filter(property => {
-                    const matchesSearch = property.title.toLowerCase().includes(searchTerm) || 
-                                          property.description.toLowerCase().includes(searchTerm);
-                    const matchesType = activeFilter === 'all' || property.type === activeFilter;
-                    return matchesSearch && matchesType;
-                });
-
-                renderProperties(filteredProperties);
-            }
+    // Función para manejar el formulario de contacto
+    function initContactForm() {
+        const form = document.getElementById('contact-form');
+        if (form) {
+            form.setAttribute('action', 'https://formspree.io/f/your_formspree_id');
+            form.setAttribute('method', 'POST');
         }
     }
+
+
+    // Función para el botón "Volver arriba"
+    function handleBackToTop() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // Función para manejar el efecto de aparición al hacer scroll
+    function handleScrollAnimation() {
+        const fadeElems = document.querySelectorAll('.fade-in-section');
+        
+        const fadeIn = (elem) => {
+            var distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
+            if (distInView < 0) {
+                elem.classList.add('is-visible');
+            } else {
+                elem.classList.remove('is-visible');
+            }
+        };
+        
+        fadeElems.forEach(elem => {
+            fadeIn(elem);
+        });
+        
+        window.addEventListener('scroll', () => {
+            fadeElems.forEach(elem => {
+                fadeIn(elem);
+            });
+        });
+    }
+
+    // Función para manejar la instalación de la PWA
+    function handleInstallApp() {
+        let deferredPrompt;
+        const installButton = document.getElementById('install-app');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+        
+        installButton.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Usuario aceptó la instalación de la PWA');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        });
+    }
+
+    // Llamar a todas las funciones de inicialización
+    createHeroSlider();
+    createFeaturedProperties();
+    createServiceCards();
+    createTestimonialsSlider();
+    createInstagramSlider();
+    createFAQs();
+    createStoreSlider();
+    createFilterButtons();
+    searchProperties();
+    handleViewDetails();
+    closeGalleryModal();
+    closeFullImage();
+    navigateFullImages();
+    createYouTubeSlider();
+    handleContactForm();
+    handleBackToTop();
+    handleScrollAnimation();
+    handleInstallApp();
 });
