@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dots: true,
                 arrows: false,
                 autoplay: true,
-                autoplaySpeed: 5000
+                autoplaySpee d: 5000
             });
         }
     }
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 slidesToScroll: 1,
                 responsive: [
                     {
-                        breakpoint:  1024,
+                        breakpoint: 1024,
                         settings: {
                             slidesToShow: 3
                         }
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function() {
             chatbotContainer.innerHTML = `
                 <div class="fixed bottom-20 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold">Chatbot Inmobiliario</h3>
+                        <h3 class="text-lg font-bold">ARIA - Experta en bienes raíces</h3>
                         <button id="close-chatbot" class="text-gray-500 hover:text-gray-700">
                             <i class="fas fa-times"></i>
                         </button>
