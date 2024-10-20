@@ -71,6 +71,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 "/img/cuenca2.jpg",
                 "/img/cuenca3.jpg"
             ]
+        },
+        { 
+            id: 6, 
+            title: "Terreno en venta – Manta", 
+            price: "$120,000", 
+            image: "/img/manta.jpg", 
+            type: "venta",
+            description: "Amplio terreno en Manta, ideal para desarrollo residencial o comercial. 1000 m2 con todos los servicios básicos.",
+            gallery: [
+                "/img/manta.jpg",
+                "/img/manta2.jpg",
+                "/img/manta3.jpg"
+            ]
+        },
+        { 
+            id: 7, 
+            title: "Oficina en alquiler – Guayaquil", 
+            price: "$1,500/mes", 
+            image: "/img/oficina_guayaquil.jpg", 
+            type: "alquiler",
+            description: "Moderna oficina en el centro empresarial de Guayaquil. 100 m2, totalmente equipada y con excelente ubicación.",
+            gallery: [
+                "/img/oficina_guayaquil.jpg",
+                "/img/oficina_guayaquil2.jpg",
+                "/img/oficina_guayaquil3.jpg"
+            ]
         }
     ];
 
@@ -132,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initPWA();
     initChatbot();
     initYouTubeVideos();
+    initPropertyStore();
 
     function initSliders() {
         // Hero slider
@@ -164,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function initFeaturedProperties() {
         const featuredContainer = document.querySelector('#propiedades .grid');
         if (featuredContainer) {
-            featuredContainer.innerHTML = properties.slice(0, 3).map(property => `
+            featuredContainer.innerHTML = properties.map(property => `
                 <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden">
                     <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
                     <div class="p-4">
@@ -280,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 slidesToScroll: 1,
                 responsive: [
                     {
-                        breakpoint: 1024,
+                        breakpoint:  1024,
                         settings: {
                             slidesToShow: 3
                         }
@@ -374,8 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         installButton.addEventListener('click', async () => {
             if (deferredPrompt) {
-                defer
-redPrompt.prompt();
+                deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
                 console.log(`User response to the install prompt: ${outcome}`);
                 deferredPrompt = null;
@@ -442,16 +468,118 @@ redPrompt.prompt();
     function initYouTubeVideos() {
         const youtubeContainer = document.getElementById('youtube-slider');
         if (youtubeContainer) {
+            // Aquí deberías hacer una llamada a la API de YouTube para obtener los últimos videos
+            // Por ahora, usaremos datos de ejemplo
+            const latestVideos = [
+                { id: 'VIDEO_ID_1', title: 'Último video 1' },
+                { id: 'VIDEO_ID_2', title: 'Último video 2' },
+                { id: 'VIDEO_ID_3', title: 'Último video 3' },
+                { id: 'VIDEO_ID_4', title: 'Último video 4' },
+                { id: 'VIDEO_ID_5', title: 'Último video 5' }
+            ];
+
             youtubeContainer.innerHTML = `
                 <div class="flex overflow-x-auto space-x-4 pb-4">
-                    ${properties.map(property => `
+                    ${latestVideos.map(video => `
                         <div class="flex-shrink-0 w-80">
-                            <iframe width="320" height="180" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            <h3 class="text-lg font-semibold mt-2">${property.title}</h3>
+                            <iframe width="320" height="180" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <h3 class="text-lg font-semibold mt-2">${video.title}</h3>
                         </div>
                     `).join('')}
                 </div>
             `;
+        }
+    }
+
+    function initPropertyStore() {
+        const storeSlider = document.getElementById('store-slider');
+        const searchInput = document.getElementById('search-input');
+        const filterButtons = document.getElementById('filter-buttons');
+
+        if (storeSlider && searchInput && filterButtons) {
+            // Renderizar todas las propiedades inicialmente
+            renderProperties(properties);
+
+            // Agregar botones de filtro
+            filterButtons.innerHTML = `
+                <button class="filter-btn active" data-type="all">Todos</button>
+                <button class="filter-btn" data-type="venta">Venta</button>
+                <button class="filter-btn" data-type="alquiler">Alquiler</button>
+            `;
+
+            // Evento de búsqueda
+            searchInput.addEventListener('input', filterProperties);
+
+            // Evento de filtrado
+            filterButtons.addEventListener('click', (e) => {
+                if (e.target.classList.contains('filter-btn')) {
+                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    filterProperties();
+                }
+            });
+
+            function renderProperties(propertiesToRender) {
+                storeSlider.innerHTML = propertiesToRender.map(property => `
+                    <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden flex-shrink-0 w-64 mx-2" data-type="${property.type}">
+                        <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">${property.title}</h3>
+                            <p class="text-gray-700">${property.price}</p>
+                            <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Inicializar o actualizar el slider
+                if ($('#store-slider').hasClass('slick-initialized')) {
+                    $('#store-slider').slick('unslick');
+                }
+                $('#store-slider').slick({
+                    dots: false,
+                    infinite: false,
+                    speed: 300,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 1
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
+                        }
+                    ]
+                });
+            }
+
+            function filterProperties() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.type;
+
+                const filteredProperties = properties.filter(property => {
+                    const matchesSearch = property.title.toLowerCase().includes(searchTerm) || 
+                                          property.description.toLowerCase().includes(searchTerm);
+                    const matchesType = activeFilter === 'all' || property.type === activeFilter;
+                    return matchesSearch && matchesType;
+                });
+
+                renderProperties(filteredProperties);
+            }
         }
     }
 });
