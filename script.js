@@ -1,12 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
-    const promoItems = [
-        "¡Oferta especial! 10% de descuento en propiedades seleccionadas",
-        "Nueva propiedad disponible en el centro de Quito",
-        "¡Financiamiento disponible! Consulta nuestras opciones",
-        "Descubre nuestras propiedades de lujo en la costa ecuatoriana"
-    ];
-
     const heroImages = [
         "/img/casa-moderna-encantadora-villa-3d-render_1015255-30058.jpg",
         "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg",
@@ -20,113 +13,128 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "Consultar", 
             image: "/img/orlandoflorida.jpg", 
             type: "venta",
-            description: "Proyecto en pre-construcción con 6 torres y 378 apartamentos, ofrecemos crédito hipotecario para inversionistas latinoamericanos. El Sycamore Club, con 3 pisos, cuenta con gastronomía, deportes, recreación, club de niños, espacio para eventos, gimnasio, spa y salón de belleza. Estrategia exclusiva de alquiler con alto porcentaje de rentabilidad.",
-            images: ["/img/orlando1.jpg", "/img/orlando3.jpg", "/img/orlando10.png", "/img/orlando6.png", "/img/orlando7.jpeg", "/img/orlando8.png", "/img/orlando9.png", "/img/orlandoflorida8.jpg", "/img/orlandoflorida9.jpg", "/img/orlandoflorida10.jpg"]
+            description: "Proyecto en pre-construcción con 6 torres y 378 apartamentos, ofrecemos crédito hipotecario para inversionistas latinoamericanos. El Sycamore Club,  es un proyecto de apartamentos de lujo en Orlando, Florida, ubicado a 10 minutos de Disney World y Universal Studios.",
+            gallery: [
+                "/img/orlandoflorida.jpg",
+                "/img/orlandoflorida2.jpg",
+                "/img/orlandoflorida3.jpg"
+            ]
         },
         { 
             id: 2, 
-            title: "Departamento vista al rio – Via Samborondon", 
-            price: "Consultar", 
-            image: "/img/departamentos.jpg", 
-            type: "alquiler",
-            description: "Últimas unidades disponibles de 2 y 3 habitaciones con balcones, master y áreas sociales con vista al río. Incluyen dormitorio secundario completo, sala, comedor, cocina tipo americana, lavandería, parqueo, piscina, pérgola y malecón. Trabajamos con todas las instituciones financieras y gestionamos su crédito hipotecario. Crédito directo disponible, consulte nuestras opciones de financiamiento.",
-            images: ["/img/i1.jpeg", "/img/i2-768x1024.jpeg", "/img/i3.jpeg", "/img/i4-1024x576.jpeg", "/img/i5-1024x682.jpeg", "/img/i6.jpeg", "/img/departamentos7.jpg", "/img/departamentos8.jpg", "/img/departamentos9.jpg", "/img/departamentos10.jpg"]
+            title: "Departamento en venta – Samborondón", 
+            price: "$250,000", 
+            image: "/img/samborondon.jpg", 
+            type: "venta",
+            description: "Hermoso departamento en Samborondón, con vista al río. 3 dormitorios, 2 baños, sala, comedor, cocina y área de lavandería.",
+            gallery: [
+                "/img/samborondon.jpg",
+                "/img/samborondon2.jpg",
+                "/img/samborondon3.jpg"
+            ]
         },
         { 
             id: 3, 
-            title: "Locales comerciales y oficinas – Via Samborondon", 
-            price: "Consultar", 
-            image: "/img/locales.jpg", 
+            title: "Casa en venta – Guayaquil", 
+            price: "$180,000", 
+            image: "/img/guayaquil.jpg", 
             type: "venta",
-            description: "Proyecto en pre-construcción, estratégicamente ubicado en el nuevo Samborondón, cerca de centros comerciales, iglesias, clínicas, escuelas, universidades, restaurantes y el Parque Bicentenario. Venta directa con plusvalía garantizada por el alto movimiento del sector. Ofrecemos crédito directo a 16 meses sin intereses y apoyo en la gestión de crédito bancario. Al ser un proyecto en planos, facilita la organización financiera. Cuenta con ascensor, excelente precio y ubicación, y oficina de administración.",
-            images: ["/img/locales1.jpg", "/img/locales2.jpg", "/img/locales3.jpeg", "/img/locales4.jpg", "/img/localea5.jpg", "/img/locales6.jpg", "/img/locales7.jpg", "/img/locales8.jpg", "/img/locales9.jpg", "/img/locales10.jpg"]
+            description: "Casa de dos plantas en Guayaquil, con 4 dormitorios, 3 baños, sala, comedor, cocina, patio y garaje para 2 vehículos.",
+            gallery: [
+                "/img/guayaquil.jpg",
+                "/img/guayaquil2.jpg",
+                "/img/guayaquil3.jpg"
+            ]
         },
         { 
             id: 4, 
-            title: "Oficina ejecutiva en Quito", 
-            price: "$2,200/mes", 
-            image: "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", 
+            title: "Departamento en alquiler – Quito", 
+            price: "$800/mes", 
+            image: "/img/quito.jpg", 
             type: "alquiler",
-            description: "Oficina ejecutiva de lujo en el corazón financiero de Quito. Este espacio de trabajo premium ofrece un ambiente profesional y sofisticado, ideal para empresas que buscan proyectar una imagen de éxito. Con vistas impresionantes de la ciudad, la oficina cuenta con tecnología de punta, salas de conferencias equipadas y áreas comunes elegantes. Ubicada en un edificio de prestigio con seguridad 24/7, esta oficina proporciona el entorno perfecto para impulsar su negocio al siguiente nivel.",
-            images: ["/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg", "/img/oficina2.jpg", "/img/oficina3.jpg", "/img/oficina4.jpg", "/img/oficina5.jpg", "/img/oficina6.jpg", "/img/oficina7.jpg", "/img/oficina8.jpg", "/img/oficina9.jpg", "/img/oficina10.jpg"]
+            description: "Moderno departamento en el centro de Quito, amoblado, con 2 dormitorios, 1 baño, sala, comedor y cocina.",
+            gallery: [
+                "/img/quito.jpg",
+                "/img/quito2.jpg",
+                "/img/quito3.jpg"
+            ]
+        },
+        { 
+            id: 5, 
+            title: "Casa en alquiler – Cuenca", 
+            price: "$1,000/mes", 
+            image: "/img/cuenca.jpg", 
+            type: "alquiler",
+            description: "Hermosa casa en Cuenca, con 3 dormitorios, 2.5 baños, sala, comedor, cocina, jardín y garaje.",
+            gallery: [
+                "/img/cuenca.jpg",
+                "/img/cuenca2.jpg",
+                "/img/cuenca3.jpg"
+            ]
         }
     ];
 
     const services = [
-        { title: "Asesoría Legal", description: "Asistencia legal en todas las transacciones inmobiliarias", icon: "fa-gavel" },
-        { title: "Valuación de Propiedades", description: "Tasaciones precisas y profesionales de bienes raíces", icon: "fa-calculator" },
-        { title: "Gestión de Alquileres", description: "Administramos sus propiedades en alquiler de manera eficiente", icon: "fa-key" }
+        { title: "Compra y Venta", icon: "fas fa-home", description: "Asesoramiento experto en la compra y venta de propiedades." },
+        { title: "Alquiler", icon: "fas fa-key", description: "Gestión de alquileres a corto y largo plazo." },
+        { title: "Inversiones", icon: "fas fa-chart-line", description: "Oportunidades de inversión en bienes raíces." },
+        { title: "Tasaciones", icon: "fas fa-calculator", description: "Valoración profesional de propiedades." },
+        { title: "Asesoría Legal", icon: "fas fa-gavel", description: "Asistencia legal en transacciones inmobiliarias." },
+        { title: "Remodelaciones", icon: "fas fa-hammer", description: "Servicios de remodelación y mejora de propiedades." }
     ];
 
     const testimonials = [
-        { id: 1, name: "Juan Pérez", text: "Janneth Aguirre me ayudó a encontrar la casa de mis sueños. Su profesionalismo y dedicación son incomparables.", image: "img/juan.png" },
-        { id: 2, name: "María González", text: "Gracias a Janneth, vender mi propiedad fue un proceso rápido y sin complicaciones. ¡Altamente recomendada!", image: "img/Maria.png" },
-        { id: 3, name: "Carlos Rodríguez", text: "La atención al cliente de Janneth Aguirre es excepcional. Siempre está disponible para responder preguntas y ofrecer asesoramiento.", image: "img/carlos.png" }
+        { name: "Juan Pérez", text: "Excelente servicio, encontré mi casa ideal gracias a Janneth Aguirre." },
+        { name: "María González", text: "Profesionalismo y dedicación en cada paso del proceso de compra." },
+        { name: "Carlos Rodríguez", text: "La mejor experiencia en venta de propiedades. Altamente recomendado." }
     ];
 
     const instagramPosts = [
-        { type: 'post', url: 'https://www.instagram.com/p/DBJS7yhM4_P/' },
-        { type: 'reel', url: 'https://www.instagram.com/reel/DA08gfysclf/' },
-        { type: 'post', url: 'https://www.instagram.com/p/DApTvIhBidr/' },
-        { type: 'reel', url: 'https://www.instagram.com/reel/EXAMPLE4/' },
-        { type: 'post', url: 'https://www.instagram.com/p/EXAMPLE5/' }
+        { image: "/img/instagram1.jpg", link: "#" },
+        { image: "/img/instagram2.jpg", link: "#" },
+        { image: "/img/instagram3.jpg", link: "#" },
+        { image: "/img/instagram4.jpg", link: "#" }
     ];
 
     const faqs = [
-        {
-            question: "¿Cómo puedo comenzar a buscar una propiedad?",
-            answer: "Puede comenzar explorando nuestro catálogo en línea o contactarnos directamente para una consulta personalizada."
+        { 
+            question: "¿Cuál es el proceso para comprar una propiedad?", 
+            answer: "El proceso generalmente incluye: búsqueda de la propiedad, negociación del precio, firma de un contrato de compraventa, obtención de financiamiento si es necesario, y cierre de la transacción. Nuestro equipo le guiará en cada paso." 
         },
-        {
-            question: "¿Qué documentos necesito para comprar una propiedad?",
-            answer: "Generalmente, necesitará una identificación válida, comprobante de ingresos y, en algunos casos, un historial crediticio."
+        { 
+            question: "¿Qué documentos necesito para vender mi propiedad?", 
+            answer: "Generalmente necesitará: título de propiedad, certificado de gravámenes, pago de impuestos al día, y cédula de identidad. Podemos ayudarle a reunir toda la documentación necesaria." 
         },
-        {
-            question: "¿Ofrecen opciones de financiamiento?",
-            answer: "Sí, trabajamos con varios bancos y entidades financieras para ofrecer opciones de financiamiento a nuestros clientes."
+        { 
+            question: "¿Cómo determino el precio de venta de mi propiedad?", 
+            answer: "El precio se determina considerando factores como la ubicación, tamaño, condición de la propiedad, y precios de propiedades similares en la zona. Ofrecemos servicios de tasación profesional para ayudarle a determinar un precio justo." 
         },
-        {
-            question: "¿Cuánto tiempo toma normalmente el proceso de compra?",
-            answer: "El proceso puede variar, pero generalmente toma entre 30 y 90 días desde la oferta inicial hasta el cierre."
+        { 
+            question: "¿Cuánto tiempo toma vender una propiedad?", 
+            answer: "El tiempo de venta puede variar dependiendo de factores como la ubicación, el precio, y las condiciones del mercado. En promedio, puede tomar entre 3 a 6 meses, pero algunas propiedades se venden más rápido." 
         },
-        {
-            question: "¿Qué servicios post-venta ofrecen?",
-            answer: "Ofrecemos asesoría legal, gestión de documentación y apoyo en trámites relacionados con la propiedad después de la compra."
+        { 
+            question: "¿Qué servicios ofrecen para propietarios que quieren alquilar?", 
+            answer: "Ofrecemos servicios completos de gestión de alquileres, incluyendo: búsqueda de inquilinos, verificación de antecedentes, preparación de contratos, cobro de alquileres, y mantenimiento de la propiedad." 
         }
     ];
 
-    // Constantes para YouTube
-    const YOUTUBE_CHANNEL_ID = 'UCiahlQJxCgPY-tEfjvkab8g';
-    const YOUTUBE_API_KEY = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
-
-    // Inicializar componentes
+    // Inicialización de componentes
     initSliders();
     renderServices();
-    initStore();
+    initFeaturedProperties();
     initGallery();
     initTestimonials();
     initInstagram();
     initFAQs();
-    initMap();
     initContactForm();
     initScrollEffects();
     initPWA();
     initChatbot();
-    loadYouTubeVideos();
+    initYouTubeVideos();
 
     function initSliders() {
-        // Inicializar el slider de promociones
-        if ($('.promo-slider').length) {
-            $('.promo-slider').html(promoItems.map(item => `<div>${item}</div>`).join(''));
-            $('.promo-slider').slick({
-                autoplay: true,
-                autoplaySpeed: 3000,
-                arrows: false,
-                dots: false
-            });
-        }
-
-        // Inicializar el slider del hero
+        // Hero slider
         if ($('.hero-slider').length) {
             $('.hero-slider').html(heroImages.map(img => `<div style="background-image: url('${img}')"></div>`).join(''));
             $('.hero-slider').slick({
@@ -138,11 +146,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 cssEase: 'linear'
             });
         }
+    }
 
-        // Renderizar propiedades destacadas
-        const featuredProperties = document.querySelector('#propiedades .grid');
-        if (featuredProperties) {
-            featuredProperties.innerHTML = properties.slice(0, 4).map(property => `
+    function renderServices() {
+        const serviceGrid = document.getElementById('service-grid');
+        if (serviceGrid) {
+            serviceGrid.innerHTML = services.map(service => `
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <i class="${service.icon} text-4xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">${service.title}</h3>
+                    <p>${service.description}</p>
+                </div>
+            `).join('');
+        }
+    }
+
+    function initFeaturedProperties() {
+        const featuredContainer = document.querySelector('#propiedades .grid');
+        if (featuredContainer) {
+            featuredContainer.innerHTML = properties.slice(0, 3).map(property => `
                 <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden">
                     <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
                     <div class="p-4">
@@ -152,68 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             `).join('');
-        }
-    }
-
-    function renderServices() {
-        const serviceGrid = document.getElementById('service-grid');
-        if (serviceGrid) {
-            serviceGrid.innerHTML = services.map(service => `
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <i class="fas ${service.icon} text-4xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">${service.title}</h3>
-                    <p class="text-gray-600">${service.description}</p>
-                </div>
-            `).join('');
-        }
-    }
-
-    function initStore() {
-        const storeSlider = document.getElementById('store-slider');
-        if (storeSlider) {
-            storeSlider.innerHTML = properties.map(property => `
-                <div class="property-card bg-white shadow-lg rounded-lg overflow-hidden flex-shrink-0 w-64" data-type="${property.type}">
-                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">${property.title}</h3>
-                        <p class="text-gray-700">${property.price}</p>
-                        <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-gallery" data-id="${property.id}">Ver Galería</button>
-                    </div>
-                </div>
-            `).join('');
-
-            // Funcionalidad de filtrado
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const filter = button.getAttribute('data-filter');
-                    const cards = document.querySelectorAll('.property-card');
-                    cards.forEach(card => {
-                        if (filter === 'all' || card.getAttribute('data-type') === filter) {
-                            card.style.display = '';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
-            });
-
-            // Funcionalidad de búsqueda
-            const searchInput = document.getElementById('search-input');
-            if (searchInput) {
-                searchInput.addEventListener('input', () => {
-                    const searchTerm = searchInput.value.toLowerCase();
-                    const cards = document.querySelectorAll('.property-card');
-                    cards.forEach(card => {
-                        const title = card.querySelector('h3').textContent.toLowerCase();
-                        if (title.includes(searchTerm)) {
-                            card.style.display = '';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
-            }
         }
     }
 
@@ -227,94 +187,57 @@ document.addEventListener('DOMContentLoaded', function() {
         const prevImage = document.getElementById('prev-image');
         const nextImage = document.getElementById('next-image');
 
-        if (!modal || !closeModal || !galleryImages || !galleryInfo || !fullImageContainer || !fullImage || !prevImage || !nextImage) {
-            console.error('Faltan elementos necesarios para la galería');
-            return;
-        }
-
-        let currentPropertyId = null;
+        let currentProperty = null;
         let currentImageIndex = 0;
 
-        document.querySelectorAll('.view-gallery, .view-details').forEach(button => {
-            button.addEventListener('click', () => {
-                const propertyId = button.getAttribute('data-id');
-                const property = properties.find(p => p.id === parseInt(propertyId));
-                
-                if (!property) {
-                    console.error('Propiedad no encontrada');
-                    return;
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('view-gallery')) {
+                const propertyId = parseInt(e.target.getAttribute('data-id'));
+                currentProperty = properties.find(p => p.id === propertyId);
+                if (currentProperty) {
+                    openGallery(currentProperty);
                 }
-
-                currentPropertyId = property.id;
-                currentImageIndex = 0;
-                
-                // Limpiar imágenes anteriores
-                galleryImages.innerHTML = '';
-                
-                // Agregar imágenes a la galería
-                property.images.forEach((image, index) => {
-                    const img = document.createElement('img');
-                    img.src = image;
-                    img.alt = `${property.title} - Imagen ${index + 1}`;
-                    img.className = 'w-24 h-24 object-cover rounded cursor-pointer';
-                    img.addEventListener('click', () => showFullImage(index));
-                    galleryImages.appendChild(img);
-                });
-                
-                // Actualizar información de la propiedad
-                galleryInfo.innerHTML = `
-                    <h3 class="text-xl font-bold">${property.title}</h3>
-                    <p class="text-lg">${property.price}</p>
-                    <p>Tipo: ${property.type}</p>
-                    <p class="mt-2">${property.description}</p>
-                `;
-                
-                modal.classList.remove('hidden');
-                
-                modal.classList.add('flex');
-            });
+            }
         });
 
-        closeModal.addEventListener('click', () => {
+        function openGallery(property) {
+            galleryImages.innerHTML = property.gallery.map((img, index) => `
+                <img src="${img}" alt="${property.title}" onclick="showFullImage(${index})">
+            `).join('');
+            galleryInfo.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">${property.title}</h3>
+                <p class="mb-2">${property.price}</p>
+                <p>${property.description}</p>
+            `;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        closeModal.addEventListener('click', function() {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         });
 
-        // Cerrar el modal si se hace clic fuera de él
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }
-        });
-
-        function showFullImage(index) {
-            const property = properties.find(p => p.id === currentPropertyId);
-            if (!property) return;
+        window.showFullImage = function(index) {
             currentImageIndex = index;
-            fullImage.src = property.images[index];
-            fullImage.alt = `${property.title} - Imagen ${index + 1}`;
+            fullImage.src = currentProperty.gallery[index];
             fullImageContainer.style.display = 'flex';
         }
 
-        prevImage.addEventListener('click', () => {
-            const property = properties.find(p => p.id === currentPropertyId);
-            if (!property) return;
-            currentImageIndex = (currentImageIndex - 1 + property.images.length) % property.images.length;
-            showFullImage(currentImageIndex);
-        });
-
-        nextImage.addEventListener('click', () => {
-            const property = properties.find(p => p.id === currentPropertyId);
-            if (!property) return;
-            currentImageIndex = (currentImageIndex + 1) % property.images.length;
-            showFullImage(currentImageIndex);
-        });
-
-        fullImageContainer.addEventListener('click', (e) => {
+        fullImageContainer.addEventListener('click', function(e) {
             if (e.target === fullImageContainer) {
                 fullImageContainer.style.display = 'none';
             }
+        });
+
+        prevImage.addEventListener('click', function() {
+            currentImageIndex = (currentImageIndex - 1 + currentProperty.gallery.length) % currentProperty.gallery.length;
+            fullImage.src = currentProperty.gallery[currentImageIndex];
+        });
+
+        nextImage.addEventListener('click', function() {
+            currentImageIndex = (currentImageIndex + 1) % currentProperty.gallery.length;
+            fullImage.src = currentProperty.gallery[currentImageIndex];
         });
     }
 
@@ -322,30 +245,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const testimonialsSlider = document.getElementById('testimonials-slider');
         if (testimonialsSlider) {
             testimonialsSlider.innerHTML = testimonials.map(testimonial => `
-                <div class="bg-white p-6 rounded-lg shadow-md mx-2">
-                    <div class="flex items-center mb-4">
-                        <img src="${testimonial.image}" alt="${testimonial.name}" class="w-12 h-12 rounded-full mr-4">
-                        <h3 class="font-bold">${testimonial.name}</h3>
-                    </div>
-                    <p class="text-gray-600">"${testimonial.text}"</p>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <p class="mb-4">"${testimonial.text}"</p>
+                    <p class="font-bold">- ${testimonial.name}</p>
                 </div>
             `).join('');
-
+            
             $(testimonialsSlider).slick({
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                arrows: false,
                 dots: true,
-                responsive: [
-                    {
-                        breakpoint: 640,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
+                arrows: false,
+                autoplay: true,
+                autoplaySpeed: 5000
             });
         }
     }
@@ -354,30 +264,29 @@ document.addEventListener('DOMContentLoaded', function() {
         const instagramSlider = document.getElementById('instagram-slider');
         if (instagramSlider) {
             instagramSlider.innerHTML = instagramPosts.map(post => `
-                <div class="instagram-post mx-2">
-                    <blockquote class="instagram-media" data-instgrm-permalink="${post.url}" data-instgrm-version="14">
-                        <a href="${post.url}" target="_blank">Ver publicación en Instagram</a>
-                    </blockquote>
+                <div>
+                    <a href="${post.link}" target="_blank" rel="noopener noreferrer">
+                        <img src="${post.image}" alt="Instagram post" class="w-full h-64 object-cover rounded-lg">
+                    </a>
                 </div>
             `).join('');
-
-            // Cargar el script de Instagram
-            const script = document.createElement('script');
-            script.src = 'https://www.instagram.com/embed.js';
-            script.async = true;
-            document.body.appendChild(script);
-
-            // Inicializar el slider de Instagram
+            
             $(instagramSlider).slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
+                dots: false,
+                arrows: true,
                 autoplay: true,
                 autoplaySpeed: 3000,
-                arrows: false,
-                dots: true,
+                slidesToShow: 4,
+                slidesToScroll: 1,
                 responsive: [
                     {
                         breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 768,
                         settings: {
                             slidesToShow: 2
                         }
@@ -397,196 +306,152 @@ document.addEventListener('DOMContentLoaded', function() {
         const faqContainer = document.getElementById('faq-container');
         if (faqContainer) {
             faqContainer.innerHTML = faqs.map((faq, index) => `
-                <div class="faq-item mb-4">
-                    <button class="faq-question w-full text-left font-semibold py-2 px-4 bg-gray-100 rounded-t-lg" data-index="${index}">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(${index})">
                         ${faq.question}
-                        <i class="fas fa-chevron-down float-right"></i>
-                    </button>
-                    <div class="faq-answer hidden p-4 bg-white border border-gray-200 rounded-b-lg">
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
                         ${faq.answer}
                     </div>
                 </div>
             `).join('');
-
-            // Agregar funcionalidad de acordeón
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            faqQuestions.forEach(question => {
-                question.addEventListener('click', () => {
-                    const answer = question.nextElementSibling;
-                    const icon = question.querySelector('i');
-                    answer.classList.toggle('hidden');
-                    icon.classList.toggle('fa-chevron-down');
-                    icon.classList.toggle('fa-chevron-up');
-                });
-            });
         }
     }
 
-    function initMap() {
-        const mapContainer = document.getElementById('map-container');
-        if (mapContainer && typeof google !== 'undefined' && google.maps) {
-            const lat = -2.1894128; // Reemplaza con la latitud correcta
-            const lng = -79.8890662; // Reemplaza con la longitud correcta
-
-            const map = new google.maps.Map(mapContainer, {
-                center: { lat, lng },
-                zoom: 15
-            });
-
-            new google.maps.Marker({
-                position: { lat, lng },
-                map: map,
-                title: 'Janneth Aguirre Bienes Raíces'
-            });
-        } else {
-            console.error('El contenedor del mapa no existe o la API de Google Maps no está cargada');
-        }
+    window.toggleFAQ = function(index) {
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems[index].classList.toggle('active');
     }
 
     function initContactForm() {
         const form = document.getElementById('contact-form');
         if (form) {
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const formData = new FormData(form);
-                try {
-                    const response = await fetch('/api/contact', {
-                        method: 'POST',
-                        body: formData
-                    });
-                    if (response.ok) {
-                        alert('Mensaje enviado con éxito. Nos pondremos en contacto contigo pronto.');
-                        form.reset();
-                    } else {
-                        throw new Error('Error al enviar el mensaje');
-                    }
-                } catch (error) {
-                    alert('Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.');
-                    console.error('Error:', error);
-                }
-            });
+            form.setAttribute('action', 'https://formspree.io/f/your_formspree_id');
+            form.setAttribute('method', 'POST');
         }
     }
 
     function initScrollEffects() {
         const fadeElems = document.querySelectorAll('.fade-in-section');
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
                 }
             });
-        }, { threshold: 0.1 });
+        });
 
         fadeElems.forEach(elem => observer.observe(elem));
 
         // Botón "Volver arriba"
-        const backToTopButton = document.getElementById('back-to-top');
-        if (backToTopButton) {
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.style.display = 'block';
-                } else {
-                    backToTopButton.style.display = 'none';
-                }
-            });
+        const backToTopButton = document.getElementById("back-to-top");
+        
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
 
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
+        backToTopButton.onclick = function() {
+            document.body.scrollTop = 0; // Para Safari
+            document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
+        };
     }
 
     function initPWA() {
-        const installButton = document.getElementById('install-app');
         let deferredPrompt;
+        const installButton = document.getElementById('install-app');
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            if (installButton) {
-                installButton.style.display = 'block';
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                defer
+redPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                deferredPrompt = null;
             }
         });
 
-        if (installButton) {
-            installButton.addEventListener('click', () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then((choiceResult) => {
-                        if (choiceResult.outcome === 'accepted') {
-                            console.log('Usuario aceptó la instalación de la PWA');
-                        }
-                        deferredPrompt = null;
-                    });
-                }
-            });
-        }
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+        });
     }
 
     function initChatbot() {
         const chatbotContainer = document.getElementById('ai-real-estate-expert-chatbot');
-        if (chatbotContainer && typeof Chatbot !== 'undefined') {
-            const chatbot = new Chatbot({
-                container: chatbotContainer,
-                apiEndpoint: '/api/chatbot',
-                suggestedQueries: [
-                    '¿Cuáles son los mejores barrios para invertir?',
-                    '¿Cómo puedo financiar una propiedad?',
-                    '¿Qué documentos necesito para comprar una casa?'
-                ]
+        if (chatbotContainer) {
+            chatbotContainer.innerHTML = `
+                <div class="fixed bottom-20 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold">Chatbot Inmobiliario</h3>
+                        <button id="close-chatbot" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div id="chatbot-messages" class="h-60 overflow-y-auto mb-4"></div>
+                    <form id="chatbot-form" class="flex">
+                        <input type="text" id="chatbot-input" class="flex-grow border rounded-l px-2 py-1" placeholder="Escribe tu pregunta...">
+                        <button type="submit" class="bg-primary text-white px-4 py-1 rounded-r">Enviar</button>
+                    </form>
+                </div>
+            `;
+
+            const closeButton = document.getElementById('close-chatbot');
+            closeButton.addEventListener('click', () => {
+                chatbotContainer.style.display = 'none';
             });
-            chatbot.init();
-        } else {
-            console.error('El contenedor del chatbot no existe o la clase Chatbot no está definida');
+
+            const chatbotForm = document.getElementById('chatbot-form');
+            const chatbotInput = document.getElementById('chatbot-input');
+            const chatbotMessages = document.getElementById('chatbot-messages');
+
+            chatbotForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const message = chatbotInput.value.trim();
+                if (message) {
+                    addMessage('user', message);
+                    chatbotInput.value = '';
+                    // Aquí iría la lógica para procesar la pregunta y obtener una respuesta
+                    setTimeout(() => {
+                        addMessage('bot', 'Lo siento, aún estoy aprendiendo. Por favor, contacta con un agente para obtener información más precisa.');
+                    }, 1000);
+                }
+            });
+
+            function addMessage(sender, text) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('mb-2', 'p-2', 'rounded', sender === 'user' ? 'bg-primary' : 'bg-gray-200', sender === 'user' ? 'text-white' : 'text-gray-800', sender === 'user' ? 'ml-auto' : 'mr-auto');
+                messageElement.style.maxWidth = '80%';
+                messageElement.textContent = text;
+                chatbotMessages.appendChild(messageElement);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
         }
     }
 
-    async function loadYouTubeVideos() {
-        const youtubeSlider = document.getElementById('youtube-slider');
-        if (!youtubeSlider) {
-            console.error('El contenedor del slider de YouTube no existe');
-            return;
-        }
-
-        try {
-            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`);
-            const data = await response.json();
-            
-            youtubeSlider.innerHTML = data.items
-                .filter(item => item.id.kind === 'youtube#video')
-                .map(item => `
-                    <div class="youtube-video">
-                        <iframe width="280" height="157" src="https://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        <h3 class="text-lg font-semibold mt-2">${item.snippet.title}</h3>
-                    </div>
-                `).join('');
-
-            // Inicializar el slider de YouTube
-            $(youtubeSlider).slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                arrows: true,
-                dots: true,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 640,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            });
-        } catch (error) {
-            console.error('Error al cargar videos de YouTube:', error);
+    function initYouTubeVideos() {
+        const youtubeContainer = document.getElementById('youtube-slider');
+        if (youtubeContainer) {
+            youtubeContainer.innerHTML = `
+                <div class="flex overflow-x-auto space-x-4 pb-4">
+                    ${properties.map(property => `
+                        <div class="flex-shrink-0 w-80">
+                            <iframe width="320" height="180" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <h3 class="text-lg font-semibold mt-2">${property.title}</h3>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
         }
     }
 });
