@@ -417,7 +417,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const chatbotContainer = document.getElementById('ai-real-estate-expert-chatbot');
         if (chatbotContainer) {
             chatbotContainer.innerHTML = `
-                <div class="fixed bottom-20 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
+                <button id="open-chatbot" class="bg-primary text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl">
+                    <i class="fas fa-comments"></i>
+                </button>
+                <div id="chatbot-window" class="hidden fixed bottom-28 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold">Chatbot Inmobiliario</h3>
                         <button id="close-chatbot" class="text-gray-500 hover:text-gray-700">
@@ -432,9 +435,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
 
+            const openButton = document.getElementById('open-chatbot');
             const closeButton = document.getElementById('close-chatbot');
+            const chatbotWindow = document.getElementById('chatbot-window');
+
+            openButton.addEventListener('click', () => {
+                chatbotWindow.classList.remove('hidden');
+                openButton.classList.add('hidden');
+            });
+
             closeButton.addEventListener('click', () => {
-                chatbotContainer.style.display = 'none';
+                chatbotWindow.classList.add('hidden');
+                openButton.classList.remove('hidden');
             });
 
             const chatbotForm = document.getElementById('chatbot-form');
@@ -464,6 +476,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+
 
     function initYouTubeVideos() {
         const youtubeContainer = document.getElementById('youtube-slider');
