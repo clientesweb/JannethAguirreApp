@@ -270,7 +270,7 @@
         </section>
 
         <section id="contacto" class="py-16 fade-in-section">
-            <div class="container mx-auto px-4">
+            <div class="container mx-auto  px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     
@@ -317,40 +317,38 @@
     </footer>
 
     <div id="ai-real-estate-expert-chatbot" class="fixed bottom-28 right-4 z-50">
-    <button id="open-chatbot" class="bg-primary text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl">
-        <i class="fas fa-comments"></i>
-    </button>
-    <div id="chatbot-window" class="hidden fixed bottom-28 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
-        <div class="flex justify-between items-center mb-4">
-            <div class="flex items-center">
-                <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo" class="h-8 mr-2">
-                <h3 class="text-lg font-bold">ARIA - Experta en bienes raíces</h3>
+        <button id="open-chatbot" class="bg-primary text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div id="chatbot-window" class="hidden fixed bottom-28 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo" class="h-8 mr-2">
+                    <h3 class="text-lg font-bold">ARIA - Experta en bienes raíces</h3>
+                </div>
+                <button id="close-chatbot" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <button id="close-chatbot" class="text-gray-500 hover:text-gray-700">
-                <i class="fas fa-times"></i>
-            </button>
+            <div id="chatbot-messages" class="h-60 overflow-y-auto mb-4"></div>
+            <form id="chatbot-form" class="flex">
+                <input type="text" id="chatbot-input" class="flex-grow border rounded-l px-2 py-1" placeholder="Escribe tu pregunta...">
+                <button type="submit" class="bg-primary text-white px-4 py-1 rounded-r">Enviar</button>
+            </form>
         </div>
-        <div id="chatbot-messages" class="h-60 overflow-y-auto mb-4"></div>
-        <form id="chatbot-form" class="flex">
-            <input type="text" id="chatbot-input" class="flex-grow border rounded-l px-2 py-1" placeholder="Escribe tu pregunta...">
-            <button type="submit" class="bg-primary text-white px-4 py-1 rounded-r">Enviar</button>
-        </form>
     </div>
-</div>
-
 
     <a href="https://wa.me/593987167782" class="fixed bottom-20 right-4 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <nav class="bottom-nav" style="background-color: var(--theme-color);">
-    <a href="#inicio"><i class="fas fa-home"></i><span>Inicio</span></a>
-    <a href="#propiedades"><i class="fas fa-building"></i><span>Propiedades</span></a>
-    <a href="#servicios"><i class="fas fa-concierge-bell"></i><span>Servicios</span></a>
-    <a href="#tienda"><i class="fas fa-store"></i><span>Tienda</span></a>
-    <a href="#contacto"><i class="fas fa-envelope"></i><span>Contacto</span></a>
-</nav>
-
+        <a href="#inicio"><i class="fas fa-home"></i><span>Inicio</span></a>
+        <a href="#propiedades"><i class="fas fa-building"></i><span>Propiedades</span></a>
+        <a href="#servicios"><i class="fas fa-concierge-bell"></i><span>Servicios</span></a>
+        <a href="#tienda"><i class="fas fa-store"></i><span>Tienda</span></a>
+        <a href="#contacto"><i class="fas fa-envelope"></i><span>Contacto</span></a>
+    </nav>
 
     <button id="back-to-top" title="Volver arriba">
         <i class="fas fa-arrow-up"></i>
