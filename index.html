@@ -35,6 +35,30 @@
         body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
         .bg-primary { background-color: #FF0000; }
         .text-primary { color: #FF0000; }
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #FF0000;
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 
     <!-- Defer non-critical CSS -->
@@ -107,6 +131,11 @@
     </script>
 </head>
 <body class="font-poppins bg-background text-gray-800">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
     <header class="bg-secondary shadow-md sticky top-0 z-50">
@@ -138,7 +167,7 @@
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Propiedades Destacadas</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 3 propiedades destacadas se insertarán aquí mediante JavaScript -->
+                    <!-- Las 7 propiedades destacadas se insertarán aquí mediante JavaScript -->
                 </div>
             </div>
         </section>
@@ -155,6 +184,10 @@
         <section id="tienda" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Tienda de Propiedades</h2>
+                
+                <div id="filter-buttons" class="flex justify-center space-x-4 mb-4">
+                    <!-- Los botones de filtro se insertarán aquí mediante JavaScript -->
+                </div>
                 
                 <input type="text" id="search-input" placeholder="Buscar propiedades..." class="w-full px-4 py-2 mb-4 border border-gray-300 rounded">
                 
@@ -217,6 +250,22 @@
                 <div id="faq-container">
                     <!-- FAQ items will be inserted here by JavaScript -->
                 </div>
+            </div>
+        </section>
+
+        <section id="mapa" class="py-16 fade-in-section">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Nuestra Ubicación</h2>
+                <div class="w-full h-96">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.9168!2d-79.8890662!3d-2.1894128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTEnMjEuOSJTIDc5wrA1MycyMC42Ilc!5e0!3m2!1ses!2sec!4v1620000000000!5m2!1ses!2sec" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                    </iframe>
+                </div>
+            
             </div>
         </section>
 
@@ -301,6 +350,11 @@
             });
         });
       }
+
+      // Preloader
+      window.addEventListener('load', function() {
+        document.getElementById('preloader').style.display = 'none';
+      });
     </script>
     
     <!-- Font Awesome -->
