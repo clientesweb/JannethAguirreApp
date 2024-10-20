@@ -468,28 +468,31 @@ document.addEventListener('DOMContentLoaded', function() {
     function initYouTubeVideos() {
         const youtubeContainer = document.getElementById('youtube-slider');
         if (youtubeContainer) {
-            // Aquí deberías hacer una llamada a la API de YouTube para obtener los últimos videos
-            // Por ahora, usaremos datos de ejemplo
-            const latestVideos = [
-                { id: 'VIDEO_ID_1', title: 'Último video 1' },
-                { id: 'VIDEO_ID_2', title: 'Último video 2' },
-                { id: 'VIDEO_ID_3', title: 'Último video 3' },
-                { id: 'VIDEO_ID_4', title: 'Último video 4' },
-                { id: 'VIDEO_ID_5', title: 'Último video 5' }
-            ];
+            // Configuración de la API de YouTube
+            const API_KEY = 'TU_API_KEY_DE_YOUTUBE';
+            const CHANNEL_ID = 'TU_ID_DE_CANAL_DE_YOUTUBE';
+            const MAX_RESULTS = 5;
 
-            youtubeContainer.innerHTML = `
-                <div class="flex overflow-x-auto space-x-4 pb-4">
-                    ${latestVideos.map(video => `
-                        <div class="flex-shrink-0 w-80">
-                            <iframe width="320" height="180" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            <h3 class="text-lg font-semibold mt-2">${video.title}</h3>
+            // Hacer la solicitud a la API de YouTube
+            fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`)
+                .then(response => response.json())
+                .then(data => {
+                    const videos = data.items;
+                    youtubeContainer.innerHTML = `
+                        <div class="flex overflow-x-auto space-x-4 pb-4">
+                            ${videos.map(video => `
+                                <div class="flex-shrink-0 w-80">
+                                    <iframe width="320" height="180" src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    <h3 class="text-lg font-semibold mt-2">${video.snippet.title}</h3>
+                                </div>
+                            `).join('')}
                         </div>
-                    `).join('')}
-                </div>
-            `;
+                    `;
+                })
+                .catch(error => console.error('Error fetching YouTube videos:', error));
         }
     }
+
 
     function initPropertyStore() {
         const storeSlider = document.getElementById('store-slider');
