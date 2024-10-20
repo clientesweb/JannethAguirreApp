@@ -15,9 +15,9 @@ body {
 /* Estilos para el chatbot */
 #ai-real-estate-expert-chatbot {
     position: fixed;
-    bottom: 80px;
-    left: 20px;
-    z-index: 1000;
+    bottom: 140px; /* Ajustado para estar encima del botón de WhatsApp */
+    right: 20px; /* Cambiado a la derecha para alinearse con el botón de WhatsApp */
+    z-index: 1001; /* Asegura que esté por encima de otros elementos */
 }
 
 #ai-real-estate-expert-chatbot .chat-button {
@@ -42,7 +42,7 @@ body {
 #ai-real-estate-expert-chatbot .chat-window {
     position: absolute;
     bottom: 70px;
-    left: 0;
+    right: 0; /* Alineado a la derecha */
     width: 300px;
     height: 400px;
     background-color: white;
@@ -54,7 +54,7 @@ body {
 /* Estilos para el botón de WhatsApp */
 .whatsapp-button {
     position: fixed;
-    bottom: 20px;
+    bottom: 80px; /* Ajustado para estar encima del menú inferior */
     right: 20px;
     background-color: #25D366;
     color: white;
@@ -75,47 +75,9 @@ body {
     transform: scale(1.1);
 }
 
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    #ai-real-estate-expert-chatbot {
-        bottom: 70px;
-        left: 10px;
-    }
-
-    #ai-real-estate-expert-chatbot .chat-button {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-    }
-
-    .whatsapp-button {
-        bottom: 70px;
-        right: 10px;
-        width: 50px;
-        height: 50px;
-        font-size: 25px;
-    }
-
-    .bottom-nav {
-        display: flex;
-    }
-}
-
-/* Resto de los estilos (sin cambios) */
-.property-card {
-    transition: transform 0.3s ease-in-out;
-}
-
-.property-card:hover {
-    transform: scale(1.05);
-}
-
-.slick-prev:before, .slick-next:before {
-    color: var(--primary-color);
-}
-
+/* Estilos para el menú inferior */
 .bottom-nav {
-    display: none;
+    display: flex;
     justify-content: space-around;
     align-items: center;
     position: fixed;
@@ -139,6 +101,51 @@ body {
 .bottom-nav i {
     font-size: 1.2rem;
     margin-bottom: 5px;
+}
+
+/* Estilos responsivos */
+@media (min-width: 769px) {
+    .bottom-nav {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    #ai-real-estate-expert-chatbot {
+        bottom: 160px; /* Ajustado para pantallas más pequeñas */
+        right: 10px;
+    }
+
+    #ai-real-estate-expert-chatbot .chat-button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .whatsapp-button {
+        bottom: 100px; /* Ajustado para pantallas más pequeñas */
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+
+    .bottom-nav {
+        display: flex;
+    }
+}
+
+/* Resto de los estilos (sin cambios) */
+.property-card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.property-card:hover {
+    transform: scale(1.05);
+}
+
+.slick-prev:before, .slick-next:before {
+    color: var(--primary-color);
 }
 
 .fade-in-section {
@@ -420,6 +427,14 @@ body {
 
     .youtube-video iframe {
         height: 180px;
+    }
+
+    #ai-real-estate-expert-chatbot {
+        bottom: 180px; /* Ajustado aún más para pantallas muy pequeñas */
+    }
+
+    .whatsapp-button {
+        bottom: 120px; /* Ajustado aún más para pantallas muy pequeñas */
     }
 }
 </style>
