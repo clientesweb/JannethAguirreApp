@@ -399,3 +399,96 @@ body {
         bottom: 120px;
     }
 }
+/* Estilos para la nueva sección "Quienes Somos" */
+#quienes-somos {
+    background-color: var(--background-color);
+    padding: 4rem 0;
+}
+
+#quienes-somos .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#quienes-somos img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+#quienes-somos p {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+/* Actualización de estilos para la sección de servicios */
+#servicios {
+    background-color: var(--secondary-color);
+    padding: 4rem 0;
+}
+
+#service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-card i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.service-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.service-card p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Media queries para responsividad */
+@media (min-width: 768px) {
+    #quienes-somos .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #quienes-somos img {
+        width: 45%;
+        margin-bottom: 0;
+        margin-right: 2rem;
+    }
+
+    #quienes-somos .text-content {
+        width: 50%;
+    }
+
+    #quienes-somos p {
+        text-align: left;
+    }
+}
+
+@media (max-width: 767px) {
+    #service-grid {
+        grid-template-columns: 1fr;
+    }
+}
