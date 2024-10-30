@@ -30,40 +30,6 @@
     <meta property="twitter:description" content="Encuentra tu hogar ideal con Janneth Aguirre Bienes Raíces. Ofrecemos las mejores propiedades en venta y alquiler en Ecuador.">
     <meta property="twitter:image" content="https://www.jannethaguirre.com/twitter-image.jpg">
 
-    <!-- Inline critical CSS -->
-    <style>
-        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
-        .bg-primary { background-color: #FF0000; }
-        .text-primary { color: #FF0000; }
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid #FF0000;
-            border-top: 3px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
-
-    <!-- Defer non-critical CSS -->
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
-
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com" defer></script>
     <script>
@@ -84,8 +50,11 @@
     </script>
 
     <!-- Slick CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 
     <!-- Structured data for SEO -->
     <script type="application/ld+json">
@@ -166,34 +135,37 @@
         <section id="quienes-somos" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">¿Quiénes Somos?</h2>
-                <div class="flex flex-col md:flex-row items-center justify-center">
+                <div class="flex flex-col md:flex-row items-center justify-center mb-8">
                     <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                        <img src="img/Janneth-Aguirre-M-bienes-raices-ecuador-Licencia-Profesional-609-G-CRS-Realtor-NAR-ID-61242209-350x350.png" alt="Equipo Janneth Aguirre" class="rounded-lg shadow-lg">
+                        <img src="img/Janneth-Aguirre-M-bienes-raices-ecuador-Licencia-Profesional-609-G-CRS-Realtor-NAR-ID-61242209-350x350.png" alt="Janneth Aguirre" class="rounded-lg shadow-lg">
                     </div>
                     <div class="md:w-1/2">
                         <p class="text-lg mb-4">
                             Janneth Aguirre es una representante inmobiliaria líder en su ramo desde 2009, pues ha logrado consolidarse como una reconocida Corredora de Bienes Raíces dentro del mercado ecuatoriano gracias a la satisfacción lograda entre sus clientes por los diversos servicios que presta.
-Contamos con el reconocimiento  internacional por nuestro sistema de calidad y trabajo, el cual garantiza a las partes el mejor manejo y promoción de sus bienes ofertados.
-En el sector inmobiliario se ha logrado demostrar:
-Visión
-Determinación y
-Liderazgo.
-Nuestros valores se basan en los pilares de la honradez, responsabilidad y profesionalismo, por lo que hemos logrado un amplio reconocimiento por nuestro trabajo ético y confiable.
                         </p>
                         <p class="text-lg">
                             Nuestro compromiso es brindar un servicio personalizado y de alta calidad, asegurando que cada cliente encuentre la propiedad perfecta o logre la mejor inversión posible. Confianza, integridad y excelencia son los pilares de nuestro trabajo diario.
                         </p>
                     </div>
                 </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <img src="https://source.unsplash.com/random/800x600?real,estate" alt="Imagen aleatoria 1" class="w-full h-48 object-cover rounded-lg shadow-md">
+                    <img src="https://source.unsplash.com/random/800x600?house" alt="Imagen aleatoria 2" class="w-full h-48 object-cover rounded-lg shadow-md">
+                    <img src="https://source.unsplash.com/random/800x600?apartment" alt="Imagen aleatoria 3" class="w-full h-48 object-cover rounded-lg shadow-md">
+                    <img src="https://source.unsplash.com/random/800x600?building" alt="Imagen aleatoria 4" class="w-full h-48 object-cover rounded-lg shadow-md">
+                    <img src="https://source.unsplash.com/random/800x600?architecture" alt="Imagen aleatoria 5" class="w-full h-48 object-cover rounded-lg shadow-md">
+                    <img src="https://source.unsplash.com/random/800x600?home" alt="Imagen aleatoria 6" class="w-full h-48 object-cover rounded-lg shadow-md">
+                    <img src="https://source.unsplash.com/random/800x600?property" alt="Imagen aleatoria 7" class="w-full h-48 object-cover rounded-lg shadow-md">
+                    <img src="https://source.unsplash.com/random/800x600?realestate" alt="Imagen aleatoria 8" class="w-full h-48 object-cover rounded-lg shadow-md">
+                </div>
             </div>
         </section>
-
 
         <section id="propiedades" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Propiedades Destacadas</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Las 7 propiedades destacadas se insertarán aquí mediante JavaScript -->
+                    <!-- Las propiedades destacadas se insertarán aquí mediante JavaScript -->
                 </div>
             </div>
         </section>
@@ -211,14 +183,14 @@ Nuestros valores se basan en los pilares de la honradez, responsabilidad y profe
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Nuestras Propiedades</h2>
                 
-                <div id="filter-buttons" class="flex justify-center space-x-4 mb-4">
+                <div id="filter-buttons" class="flex flex-wrap justify-center space-x-2 space-y-2 mb-4">
                     <!-- Los botones de filtro se insertarán aquí mediante JavaScript -->
                 </div>
                 
                 <input type="text" id="search-input" placeholder="Buscar propiedades..." class="w-full px-4 py-2 mb-4 border border-gray-300 rounded">
                 
                 <div class="overflow-x-auto">
-                    <div id="store-slider" class="flex space-x-4 pb-4"> 
+                    <div id="store-slider" class="flex flex-nowrap space-x-4 pb-4"> 
                         <!-- Las tarjetas se insertarán aquí mediante JavaScript -->
                     </div>
                 </div>
@@ -236,15 +208,15 @@ Nuestros valores se basan en los pilares de la honradez, responsabilidad y profe
             </div>
         </div>
 
-        <div id="full-image-container" class="hidden">
-            <img id="full-image" src="" alt="Imagen completa">
-            <div id="prev-image" class="gallery-nav">&lt;</div>
-            <div id="next-image" class="gallery-nav">&gt;</div>
+        <div id="full-image-container" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex justify-center items-center">
+            <img id="full-image" src="" alt="Imagen completa" class="max-w-full max-h-full">
+            <div id="prev-image" class="gallery-nav left-4">&lt;</div>
+            <div id="next-image" class="gallery-nav right-4">&gt;</div>
         </div>
 
         <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8">Nuestro Canal de YouTube</h2>
+                <h2 class="text-3xl font-bold text-center mb-8">Nuestro Canal de  YouTube</h2>
                 <div id="youtube-slider" class="youtube-slider">
                     <!-- Los videos de YouTube se insertarán aquí mediante JavaScript -->
                 </div>
@@ -291,21 +263,25 @@ Nuestros valores se basan en los pilares de la honradez, responsabilidad y profe
                             loading="lazy">
                     </iframe>
                 </div>
-            
             </div>
         </section>
 
         <section id="contacto" class="py-16 fade-in-section">
-            <div class="container mx-auto  px-4">
+            <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    
                     <form id="contact-form" class="space-y-4">
                         <input type="text" name="name" placeholder="Nombre" required class="w-full px-4 py-2 border border-gray-300 rounded">
                         <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border border-gray-300 rounded">
                         <textarea name="message" placeholder="Mensaje" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded"></textarea>
                         <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Enviar</button>
                     </form>
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-4">Información de Contacto</h3>
+                        <p class="mb-2"><i class="fas fa-phone mr-2"></i> +593 98 716 7782</p>
+                        <p class="mb-2"><i class="fas fa-envelope mr-2"></i> info@jannethaguirre.com</p>
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> Guayaquil, Ecuador</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -320,10 +296,9 @@ Nuestros valores se basan en los pilares de la honradez, responsabilidad y profe
                 </div>
                 <div class="fade-in-section">
                     <h3 class="text-xl font-bold mb-4">Contacto</h3>
-                
                     <p class="mb-2"><i class="fas fa-phone mr-2"></i> +593 98 716 7782</p>
-                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c8cfc7cee1cbc0cfcfc4d5c9c0c6d4c8d3d3c48fc2cecc">[email&#160;protected]</a></p>
-                    <p><i class="fas fa-map-marker-alt mr-2"></i> Guayaquil-Ecuador</p>
+                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> info@jannethaguirre.com</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> Guayaquil, Ecuador</p>
                 </div>
                 <div class="fade-in-section">
                     <h3 class="text-xl font-bold mb-4">Síguenos</h3>
@@ -368,20 +343,20 @@ Nuestros valores se basan en los pilares de la honradez, responsabilidad y profe
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <nav class="bottom-nav" style="background-color: var(--theme-color);">
-    <a href="#inicio"><i class="fas fa-home"></i><span>Inicio</span></a>
-    <a href="#propiedades"><i class="fas fa-building"></i><span>Propiedades</span></a>
-    <a href="#servicios"><i class="fas fa-concierge-bell"></i><span>Servicios</span></a>
-    <a href="#tienda"><i class="fas fa-city"></i><span>Propiedades</span></a>
-    <a href="#contacto"><i class="fas fa-envelope"></i><span>Contacto</span></a>
-</nav>
+    <nav class="bottom-nav">
+        <a href="#inicio"><i class="fas fa-home"></i><span>Inicio</span></a>
+        <a href="#propiedades"><i class="fas fa-building"></i><span>Propiedades</span></a>
+        <a href="#servicios"><i class="fas fa-concierge-bell"></i><span>Servicios</span></a>
+        <a href="#tienda"><i class="fas fa-city"></i><span>Propiedades</span></a>
+        <a href="#contacto"><i class="fas fa-envelope"></i><span>Contacto</span></a>
+    </nav>
 
-<button id="back-to-top" title="Volver arriba">
-    <i class="fas fa-arrow-up"></i>
-</button>
+    <button id="back-to-top" title="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- jQuery -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Slick JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="chatbot.js"></script>
