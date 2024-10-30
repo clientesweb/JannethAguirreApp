@@ -24,6 +24,12 @@ body {
     box-sizing: border-box;
 }
 
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 30px;
+    }
+}
+
 /* Estilos para el chatbot */
 #ai-real-estate-expert-chatbot {
     position: fixed;
@@ -122,6 +128,18 @@ body {
     margin-bottom: 20px;
 }
 
+@media (min-width: 640px) {
+    .property-card {
+        width: calc(50% - 10px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .property-card {
+        width: calc(33.333% - 13.333px);
+    }
+}
+
 .property-card:hover {
     transform: scale(1.05);
 }
@@ -145,7 +163,16 @@ body {
     height: calc(100vh - 80px);
     background-size: cover;
     background-position: center;
+    min-height: 400px;
 }
+
+@media (min-width: 768px) {
+    .hero-slider .slick-slide {
+        height: calc(100vh - 100px);
+        min-height: 600px;
+    }
+}
+
 
 .hero-slider .slick-dots {
     bottom: 20px;
@@ -334,6 +361,16 @@ body {
     top: 0;
 }
 
+section {
+    padding: 4rem 0;
+}
+
+@media (min-width: 768px) {
+    section {
+        padding: 6rem 0;
+    }
+}
+
 /* Media queries para responsividad */
 @media (min-width: 641px) {
     .youtube-video, #store-slider .property-card {
@@ -493,4 +530,17 @@ body {
     #service-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Estilos para la sección invertir-samborondon */
+#invertir-samborondon .grid {
+    gap: 1.5rem;
+}
+
+#invertir-samborondon .bg-white {
+    transition: transform 0.3s ease-in-out;
+}
+
+#invertir-samborondon .bg-white:hover {
+    transform: translateY(-5px);
 }
