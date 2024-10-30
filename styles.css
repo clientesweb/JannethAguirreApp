@@ -399,6 +399,7 @@ body {
         bottom: 120px;
     }
 }
+
 /* Estilos para la nueva sección "Quienes Somos" */
 #quienes-somos {
     background-color: var(--background-color);
@@ -424,6 +425,7 @@ body {
     max-width: 800px;
     margin: 0 auto;
 }
+
 /* Actualización de estilos para la sección de servicios */
 #servicios {
     background-color: var(--secondary-color);
