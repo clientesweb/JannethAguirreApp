@@ -150,6 +150,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para crear el slider de imágenes del hero
     function createHeroSlider() {
         const heroSlider = document.querySelector('.hero-slider');
+        const heroImages = [
+            "https://source.unsplash.com/random/1600x900?real,estate",
+            "https://source.unsplash.com/random/1600x900?house",
+            "https://source.unsplash.com/random/1600x900?apartment"
+        ];
         heroImages.forEach(image => {
             const slide = document.createElement('div');
             slide.style.backgroundImage = `url(${image})`;
@@ -157,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
             slide.style.backgroundPosition = 'center';
             heroSlider.appendChild(slide);
         });
-        
         $('.hero-slider').slick({
             dots: true,
             infinite: true,
@@ -165,15 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fade: true,
             cssEase: 'linear',
             autoplay: true,
-            autoplaySpeed: 5000,
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        arrows: false
-                    }
-                }
-            ]
+            autoplaySpeed: 5000
         });
     }
 
@@ -472,9 +468,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const images = Array.from(document.querySelectorAll('#gallery-images img'));
         
         prevButton.addEventListener('click', (e) => {
-            e.stopPropag
-
-ation();
+            e.stopPropagation();
             currentIndex = (currentIndex - 1 + images.length) % images.length;
             fullImage.src = images[currentIndex].src;
         });
@@ -589,6 +583,20 @@ ation();
         });
     }
 
+    // Nueva función para manejar el hover en las tarjetas de invertir-samborondon
+    function initInvertirSamborondon() {
+        const cards = document.querySelectorAll('#invertir-samborondon .bg-white');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    }
+
+
     // Llamar a todas las funciones de inicialización
     createHeroSlider();
     createFeaturedProperties();
@@ -608,4 +616,5 @@ ation();
     handleBackToTop();
     handleScrollAnimation();
     handleInstallApp();
+    initInvertirSamborondon();
 });
