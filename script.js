@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
     const heroImages = [
-        "/img/casa-moderna-encantadora-villa-3d-render_1015255-30058.jpg",
-        "/img/vista-lujosa-villa-diseno-arquitectonico-moderno_23-2151694026.jpg",
-        "/img/paisaje-analogico-ciudad-edificios_23-2149661457.jpg"
+        "https://source.unsplash.com/random/1600x900?real,estate",
+        "https://source.unsplash.com/random/1600x900?house",
+        "https://source.unsplash.com/random/1600x900?apartment"
     ];
 
     const properties = [
@@ -11,91 +11,91 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 1, 
             title: "Guayaquil Samborondon", 
             price: "Consultar", 
-            image: "/img/Guayaquil.png", 
+            image: "https://source.unsplash.com/random/800x600?house", 
             type: "venta",
-            description: "",
+            description: "Hermosa propiedad en Samborondon",
             gallery: [
-                "/img/orlandoflorida.jpg",
-                "/img/orlandoflorida2.jpg",
-                "/img/orlandoflorida3.jpg"
+                "https://source.unsplash.com/random/800x600?house,interior",
+                "https://source.unsplash.com/random/800x600?house,exterior",
+                "https://source.unsplash.com/random/800x600?house,garden"
             ]
         },
         { 
             id: 2, 
             title: "Isla Mocoli", 
             price: "Consultar", 
-            image: "/img/samborondon.jpg", 
+            image: "https://source.unsplash.com/random/800x600?apartment", 
             type: "venta",
             description: "Departamentos en planos - Departamentos listos de estreno",
             gallery: [
-                "/img/samborondon.jpg",
-                "/img/samborondon2.jpg",
-                "/img/samborondon3.jpg"
+                "https://source.unsplash.com/random/800x600?apartment,living",
+                "https://source.unsplash.com/random/800x600?apartment,bedroom",
+                "https://source.unsplash.com/random/800x600?apartment,kitchen"
             ]
         },
         { 
             id: 3, 
             title: "Departamentos en planos y de estreno en el nuevo Samborondón", 
             price: "Consultar", 
-            image: "/img/guayaquil.jpg", 
+            image: "https://source.unsplash.com/random/800x600?condo", 
             type: "venta",
-            description: "Casa de dos plantas en Guayaquil, con 4 dormitorios, 3 baños, sala, comedor, cocina, patio y garaje para 2 vehículos.",
+            description: "Modernos departamentos en el corazón de Samborondón",
             gallery: [
-                "/img/guayaquil.jpg",
-                "/img/guayaquil2.jpg",
-                "/img/guayaquil3.jpg"
+                "https://source.unsplash.com/random/800x600?condo,view",
+                "https://source.unsplash.com/random/800x600?condo,pool",
+                "https://source.unsplash.com/random/800x600?condo,gym"
             ]
         },
         { 
             id: 4, 
             title: "Locales Comerciales en nuevo Samborondón", 
             price: "Consultar", 
-            image: "/img/quito.jpg", 
+            image: "https://source.unsplash.com/random/800x600?commercial", 
             type: "alquiler",
-            description: "",
+            description: "Espacios comerciales ideales para tu negocio",
             gallery: [
-                "/img/quito.jpg",
-                "/img/quito2.jpg",
-                "/img/quito3.jpg"
+                "https://source.unsplash.com/random/800x600?commercial,office",
+                "https://source.unsplash.com/random/800x600?commercial,retail",
+                "https://source.unsplash.com/random/800x600?commercial,restaurant"
             ]
         },
         { 
             id: 5, 
             title: "Terrenos Urbanizados residenciales", 
             price: "Consultar", 
-            image: "/img/cuenca.jpg", 
-            type: "alquiler",
-            description: "",
+            image: "https://source.unsplash.com/random/800x600?land", 
+            type: "venta",
+            description: "Terrenos listos para construir tu hogar soñado",
             gallery: [
-                "/img/cuenca.jpg",
-                "/img/cuenca2.jpg",
-                "/img/cuenca3.jpg"
+                "https://source.unsplash.com/random/800x600?land,residential",
+                "https://source.unsplash.com/random/800x600?land,plot",
+                "https://source.unsplash.com/random/800x600?land,development"
             ]
         },
         { 
             id: 6, 
             title: "Terrenos industriales", 
             price: "Consultar", 
-            image: "/img/manta.jpg", 
+            image: "https://source.unsplash.com/random/800x600?industrial", 
             type: "venta",
-            description: "",
+            description: "Amplios terrenos para proyectos industriales",
             gallery: [
-                "/img/manta.jpg",
-                "/img/manta2.jpg",
-                "/img/manta3.jpg"
+                "https://source.unsplash.com/random/800x600?industrial,warehouse",
+                "https://source.unsplash.com/random/800x600?industrial,factory",
+                "https://source.unsplash.com/random/800x600?industrial,logistics"
             ]
         },
         { 
             id: 7, 
             title: "Terrenos Comerciales", 
             price: "Consultar", 
-            image: "/img/oficina_guayaquil.jpg", 
-            type: "alquiler",
-            description: "",
+            image: "https://source.unsplash.com/random/800x600?commercial,land", 
+            type: "venta",
+            description: "Excelente ubicación para desarrollos comerciales",
             gallery: [
-                "/img/oficina_guayaquil.jpg",
-                "/img/oficina_guayaquil2.jpg",
-                "/img/oficina_guayaquil3.jpg"
+                "https://source.unsplash.com/random/800x600?commercial,development",
+                "https://source.unsplash.com/random/800x600?commercial,construction",
+                "https://source.unsplash.com/random/800x600?commercial,project"
             ]
         }
     ];
@@ -111,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Gestión de Alquileres", icon: "fas fa-home", description: "Administración completa de propiedades en alquiler." }
     ];
 
-
     const testimonials = [
         { name: "Juan Pérez", text: "Excelente servicio, encontré mi casa ideal gracias a Janneth Aguirre." },
         { name: "María González", text: "Profesionalismo y dedicación en cada paso del proceso de compra." },
@@ -119,10 +118,10 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const instagramPosts = [
-        { image: "/img/instagram1.jpg", link: "#" },
-        { image: "/img/instagram2.jpg", link: "#" },
-        { image: "/img/instagram3.jpg", link: "#" },
-        { image: "/img/instagram4.jpg", link: "#" }
+        { image: "https://source.unsplash.com/random/600x600?real,estate", link: "#" },
+        { image: "https://source.unsplash.com/random/600x600?house", link: "#" },
+        { image: "https://source.unsplash.com/random/600x600?apartment", link: "#" },
+        { image: "https://source.unsplash.com/random/600x600?condo", link: "#" }
     ];
 
     const faqs = [
@@ -131,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
             answer: "El proceso generalmente incluye: búsqueda de la propiedad, negociación del precio, firma de un contrato de compraventa, obtención de financiamiento si es necesario, y cierre de la transacción. Nuestro equipo le guiará en cada paso." 
         },
         { 
-            question: "¿Qué documentos necesito para vender mi propieda?", 
+            question: "¿Qué documentos necesito para vender mi propiedad?", 
             answer: "Generalmente necesitará: título de propiedad, certificado de gravámenes, pago de impuestos al día, y cédula de identidad. Podemos ayudarle a reunir toda la documentación necesaria." 
         },
         { 
@@ -166,7 +165,15 @@ document.addEventListener('DOMContentLoaded', function() {
             fade: true,
             cssEase: 'linear',
             autoplay: true,
-            autoplaySpeed: 5000
+            autoplaySpeed: 5000,
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false
+                    }
+                }
+            ]
         });
     }
 
@@ -193,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const serviceGrid = document.getElementById('service-grid');
         services.forEach(service => {
             const serviceCard = document.createElement('div');
-            serviceCard.className = 'bg-white p-6 rounded-lg shadow-md text-center';
+            serviceCard.className = 'service-card';
             serviceCard.innerHTML = `
                 <i class="${service.icon} text-4xl text-primary mb-4"></i>
                 <h3 class="text-xl font-semibold mb-2">${service.title}</h3>
@@ -223,7 +230,15 @@ document.addEventListener('DOMContentLoaded', function() {
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            autoplaySpeed: 5000
+            autoplaySpeed: 5000,
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false
+                    }
+                }
+            ]
         });
     }
 
@@ -261,14 +276,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     breakpoint: 768,
                     settings: {
                         slidesToShow: 2,
-                        slidesToScroll: 1
+                        slidesToScroll: 1,
+                        arrows: false
                     }
                 },
                 {
                     breakpoint: 480,
                     settings: {
                         slidesToShow: 1,
-                        slidesToScroll: 1
+                        slidesToScroll: 1,
+                        arrows: false
                     }
                 }
             ]
@@ -455,7 +472,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const images = Array.from(document.querySelectorAll('#gallery-images img'));
         
         prevButton.addEventListener('click', (e) => {
-            e.stopPropagation();
+            e.stopPropag
+
+ation();
             currentIndex = (currentIndex - 1 + images.length) % images.length;
             fullImage.src = images[currentIndex].src;
         });
