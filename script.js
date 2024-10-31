@@ -57,14 +57,12 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "Consultar", 
             image: "img/localescomerciales.png", 
             type: "alquiler",
-            description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
+            description: "Oportunidad única de invertir en locales comerciales en Nuevo Samborondon  Estos locales ofrecen una combinación perfecta de ubicación, visibilidad y potencial de crecimiento.Nuestros locales comerciales están diseñados para satisfacer las necesidades de los empresarios más exigentes. Ofrecemos:",
             features: [
-                "2 habitaciones con armarios empotrados",
-                "2 baños modernos con acabados de alta calidad",
-                "Cocina abierta con muebles a medida",
-                "Sala y comedor acogedores",
-                "Áreas sociales: piscina, gimnasio, salón de eventos",
-                "Seguridad 24/7 con conserjería y vigilancia"
+                "Locales de diferentes tamaños y diseños para adaptarse a sus necesidades específicas.",
+                "Ventanas y fachadas amplias para maximizar la visibilidad.",
+                "Acceso fácil para clientes y empleados.",
+                "Instalaciones modernas y bien mantenidas."
             ],
             gallery: [
                 "https://images.unsplash.com/photo-1600607687954-e85aa7b46ca3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
@@ -78,14 +76,13 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "Consultar", 
             image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
             type: "venta",
-            description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
+            description: "Nuestra empresa cuenta con un equipo de expertos en construcción y diseño que trabajan juntos para crear casas personalizadas que se adaptan a las necesidades y gustos de cada cliente.Nuestro objetivo es hacer que su sueño de tener una casa perfecta se convierta en realidad.",
             features: [
-                "2 habitaciones con armarios empotrados",
-                "2 baños modernos con acabados de alta calidad",
-                "Cocina abierta con muebles a medida",
-                "Sala y comedor acogedores",
-                "Áreas sociales: piscina, gimnasio, salón de eventos",
-                "Seguridad 24/7 con conserjería y vigilancia"
+                "Diseño personalizado: trabajamos con usted para crear un diseño que se adapte a su estilo de vida y preferencias.",
+                "Materiales de alta calidad: utilizamos materiales de alta calidad para garantizar la durabilidad y eficiencia energética de su casa.",
+                "Construcción rápida y eficiente: nuestra experiencia y tecnología nos permiten construir casas de manera rápida y eficiente sin comprometer la calidad.",
+                "Atención al detalle: nos enfocamos en los detalles para asegurarnos de que su casa sea perfecta.",
+                "No pierda la oportunidad de tener la casa de sus sueños. ¡Contáctenos hoy mismo para obtener más información y programar una reunión!"
             ],
             gallery: [
                 "https://images.unsplash.com/photo-1600607688960-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
@@ -99,12 +96,12 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "Consultar", 
             image: "img/departamentoscuenca.png", 
             type: "venta",
-            description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
+            description: "Oportunidad única de invertir en un departamento en Cuenca, ideal para Airbnb.",
             features: [
-                "2 habitaciones con armarios empotrados",
-                "2 baños modernos con acabados de alta calidad",
-                "Cocina abierta con muebles a medida",
-                "Sala y comedor acogedores",
+                "2  Y 3 habitaciones amplias y bien iluminadas",
+                "2  Y 3  baños completos",
+                "Salón-comedor con cocina integrada",
+                "con vistas impresionantes a la ciudad",
                 "Áreas sociales: piscina, gimnasio, salón de eventos",
                 "Seguridad 24/7 con conserjería y vigilancia"
             ],
