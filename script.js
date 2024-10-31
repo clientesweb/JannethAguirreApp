@@ -255,7 +255,43 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             propertiesGrid.appendChild(propertyCard);
         });
+
+        // Inicializar el slider después de crear las tarjetas
+        initializePropertySlider();
     }
+     // Función para inicializar el slider de propiedades
+    function initializePropertySlider() {
+        const slider = document.querySelector('.properties-slider');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 3;
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    }
+
 
     // Función para crear las tarjetas de servicios
     function createServiceCards() {
@@ -546,12 +582,20 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error fetching YouTube videos:', error));
     }
 
-    // Función para manejar el formulario de contacto
+    // Modificar la función para manejar el formulario de contacto
     function initContactForm() {
         const form = document.getElementById('contact-form');
         if (form) {
-            form.setAttribute('action', 'https://formspree.io/f/xvgogpyz');
-            form.setAttribute('method', 'POST');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = form.elements.name.value;
+                const email = form.elements.email.value;
+                const message = form.elements.message.value;
+                const whatsappMessage = `Nombre: ${name}%0AEmail: ${email}%0AMensaje: ${message}`;
+                const whatsappUrl = `https://wa.me/593987167782?text=${whatsappMessage}`;
+                window.open(whatsappUrl, '_blank');
+                form.reset();
+            });
         }
     }
 
@@ -593,6 +637,16 @@ document.addEventListener('DOMContentLoaded', function() {
             fadeElems.forEach(elem => {
                 fadeIn(elem);
             });
+        });
+    }
+     // Función para manejar el preloader
+    function handlePreloader() {
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
         });
     }
 
@@ -637,7 +691,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
     preloadImages(allImages);
 
-    // Llamar a todas las funciones de inicialización
+    // Llamar a las funciones de inicialización
     createHeroSlider();
     createQuienesSomosSlider();
     createFeaturedProperties();
@@ -654,4 +708,5 @@ document.addEventListener('DOMContentLoaded', function() {
     handleBackToTop();
     handleScrollAnimation();
     handleInstallApp();
+    handlePreloader();
 });
