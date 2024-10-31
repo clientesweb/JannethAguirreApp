@@ -173,7 +173,6 @@ body {
     }
 }
 
-
 .hero-slider .slick-dots {
     bottom: 20px;
 }
@@ -439,7 +438,7 @@ section {
 
 /* Estilos para la nueva sección "Quienes Somos" */
 #quienes-somos {
-    background-color: #f8f9fa; /* Updated background color */
+    background-color: #f8f9fa;
     padding: 4rem 0;
 }
 
@@ -447,7 +446,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 1200px; /* Added max-width */
+    max-width: 1200px;
 }
 
 #quienes-somos img {
@@ -459,7 +458,7 @@ section {
 }
 
 #quienes-somos h3 {
-    color: var(--primary-color); /* Added h3 style */
+    color: var(--secondary-color);
 }
 
 #quienes-somos p {
@@ -468,51 +467,36 @@ section {
     margin: 0 auto;
 }
 
-#quienes-somos .bg-white {
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+.quienes-somos-slider {
+    width: 100%;
+    margin-top: 2rem;
 }
 
-#quienes-somos .bg-white:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.quienes-somos-slider .slick-slide {
+    padding: 0 10px;
 }
 
-@media (max-width: 1023px) {
-    #quienes-somos .lg\:w-1/2 {
-        width: 100%;
-    }
-
-    #quienes-somos .lg\:pl-12 {
-        padding-left: 0;
-        margin-top: 2rem;
-    }
+/* Estilos para la sección de propiedades destacadas */
+.propiedades-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 1rem;
 }
 
-@media (min-width: 1024px) {
-    #quienes-somos .flex-col {
-        flex-direction: row;
-    }
-    #quienes-somos .container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    #quienes-somos img {
-        width: 45%;
-        margin-bottom: 0;
-        margin-right: 2rem;
-    }
-
-    #quienes-somos .text-content {
-        width: 50%;
-    }
-
-    #quienes-somos p {
-        text-align: left;
-    }
+.propiedades-slider::-webkit-scrollbar {
+    display: none;
 }
 
+.propiedades-slider .property-card {
+    flex: 0 0 auto;
+    width: 300px;
+    margin-right: 1rem;
+    scroll-snap-align: start;
+}
 
 /* Actualización de estilos para la sección de servicios */
 #servicios {
@@ -555,6 +539,20 @@ section {
 }
 
 /* Media queries para responsividad */
+@media (min-width: 768px) {
+    #quienes-somos .flex-col {
+        flex-direction: row;
+    }
+
+    #quienes-somos .lg\:w-1/2 {
+        width: 50%;
+    }
+
+    #quienes-somos .lg\:pl-12 {
+        padding-left: 3rem;
+    }
+}
+
 @media (max-width: 767px) {
     #service-grid {
         grid-template-columns: 1fr;
