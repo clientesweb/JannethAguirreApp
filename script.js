@@ -183,6 +183,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Función para crear las tarjetas de propiedades destacadas
+    function createFeaturedProperties() {
+        const propertiesSlider = document.querySelector('.propiedades-slider');
+        properties.forEach(property => {
+            const propertyCard = document.createElement('div');
+            propertyCard.className = 'property-card';
+            propertyCard.innerHTML = `
+                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-xl mb-2">${property.title}</h3>
+                    <p class="text-gray-700 text-base mb-4">${property.price}</p>
+                    <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-details" data-id="${property.id}">Ver Detalles</button>
+                </div>
+            `;
+            propertiesSlider.appendChild(propertyCard);
+        });
+    }
+
+    // Función para crear las tarjetas de propiedades en la sección "Nuestras Propiedades"
     function createPropertyCards() {
         const propertiesGrid = document.getElementById('properties-grid');
         properties.forEach(property => {
@@ -199,6 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
             propertiesGrid.appendChild(propertyCard);
         });
     }
+
 
     // Función para crear las tarjetas de servicios
     function createServiceCards() {
@@ -523,9 +542,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Función para precargar imágenes
+    function preloadImages(images) {
+        images.forEach(image => {
+            const img = new Image();
+            img.src = image;
+        });
+    }
+
+    // Precargar todas las imágenes
+    const allImages = [
+        ...heroImages,
+        ...properties.map(p => p.image),
+        ...properties.flatMap(p => p.gallery || []),
+        ...instagramPosts.map(p => p.image)
+    ];
+    preloadImages(allImages);
+
     // Llamar a todas las funciones de inicialización
     createHeroSlider();
     createQuienesSomosSlider();
+    createFeaturedProperties();
     createPropertyCards();
     createServiceCards();
     createTestimonialsSlider();
@@ -541,3 +578,4 @@ document.addEventListener('DOMContentLoaded', function() {
     handleScrollAnimation();
     handleInstallApp();
 });
+
