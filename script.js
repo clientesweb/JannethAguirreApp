@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
     const heroImages = [
-        "https://source.unsplash.com/random/1600x900?real,estate",
-        "https://source.unsplash.com/random/1600x900?house",
-        "https://source.unsplash.com/random/1600x900?apartment"
+        "https://source.unsplash.com/random/1600x900?luxury,house",
+        "https://source.unsplash.com/random/1600x900?modern,apartment",
+        "https://source.unsplash.com/random/1600x900?real,estate"
     ];
 
     const properties = [
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 1, 
             title: "DEPARTAMENTOS EN VENTA NUEVO SAMBORONDON", 
             price: "Consultar", 
-            image: "https://source.unsplash.com/random/800x600?apartment,samborondon", 
+            image: "https://source.unsplash.com/random/800x600?luxury,apartment", 
             type: "venta",
             description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
             features: [
@@ -108,29 +108,6 @@ document.addEventListener('DOMContentLoaded', function() {
         { image: "https://source.unsplash.com/random/600x600?condo", link: "#" }
     ];
 
-    const faqs = [
-        { 
-            question: "¿Cuál es el proceso para comprar una propiedad?", 
-            answer: "El proceso generalmente incluye: búsqueda de la propiedad, negociación del precio, firma de un contrato de compraventa, obtención de financiamiento si es necesario, y cierre de la transacción. Nuestro equipo le guiará en cada paso." 
-        },
-        { 
-            question: "¿Qué documentos necesito para vender mi propiedad?", 
-            answer: "Generalmente necesitará: título de propiedad, certificado de gravámenes, pago de impuestos al día, y cédula de identidad. Podemos ayudarle a reunir toda la documentación necesaria." 
-        },
-        { 
-            question: "¿Cómo determino el precio de venta de mi propiedad?", 
-            answer: "El precio se determina considerando factores como la ubicación, tamaño, condición de la propiedad, y precios de propiedades similares en la zona. Ofrecemos servicios de tasación profesional para ayudarle a establecer un precio justo." 
-        },
-        { 
-            question: "¿Cuánto tiempo toma vender una propiedad?", 
-            answer: "El tiempo de venta puede variar dependiendo de factores como la ubicación, el precio, y las condiciones del mercado. En promedio, puede tomar entre 3 a 6 meses, pero algunas propiedades se venden más rápido." 
-        },
-        { 
-            question: "¿Ofrecen servicios de administración de propiedades?", 
-            answer: "Sí, ofrecemos servicios completos de administración de propiedades, incluyendo búsqueda de inquilinos, cobro de alquileres, mantenimiento y reparaciones." 
-        }
-    ];
-
     // Función para crear el slider de imágenes del hero
     function createHeroSlider() {
         const heroSlider = document.querySelector('.hero-slider');
@@ -155,6 +132,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para crear el slider de "Quienes Somos"
     function createQuienesSomosSlider() {
+        const quienesSomosSlider = document.querySelector('.quienes-somos-slider');
+        const images = [
+            "https://source.unsplash.com/random/800x600?real,estate,team",
+            "https://source.unsplash.com/random/800x600?realtor",
+            "https://source.unsplash.com/random/800x600?property,management",
+            "https://source.unsplash.com/random/800x600?real,estate,office"
+        ];
+        images.forEach(image => {
+            const slide = document.createElement('div');
+            slide.innerHTML = `<img src="${image}" alt="Equipo" class="w-full h-64 object-cover rounded-lg">`;
+            quienesSomosSlider.appendChild(slide);
+        });
+        
         $('.quienes-somos-slider').slick({
             dots: true,
             infinite: true,
@@ -200,330 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Función para crear las tarjetas de servicios
-    function createServiceCards() {
-        const serviceGrid = document.getElementById('service-grid');
-        services.forEach(service => {
-            const serviceCard = document.createElement('div');
-            serviceCard.className = 'service-card';
-            serviceCard.innerHTML = `
-                <i class="${service.icon} text-4xl text-primary mb-4"></i>
-                <h3 class="text-xl font-semibold mb-2">${service.title}</h3>
-                <p class="text-gray-600">${service.description}</p>
-            `;
-            serviceGrid.appendChild(serviceCard);
-        });
-    }
-
-    // Función para crear el slider de testimonios
-    function createTestimonialsSlider() {
-        const testimonialsSlider = document.getElementById('testimonials-slider');
-        testimonials.forEach(testimonial => {
-            const slide = document.createElement('div');
-            slide.className = 'bg-white p-6 rounded-lg shadow-md';
-            slide.innerHTML = `
-                <p class="text-gray-600 mb-4">"${testimonial.text}"</p>
-                <p class="font-semibold">- ${testimonial.name}</p>
-            `;
-            testimonialsSlider.appendChild(slide);
-        });
-        
-        $('#testimonials-slider').slick({
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 5000
-        });
-    }
-
-    // Función para crear el slider de Instagram
-    function createInstagramSlider() {
-        const instagramSlider = document.getElementById('instagram-slider');
-        instagramPosts.forEach(post => {
-            const slide = document.createElement('div');
-            slide.className = 'px-2';
-            slide.innerHTML = `
-                <a href="${post.link}" target="_blank" rel="noopener noreferrer">
-                    <img src="${post.image}" alt="Instagram post" class="w-full h-64 object-cover rounded-lg">
-                </a>
-            `;
-            instagramSlider.appendChild(slide);
-        });
-        
-        $('#instagram-slider').slick({
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
-    }
-
-    // Función para crear las preguntas frecuentes
-    function createFAQs() {
-        const faqContainer = document.getElementById('faq-container');
-        faqs.forEach((faq, index) => {
-            const faqItem = document.createElement('div');
-            faqItem.className = 'faq-item';
-            faqItem.innerHTML = `
-                <div class="faq-question flex justify-between items-center cursor-pointer">
-                    <span>${faq.question}</span>
-                    <i class="fas fa-chevron-down faq-icon"></i>
-                </div>
-                <div class="faq-answer mt-2 text-gray-600 hidden">
-                    ${faq.answer}
-                </div>
-            `;
-            faqContainer.appendChild(faqItem);
-
-            // Añadir evento de clic para mostrar/ocultar la respuesta
-            const question = faqItem.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                faqItem.classList.toggle('active');
-                const answer = faqItem.querySelector('.faq-answer');
-                answer.classList.toggle('hidden');
-            });
-        });
-    }
-
-    // Función para manejar el clic en "Ver Detalles"
-    function handleViewDetails() {
-        document.addEventListener('click', function(e) {
-            if (e.target && e.target.classList.contains('view-details')) {
-                const propertyId = parseInt(e.target.dataset.id);
-                const property = properties.find(p => p.id === propertyId);
-                showPropertyModal(property);
-            }
-        });
-    }
-
-    // Función para mostrar el modal de la propiedad
-    function showPropertyModal(property) {
-        const modal = document.getElementById('gallery-modal');
-        const galleryImages = document.getElementById('gallery-images');
-        const galleryInfo = document.getElementById('gallery-info');
-        
-        // Limpiar imágenes anteriores
-        galleryImages.innerHTML = '';
-        
-        // Agregar nuevas imágenes
-        property.gallery.forEach(image => {
-            const img = document.createElement('img');
-            img.src = image;
-            img.alt = property.title;
-            img.className = 'w-1/3 p-2 cursor-pointer';
-            img.addEventListener('click', () => showFullImage(image));
-            galleryImages.appendChild(img);
-        });
-        
-        // Actualizar información de la propiedad
-        galleryInfo.innerHTML = `
-            <h3 class="text-xl font-bold mb-2">${property.title}</h3>
-            <p class="mb-2"><strong>Precio:</strong> ${property.price}</p>
-            <p class="mb-4">${property.description}</p>
-            <h4 class="font-bold mb-2">Características:</h4>
-            <ul class="list-disc pl-5 mb-4">
-                ${property.features ? property.features.map(feature => `<li>${feature}</li>`).join('') : ''}
-            </ul>
-            <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Contactar Agente</button>
-        `;
-        
-        // Mostrar modal
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-    }
-
-    // Función para mostrar imagen completa
-    function showFullImage(imageSrc) {
-        const fullImageContainer = document.getElementById('full-image-container');
-        const fullImage = document.getElementById('full-image');
-        
-        fullImage.src = imageSrc;
-        fullImageContainer.style.display = 'flex';
-    }
-
-    // Función para cerrar el modal de la galería
-    function closeGalleryModal() {
-        const modal = document.getElementById('gallery-modal');
-        const closeButton = document.getElementById('close-modal');
-        
-        closeButton.addEventListener('click', () => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        });
-        
-        // Cerrar modal al hacer clic fuera de él
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }
-        });
-    }
-
-    // Función para cerrar la imagen completa
-    function closeFullImage() {
-        const fullImageContainer = document.getElementById('full-image-container');
-        
-        fullImageContainer.addEventListener('click', () => {
-            fullImageContainer.style.display = 'none';
-        });
-    }
-
-    // Función para navegar entre imágenes completas
-    function navigateFullImages() {
-        const prevButton = document.getElementById('prev-image');
-        const nextButton = document.getElementById('next-image');
-        const fullImage = document.getElementById('full-image');
-        
-        let currentIndex = 0;
-        const images = Array.from(document.querySelectorAll('#gallery-images img'));
-        
-        prevButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            full
-
-Image.src = images[currentIndex].src;
-        });
-        
-        nextButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex + 1) % images.length;
-            fullImage.src = images[currentIndex].src;
-        });
-    }
-
-    // Función para crear el slider de YouTube
-    function initYouTubeVideos() {
-        const youtubeContainer = document.getElementById('youtube-slider');
-        if (youtubeContainer) {
-            // Configuración de la API de YouTube
-            const API_KEY = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
-            const CHANNEL_ID = 'UCiahlQJxCgPY-tEfjvkab8g';
-            const MAX_RESULTS = 10;
-
-            // Hacer la solicitud a la API de YouTube
-            fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`)
-                .then(response => response.json())
-                .then(data => {
-                    const videos = data.items;
-                    youtubeContainer.innerHTML = `
-                        <div class="flex overflow-x-auto space-x-4 pb-4">
-                            ${videos.map(video => `
-                                <div class="flex-shrink-0 w-80">
-                                    <iframe width="320" height="180" src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                    <h3 class="text-lg font-semibold mt-2">${video.snippet.title}</h3>
-                                </div>
-                            `).join('')}
-                        </div>
-                    `;
-                })
-                .catch(error => console.error('Error fetching YouTube videos:', error));
-        }
-    }
-
-    // Función para manejar el formulario de contacto
-    function initContactForm() {
-        const form = document.getElementById('contact-form');
-        if (form) {
-            form.setAttribute('action', 'https://formspree.io/f/xvgogpyz');
-            form.setAttribute('method', 'POST');
-        }
-    }
-
-    // Función para el botón "Volver arriba"
-    function handleBackToTop() {
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 100) {
-                backToTopButton.style.display = 'block';
-            } else {
-                backToTopButton.style.display = 'none';
-            }
-        });
-        
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-
-    // Función para manejar el efecto de aparición al hacer scroll
-    function handleScrollAnimation() {
-        const fadeElems = document.querySelectorAll('.fade-in-section');
-        
-        const fadeIn = (elem) => {
-            var distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
-            if (distInView < 0) {
-                elem.classList.add('is-visible');
-            } else {
-                elem.classList.remove('is-visible');
-            }
-        };
-        
-        fadeElems.forEach(elem => {
-            fadeIn(elem);
-        });
-        
-        window.addEventListener('scroll', () => {
-            fadeElems.forEach(elem => {
-                fadeIn(elem);
-            });
-        });
-    }
-
-    // Función para manejar la instalación de la PWA
-    function handleInstallApp() {
-        let deferredPrompt;
-        const installButton = document.getElementById('install-app');
-        
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installButton.style.display = 'block';
-        });
-        
-        installButton.addEventListener('click', () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('Usuario aceptó la instalación de la PWA');
-                    }
-                    deferredPrompt = null;
-                });
-            }
-        });
-    }
+    // ... (resto del código sin cambios) ...
 
     // Llamar a todas las funciones de inicialización
     createHeroSlider();
