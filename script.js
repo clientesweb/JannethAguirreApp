@@ -72,7 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 5, 
             title: "Terreno para Desarrollo Residencial", 
-            price: "Consultar", 
+            price: "Consul
+
+tar", 
             image: "https://source.unsplash.com/random/800x600?land,residential", 
             type: "venta",
             description: "Amplio terreno ideal para desarrollo residencial. Ubicación estratégica con todos los servicios disponibles.",
@@ -410,9 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
         prevButton.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = (currentIndex - 1 + images.length) % images.length;
-            full
-
-Image.src = images[currentIndex].src;
+            fullImage.src = images[currentIndex].src;
         });
         
         nextButton.addEventListener('click', (e) => {
