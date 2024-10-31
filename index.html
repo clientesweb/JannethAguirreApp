@@ -111,7 +111,7 @@
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="h-12">
-                <button id="install-app" class="bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/90 transition-colors">
+                <button id="install-app" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">
                     <i class="fas fa-download mr-2"></i> Instalar App
                 </button>
             </div>
@@ -179,17 +179,8 @@
         <section id="tienda" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Nuestras Propiedades</h2>
-                
-                <div id="filter-buttons" class="flex flex-wrap justify-center space-x-2 space-y-2 mb-4">
-                    <!-- Los botones de filtro se insertarán aquí mediante JavaScript -->
-                </div>
-                
-                <input type="text" id="search-input" placeholder="Buscar propiedades..." class="w-full px-4 py-2 mb-4 border border-gray-300 rounded">
-                
-                <div class="overflow-x-auto">
-                    <div id="store-slider" class="flex flex-nowrap space-x-4 pb-4"> 
-                        <!-- Las tarjetas se insertarán aquí mediante JavaScript -->
-                    </div>
+                <div id="properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Las tarjetas de propiedades se insertarán aquí mediante JavaScript -->
                 </div>
             </div>
         </section>
@@ -289,28 +280,28 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="fade-in-section">
                     <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="h-16 mb-4">
-                    <p>Expertos en bienes raíces con años de experiencia en el mercado ecuatoriano.</p>
+                    <p class="text-white">Expertos en bienes raíces con años de experiencia en el mercado ecuatoriano.</p>
                 </div>
                 <div class="fade-in-section">
-                    <h3 class="text-xl font-bold mb-4">Contacto</h3>
-                    <p class="mb-2"><i class="fas fa-phone mr-2"></i> +593 98 716 7782</p>
-                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> info@jannethaguirre.com</p>
-                    <p><i class="fas fa-map-marker-alt mr-2"></i> Guayaquil, Ecuador</p>
+                    <h3 class="text-xl font-bold mb-4 text-white">Contacto</h3>
+                    <p class="mb-2 text-white"><i class="fas fa-phone mr-2"></i> +593 98 716 7782</p>
+                    <p class="mb-2 text-white"><i class="fas fa-envelope mr-2"></i> info@jannethaguirre.com</p>
+                    <p class="text-white"><i class="fas fa-map-marker-alt mr-2"></i> Guayaquil, Ecuador</p>
                 </div>
                 <div class="fade-in-section">
-                    <h3 class="text-xl font-bold mb-4">Síguenos</h3>
+                    <h3 class="text-xl font-bold mb-4 text-white">Síguenos</h3>
                     <div class="flex space-x-4">
-                        <a href="#" aria-label="Facebook" class="text-white hover:text-secondary"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/janneth_aguirrem?igsh=MXNxejU5eGV0MjJzcg==" aria-label="Instagram" class="text-white hover:text-secondary"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="Twitter" class="text-white hover:text-secondary"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn" class="text-white hover:text-secondary"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="TikTok" class="text-white hover:text-secondary"><i class="fab fa-tiktok"></i></a>
-                        <a href="#" aria-label="X" class="text-white hover:text-secondary"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="Facebook" class="text-white hover:text-gray-300"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/janneth_aguirrem?igsh=MXNxejU5eGV0MjJzcg==" aria-label="Instagram" class="text-white hover:text-gray-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter" class="text-white hover:text-gray-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn" class="text-white hover:text-gray-300"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="TikTok" class="text-white hover:text-gray-300"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="X" class="text-white hover:text-gray-300"><i class="fab fa-x-twitter"></i></a>
                     </div>
                 </div>
             </div>
-            <p class="text-center mt-8 fade-in-section">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
-            <p class="text-center mt-2 fade-in-section">Powered by <a href="https://dualitydomain.github.io/Dualitydomain/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-secondary">Duality Domain</a></p>
+            <p class="text-center mt-8 fade-in-section text-white">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
+            <p class="text-center mt-2 fade-in-section text-white">Powered by <a href="https://dualitydomain.github.io/Dualitydomain/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300">Duality Domain</a></p>
         </div>
     </footer>
 
