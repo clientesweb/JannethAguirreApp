@@ -138,7 +138,7 @@ body {
 }
 
 /* Estilos para los sliders */
-.propiedades-slider {
+.propiedades-slider, #properties-grid {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -148,9 +148,10 @@ body {
     padding-bottom: 1rem;
 }
 
-.propiedades-slider::-webkit-scrollbar {
+.propiedades-slider::-webkit-scrollbar, #properties-grid::-webkit-scrollbar {
     display: none;
 }
+
 @media (min-width: 640px) {
     .property-card {
         width: calc(50% - 10px);
@@ -162,7 +163,6 @@ body {
         width: calc(33.333% - 13.333px);
     }
 }
-
 
 /* Estilos para los sliders */
 .slick-prev:before, .slick-next:before {
@@ -609,4 +609,25 @@ section {
 #properties-grid {
     display: grid;
     gap: 1.5rem;
+}
+
+/* Estilos para la galería de imágenes */
+.gallery-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.gallery-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-slider img {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    scroll-snap-align: start;
 }
