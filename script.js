@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const properties = [
         { 
             id: 1, 
-            title: "DEPARTAMENTOS EN VENTA NUEVO SAMBORONDON", 
-            price: "Consultar", 
+            title: "DEPARTAMENTOS EN VENTA", 
+            price: "NUEVO SAMBORONDON", 
             image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
             type: "venta",
             description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 2, 
-            title: "Casa de Lujo en Samborondón", 
-            price: "Consultar", 
+            title: "DEPARTAMENTOS EN VENTA", 
+            price: "ISLA MOCOLI", 
             image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
             type: "venta",
             description: "Espectacular casa de lujo en el corazón de Samborondón. Amplios espacios, acabados de primera y vistas impresionantes.",
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 3, 
-            title: "Oficina Comercial en Centro Empresarial", 
+            title: "LOCALES COMERCIALES", 
             price: "Consultar", 
             image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
             type: "alquiler",
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 4, 
-            title: "Penthouse con Vista al Mar", 
+            title: "CASAS PERSONALIZADAS", 
             price: "Consultar", 
             image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
             type: "venta",
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 5, 
-            title: "Terreno para Desarrollo Residencial", 
+            title: "DEPARTAMENTOS EN CUENCA", 
             price: "Consultar", 
             image: "https://images.unsplash.com/photo-1600607688930-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
             type: "venta",
