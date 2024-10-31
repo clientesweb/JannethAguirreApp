@@ -366,30 +366,6 @@ body {
     opacity: 0.8;
 }
 
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: #000000;
-    color: white;
-    padding: 8px;
-    z-index: 100;
-}
-
-.skip-link:focus {
-    top: 0;
-}
-
-section {
-    padding: 4rem 0;
-}
-
-@media (min-width: 768px) {
-    section {
-        padding: 6rem 0;
-    }
-}
-
 /* Media queries para responsividad */
 @media (min-width: 641px) {
     .youtube-video, #store-slider .property-card {
