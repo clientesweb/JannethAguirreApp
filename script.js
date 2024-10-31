@@ -202,10 +202,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para crear las tarjetas de propiedades en la sección "Nuestras Propiedades"
     function createPropertyCards() {
-        const propertiesGrid = document.getElementById('properties-grid');
+        const propertiesSlider = document.getElementById('properties-slider');
         properties.forEach(property => {
             const propertyCard = document.createElement('div');
-            propertyCard.className = 'property-card flex-shrink-0';
+            propertyCard.className = 'property-card inline-block w-64 mr-4';
             propertyCard.innerHTML = `
                 <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
                 <div class="p-4">
@@ -214,7 +214,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-details" data-id="${property.id}">Ver Detalles</button>
                 </div>
             `;
-            propertiesGrid.appendChild(propertyCard);
+            propertiesSlider.appendChild(propertyCard);
+        });
+
+        // Agregar funcionalidad de desplazamiento horizontal
+        const slideLeft = document.getElementById('slide-left');
+        const slideRight = document.getElementById('slide-right');
+
+        slideLeft.addEventListener('click', () => {
+            propertiesSlider.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+
+        slideRight.addEventListener('click', () => {
+            propertiesSlider.scrollBy({ left: 300, behavior: 'smooth' });
         });
     }
 
@@ -471,26 +483,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function initContactForm() {
         const form = document.getElementById('contact-form');
         if (form) {
-            form.setAttribute('action', 'https://formspree.io/f/xvgogpyz');
-            form.setAttribute('method', 'POST');
-        }
-    }
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const message = document.getElementById('message').value;
 
-    // Función para el botón "Volver arriba"
-    function handleBackToTop() {
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 100) {
-                backToTopButton.style.display = 'block';
-            } else {
-                backToTopButton.style.display = 'none';
-            }
-        });
-        
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+                const whatsappMessage = `Hola, soy ${name}. Mi correo es ${email} y mi teléfono es ${phone}. ${message}`;
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                const whatsappUrl = `https://wa.me/593987167782?text=${encodedMessage}`;
+
+                window.open(whatsappUrl, '_blank');
+            });
+        }
     }
 
     // Función para manejar el efecto de aparición al hacer scroll
