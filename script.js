@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "Samborondón, ciudad de oportunidades, donde la inversión en bienes raíces, comercio y servicios florece.",
             "El clima y la geografía de Samborondón ofrecen un entorno ideal para vivir, trabajar e invertir.",
             "Samborondón, un lugar donde  la innovación y la tecnología se unen para impulsar el crecimiento económico.",
-            "Invierte en Samborondón y sé parte de una comunidad próspera y en constante crecimiento, con un futuro brillante."
+            "Invierte en Samborondón y sé parte de una comunidad próspera y en constante  crecimiento, con un futuro brillante."
         ],
         usa: [
             "Estados Unidos ofrece un mercado inmobiliario estable y diversificado para inversores internacionales.",
@@ -259,7 +259,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Inicializar el slider después de crear las tarjetas
         initializePropertySlider();
     }
-     // Función para inicializar el slider de propiedades
+
+    // Función para inicializar el slider de propiedades
     function initializePropertySlider() {
         const slider = document.querySelector('.properties-slider');
         let isDown = false;
@@ -291,7 +292,6 @@ document.addEventListener('DOMContentLoaded', function() {
             slider.scrollLeft = scrollLeft - walk;
         });
     }
-
 
     // Función para crear las tarjetas de servicios
     function createServiceCards() {
@@ -582,7 +582,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error fetching YouTube videos:', error));
     }
 
-    // Modificar la función para manejar el formulario de contacto
+    // Función para manejar el formulario de contacto
     function initContactForm() {
         const form = document.getElementById('contact-form');
         if (form) {
@@ -639,16 +639,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-     // Función para manejar el preloader
-    function handlePreloader() {
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
-        });
-    }
 
     // Función para manejar la instalación de la PWA
     function handleInstallApp() {
@@ -674,6 +664,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Función para manejar el preloader
+    function handlePreloader() {
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+    }
+
     // Función para precargar imágenes
     function preloadImages(images) {
         images.forEach(image => {
@@ -691,7 +692,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
     preloadImages(allImages);
 
-    // Llamar a las funciones de inicialización
+    // Llamar a todas las funciones de inicialización
     createHeroSlider();
     createQuienesSomosSlider();
     createFeaturedProperties();
