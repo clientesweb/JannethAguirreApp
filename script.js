@@ -30,7 +30,58 @@ document.addEventListener('DOMContentLoaded', function() {
                 "https://images.unsplash.com/photo-1600566752734-2a0cd53b9f58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
             ]
         },
-        // Add more properties here...
+        { 
+            id: 2, 
+            title: "Casa de Lujo en Samborondón", 
+            price: "Consultar", 
+            image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            type: "venta",
+            description: "Espectacular casa de lujo en el corazón de Samborondón. Amplios espacios, acabados de primera y vistas impresionantes.",
+            gallery: [
+                "https://images.unsplash.com/photo-1600607687644-c7f34e88598f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607687668-0b7b4bf7a00a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607687710-040798eea3fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+            ]
+        },
+        { 
+            id: 3, 
+            title: "Oficina Comercial en Centro Empresarial", 
+            price: "Consultar", 
+            image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            type: "alquiler",
+            description: "Moderna oficina comercial en el principal centro empresarial de la ciudad. Ideal para empresas en crecimiento.",
+            gallery: [
+                "https://images.unsplash.com/photo-1600607687954-e85aa7b46ca3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607687968-d7a205ad5e7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607687985-a6ad18e3c1d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+            ]
+        },
+        { 
+            id: 4, 
+            title: "Penthouse con Vista al Mar", 
+            price: "Consultar", 
+            image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            type: "venta",
+            description: "Exclusivo penthouse con impresionantes vistas al mar. Terraza privada, acabados de lujo y comodidades de primer nivel.",
+            gallery: [
+                "https://images.unsplash.com/photo-1600607688960-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607688951-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607688942-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+            ]
+        },
+        { 
+            id: 5, 
+            title: "Terreno para Desarrollo Residencial", 
+            price: "Consultar", 
+            image: "https://images.unsplash.com/photo-1600607688930-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            type: "venta",
+            description: "Amplio terreno ideal para desarrollo residencial. Ubicación estratégica con todos los servicios disponibles.",
+            gallery: [
+                "https://images.unsplash.com/photo-1600607688921-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607688912-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607688903-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+            ]
+        }
     ];
 
     const services = [
@@ -79,6 +130,33 @@ document.addEventListener('DOMContentLoaded', function() {
             answer: "Sí, ofrecemos servicios completos de administración de propiedades, incluyendo búsqueda de inquilinos, cobro de alquileres, mantenimiento y reparaciones." 
         }
     ];
+
+    const investReasons = {
+        samborondon: [
+            "Samborondón, el corazón económico de la región, donde la inversión y el progreso se unen.",
+            "Descubre Samborondón, el destino más próspero para invertir en Ecuador, con crecimiento sostenible y estabilidad.",
+            "Samborondón, ciudad innovadora y emprendedora, impulsa tus negocios con infraestructura y tecnología de vanguardia.",
+            "Invierte en Samborondón y aprovecha su ubicación estratégica",
+            "Samborondón, líder en desarrollo urbano y calidad de vida, ofrece oportunidades ilimitadas para compradores e inversores.",
+            "La economía en crecimiento y la inversión constante convierten a Samborondón en un polo de atracción para empresarios.",
+            "Samborondón, ciudad de oportunidades, donde la inversión en bienes raíces, comercio y servicios florece.",
+            "El clima y la geografía de Samborondón ofrecen un entorno ideal para vivir, trabajar e invertir.",
+            "Samborondón, un lugar donde  la innovación y la tecnología se unen para impulsar el crecimiento económico.",
+            "Invierte en Samborondón y sé parte de una comunidad próspera y en constante crecimiento, con un futuro brillante."
+        ],
+        usa: [
+            "Estados Unidos ofrece un mercado inmobiliario estable y diversificado para inversores internacionales.",
+            "Benefíciate de un sistema legal robusto que protege los derechos de propiedad de los inversores extranjeros.",
+            "Accede a oportunidades de inversión en ciudades de rápido crecimiento y mercados emergentes en todo el país.",
+            "Aprovecha las tasas de interés históricamente bajas para financiar tus inversiones inmobiliarias.",
+            "Diversifica tu portafolio con propiedades en una de las economías más grandes y estables del mundo.",
+            "Explora opciones de inversión en sectores de alto rendimiento como tecnología, salud y educación.",
+            "Benefíciate de la apreciación a largo plazo del mercado inmobiliario estadounidense.",
+            "Accede a un mercado de alquileres robusto, especialmente en áreas metropolitanas y destinos turísticos.",
+            "Aprovecha las oportunidades en el mercado de propiedades comerciales y de uso mixto en crecimiento.",
+            "Invierte en un país con una infraestructura de clase mundial y una economía impulsada por la innovación."
+        ]
+    };
 
     // Función para crear el slider de imágenes del hero
     function createHeroSlider() {
@@ -281,6 +359,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Función para crear el acordeón de razones para invertir
+    function createInvestReasons() {
+        const samborondonContainer = document.getElementById('invest-samborondon');
+        const usaContainer = document.getElementById('invest-usa');
+
+        function createAccordion(container, reasons, flagUrl) {
+            const accordionHeader = document.createElement('div');
+            accordionHeader.className = 'flex items-center cursor-pointer mb-4';
+            accordionHeader.innerHTML = `
+                <img src="${flagUrl}" alt="Bandera" class="w-8 h-8 mr-2">
+                <h3 class="text-xl font-bold">${container.id === 'invest-samborondon' ? 'Invertir en Samborondón' : 'Invertir en Estados Unidos'}</h3>
+                <i class="fas fa-chevron-down ml-auto"></i>
+            `;
+            container.appendChild(accordionHeader);
+
+            const accordionContent = document.createElement('div');
+            accordionContent.className = 'hidden';
+            reasons.forEach(reason => {
+                const reasonElement = document.createElement('p');
+                reasonElement.className = 'mb-2';
+                reasonElement.textContent = reason;
+                accordionContent.appendChild(reasonElement);
+            });
+            container.appendChild(accordionContent);
+
+            accordionHeader.addEventListener('click', () => {
+                accordionContent.classList.toggle('hidden');
+                accordionHeader.querySelector('i').classList.toggle('fa-chevron-down');
+                accordionHeader.querySelector('i').classList.toggle('fa-chevron-up');
+            });
+        }
+
+        createAccordion(samborondonContainer, investReasons.samborondon, 'https://flagcdn.com/w40/ec.png');
+        createAccordion(usaContainer, investReasons.usa, 'https://flagcdn.com/w40/us.png');
+    }
+
     // Función para manejar el clic en "Ver Detalles"
     function handleViewDetails() {
         document.addEventListener('click', function(e) {
@@ -355,6 +469,67 @@ document.addEventListener('DOMContentLoaded', function() {
                 modal.classList.remove('flex');
             }
         });
+    }
+
+    // Función para cargar los videos de YouTube
+    function loadYouTubeVideos() {
+        const youtubeContainer = document.getElementById('youtube-slider');
+        const channelId = 'UCiahlQJxCgPY-tEfjvkab8g';
+        const maxResults = 10;
+        const apiKey = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
+
+        fetch(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${maxResults}`)
+            .then(response => response.json())
+            .then(data => {
+                data.items.forEach(item => {
+                    const videoId = item.id.videoId;
+                    const title = item.snippet.title;
+                    const thumbnail = item.snippet.thumbnails.medium.url;
+
+                    const videoElement = document.createElement('div');
+                    videoElement.className = 'youtube-video';
+                    videoElement.innerHTML = `
+                        <img src="${thumbnail}" alt="${title}" class="w-full cursor-pointer">
+                        <h3 class="text-lg font-semibold mt-2">${title}</h3>
+                    `;
+                    videoElement.addEventListener('click', () => {
+                        const iframe = document.createElement('iframe');
+                        iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                        iframe.width = '100%';
+                        iframe.height = '200';
+                        iframe.allowFullscreen = true;
+                        videoElement.innerHTML = '';
+                        videoElement.appendChild(iframe);
+                    });
+                    youtubeContainer.appendChild(videoElement);
+                });
+
+                // Inicializar el slider después de cargar los videos
+                $('#youtube-slider').slick({
+                    dots: true,
+                    infinite: false,
+                    speed: 300,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 2
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
+                        }
+                    ]
+                });
+            })
+            .catch(error => console.error('Error fetching YouTube videos:', error));
     }
 
     // Función para manejar el formulario de contacto
@@ -457,8 +632,10 @@ document.addEventListener('DOMContentLoaded', function() {
     createTestimonialsSlider();
     createInstagramSlider();
     createFAQs();
+    createInvestReasons();
     handleViewDetails();
     closeGalleryModal();
+    loadYouTubeVideos();
     initContactForm();
     handleBackToTop();
     handleScrollAnimation();
