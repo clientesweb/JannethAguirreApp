@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
     const heroImages = [
-        "https://source.unsplash.com/random/1600x900?real,estate",
-        "https://source.unsplash.com/random/1600x900?house",
-        "https://source.unsplash.com/random/1600x900?apartment"
+        "https://source.unsplash.com/random/1600x900?real,estate,ecuador",
+        "https://source.unsplash.com/random/1600x900?house,ecuador",
+        "https://source.unsplash.com/random/1600x900?apartment,ecuador"
     ];
 
     const properties = [
@@ -72,9 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 5, 
             title: "Terreno para Desarrollo Residencial", 
-            price: "Consul
-
-tar", 
+            price: "Consultar", 
             image: "https://source.unsplash.com/random/800x600?land,residential", 
             type: "venta",
             description: "Amplio terreno ideal para desarrollo residencial. Ubicación estratégica con todos los servicios disponibles.",
