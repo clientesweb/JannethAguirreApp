@@ -101,8 +101,13 @@
 </head>
 <body class="font-poppins bg-background text-gray-800">
     <!-- Preloader -->
-    <div id="preloader">
-        <div class="spinner"></div>
+    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <div class="relative">
+            <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Janneth Aguirre Logo" class="w-32 h-32">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        </div>
     </div>
 
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
@@ -111,7 +116,7 @@
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" class="h-12">
-                <button id="install-app" class="bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/90 transition-colors">
+                <button id="install-app" class="bg-white text-primary px-4 py-2 rounded hover:bg-gray-100 transition-colors">
                     <i class="fas fa-download mr-2"></i> Instalar App
                 </button>
             </div>
@@ -122,7 +127,6 @@
         <section id="inicio" class="relative h-[calc(100vh-80px)] overflow-hidden fade-in-section">
             <div class="hero-slider absolute inset-0">
                 <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
-                <div style="background-image: url('https://source.unsplash.com/random/1600x900?real,estate'); background-size: cover; background-position: center;"></div>
             </div>
             <div class="absolute inset-0 flex items-center justify-center z-10">
                 <div class="text-center text-white p-4">
@@ -151,10 +155,7 @@
                     </div>
                 </div>
                 <div class="quienes-somos-slider">
-                    <div><img src="https://source.unsplash.com/random/800x600?real,estate,team" alt="Equipo de trabajo" class="w-full h-64 object-cover rounded-lg"></div>
-                    <div><img src="https://source.unsplash.com/random/800x600?office,realestate" alt="Oficina" class="w-full h-64 object-cover rounded-lg"></div>
-                    <div><img src="https://source.unsplash.com/random/800x600?house,sale" alt="Casa en venta" class="w-full h-64 object-cover rounded-lg"></div>
-                    <div><img src="https://source.unsplash.com/random/800x600?apartment,luxury" alt="Apartamento de lujo" class="w-full h-64 object-cover rounded-lg"></div>
+                    <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
                 </div>
             </div>
         </section>
@@ -216,7 +217,7 @@
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Nuestro Canal de YouTube</h2>
                 <div id="youtube-slider" class="youtube-slider">
-                    <!-- Los videos de YouTube se insertarán aquí mediante JavaScript  -->
+                    <!-- Los videos de YouTube se insertarán aquí mediante JavaScript -->
                 </div>
             </div>
         </section>
@@ -231,7 +232,7 @@
         </section>
 
         <section id="instagram" class="py-16 bg-gray-100 fade-in-section">
-            <div class="container mx-auto px-4">
+            <div  class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Síguenos en Instagram</h2>
                 <div id="instagram-slider" class="instagram-slider">
                     <!-- Instagram posts will be inserted here by JavaScript -->
