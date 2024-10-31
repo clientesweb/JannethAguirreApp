@@ -36,7 +36,15 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "ISLA MOCOLI", 
             image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
             type: "venta",
-            description: "Espectacular casa de lujo en el corazón de Samborondón. Amplios espacios, acabados de primera y vistas impresionantes.",
+            description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
+            features: [
+                "2 habitaciones con armarios empotrados",
+                "2 baños modernos con acabados de alta calidad",
+                "Cocina abierta con muebles a medida",
+                "Sala y comedor acogedores",
+                "Áreas sociales: piscina, gimnasio, salón de eventos",
+                "Seguridad 24/7 con conserjería y vigilancia"
+            ],
             gallery: [
                 "https://images.unsplash.com/photo-1600607687644-c7f34e88598f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
                 "https://images.unsplash.com/photo-1600607687668-0b7b4bf7a00a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
@@ -49,7 +57,15 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "Consultar", 
             image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
             type: "alquiler",
-            description: "Moderna oficina comercial en el principal centro empresarial de la ciudad. Ideal para empresas en crecimiento.",
+            description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
+            features: [
+                "2 habitaciones con armarios empotrados",
+                "2 baños modernos con acabados de alta calidad",
+                "Cocina abierta con muebles a medida",
+                "Sala y comedor acogedores",
+                "Áreas sociales: piscina, gimnasio, salón de eventos",
+                "Seguridad 24/7 con conserjería y vigilancia"
+            ],
             gallery: [
                 "https://images.unsplash.com/photo-1600607687954-e85aa7b46ca3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
                 "https://images.unsplash.com/photo-1600607687968-d7a205ad5e7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
@@ -62,7 +78,15 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "Consultar", 
             image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
             type: "venta",
-            description: "Exclusivo penthouse con impresionantes vistas al mar. Terraza privada, acabados de lujo y comodidades de primer nivel.",
+            description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
+            features: [
+                "2 habitaciones con armarios empotrados",
+                "2 baños modernos con acabados de alta calidad",
+                "Cocina abierta con muebles a medida",
+                "Sala y comedor acogedores",
+                "Áreas sociales: piscina, gimnasio, salón de eventos",
+                "Seguridad 24/7 con conserjería y vigilancia"
+            ],
             gallery: [
                 "https://images.unsplash.com/photo-1600607688960-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
                 "https://images.unsplash.com/photo-1600607688951-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
@@ -75,7 +99,15 @@ document.addEventListener('DOMContentLoaded', function() {
             price: "Consultar", 
             image: "https://images.unsplash.com/photo-1600607688930-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
             type: "venta",
-            description: "Amplio terreno ideal para desarrollo residencial. Ubicación estratégica con todos los servicios disponibles.",
+            description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
+            features: [
+                "2 habitaciones con armarios empotrados",
+                "2 baños modernos con acabados de alta calidad",
+                "Cocina abierta con muebles a medida",
+                "Sala y comedor acogedores",
+                "Áreas sociales: piscina, gimnasio, salón de eventos",
+                "Seguridad 24/7 con conserjería y vigilancia"
+            ],
             gallery: [
                 "https://images.unsplash.com/photo-1600607688921-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
                 "https://images.unsplash.com/photo-1600607688912-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
