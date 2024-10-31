@@ -154,7 +154,9 @@ body {
     height: 100%;
 }
 
-.hero-slider .slick-list,
+.hero-slider .sl
+
+ick-list,
 .hero-slider .slick-track {
     height: 100%;
 }
@@ -570,4 +572,22 @@ section {
 
 #invertir-samborondon .bg-white:hover {
     transform: translateY(-5px);
+}
+
+/* Estilos para los botones */
+.bg-primary, .hover\:bg-primary\/90:hover {
+    background-color: var(--primary-color);
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: var(--primary-color);
+}
+
+footer p, footer a {
+    color: white;
+}
+
+footer a:hover {
+    color: var(--secondary-color);
 }
