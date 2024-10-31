@@ -30,18 +30,8 @@
     <meta property="twitter:description" content="Encuentra tu hogar ideal con Janneth Aguirre Bienes Raíces. Ofrecemos las mejores propiedades en venta y alquiler en Ecuador.">
     <meta property="twitter:image" content="https://www.jannethaguirre.com/twitter-image.jpg">
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Slick CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-
-    <!-- Slick JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
     <script>
         tailwind.config = {
             theme: {
@@ -59,11 +49,12 @@
         }
     </script>
 
+    <!-- Slick CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Structured data for SEO -->
     <script type="application/ld+json">
@@ -110,13 +101,8 @@
 </head>
 <body class="font-poppins bg-background text-gray-800">
     <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
-        <div class="relative">
-            <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Janneth Aguirre Logo" class="w-32 h-32">
-            <div class="absolute inset-0 flex items-center justify-center">
-                <div class="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-            </div>
-        </div>
+    <div id="preloader">
+        <div class="spinner"></div>
     </div>
 
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
@@ -181,7 +167,7 @@
         <section id="servicios" class="bg-secondary py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-white">Nuestros Servicios</h2>
-                <div class="services-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div id="service-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Service cards will be inserted here by JavaScript -->
                 </div>
             </div>
@@ -234,27 +220,27 @@
         <section id="testimonials" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Lo que dicen nuestros clientes</h2>
-                <div class="testimonials-slider">
+                <div id="testimonials-slider" class="testimonials-slider">
                     <!-- Testimonials will be inserted here by JavaScript -->
-                
                 </div>
             </div>
         </section>
 
         <section id="instagram" class="py-16 bg-gray-100 fade-in-section">
-            <div  class="container mx-auto px-4">
+            <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Síguenos en Instagram</h2>
-                <div class="instagram-slider">
+                <div id="instagram-slider" class="instagram-slider">
                     <!-- Instagram posts will be inserted here by JavaScript -->
+                
                 </div>
             </div>
         </section>
 
         <section id="faqs" class="py-16 fade-in-section">
-            <div class="container mx-auto  px-4">
+            <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Preguntas Frecuentes</h2>
                 
-                <div class="faq-container">
+                <div id="faq-container">
                     <!-- FAQ items will be inserted here by JavaScript -->
                 </div>
             </div>
@@ -364,6 +350,10 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Slick JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="chatbot.js"></script>
     <script src="script.js"></script>
     <script>
@@ -384,5 +374,8 @@
         document.getElementById('preloader').style.display = 'none';
       });
     </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </body>
 </html>
