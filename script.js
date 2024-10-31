@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
     const heroImages = [
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=900&q=80",
-        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=900&q=80",
-        "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=900&q=80"
+        "https://source.unsplash.com/1600x900/?luxury,house",
+        "https://source.unsplash.com/1600x900/?modern,apartment",
+        "https://source.unsplash.com/1600x900/?real,estate,ecuador"
     ];
 
     const properties = [
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 1, 
             title: "DEPARTAMENTOS EN VENTA NUEVO SAMBORONDON", 
             price: "Consultar", 
-            image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            image: "https://source.unsplash.com/800x600/?luxury,apartment,samborondon", 
             type: "venta",
             description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
             features: [
@@ -23,63 +23,63 @@ document.addEventListener('DOMContentLoaded', function() {
                 "Seguridad 24/7 con conserjería y vigilancia"
             ],
             gallery: [
-                "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600566752547-33cce5195f64?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600566752421-3ec9c3ec7dfb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600566752734-2a0cd53b9f58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+                "https://source.unsplash.com/800x600/?modern,living,room",
+                "https://source.unsplash.com/800x600/?luxury,bedroom",
+                "https://source.unsplash.com/800x600/?modern,kitchen",
+                "https://source.unsplash.com/800x600/?luxury,bathroom",
+                "https://source.unsplash.com/800x600/?apartment,pool"
             ]
         },
         { 
             id: 2, 
             title: "Casa de Lujo en Samborondón", 
             price: "Consultar", 
-            image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            image: "https://source.unsplash.com/800x600/?luxury,house", 
             type: "venta",
             description: "Espectacular casa de lujo en el corazón de Samborondón. Amplios espacios, acabados de primera y vistas impresionantes.",
             gallery: [
-                "https://images.unsplash.com/photo-1600607687644-c7f34e88598f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607687668-0b7b4bf7a00a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607687710-040798eea3fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+                "https://source.unsplash.com/800x600/?luxury,living",
+                "https://source.unsplash.com/800x600/?luxury,bedroom",
+                "https://source.unsplash.com/800x600/?luxury,kitchen"
             ]
         },
         { 
             id: 3, 
             title: "Oficina Comercial en Centro Empresarial", 
             price: "Consultar", 
-            image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            image: "https://source.unsplash.com/800x600/?office,modern", 
             type: "alquiler",
             description: "Moderna oficina comercial en el principal centro empresarial de la ciudad. Ideal para empresas en crecimiento.",
             gallery: [
-                "https://images.unsplash.com/photo-1600607687954-e85aa7b46ca3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607687968-d7a205ad5e7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607687985-a6ad18e3c1d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+                "https://source.unsplash.com/800x600/?office,interior",
+                "https://source.unsplash.com/800x600/?office,meeting",
+                "https://source.unsplash.com/800x600/?office,workspace"
             ]
         },
         { 
             id: 4, 
             title: "Penthouse con Vista al Mar", 
             price: "Consultar", 
-            image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            image: "https://source.unsplash.com/800x600/?penthouse,sea", 
             type: "venta",
             description: "Exclusivo penthouse con impresionantes vistas al mar. Terraza privada, acabados de lujo y comodidades de primer nivel.",
             gallery: [
-                "https://images.unsplash.com/photo-1600607688960-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607688951-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607688942-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+                "https://source.unsplash.com/800x600/?penthouse,view",
+                "https://source.unsplash.com/800x600/?penthouse,terrace",
+                "https://source.unsplash.com/800x600/?penthouse,interior"
             ]
         },
         { 
             id: 5, 
             title: "Terreno para Desarrollo Residencial", 
             price: "Consultar", 
-            image: "https://images.unsplash.com/photo-1600607688930-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            image: "https://source.unsplash.com/800x600/?land,residential", 
             type: "venta",
             description: "Amplio terreno ideal para desarrollo residencial. Ubicación estratégica con todos los servicios disponibles.",
             gallery: [
-                "https://images.unsplash.com/photo-1600607688921-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607688912-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607688903-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+                "https://source.unsplash.com/800x600/?land,view",
+                "https://source.unsplash.com/800x600/?land,aerial",
+                "https://source.unsplash.com/800x600/?land,nature"
             ]
         }
     ];
@@ -102,10 +102,10 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const instagramPosts = [
-        { image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" },
-        { image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" },
-        { image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" },
-        { image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" }
+        { image: "https://source.unsplash.com/random/600x600?real,estate", link: "#" },
+        { image: "https://source.unsplash.com/random/600x600?house", link: "#" },
+        { image: "https://source.unsplash.com/random/600x600?apartment", link: "#" },
+        { image: "https://source.unsplash.com/random/600x600?condo", link: "#" }
     ];
 
     const faqs = [
@@ -182,30 +182,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Función para crear las tarjetas de propiedades  destacadas
-    function createFeaturedProperties() {
-        const propertiesSlider = document.querySelector('.propiedades-slider');
-        properties.forEach(property => {
-            const propertyCard = document.createElement('div');
-            propertyCard.className = 'property-card';
-            propertyCard.innerHTML = `
-                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-bold text-xl mb-2">${property.title}</h3>
-                    <p class="text-gray-700 text-base mb-4">${property.price}</p>
-                    <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-details" data-id="${property.id}">Ver Detalles</button>
-                </div>
-            `;
-            propertiesSlider.appendChild(propertyCard);
-        });
-    }
-
-    // Función para crear las tarjetas de propiedades en la sección "Nuestras Propiedades"
+    // Función para crear las tarjetas de propiedades destacadas
     function createPropertyCards() {
         const propertiesGrid = document.getElementById('properties-grid');
         properties.forEach(property => {
             const propertyCard = document.createElement('div');
-            propertyCard.className = 'property-card flex-shrink-0';
+            propertyCard.className = 'property-card';
             propertyCard.innerHTML = `
                 <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
                 <div class="p-4">
@@ -541,27 +523,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Función para precargar imágenes
-    function preloadImages(images) {
-        images.forEach(image => {
-            const img = new Image();
-            img.src = image;
-        });
-    }
-
-    // Precargar todas las imágenes
-    const allImages = [
-        ...heroImages,
-        ...properties.map(p => p.image),
-        ...properties.flatMap(p => p.gallery || []),
-        ...instagramPosts.map(p => p.image)
-    ];
-    preloadImages(allImages);
-
     // Llamar a todas las funciones de inicialización
     createHeroSlider();
     createQuienesSomosSlider();
-    createFeaturedProperties();
     createPropertyCards();
     createServiceCards();
     createTestimonialsSlider();
