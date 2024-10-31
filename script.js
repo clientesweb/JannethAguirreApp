@@ -9,93 +9,77 @@ document.addEventListener('DOMContentLoaded', function() {
     const properties = [
         { 
             id: 1, 
-            title: "Guayaquil Samborondon", 
+            title: "DEPARTAMENTOS EN VENTA NUEVO SAMBORONDON", 
             price: "Consultar", 
-            image: "https://source.unsplash.com/random/800x600?house", 
+            image: "https://source.unsplash.com/random/800x600?apartment,samborondon", 
             type: "venta",
-            description: "Hermosa propiedad en Samborondon",
+            description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
+            features: [
+                "2 habitaciones con armarios empotrados",
+                "2 baños modernos con acabados de alta calidad",
+                "Cocina abierta con muebles a medida",
+                "Sala y comedor acogedores",
+                "Áreas sociales: piscina, gimnasio, salón de eventos",
+                "Seguridad 24/7 con conserjería y vigilancia"
+            ],
             gallery: [
-                "https://source.unsplash.com/random/800x600?house,interior",
-                "https://source.unsplash.com/random/800x600?house,exterior",
-                "https://source.unsplash.com/random/800x600?house,garden"
+                "https://source.unsplash.com/random/800x600?apartment,living",
+                "https://source.unsplash.com/random/800x600?apartment,bedroom",
+                "https://source.unsplash.com/random/800x600?apartment,kitchen",
+                "https://source.unsplash.com/random/800x600?apartment,bathroom",
+                "https://source.unsplash.com/random/800x600?apartment,pool"
             ]
         },
         { 
             id: 2, 
-            title: "Isla Mocoli", 
+            title: "Casa de Lujo en Samborondón", 
             price: "Consultar", 
-            image: "https://source.unsplash.com/random/800x600?apartment", 
+            image: "https://source.unsplash.com/random/800x600?luxury,house", 
             type: "venta",
-            description: "Departamentos en planos - Departamentos listos de estreno",
+            description: "Espectacular casa de lujo en el corazón de Samborondón. Amplios espacios, acabados de primera y vistas impresionantes.",
             gallery: [
-                "https://source.unsplash.com/random/800x600?apartment,living",
-                "https://source.unsplash.com/random/800x600?apartment,bedroom",
-                "https://source.unsplash.com/random/800x600?apartment,kitchen"
+                "https://source.unsplash.com/random/800x600?luxury,living",
+                "https://source.unsplash.com/random/800x600?luxury,bedroom",
+                "https://source.unsplash.com/random/800x600?luxury,kitchen"
             ]
         },
         { 
             id: 3, 
-            title: "Departamentos en planos y de estreno en el nuevo Samborondón", 
+            title: "Oficina Comercial en Centro Empresarial", 
             price: "Consultar", 
-            image: "https://source.unsplash.com/random/800x600?condo", 
-            type: "venta",
-            description: "Modernos departamentos en el corazón de Samborondón",
+            image: "https://source.unsplash.com/random/800x600?office,modern", 
+            type: "alquiler",
+            description: "Moderna oficina comercial en el principal centro empresarial de la ciudad. Ideal para empresas en crecimiento.",
             gallery: [
-                "https://source.unsplash.com/random/800x600?condo,view",
-                "https://source.unsplash.com/random/800x600?condo,pool",
-                "https://source.unsplash.com/random/800x600?condo,gym"
+                "https://source.unsplash.com/random/800x600?office,interior",
+                "https://source.unsplash.com/random/800x600?office,meeting",
+                "https://source.unsplash.com/random/800x600?office,workspace"
             ]
         },
         { 
             id: 4, 
-            title: "Locales Comerciales en nuevo Samborondón", 
+            title: "Penthouse con Vista al Mar", 
             price: "Consultar", 
-            image: "https://source.unsplash.com/random/800x600?commercial", 
-            type: "alquiler",
-            description: "Espacios comerciales ideales para tu negocio",
+            image: "https://source.unsplash.com/random/800x600?penthouse,sea", 
+            type: "venta",
+            description: "Exclusivo penthouse con impresionantes vistas al mar. Terraza privada, acabados de lujo y comodidades de primer nivel.",
             gallery: [
-                "https://source.unsplash.com/random/800x600?commercial,office",
-                "https://source.unsplash.com/random/800x600?commercial,retail",
-                "https://source.unsplash.com/random/800x600?commercial,restaurant"
+                "https://source.unsplash.com/random/800x600?penthouse,view",
+                "https://source.unsplash.com/random/800x600?penthouse,terrace",
+                "https://source.unsplash.com/random/800x600?penthouse,interior"
             ]
         },
         { 
             id: 5, 
-            title: "Terrenos Urbanizados residenciales", 
+            title: "Terreno para Desarrollo Residencial", 
             price: "Consultar", 
-            image: "https://source.unsplash.com/random/800x600?land", 
+            image: "https://source.unsplash.com/random/800x600?land,residential", 
             type: "venta",
-            description: "Terrenos listos para construir tu hogar soñado",
+            description: "Amplio terreno ideal para desarrollo residencial. Ubicación estratégica con todos los servicios disponibles.",
             gallery: [
-                "https://source.unsplash.com/random/800x600?land,residential",
-                "https://source.unsplash.com/random/800x600?land,plot",
-                "https://source.unsplash.com/random/800x600?land,development"
-            ]
-        },
-        { 
-            id: 6, 
-            title: "Terrenos industriales", 
-            price: "Consultar", 
-            image: "https://source.unsplash.com/random/800x600?industrial", 
-            type: "venta",
-            description: "Amplios terrenos para proyectos industriales",
-            gallery: [
-                "https://source.unsplash.com/random/800x600?industrial,warehouse",
-                "https://source.unsplash.com/random/800x600?industrial,factory",
-                "https://source.unsplash.com/random/800x600?industrial,logistics"
-            ]
-        },
-        { 
-            id: 7, 
-            title: "Terrenos Comerciales", 
-            price: "Consultar", 
-            image: "https://source.unsplash.com/random/800x600?commercial,land", 
-            type: "venta",
-            description: "Excelente ubicación para desarrollos comerciales",
-            gallery: [
-                "https://source.unsplash.com/random/800x600?commercial,development",
-                "https://source.unsplash.com/random/800x600?commercial,construction",
-                "https://source.unsplash.com/random/800x600?commercial,project"
+                "https://source.unsplash.com/random/800x600?land,view",
+                "https://source.unsplash.com/random/800x600?land,aerial",
+                "https://source.unsplash.com/random/800x600?land,nature"
             ]
         }
     ];
@@ -150,11 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para crear el slider de imágenes del hero
     function createHeroSlider() {
         const heroSlider = document.querySelector('.hero-slider');
-        const heroImages = [
-            "https://source.unsplash.com/random/1600x900?real,estate",
-            "https://source.unsplash.com/random/1600x900?house",
-            "https://source.unsplash.com/random/1600x900?apartment"
-        ];
         heroImages.forEach(image => {
             const slide = document.createElement('div');
             slide.style.backgroundImage = `url(${image})`;
@@ -162,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
             slide.style.backgroundPosition = 'center';
             heroSlider.appendChild(slide);
         });
+        
         $('.hero-slider').slick({
             dots: true,
             infinite: true,
@@ -173,9 +153,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Función para crear el slider de "Quienes Somos"
+    function createQuienesSomosSlider() {
+        $('.quienes-somos-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+    }
+
     // Función para crear las tarjetas de propiedades destacadas
     function createFeaturedProperties() {
-        const propertiesContainer = document.querySelector('#propiedades .grid');
+        const propertiesContainer = document.querySelector('.propiedades-slider');
         properties.forEach(property => {
             const propertyCard = document.createElement('div');
             propertyCard.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
@@ -226,15 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            autoplaySpeed: 5000,
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        arrows: false
-                    }
-                }
-            ]
+            autoplaySpeed: 5000
         });
     }
 
@@ -272,16 +273,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     breakpoint: 768,
                     settings: {
                         slidesToShow: 2,
-                        slidesToScroll: 1,
-                        arrows: false
+                        slidesToScroll: 1
                     }
                 },
                 {
                     breakpoint: 480,
                     settings: {
                         slidesToShow: 1,
-                        slidesToScroll: 1,
-                        arrows: false
+                        slidesToScroll: 1
                     }
                 }
             ]
@@ -315,83 +314,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Función para crear el slider de la tienda
-    function createStoreSlider() {
-        const storeSlider = document.getElementById('store-slider');
-        properties.forEach(property => {
-            const propertyCard = document.createElement('div');
-            propertyCard.className = 'property-card bg-white shadow-lg rounded-lg overflow-hidden';
-            propertyCard.innerHTML = `
-                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3  class="font-bold text-xl mb-2">${property.title}</h3>
-                    <p class="text-gray-700 text-base mb-4">${property.price}</p>
-                    <p class="text-gray-600 mb-4">${property.description}</p>
-                    <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-details" data-id="${property.id}">Ver Detalles</button>
-                </div>
-            `;
-            storeSlider.appendChild(propertyCard);
-        });
-    }
-
-    // Función para crear los botones de filtro
-    function createFilterButtons() {
-        const filterButtons = document.getElementById('filter-buttons');
-        const types = ['todos', 'venta', 'alquiler'];
-        types.forEach(type => {
-            const button = document.createElement('button');
-            button.className = 'px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 transition-colors';
-            button.textContent = type.charAt(0).toUpperCase() + type.slice(1);
-            button.addEventListener('click', () => filterProperties(type));
-            filterButtons.appendChild(button);
-        });
-    }
-
-    // Función para filtrar propiedades
-    function filterProperties(type) {
-        const propertyCards = document.querySelectorAll('.property-card');
-        propertyCards.forEach(card => {
-            const propertyType = properties.find(p => p.id === parseInt(card.querySelector('.view-details').dataset.id)).type;
-            if (type === 'todos' || propertyType === type) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
-
-    // Función para buscar propiedades
-    function searchProperties() {
-        const searchInput = document.getElementById('search-input');
-        const propertyCards = document.querySelectorAll('.property-card');
-        
-        searchInput.addEventListener('input', () => {
-            const searchTerm = searchInput.value.toLowerCase();
-            propertyCards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const description = card.querySelector('p:nth-of-type(2)').textContent.toLowerCase();
-                if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    }
-
     // Función para manejar el clic en "Ver Detalles"
     function handleViewDetails() {
         document.addEventListener('click', function(e) {
             if (e.target && e.target.classList.contains('view-details')) {
                 const propertyId = parseInt(e.target.dataset.id);
                 const property = properties.find(p => p.id === propertyId);
-                showGalleryModal(property);
+                showPropertyModal(property);
             }
         });
     }
 
-    // Función para mostrar el modal de la galería
-    function showGalleryModal(property) {
+    // Función para mostrar el modal de la propiedad
+    function showPropertyModal(property) {
         const modal = document.getElementById('gallery-modal');
         const galleryImages = document.getElementById('gallery-images');
         const galleryInfo = document.getElementById('gallery-info');
@@ -413,7 +348,12 @@ document.addEventListener('DOMContentLoaded', function() {
         galleryInfo.innerHTML = `
             <h3 class="text-xl font-bold mb-2">${property.title}</h3>
             <p class="mb-2"><strong>Precio:</strong> ${property.price}</p>
-            <p>${property.description}</p>
+            <p class="mb-4">${property.description}</p>
+            <h4 class="font-bold mb-2">Características:</h4>
+            <ul class="list-disc pl-5 mb-4">
+                ${property.features ? property.features.map(feature => `<li>${feature}</li>`).join('') : ''}
+            </ul>
+            <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Contactar Agente</button>
         `;
         
         // Mostrar modal
@@ -470,7 +410,9 @@ document.addEventListener('DOMContentLoaded', function() {
         prevButton.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = (currentIndex - 1 + images.length) % images.length;
-            fullImage.src = images[currentIndex].src;
+            full
+
+Image.src = images[currentIndex].src;
         });
         
         nextButton.addEventListener('click', (e) => {
@@ -583,30 +525,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Nueva función para manejar el hover en las tarjetas de invertir-samborondon
-    function initInvertirSamborondon() {
-        const cards = document.querySelectorAll('#invertir-samborondon .bg-white');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-5px)';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-            });
-        });
-    }
-
-
     // Llamar a todas las funciones de inicialización
     createHeroSlider();
+    createQuienesSomosSlider();
     createFeaturedProperties();
     createServiceCards();
     createTestimonialsSlider();
     createInstagramSlider();
     createFAQs();
-    createStoreSlider();
-    createFilterButtons();
-    searchProperties();
     handleViewDetails();
     closeGalleryModal();
     closeFullImage();
@@ -616,5 +542,4 @@ document.addEventListener('DOMContentLoaded', function() {
     handleBackToTop();
     handleScrollAnimation();
     handleInstallApp();
-    initInvertirSamborondon();
 });
