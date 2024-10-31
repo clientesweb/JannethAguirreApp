@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 1, 
             title: "DEPARTAMENTOS EN VENTA", 
             price: "NUEVO SAMBORONDON", 
-            image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            image: "img/nuevosamborombon.png", 
             type: "venta",
             description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
             features: [
@@ -34,16 +34,16 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 2, 
             title: "DEPARTAMENTOS EN VENTA", 
             price: "ISLA MOCOLI", 
-            image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            image: "img/isla.png", 
             type: "venta",
-            description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
+            description: "Ubicados en una de las zonas más prestigiosas y exclusiva  de la ciudad, estos departamentos ofrecen una combinación perfecta de estilo, comodidad y privacidad.Proyecto exclusivo de departamentos de 3 habitaciones en Isla Mocoli.",
             features: [
-                "2 habitaciones con armarios empotrados",
-                "2 baños modernos con acabados de alta calidad",
-                "Cocina abierta con muebles a medida",
-                "Sala y comedor acogedores",
-                "Áreas sociales: piscina, gimnasio, salón de eventos",
-                "Seguridad 24/7 con conserjería y vigilancia"
+                "3 habitaciones amplias y bien iluminadas",
+                "3,5  baños completos",
+                "Vistas impresionantes a la  Isla y de la ciudad",
+                "Área de lavado y secado",
+                "Seguridad 24/7, Gimnasio, Piscina",
+                "Estacionamiento privado y de visitas"
             ],
             gallery: [
                 "https://images.unsplash.com/photo-1600607687644-c7f34e88598f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 3, 
             title: "LOCALES COMERCIALES", 
             price: "Consultar", 
-            image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            image: "img/localescomerciales.png", 
             type: "alquiler",
             description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
             features: [
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 5, 
             title: "DEPARTAMENTOS EN CUENCA", 
             price: "Consultar", 
-            image: "https://images.unsplash.com/photo-1600607688930-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            image: "img/departamentoscuenca.png", 
             type: "venta",
             description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
             features: [
