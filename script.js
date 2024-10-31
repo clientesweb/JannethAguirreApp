@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded and parsed");
+
     // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
     const heroImages = [
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
@@ -27,7 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
                 "https://images.unsplash.com/photo-1564540586988-aa4e53c3d799?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
                 "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&ixid=M3wx
+
+MjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
             ]
         },
         { 
@@ -102,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const instagramPosts = [
-        { image:  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", link: "#" },
+        { image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", link: "#" },
         { image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", link: "#" },
         { image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", link: "#" },
         { image: "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", link: "#" }
@@ -110,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para crear el slider de imágenes del hero
     function createHeroSlider() {
+        console.log("Creating hero slider...");
         const heroSlider = document.querySelector('.hero-slider');
         if (!heroSlider) {
             console.error('Hero slider element not found');
@@ -133,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 autoplay: true,
                 autoplaySpeed: 5000
             });
+            console.log("Hero slider created successfully.");
         } else {
             console.error('Slick slider not loaded');
         }
@@ -140,6 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para crear el slider de "Quienes Somos"
     function createQuienesSomosSlider() {
+        console.log("Creating Quienes Somos slider...");
         const quienesSomosSlider = document.querySelector('.quienes-somos-slider');
         if (!quienesSomosSlider) {
             console.error('Quienes Somos slider element not found');
@@ -183,6 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 ]
             });
+            console.log("Quienes Somos slider created successfully.");
         } else {
             console.error('Slick slider not loaded');
         }
@@ -190,6 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para crear las tarjetas de propiedades destacadas
     function createFeaturedProperties() {
+        console.log("Creating featured properties...");
         const propertiesContainer = document.querySelector('.propiedades-slider');
         if (!propertiesContainer) {
             console.error('Properties container not found');
@@ -208,10 +217,12 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             propertiesContainer.appendChild(propertyCard);
         });
+        console.log("Featured properties created successfully.");
     }
 
     // Función para crear las tarjetas de servicios
     function createServiceCards() {
+        console.log("Creating service cards...");
         const servicesContainer = document.querySelector('.services-container');
         if (!servicesContainer) {
             console.error('Services container not found');
@@ -227,10 +238,12 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             servicesContainer.appendChild(serviceCard);
         });
+        console.log("Service cards created successfully.");
     }
 
     // Función para crear el slider de testimonios
     function createTestimonialsSlider() {
+        console.log("Creating testimonials slider...");
         const testimonialsContainer = document.querySelector('.testimonials-slider');
         if (!testimonialsContainer) {
             console.error('Testimonials container not found');
@@ -256,6 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 autoplay: true,
                 autoplaySpeed: 5000
             });
+            console.log("Testimonials slider created successfully.");
         } else {
             console.error('Slick slider not loaded');
         }
@@ -263,6 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para crear el slider de Instagram
     function createInstagramSlider() {
+        console.log("Creating Instagram slider...");
         const instagramContainer = document.querySelector('.instagram-slider');
         if (!instagramContainer) {
             console.error('Instagram container not found');
@@ -312,6 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 ]
             });
+            console.log("Instagram slider created successfully.");
         } else {
             console.error('Slick slider not loaded');
         }
@@ -319,6 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para crear las preguntas frecuentes
     function createFAQs() {
+        console.log("Creating FAQs...");
         const faqContainer = document.querySelector('.faq-container');
         if (!faqContainer) {
             console.error('FAQ container not found');
@@ -339,35 +356,44 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             faqContainer.appendChild(faqItem);
         });
+        console.log("FAQs created successfully.");
     }
 
     // Función para manejar la visualización de detalles de la propiedad
     function handleViewDetails() {
-        const modal = document.getElementById('property-modal');
-        const modalContent = document.querySelector('#property-modal .modal-content');
-        const closeModal = document.querySelector('#property-modal .close');
-
+        console.log("Setting up view details functionality...");
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('view-details')) {
                 const propertyId = e.target.getAttribute('data-id');
                 const property = properties.find(p => p.id === parseInt(propertyId));
                 if (property) {
-                    modalContent.innerHTML = `
-                        <h2 class="text-2xl font-bold mb-4">${property.title}</h2>
-                        <p class="text-xl mb-4">${property.price}</p>
-                        <p class="mb-4">${property.description}</p>
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            ${property.features ? property.features.map(feature => `<p class="flex items-center"><i class="fas fa-check text-primary mr-2"></i>${feature}</p>`).join('') : ''}
-                        </div>
-                        <div class="property-gallery grid grid-cols-3 gap-4">
-                            ${property.gallery.map(img => `<img src="${img}" alt="Property Image" class="w-full h-32 object-cover rounded cursor-pointer">`).join('')}
-                        </div>
-                    `;
-                    modal.style.display = 'block';
+                    showPropertyDetails(property);
                 }
             }
         });
+        console.log("View details functionality set up successfully.");
+    }
 
+    // Función para mostrar los detalles de la propiedad
+    function showPropertyDetails(property) {
+        console.log("Showing property details...");
+        const modal = document.getElementById('gallery-modal');
+        const modalContent = modal.querySelector('.modal-content');
+        modalContent.innerHTML = `
+            <span id="close-modal" class="cursor-pointer text-gray-500 float-right text-2xl">&times;</span>
+            <h2 class="text-2xl font-bold mb-4">${property.title}</h2>
+            <p class="text-xl mb-4">${property.price}</p>
+            <p class="mb-4">${property.description}</p>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                ${property.features ? property.features.map(feature => `<p class="flex items-center"><i class="fas fa-check text-primary mr-2"></i>${feature}</p>`).join('') : ''}
+            </div>
+            <div class="property-gallery grid grid-cols-3 gap-4">
+                ${property.gallery.map(img => `<img src="${img}" alt="Property Image" class="w-full h-32 object-cover rounded cursor-pointer">`).join('')}
+            </div>
+        `;
+        modal.style.display = 'flex';
+
+        const closeModal = modal.querySelector('#close-modal');
         closeModal.addEventListener('click', function() {
             modal.style.display = 'none';
         });
@@ -377,43 +403,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 modal.style.display = 'none';
             }
         });
+
+        console.log("Property details displayed successfully.");
     }
 
-    // Función para cerrar la galería modal
-    function closeGalleryModal() {
-        const galleryModal = document.getElementById('gallery-modal');
-        const closeGalleryBtn = document.querySelector('#gallery-modal .close');
-
-        closeGalleryBtn.addEventListener('click', function() {
-            galleryModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', function(e) {
-            if (e.target === galleryModal) {
-                galleryModal.style.display = 'none';
-            }
-        });
-    }
-
-    // Función para cerrar la imagen completa
-    function closeFullImage() {
-        const fullImageModal = document.getElementById('full-image-modal');
-        const closeFullImageBtn = document.querySelector('#full-image-modal .close');
-
-        closeFullImageBtn.addEventListener('click', function() {
-            fullImageModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', function(e) {
-            if (e.target === fullImageModal) {
-                fullImageModal.style.display = 'none';
-            }
-        });
-    }
-
-    // Función para navegar entre imágenes completas
-    function navigateFullImages() {
-        const fullImageModal = document.getElementById('full-image-modal');
+    // Función para manejar la galería de imágenes
+    function handleImageGallery() {
+        console.log("Setting up image gallery functionality...");
+        const fullImageContainer = document.getElementById('full-image-container');
         const fullImage = document.getElementById('full-image');
         const prevButton = document.getElementById('prev-image');
         const nextButton = document.getElementById('next-image');
@@ -422,17 +419,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.addEventListener('click', function(e) {
             if (e.target.closest('.property-gallery')) {
-                const propertyCard = e.target.closest('.modal-content');
-                const images = propertyCard.querySelectorAll('.property-gallery img');
-                currentGallery = Array.from(images).map(img => img.src);
-                currentImageIndex = Array.from(images).indexOf(e.target);
-                showFullImage(currentImageIndex);
+                const clickedImage = e.target.closest('img');
+                if (clickedImage) {
+                    const galleryImages = e.target.closest('.property-gallery').querySelectorAll('img');
+                    currentGallery = Array.from(galleryImages).map(img => img.src);
+                    currentImageIndex = currentGallery.indexOf(clickedImage.src);
+                    showFullImage(currentImageIndex);
+                }
             }
         });
 
         function showFullImage(index) {
             fullImage.src = currentGallery[index];
-            fullImageModal.style.display = 'block';
+            fullImageContainer.style.display = 'flex';
         }
 
         prevButton.addEventListener('click', function() {
@@ -444,21 +443,19 @@ document.addEventListener('DOMContentLoaded', function() {
             currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
             showFullImage(currentImageIndex);
         });
-    }
 
-    // Función para inicializar los videos de YouTube
-    function initYouTubeVideos() {
-        const youtubeVideos = document.querySelectorAll('.youtube-video');
-        youtubeVideos.forEach(video => {
-            const videoId = video.getAttribute('data-video-id');
-            video.innerHTML = `
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            `;
+        fullImageContainer.addEventListener('click', function(e) {
+            if (e.target === fullImageContainer) {
+                fullImageContainer.style.display = 'none';
+            }
         });
+
+        console.log("Image gallery functionality set up successfully.");
     }
 
     // Función para inicializar el formulario de contacto
     function initContactForm() {
+        console.log("Initializing contact form...");
         const form = document.getElementById('contact-form');
         if (form) {
             form.addEventListener('submit', function(e) {
@@ -467,11 +464,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Gracias por su mensaje. Nos pondremos en contacto pronto.');
                 form.reset();
             });
+            console.log("Contact form initialized successfully.");
+        } else {
+            console.error("Contact form not found");
         }
     }
 
     // Función para manejar el botón "Volver arriba"
     function handleBackToTop() {
+        console.log("Setting up back to top functionality...");
         const backToTopButton = document.getElementById('back-to-top');
         if (backToTopButton) {
             window.addEventListener('scroll', function() {
@@ -485,16 +486,20 @@ document.addEventListener('DOMContentLoaded', function() {
             backToTopButton.addEventListener('click', function() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+            console.log("Back to top functionality set up successfully.");
+        } else {
+            console.error("Back to top button not found");
         }
     }
 
     // Función para manejar las animaciones al hacer scroll
     function handleScrollAnimation() {
-        const elements = document.querySelectorAll('.animate-on-scroll');
+        console.log("Setting up scroll animations...");
+        const elements = document.querySelectorAll('.fade-in-section');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
+                    entry.target.classList.add('is-visible');
                 }
             });
         }, { threshold: 0.1 });
@@ -502,10 +507,12 @@ document.addEventListener('DOMContentLoaded', function() {
         elements.forEach(element => {
             observer.observe(element);
         });
+        console.log("Scroll animations set up successfully.");
     }
 
     // Función para manejar la instalación de la PWA
     function handleInstallApp() {
+        console.log("Setting up PWA installation...");
         let deferredPrompt;
         const installButton = document.getElementById('install-app');
 
@@ -525,26 +532,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 deferredPrompt = null;
             }
         });
+        console.log("PWA installation set up successfully.");
     }
 
     // Función para inicializar todo
     function initializeWebsite() {
-        createHeroSlider();
-        createQuienesSomosSlider();
-        createFeaturedProperties();
-        createServiceCards();
-        createTestimonialsSlider();
-        createInstagramSlider();
-        createFAQs();
-        handleViewDetails();
-        closeGalleryModal();
-        closeFullImage();
-        navigateFullImages();
-        initYouTubeVideos();
-        initContactForm();
-        handleBackToTop();
-        handleScrollAnimation();
-        handleInstallApp();
+        console.log("Initializing website...");
+        try {
+            createHeroSlider();
+            createQuienesSomosSlider();
+            createFeaturedProperties();
+            createServiceCards();
+            createTestimonialsSlider();
+            createInstagramSlider();
+            createFAQs();
+            handleViewDetails();
+            handleImageGallery();
+            initContactForm();
+            handleBackToTop();
+            handleScrollAnimation();
+            handleInstallApp();
+            console.log("Website initialization complete.");
+        } catch (error) {
+            console.error("Error during website initialization:", error);
+        }
     }
 
     // Llamar a la función de inicialización
