@@ -155,6 +155,18 @@ document.addEventListener('DOMContentLoaded', function() {
             "Accede a un mercado de alquileres robusto, especialmente en áreas metropolitanas y destinos turísticos.",
             "Aprovecha las oportunidades en el mercado de propiedades comerciales y de uso mixto en crecimiento.",
             "Invierte en un país con una infraestructura de clase mundial y una economía impulsada por la innovación."
+        ],
+        panama: [
+            "Panamá, el corazón de América, donde la inversión y el progreso se unen en un solo ritmo.",
+            "Descubre el potencial de Panamá, el hub de inversión más dinámico de América Latina.",
+            "Panamá, donde la estrategia y la innovación se encuentran en el centro de la inversión internacional.",
+            "Invierte en Panamá y aprovecha su posición geográfica única, conectando América del Norte y del Sur.",
+            "Panamá, el destino perfecto para inversores que buscan crecimiento y estabilidad en América.",
+            "El Canal de Panamá, un símbolo de progreso y conexión global, impulse su inversión en este hub clave.",
+            "Panamá, donde la inversión en infraestructura y tecnología impulsa el crecimiento económico sostenible.",
+            "Unirse a la comunidad de inversores en Panamá, donde la innovación y el emprendimiento florecen.",
+            "Panamá, el lugar donde la inversión y la diversificación se unen para crear oportunidades ilimitadas.",
+            "Panamá, el futuro de la inversión en América, donde la visión y la acción se unen para crear un mañana próspero."
         ]
     };
 
@@ -363,13 +375,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function createInvestReasons() {
         const samborondonContainer = document.getElementById('invest-samborondon');
         const usaContainer = document.getElementById('invest-usa');
+        const panamaContainer = document.getElementById('invest-panama');
 
-        function createAccordion(container, reasons, flagUrl) {
+        function createAccordion(container, title, reasons, flagUrl) {
             const accordionHeader = document.createElement('div');
             accordionHeader.className = 'flex items-center cursor-pointer mb-4';
             accordionHeader.innerHTML = `
                 <img src="${flagUrl}" alt="Bandera" class="w-8 h-8 mr-2">
-                <h3 class="text-xl font-bold">${container.id === 'invest-samborondon' ? 'Invertir en Samborondón' : 'Invertir en Estados Unidos'}</h3>
+                <h3 class="text-xl font-bold">${title}</h3>
                 <i class="fas fa-chevron-down ml-auto"></i>
             `;
             container.appendChild(accordionHeader);
@@ -391,8 +404,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        createAccordion(samborondonContainer, investReasons.samborondon, 'https://flagcdn.com/w40/ec.png');
-        createAccordion(usaContainer, investReasons.usa, 'https://flagcdn.com/w40/us.png');
+        createAccordion(samborondonContainer, 'Invertir en Samborondón', investReasons.samborondon, 'https://flagcdn.com/w40/ec.png');
+        createAccordion(usaContainer, 'Invertir en Estados Unidos', investReasons.usa, 'https://flagcdn.com/w40/us.png');
+        createAccordion(panamaContainer, 'Invertir en Panamá', investReasons.panama, 'https://flagcdn.com/w40/pa.png');
     }
 
     // Función para manejar el clic en "Ver Detalles"
