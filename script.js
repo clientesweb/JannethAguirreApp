@@ -30,58 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "https://images.unsplash.com/photo-1600566752734-2a0cd53b9f58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
             ]
         },
-        { 
-            id: 2, 
-            title: "Casa de Lujo en Samborondón", 
-            price: "Consultar", 
-            image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
-            type: "venta",
-            description: "Espectacular casa de lujo en el corazón de Samborondón. Amplios espacios, acabados de primera y vistas impresionantes.",
-            gallery: [
-                "https://images.unsplash.com/photo-1600607687644-c7f34e88598f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607687668-0b7b4bf7a00a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607687710-040798eea3fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
-            ]
-        },
-        { 
-            id: 3, 
-            title: "Oficina Comercial en Centro Empresarial", 
-            price: "Consultar", 
-            image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
-            type: "alquiler",
-            description: "Moderna oficina comercial en el principal centro empresarial de la ciudad. Ideal para empresas en crecimiento.",
-            gallery: [
-                "https://images.unsplash.com/photo-1600607687954-e85aa7b46ca3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607687968-d7a205ad5e7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607687985-a6ad18e3c1d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
-            ]
-        },
-        { 
-            id: 4, 
-            title: "Penthouse con Vista al Mar", 
-            price: "Consultar", 
-            image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
-            type: "venta",
-            description: "Exclusivo penthouse con impresionantes vistas al mar. Terraza privada, acabados de lujo y comodidades de primer nivel.",
-            gallery: [
-                "https://images.unsplash.com/photo-1600607688960-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607688951-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607688942-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
-            ]
-        },
-        { 
-            id: 5, 
-            title: "Terreno para Desarrollo Residencial", 
-            price: "Consultar", 
-            image: "https://images.unsplash.com/photo-1600607688930-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
-            type: "venta",
-            description: "Amplio terreno ideal para desarrollo residencial. Ubicación estratégica con todos los servicios disponibles.",
-            gallery: [
-                "https://images.unsplash.com/photo-1600607688921-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607688912-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                "https://images.unsplash.com/photo-1600607688903-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
-            ]
-        }
+        // Add more properties here...
     ];
 
     const services = [
@@ -182,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Función para crear las tarjetas de propiedades  destacadas
+    // Función para crear las tarjetas de propiedades destacadas
     function createFeaturedProperties() {
         const propertiesSlider = document.querySelector('.propiedades-slider');
         properties.forEach(property => {
@@ -357,9 +306,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const img = document.createElement('img');
             img.src = image;
             img.alt = property.title;
-            img.className = 'w-1/3 p-2 cursor-pointer';
-            img.addEventListener('click', () => showFullImage(image));
+            img.className = 'w-full h-auto';
             galleryImages.appendChild(img);
+        });
+        
+        // Inicializar el slider de la galería
+        $(galleryImages).slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000
         });
         
         // Actualizar información de la propiedad
@@ -379,15 +338,6 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.classList.add('flex');
     }
 
-    // Función para mostrar imagen completa
-    function showFullImage(imageSrc) {
-        const fullImageContainer = document.getElementById('full-image-container');
-        const fullImage = document.getElementById('full-image');
-        
-        fullImage.src = imageSrc;
-        fullImageContainer.style.display = 'flex';
-    }
-
     // Función para cerrar el modal de la galería
     function closeGalleryModal() {
         const modal = document.getElementById('gallery-modal');
@@ -405,66 +355,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 modal.classList.remove('flex');
             }
         });
-    }
-
-    // Función para cerrar la imagen completa
-    function closeFullImage() {
-        const fullImageContainer = document.getElementById('full-image-container');
-        
-        fullImageContainer.addEventListener('click', () => {
-            fullImageContainer.style.display = 'none';
-        });
-    }
-
-    // Función para navegar entre imágenes completas
-    function navigateFullImages() {
-        const prevButton = document.getElementById('prev-image');
-        const nextButton = document.getElementById('next-image');
-        const fullImage = document.getElementById('full-image');
-        
-        let currentIndex = 0;
-        const images = Array.from(document.querySelectorAll('#gallery-images img'));
-        
-        prevButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            fullImage.src = images[currentIndex].src;
-        });
-        
-        nextButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex + 1) % images.length;
-            fullImage.src = images[currentIndex].src;
-        });
-    }
-
-    // Función para crear el slider de YouTube
-    function initYouTubeVideos() {
-        const youtubeContainer = document.getElementById('youtube-slider');
-        if (youtubeContainer) {
-            // Configuración de la API de YouTube
-            const API_KEY = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
-            const CHANNEL_ID = 'UCiahlQJxCgPY-tEfjvkab8g';
-            const MAX_RESULTS = 10;
-
-            // Hacer la solicitud a la API de YouTube
-            fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`)
-                .then(response => response.json())
-                .then(data => {
-                    const videos = data.items;
-                    youtubeContainer.innerHTML = `
-                        <div class="flex overflow-x-auto space-x-4 pb-4">
-                            ${videos.map(video => `
-                                <div class="flex-shrink-0 w-80">
-                                    <iframe width="320" height="180" src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                    <h3 class="text-lg font-semibold mt-2">${video.snippet.title}</h3>
-                                </div>
-                            `).join('')}
-                        </div>
-                    `;
-                })
-                .catch(error => console.error('Error fetching YouTube videos:', error));
-        }
     }
 
     // Función para manejar el formulario de contacto
@@ -569,9 +459,6 @@ document.addEventListener('DOMContentLoaded', function() {
     createFAQs();
     handleViewDetails();
     closeGalleryModal();
-    closeFullImage();
-    navigateFullImages();
-    initYouTubeVideos();
     initContactForm();
     handleBackToTop();
     handleScrollAnimation();
