@@ -123,9 +123,10 @@ body {
 
 /* Estilos para las tarjetas de propiedades */
 .property-card {
+    flex: 0 0 auto;
+    width: 300px;
+    margin-right: 1rem;
     transition: transform 0.3s ease-in-out;
-    width: 100%;
-    margin-bottom: 20px;
     background-color: white;
     border-radius: 0.5rem;
     overflow: hidden;
@@ -136,6 +137,20 @@ body {
     transform: translateY(-5px);
 }
 
+/* Estilos para los sliders */
+.propiedades-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 1rem;
+}
+
+.propiedades-slider::-webkit-scrollbar {
+    display: none;
+}
 @media (min-width: 640px) {
     .property-card {
         width: calc(50% - 10px);
