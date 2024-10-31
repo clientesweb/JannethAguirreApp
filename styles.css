@@ -126,6 +126,14 @@ body {
     transition: transform 0.3s ease-in-out;
     width: 100%;
     margin-bottom: 20px;
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
 }
 
 @media (min-width: 640px) {
@@ -140,9 +148,6 @@ body {
     }
 }
 
-.property-card:hover {
-    transform: scale(1.05);
-}
 
 /* Estilos para los sliders */
 .slick-prev:before, .slick-next:before {
@@ -570,4 +575,23 @@ section {
 
 #invertir-samborondon .bg-white:hover {
     transform: translateY(-5px);
+}
+
+/* Estilos para los botones */
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.hover\:bg-primary\/90:hover {
+    background-color: rgba(255, 0, 0, 0.9);
+}
+
+/* Estilos para la sección de propiedades en grid */
+#properties-grid {
+    display: grid;
+    gap: 1.5rem;
 }
