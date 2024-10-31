@@ -664,34 +664,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Función para manejar el preloader
-function handlePreloader() {
-    window.addEventListener('load', function() {
-        const preloader = document.getElementById('preloader');
-        const content = document.getElementById('content');
-
-        // Desvanecer el preloader
-        preloader.style.opacity = '0';
-        
-        // Después de la transición, oculta el preloader y muestra el contenido
-        setTimeout(() => {
-            preloader.style.display = 'none';
-            content.style.display = 'block';
-        }, 500); // Espera 500 ms para la transición
-    });
-}
-
-// Llamar a la función
-handlePreloader();
-
-    // Función para precargar imágenes
-    function preloadImages(images) {
-        images.forEach(image => {
-            const img = new Image();
-            img.src = image;
-        });
-    }
-
     // Precargar todas las imágenes
     const allImages = [
         ...heroImages,
@@ -718,5 +690,4 @@ handlePreloader();
     handleBackToTop();
     handleScrollAnimation();
     handleInstallApp();
-    handlePreloader();
 });
