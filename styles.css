@@ -24,18 +24,45 @@ body {
     box-sizing: border-box;
 }
 
-@media (min-width: 1024px) {
+/* Mejoras en la responsividad */
+@media (min-width: 768px) {
     .container {
         padding: 0 30px;
     }
 }
 
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 50px;
+    }
+}
+
+/* Estilos para el encabezado */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
 /* Estilos para el chatbot */
 #ai-real-estate-expert-chatbot {
     position: fixed;
-    bottom: 140px;
+    bottom: 80px;
     right: 20px;
     z-index: 1001;
+    transition: all 0.3s ease;
 }
 
 #ai-real-estate-expert-chatbot .chat-button {
@@ -67,12 +94,48 @@ body {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#ai-real-estate-expert-chatbot .chat-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#ai-real-estate-expert-chatbot .chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+#ai-real-estate-expert-chatbot .chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+#ai-real-estate-expert-chatbot .chat-input input {
+    flex-grow: 1;
+    border: none;
+    padding: 5px;
+    outline: none;
+}
+
+#ai-real-estate-expert-chatbot .chat-input button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 /* Estilos para el botón de WhatsApp */
 .whatsapp-button {
     position: fixed;
-    bottom: 80px;
+    bottom: 20px;
     right: 20px;
     background-color: #25D366;
     color: white;
@@ -137,6 +200,26 @@ body {
     transform: translateY(-5px);
 }
 
+.property-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.property-card .property-info {
+    padding: 1rem;
+}
+
+.property-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+.property-card p {
+    margin: 0;
+    color: var(--secondary-color);
+}
+
 /* Estilos para los sliders */
 .propiedades-slider, #properties-grid {
     display: flex;
@@ -152,6 +235,7 @@ body {
     display: none;
 }
 
+/* Mejoras en la responsividad para las tarjetas de propiedades */
 @media (min-width: 640px) {
     .property-card {
         width: calc(50% - 10px);
@@ -164,149 +248,35 @@ body {
     }
 }
 
-/* Estilos para los sliders */
-.slick-prev:before, .slick-next:before {
-    color: var(--primary-color);
-}
-
-.hero-slider {
-    width: 100%;
-    height: 100%;
-}
-
-.hero-slider .slick-list,
-.hero-slider .slick-track {
-    height: 100%;
-}
-
-.hero-slider .slick-slide {
-    height: calc(100vh - 80px);
-    background-size: cover;
-    background-position: center;
-    min-height: 400px;
-}
-
-@media (min-width: 768px) {
-    .hero-slider .slick-slide {
-        height: calc(100vh - 100px);
-        min-height: 600px;
-    }
-}
-
-.hero-slider .slick-dots {
-    bottom: 20px;
-}
-
-.hero-slider .slick-dots li button:before {
-    color: white;
-}
-
-.youtube-slider, #store-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.youtube-slider::-webkit-scrollbar, #store-slider::-webkit-scrollbar {
-    display: none;
-}
-
-.youtube-video {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-    padding: 0 10px;
-}
-
-.youtube-video iframe {
-    width: 100%;
-    height: 200px;
-}
-
-#store-slider .property-card {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-}
-
-/* Estilos para las FAQ */
-.faq-item {
-    border-bottom: 1px solid #e2e8f0;
-    padding: 1rem 0;
-}
-
-.faq-question {
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-}
-
-.faq-item.active .faq-answer {
-    max-height: 500px;
-    transition: max-height 0.5s ease-in;
-}
-
-.faq-icon {
-    transition: transform 0.3s ease;
-}
-
-.faq-item.active .faq-icon {
-    transform: rotate(180deg);
-}
-
 /* Estilos para la galería */
 #gallery-modal {
-    background-color: rgba(0, 0, 0, 0.9);
-}
-
-#gallery-modal .modal-content {
-    max-width: 90%;
-    max-height: 90%;
-    overflow-y: auto;
-}
-
-#gallery-images {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-#gallery-images img {
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%; /* Esto hace que las imágenes sean cuadradas */
-    object-fit: cover;
-}
-
-#gallery-images img:hover {
-    transform: scale(1.1);
-}
-
-#full-image-container {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.9);
-    z-index: 1000;
+    display: none;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
-#full-image {
+#gallery-modal .modal-content {
     max-width: 90%;
     max-height: 90%;
+    overflow: hidden;
+    position: relative;
+}
+
+#gallery-images {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+#gallery-images img {
+    width: 100%;
+    height: auto;
     object-fit: contain;
 }
 
@@ -318,6 +288,9 @@ body {
     font-size: 2rem;
     cursor: pointer;
     z-index: 1001;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 50%;
 }
 
 #prev-image {
@@ -326,6 +299,16 @@ body {
 
 #next-image {
     right: 20px;
+}
+
+#close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
 }
 
 /* Estilos adicionales */
@@ -364,248 +347,82 @@ body {
     opacity: 0.8;
 }
 
+/* Estilos para secciones */
+.section {
+    padding: 2rem 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Estilos para el formulario de contacto */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.contact-form button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
 /* Media queries para responsividad */
-@media (min-width: 641px) {
-    .youtube-video, #store-slider .property-card {
-        flex: 0 0 50%;
-    }
-}
-
-@media (min-width: 1024px) {
-    .youtube-video, #store-slider .property-card {
-        flex: 0 0 33.333%;
-    }
-}
-
 @media (max-width: 768px) {
     #ai-real-estate-expert-chatbot {
-        bottom: 160px;
-        right: 10px;
-    }
-
-    #ai-real-estate-expert-chatbot .chat-button {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
+        bottom: 100px;
     }
 
     .whatsapp-button {
-        bottom: 100px;
-        right: 10px;
-        width: 50px;
-        height: 50px;
-        font-size: 25px;
+        bottom: 80px;
     }
 
     .bottom-nav {
         display: flex;
     }
 
-    .hero-slider .slick-slide {
-        height: calc(100vh - 60px);
-    }
-
     #gallery-images img {
-        width: 80px;
-        height: 80px;
+        width: 100%;
+        height: auto;
     }
 }
 
 @media (max-width: 480px) {
-    #gallery-images img {
-        width: 60px;
-        height: 60px;
-    }
-
     .youtube-video iframe {
         height: 180px;
     }
 
     #ai-real-estate-expert-chatbot {
-        bottom: 180px;
+        bottom: 120px;
     }
 
     .whatsapp-button {
-        bottom: 120px;
+        bottom: 100px;
     }
 }
 
-/* Estilos para la nueva sección "Quienes Somos" */
-#quienes-somos {
-    background-color: #f8f9fa;
-    padding: 4rem 0;
-}
-
-#quienes-somos .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 1200px;
-}
-
-#quienes-somos img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
-}
-
-#quienes-somos h3 {
-    color: var(--secondary-color);
-}
-
-#quienes-somos p {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.quienes-somos-slider {
-    width: 100%;
-    margin-top: 2rem;
-}
-
-.quienes-somos-slider .slick-slide {
-    padding: 0 10px;
-}
-
-/* Estilos para la sección de propiedades destacadas */
-.propiedades-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: 1rem;
-}
-
-.propiedades-slider::-webkit-scrollbar {
-    display: none;
-}
-
-.propiedades-slider .property-card {
-    flex: 0 0 auto;
-    width: 300px;
-    margin-right: 1rem;
-    scroll-snap-align: start;
-}
-
-/* Actualización de estilos para la sección de servicios */
-#servicios {
-    background-color: var(--secondary-color);
-    padding: 4rem 0;
-}
-
-#service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.service-card {
-    background-color: var(--background-color);
-    border-radius: 0.5rem;
-    padding: 2rem;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-}
-
-.service-card i {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.service-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-}
-
-.service-card p {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-/* Media queries para responsividad */
-@media (min-width: 768px) {
-    
-    #quienes-somos .flex-col {
-        flex-direction: row;
-    }
-
-    #quienes-somos .lg\:w-1/2 {
-        width: 50%;
-    }
-
-    #quienes-somos .lg\:pl-12 {
-        padding-left: 3rem;
-    }
-}
-
-@media (max-width: 767px) {
-    #service-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Estilos para la sección invertir-samborondon */
-#invertir-samborondon .grid {
-    gap: 1.5rem;
-}
-
-#invertir-samborondon .bg-white {
-    transition: transform 0.3s ease-in-out;
-}
-
-#invertir-samborondon .bg-white:hover {
-    transform: translateY(-5px);
-}
-
-/* Estilos para los botones */
-.bg-primary {
-    background-color: var(--primary-color);
-}
-
-.text-primary {
-    color: var(--primary-color);
-}
-
-.hover\:bg-primary\/90:hover {
-    background-color: rgba(255, 0, 0, 0.9);
-}
-
-/* Estilos para la sección de propiedades en grid */
-#properties-grid {
-    display: grid;
-    gap: 1.5rem;
-}
-
-/* Estilos para la galería de imágenes */
-.gallery-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.gallery-slider::-webkit-scrollbar {
-    display: none;
-}
-
-.gallery-slider img {
-    flex: 0 0 auto;
-    width: 100%;
-    height: auto;
-    scroll-snap-align: start;
-}
 /* Estilos para el preloader */
 #preloader {
     position: fixed;
@@ -645,125 +462,3 @@ body {
 #preloader .pulse {
     animation: pulse 2s infinite;
 }
-
-/* Estilos adicionales para mejorar la responsividad */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 10px;
-    }
-
-    .property-card {
-        width: 100%;
-    }
-
-    #ai-real-estate-expert-chatbot,
-    .whatsapp-button {
-        bottom: 70px;
-    }
-
-    .bottom-nav {
-        display: flex;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .service-card {
-        padding: 1rem;
-    }
-}
-
-/* Estilos para el slider de propiedades */
-.properties-slider {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.properties-slider::-webkit-scrollbar {
-    display: none;
-}
-
-#properties-grid {
-    display: flex;
-    gap: 1rem;
-}
-
-.property-card {
-    flex: 0 0 auto;
-    width: 300px;
-    scroll-snap-align: start;
-}
-
-/* Estilos para el efecto de arrastre del slider */
-.properties-slider.active {
-    cursor: grabbing;
-    cursor: -webkit-grabbing;
-}
-/* Estilos para el fondo SVG de cabañas */
-body {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='%23f0f0f0'/%3E%3Cpath d='M30 30 L70 30 L50 10 Z' fill='%23e0e0e0'/%3E%3Crect x='40' y='30' width='20' height='20' fill='%23d0d0d0'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 100px 100px;
-}
-/* Ajustes para el botón del chatbot en dispositivos móviles */
-@media (max-width: 768px) {
-    #ai-real-estate-expert-chatbot {
-        bottom: 160px; /* Ajusta este valor según sea necesario */
-    }
-}
-
-/* Mejoras de responsividad */
-@media (max-width: 640px) {
-    .container {
-        padding: 0 10px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .property-card {
-        width: 100%;
-    }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-    .property-card {
-        width: calc(50% - 10px);
-    }
-}
-
-@media (min-width: 1025px) {
-    .property-card {
-        width: calc(33.333% - 13.333px);
-    }
-}
-
-/* Ajustes generales para mejorar la responsividad */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-.flex-wrap {
-    flex-wrap: wrap;
-}
-
-.gap-4 {
-    gap: 1rem;
-}
-
