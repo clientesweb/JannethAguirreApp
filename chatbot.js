@@ -8,14 +8,6 @@ class Chatbot {
         this.chatWindow = document.getElementById('chatbot-window');
         this.suggestedQuestions = document.getElementById('suggested-questions');
 
-        // Verificamos si los elementos existen en el DOM antes de agregar los listeners
-        if (this.openButton && this.closeButton && this.chatWindow) {
-            this.addEventListeners();
-            this.displaySuggestedQuestions();
-        } else {
-            console.error("Los elementos necesarios no están en el DOM.");
-        }
-
         this.knowledge = {
             "propiedades": "Ofrecemos una variedad de propiedades, incluyendo departamentos en Nuevo Samborondón, Isla Mocolí, Cuenca, locales comerciales y casas personalizadas.",
             "servicios": "Nuestros servicios incluyen asesoría legal, avalúo de propiedades, asesoría dentro y fuera de Ecuador, gestión de proyectos, análisis de mercado, gestión de ventas, venta de proyectos en planos y gestión de alquileres.",
@@ -37,6 +29,9 @@ class Chatbot {
             "¿Qué documentos necesito para vender mi propiedad?",
             "¿Cuánto tiempo toma vender una propiedad?"
         ];
+
+        this.addEventListeners();
+        this.displaySuggestedQuestions();
     }
 
     addEventListeners() {
@@ -47,9 +42,7 @@ class Chatbot {
     }
 
     toggleChat() {
-        if (this.chatWindow) {
-            this.chatWindow.classList.toggle('hidden');
-        }
+        this.chatWindow.classList.toggle('hidden');
     }
 
     handleSubmit(event) {
