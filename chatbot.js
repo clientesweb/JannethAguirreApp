@@ -8,6 +8,7 @@ class Chatbot {
         this.chatWindow = document.getElementById('chatbot-window');
         this.suggestedQuestions = document.getElementById('suggested-questions');
 
+        // Conjunto de respuestas predeterminadas
         this.knowledge = {
             "propiedades": "Ofrecemos una variedad de propiedades, incluyendo departamentos en Nuevo Samborondón, Isla Mocolí, Cuenca, locales comerciales y casas personalizadas.",
             "servicios": "Nuestros servicios incluyen asesoría legal, avalúo de propiedades, asesoría dentro y fuera de Ecuador, gestión de proyectos, análisis de mercado, gestión de ventas, venta de proyectos en planos y gestión de alquileres.",
@@ -19,6 +20,7 @@ class Chatbot {
             "tiempo_venta": "El tiempo de venta puede variar, pero en promedio puede tomar entre 3 a 6 meses, dependiendo de factores como la ubicación, el precio y las condiciones del mercado."
         };
 
+        // Preguntas sugeridas
         this.suggestedQuestionsData = [
             "¿Qué tipos de propiedades ofrecen?",
             "¿Cuáles son sus servicios principales?",
@@ -30,10 +32,13 @@ class Chatbot {
             "¿Cuánto tiempo toma vender una propiedad?"
         ];
 
+        // Añadir los eventos
         this.addEventListeners();
+        // Mostrar las preguntas sugeridas
         this.displaySuggestedQuestions();
     }
 
+    // Añadir los listeners de eventos
     addEventListeners() {
         this.form.addEventListener('submit', this.handleSubmit.bind(this));
         this.openButton.addEventListener('click', this.toggleChat.bind(this));
@@ -41,10 +46,12 @@ class Chatbot {
         this.suggestedQuestions.addEventListener('click', this.handleSuggestedQuestion.bind(this));
     }
 
+    // Mostrar u ocultar el chat
     toggleChat() {
         this.chatWindow.classList.toggle('hidden');
     }
 
+    // Manejar la respuesta al enviar un mensaje
     handleSubmit(event) {
         event.preventDefault();
         const message = this.input.value.trim();
@@ -55,6 +62,7 @@ class Chatbot {
         }
     }
 
+    // Añadir un mensaje en la ventana de chat
     addMessage(sender, message) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('mb-2', sender === 'user' ? 'text-right' : 'text-left');
@@ -67,6 +75,7 @@ class Chatbot {
         this.messages.scrollTop = this.messages.scrollHeight;
     }
 
+    // Procesar el mensaje y generar respuesta
     processMessage(message) {
         const response = this.generateResponse(message);
         setTimeout(() => {
@@ -74,6 +83,7 @@ class Chatbot {
         }, 500);
     }
 
+    // Generar la respuesta según el mensaje
     generateResponse(message) {
         message = message.toLowerCase();
         
@@ -98,33 +108,27 @@ class Chatbot {
         }
     }
 
+    // Mostrar las preguntas sugeridas
     displaySuggestedQuestions() {
-        this.suggestedQuestions.innerHTML = '';
-        this.suggestedQuestionsData.forEach(question => {
-            const button = document.createElement('button');
-            button.textContent = question;
-            button.classList.add('suggested-question', 'bg-gray-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm');
-            this.suggestedQuestions.appendChild(button);
+        this.suggestedQuestionsData.forEach((question) => {
+            const questionElement = document.createElement('div');
+            questionElement.classList.add('suggested-question');
+            questionElement.textContent = question;
+            this.suggestedQuestions.appendChild(questionElement);
         });
     }
 
+    // Manejar el clic en una pregunta sugerida
     handleSuggestedQuestion(event) {
-        if (event.target.classList.contains('suggested-question')) {
-            const question = event.target.textContent;
-            this.addMessage('user', question);
-            this.processMessage(question);
+        if (event.target && event.target.classList.contains('suggested-question')) {
+            const message = event.target.textContent;
+            this.addMessage('user', message);
+            this.processMessage(message);
         }
-    }
-
-    addKnowledge(key, value) {
-        this.knowledge[key] = value;
     }
 }
 
-// Initialize the chatbot when the DOM is fully loaded
+// Iniciar el chatbot cuando el documento esté listo
 document.addEventListener('DOMContentLoaded', () => {
-    const chatbot = new Chatbot();
-
-    // Example of how to add more knowledge to the chatbot
-    chatbot.addKnowledge('nuevas_propiedades', 'Estamos constantemente agregando nuevas propiedades a nuestro portafolio. Por favor, consulta nuestra sección de propiedades destacadas para ver las últimas adiciones.');
+    new Chatbot();
 });
