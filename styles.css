@@ -335,6 +335,11 @@ body {
     transition: opacity var(--transition-speed);
 }
 
+#back-to-top i {
+    position: relative;
+    left: 0;
+}
+
 #back-to-top:hover {
     opacity: 0.8;
 }
