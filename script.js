@@ -639,21 +639,26 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        handleBackToTop() {
-            const backToTopButton = document.getElementById('back-to-top');
-            
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 100) {
-                    backToTopButton.style.display = 'block';
-                } else {
-                    backToTopButton.style.display = 'none';
-                }
-            });
-            
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+        function handleBackToTop() {
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    // Mostrar o esconder el botón en función del scroll
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 100) {
+            backToTopButton.style.display = 'block';  // Mostrar el botón
+        } else {
+            backToTopButton.style.display = 'none';  // Ocultar el botón
         }
+    });
+    
+    // Desplazamiento suave al hacer clic en el botón
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// Asegúrate de ejecutar la función cuando el contenido esté completamente cargado
+document.addEventListener('DOMContentLoaded', handleBackToTop);
 
         handleScrollAnimation() {
             const fadeElems = document.querySelectorAll('.fade-in-section');
