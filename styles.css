@@ -59,6 +59,14 @@ body {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+}
+
+#chatbot-header img {
+    height: 30px;  /* Ajusta el tamaño del logo */
 }
 
 #chatbot-messages {
@@ -70,7 +78,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-height: 350px; /* Para limitar la altura en dispositivos pequeños */
+    max-height: 350px; /* Limita la altura en dispositivos pequeños */
 }
 
 .chat-message {
@@ -142,8 +150,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 12px;
-    white-space: nowrap; /* Evita que el texto se rompa */
-    max-width: 100%;
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -197,7 +204,6 @@ body {
         padding: 5px 8px;
     }
 }
-
 /* Estilos para el botón de WhatsApp */
 .whatsapp-button {
     position: fixed;
