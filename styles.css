@@ -321,8 +321,8 @@ body {
 #back-to-top {
     display: none;
     position: fixed;
-    bottom: 4.25rem; /* Justo arriba del menú inferior */
-    right: 1.875rem; /* Totalmente alineado a la derecha */
+    bottom: 4.25rem; /* Ajusta el valor según sea necesario */
+    right: 0; /* Asegura que el botón esté en el extremo derecho */
     z-index: 99;
     border: none;
     outline: none;
@@ -333,11 +333,7 @@ body {
     border-radius: 50%;
     font-size: 1.125rem;
     transition: opacity var(--transition-speed);
-}
-
-#back-to-top i {
-    position: relative;
-    left: 0;
+    transform: translateX(0); /* Asegura que no haya desplazamiento */
 }
 
 #back-to-top:hover {
