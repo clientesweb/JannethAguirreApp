@@ -33,6 +33,21 @@ body {
     }
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media (min-width: 1025px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+
 /* Estilos para el chatbot */
 #ai-real-estate-expert-chatbot {
     position: fixed;
@@ -284,7 +299,7 @@ body {
     background-color: transparent;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    color: white;
+    color: white; /* Update 1: Changed text color to white */
 }
 
 #gallery-images {
