@@ -321,8 +321,8 @@ body {
 #back-to-top {
     display: none;
     position: fixed;
-    bottom: 1.25rem;
-    right: 1.875rem;
+    bottom: 4.25rem; /* Ajustado para que esté justo arriba del menú inferior */
+    right: 1.875rem; /* Mantén esta posición para alinearlo a la derecha */
     z-index: 99;
     border: none;
     outline: none;
