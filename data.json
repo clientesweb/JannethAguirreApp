@@ -11,6 +11,14 @@
     {
       "question": "cómo estás",
       "answer": "¡Hola! ¿Cómo estás? Soy ARIA, tu asistente virtual para todo lo relacionado con bienes raíces. ¿Te gustaría explorar nuestras propiedades o tal vez saber más sobre nuestros servicios?"
+    },
+    {
+      "question": "buenas tardes",
+      "answer": "¡Buenas tardes! Soy ARIA, tu asistente inmobiliario. ¿En qué puedo ayudarte hoy? Estoy aquí para resolver tus dudas sobre el mercado de bienes raíces."
+    },
+    {
+      "question": "buenas noches",
+      "answer": "¡Buenas noches! Soy ARIA, tu asistente en bienes raíces. Si tienes preguntas sobre propiedades o el mercado, estoy aquí para ayudarte."
     }
   ],
   "despedidas": [
@@ -25,6 +33,190 @@
     {
       "question": "adiós",
       "answer": "¡Hasta la próxima! Si tienes alguna otra duda, no dudes en preguntar. ¡Que todo te vaya bien!"
+    },
+    {
+      "question": "nos vemos",
+      "answer": "¡Nos vemos! Recuerda que siempre puedes contar con mi ayuda para tus consultas inmobiliarias."
+    },
+    {
+      "question": "me despido",
+      "answer": "¡Hasta luego! Si necesitas cualquier otra información, no dudes en regresar. ¡Que tengas un gran día!"
+    }
+  ],
+  "propiedades": [
+    {
+      "question": "propiedades",
+      "answer": "Tenemos una amplia selección de propiedades que se ajustan a todos los gustos y necesidades. Desde modernos departamentos hasta casas de lujo, en ubicaciones exclusivas como Samborondón y Cuenca."
+    },
+    {
+      "question": "qué propiedades tienen",
+      "answer": "Contamos con propiedades variadas que incluyen departamentos modernos, casas amplias y propiedades de lujo en ubicaciones exclusivas. ¿Tienes alguna ubicación o tipo específico en mente?"
+    },
+    {
+      "question": "departamentos",
+      "answer": "Ofrecemos departamentos de diferentes tamaños y estilos, desde modernos hasta clásicos, ubicados en zonas exclusivas. ¿Te gustaría saber más sobre algún área en particular?"
+    },
+    {
+      "question": "casas en venta",
+      "answer": "Tenemos una excelente selección de casas en venta. Puedes elegir entre varios estilos y ubicaciones. ¿Te gustaría recibir detalles específicos?"
+    }
+  ],
+  "servicios": [
+    {
+      "question": "servicios",
+      "answer": "Ofrecemos servicios completos que incluyen asesoría legal, gestión de ventas y análisis de mercado. Nuestro enfoque es brindarte un servicio personalizado adaptado a tus necesidades."
+    },
+    {
+      "question": "qué servicios ofrecen",
+      "answer": "Ofrecemos una gama completa de servicios inmobiliarios, incluyendo asesoría legal, gestión de ventas, marketing y análisis de mercado. ¿Te interesa algún servicio en particular?"
+    },
+    {
+      "question": "asesoría legal",
+      "answer": "Nuestra asesoría legal te guiará durante el proceso de compra o venta de propiedades, asegurando que todo esté en regla y con total transparencia."
+    },
+    {
+      "question": "gestión de ventas",
+      "answer": "Nos encargamos de la gestión completa de la venta, desde la promoción de la propiedad hasta la firma del contrato. Te acompañamos en cada paso."
+    }
+  ],
+  "contacto": [
+    {
+      "question": "contacto",
+      "answer": "Estar en contacto con nosotros es muy sencillo. Puedes llamarnos o escribirnos por email, y siempre estamos dispuestos a coordinar reuniones virtuales."
+    },
+    {
+      "question": "cómo los contacto",
+      "answer": "Puedes contactarnos a través de nuestro número telefónico o email, y también ofrecemos reuniones virtuales para tu comodidad."
+    },
+    {
+      "question": "dirección",
+      "answer": "Nos ubicamos en un lugar céntrico y de fácil acceso. Si necesitas la dirección exacta o agendar una cita, házmelo saber."
+    }
+  ],
+  "sobre_nosotros": [
+    {
+      "question": "sobre nosotros",
+      "answer": "Desde 2009, Janneth Aguirre es una figura clave en el sector inmobiliario ecuatoriano. Nuestra misión es brindarte un servicio de alta calidad y personalizado, asegurándonos de que encuentres la propiedad de tus sueños."
+    },
+    {
+      "question": "quiénes son",
+      "answer": "Somos una agencia inmobiliaria con años de experiencia en el mercado ecuatoriano, comprometidos en ayudarte a encontrar la propiedad ideal o concretar tus inversiones."
+    },
+    {
+      "question": "historia",
+      "answer": "Nuestra historia comenzó en 2009 con el liderazgo de Janneth Aguirre. Hoy somos una agencia de referencia en bienes raíces, reconocidos por nuestro enfoque personalizado y nuestra experiencia."
+    }
+  ],
+  "invertir": [
+    {
+      "question": "invertir",
+      "answer": "Si estás interesado en invertir en bienes raíces, tenemos excelentes oportunidades en lugares como Samborondón, EE.UU. y Panamá. Cada lugar tiene ventajas únicas para los inversionistas."
+    },
+    {
+      "question": "inversiones",
+      "answer": "Ofrecemos asesoramiento en inversiones inmobiliarias, tanto en el país como en el extranjero. Ya sea que busques propiedades para rentar o revender, podemos ayudarte a tomar la mejor decisión."
+    },
+    {
+      "question": "dónde invertir",
+      "answer": "Te recomendamos lugares con alto potencial de retorno, como Samborondón, EE.UU. y Panamá. Estas áreas ofrecen oportunidades únicas para los inversores."
+    }
+  ],
+  "proceso_compra": [
+    {
+      "question": "comprar",
+      "answer": "Comprar una propiedad es un proceso que puede parecer complicado, pero con la orientación adecuada es mucho más fácil. Nuestro equipo te acompañará en todo momento."
+    },
+    {
+      "question": "cómo comprar",
+      "answer": "Comprar una propiedad implica varios pasos, desde la selección de opciones hasta la firma final. Con nuestra ayuda, cada paso es sencillo y transparente."
+    },
+    {
+      "question": "proceso de compra",
+      "answer": "El proceso de compra incluye la búsqueda de la propiedad, negociación de precio, y firma del contrato. Nuestro equipo estará a tu lado en cada paso para guiarte."
+    }
+  ],
+  "documentos_venta": [
+    {
+      "question": "documentos venta",
+      "answer": "Para vender una propiedad, necesitas contar con algunos documentos clave que aseguren que todo el proceso se realiza correctamente."
+    },
+    {
+      "question": "qué documentos necesito para vender",
+      "answer": "Para la venta de una propiedad, necesitarás documentos como el título de propiedad, certificado de gravámenes, y comprobantes de pagos de impuestos."
+    },
+    {
+      "question": "documentación",
+      "answer": "La documentación para vender una propiedad incluye el título de propiedad, certificado de gravámenes y constancias de pago de impuestos. Te ayudamos a asegurarte de que todo esté en regla."
+    }
+  ],
+  "tiempo_venta": [
+    {
+      "question": "tiempo venta",
+      "answer": "El tiempo para vender una propiedad puede variar, pero con la estrategia correcta, podemos ayudarte a vender más rápido."
+    },
+    {
+      "question": "cuánto tiempo toma vender",
+      "answer": "El tiempo para vender depende de factores como la ubicación y el mercado. Sin embargo, con una buena estrategia, podemos reducir el tiempo considerablemente."
+    },
+    {
+      "question": "tiempo estimado de venta",
+      "answer": "El tiempo estimado de venta varía, pero nuestra experiencia y técnicas de marketing ayudan a que el proceso sea lo más rápido posible."
+    }
+  ],
+  "alquileres": [
+    {
+      "question": "alquileres",
+      "answer": "Si estás buscando alquilar una propiedad o poner la tuya en alquiler, podemos ayudarte con todo el proceso, desde la búsqueda hasta la firma del contrato."
+    },
+    {
+      "question": "alquilar",
+      "answer": "Para alquilar una propiedad, te ofrecemos una selección de opciones en zonas convenientes y con diferentes presupuestos. ¿Te gustaría explorar las opciones?"
+    },
+    {
+      "question": "quiero poner mi casa en alquiler",
+      "answer": "Podemos ayudarte a poner tu propiedad en alquiler, desde la promoción hasta el contrato de arrendamiento. ¿Te gustaría más detalles sobre nuestro proceso?"
+    }
+  ],
+  "tendencias_inmobiliarias": [
+    {
+      "question": "tendencias inmobiliarias",
+      "answer": "El mercado inmobiliario está en constante cambio. Actualmente, las propiedades sostenibles y ubicadas en zonas urbanas de alto desarrollo están en alta demanda."
+    },
+    {
+      "question": "qué tendencias hay en el mercado inmobiliario",
+      "answer": "En el mercado inmobiliario, hay un creciente interés en propiedades eco-amigables, tecnologías para hogares inteligentes y opciones de inversión en bienes raíces internacionales."
+    },
+    {
+      "question": "tendencias del mercado",
+      "answer": "Las tendencias actuales incluyen propiedades con certificación ecológica, desarrollos de uso mixto y alta demanda en zonas de rápido crecimiento urbano."
+    }
+  ],
+  "financiamiento": [
+    {
+      "question": "financiamiento",
+      "answer": "Contamos con opciones de financiamiento a través de nuestros aliados bancarios. Te ayudamos a evaluar las mejores opciones para tu situación financiera."
+    },
+    {
+      "question": "cómo financiar una propiedad",
+      "answer": "Financiar una propiedad es sencillo con nuestras opciones. Ofrecemos asesoramiento para que encuentres la opción bancaria que mejor se ajuste a tus necesidades."
+    },
+    {
+      "question": "préstamos",
+      "answer": "Trabajamos con varios bancos para ofrecerte préstamos con condiciones favorables. Te apoyamos en el proceso de solicitud y aprobación."
+    }
+  ],
+  "seguridad": [
+    {
+      "question": "es seguro invertir en bienes raíces",
+      "answer": "Invertir en bienes raíces es una opción segura a largo plazo. Ofrecemos asesoría para minimizar riesgos y maximizar tus oportunidades de retorno."
+    },
+    {
+      "question": "riesgos al comprar una propiedad",
+      "answer": "La compra de una propiedad puede tener algunos riesgos, pero nuestro equipo te ayuda a asegurarte de que la transacción sea segura y de que la propiedad esté en regla."
+    },
+    {
+      "question": "cómo proteger mi inversión",
+      "answer": "Te ofrecemos asesoría para proteger tu inversión, desde revisiones legales hasta un análisis del mercado para asegurar el valor a largo plazo."
     }
   ]
 }
