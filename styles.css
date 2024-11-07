@@ -40,7 +40,7 @@ body {
     height: 400px;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
 
@@ -53,32 +53,84 @@ body {
     overflow-y: auto;
     flex-grow: 1;
     padding: 10px;
+    max-height: 300px; /* Limitar el alto del área de mensajes */
 }
 
 #chatbot-form {
     display: flex;
     padding: 10px;
+    background-color: #f9fafb; /* Fondo suave */
+    border-top: 1px solid #e2e8f0;
 }
 
 #chatbot-input {
     flex-grow: 1;
     margin-right: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #e2e8f0;
 }
 
+#chatbot-input:focus {
+    outline: none;
+    border-color: #3b82f6; /* Color al enfocar el input */
+}
+
+#chatbot-form button {
+    padding: 8px 16px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#chatbot-form button:hover {
+    background-color: #2563eb;
+}
+
+/* Estilo para las preguntas sugeridas */
 .suggested-question {
     cursor: pointer;
+    background-color: #f1f5f9;
+    padding: 8px;
+    margin: 4px 0;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 14px;
 }
 
 .suggested-question:hover {
     background-color: #e2e8f0;
 }
 
-.suggested-question {
-    cursor: pointer;
+/* Estilo de los mensajes */
+#chatbot-messages .user {
+    text-align: right;
+    margin-bottom: 10px;
 }
 
-.suggested-question:hover {
+#chatbot-messages .bot {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+#chatbot-messages .user span, 
+#chatbot-messages .bot span {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 12px;
+    max-width: 80%;
+}
+
+#chatbot-messages .user span {
+    background-color: #3b82f6;
+    color: white;
+}
+
+#chatbot-messages .bot span {
     background-color: #e2e8f0;
+    color: #333;
 }
 
 /* Estilos para el botón de WhatsApp */
