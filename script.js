@@ -583,7 +583,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const youtubeContainer = document.getElementById('youtube-slider');
             const channelId = 'UCiahlQJxCgPY-tEfjvkab8g';
             const maxResults = 10;
-            const apiKey ='AIzaSyBf5wzygVChOBD-3pPb4BR2v5NA4uE9J5c';
+            const apiKey ='AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
 
             try {
                 const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${maxResults}`);
