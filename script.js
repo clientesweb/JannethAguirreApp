@@ -199,10 +199,6 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     };
 
-    document.addEventListener('DOMContentLoaded', function() {
-    // Data structures (heroImages, properties, services, testimonials, instagramPosts, faqs, investReasons)
-    // ... (keep existing data unchanged)
-
     class WebsiteManager {
         constructor() {
             this.initializeComponents();
