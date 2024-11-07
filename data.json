@@ -1,0 +1,90 @@
+{
+  "saludos": [
+    {
+      "question": "hola",
+      "answer": "¡Hola! Soy ARIA, tu asistente inmobiliario. ¿Cómo puedo ayudarte hoy? Si tienes alguna duda sobre propiedades, servicios o el mercado, ¡estoy aquí para ayudarte!"
+    },
+    {
+      "question": "buenos días",
+      "answer": "¡Buenos días! Bienvenido, soy ARIA. ¿En qué puedo ayudarte en tu búsqueda de la propiedad perfecta? Estoy aquí para facilitarte todo el proceso."
+    },
+    {
+      "question": "cómo estás",
+      "answer": "¡Hola! ¿Cómo estás? Soy ARIA, tu asistente virtual para todo lo relacionado con bienes raíces. ¿Te gustaría explorar nuestras propiedades o tal vez saber más sobre nuestros servicios?"
+    }
+  ],
+  "despedidas": [
+    {
+      "question": "gracias",
+      "answer": "¡Gracias por tu tiempo! Si necesitas más información, estaré aquí para ayudarte en cualquier momento. ¡Que tengas un excelente día!"
+    },
+    {
+      "question": "hasta luego",
+      "answer": "¡Fue un placer ayudarte! Recuerda que siempre puedes volver si tienes más preguntas. ¡Hasta pronto!"
+    },
+    {
+      "question": "adiós",
+      "answer": "¡Hasta la próxima! Si tienes alguna otra duda, no dudes en preguntar. ¡Que todo te vaya bien!"
+    }
+  ],
+  "propiedades": [
+    {
+      "question": "propiedades",
+      "answer": "Tenemos una amplia selección de propiedades que se ajustan a todos los gustos y necesidades. Desde modernos departamentos hasta casas de lujo, en ubicaciones exclusivas como Samborondón y Cuenca."
+    }
+  ],
+  "servicios": [
+    {
+      "question": "servicios",
+      "answer": "Ofrecemos servicios completos que incluyen asesoría legal, gestión de ventas y análisis de mercado. Nuestro enfoque es brindarte un servicio personalizado adaptado a tus necesidades."
+    }
+  ],
+  "contacto": [
+    {
+      "question": "contacto",
+      "answer": "Estar en contacto con nosotros es muy sencillo. Puedes llamarnos o escribirnos por email, y siempre estamos dispuestos a coordinar reuniones virtuales."
+    }
+  ],
+  "sobre_nosotros": [
+    {
+      "question": "sobre nosotros",
+      "answer": "Desde 2009, Janneth Aguirre es una figura clave en el sector inmobiliario ecuatoriano. Nuestra misión es brindarte un servicio de alta calidad y personalizado, asegurándonos de que encuentres la propiedad de tus sueños."
+    }
+  ],
+  "invertir": [
+    {
+      "question": "invertir",
+      "answer": "Si estás interesado en invertir en bienes raíces, tenemos excelentes oportunidades en lugares como Samborondón, EE.UU. y Panamá. Cada lugar tiene ventajas únicas para los inversionistas."
+    }
+  ],
+  "proceso_compra": [
+    {
+      "question": "comprar",
+      "answer": "Comprar una propiedad es un proceso que puede parecer complicado, pero con la orientación adecuada es mucho más fácil. Nuestro equipo te acompañará en todo momento."
+    }
+  ],
+  "documentos_venta": [
+    {
+      "question": "documentos venta",
+      "answer": "Para vender una propiedad, necesitas contar con algunos documentos clave que aseguren que todo el proceso se realiza correctamente."
+    }
+  ],
+  "tiempo_venta": [
+    {
+      "question": "tiempo venta",
+      "answer": "El tiempo para vender una propiedad puede variar, pero con la estrategia correcta, podemos ayudarte a vender más rápido."
+    }
+  ],
+  "alquileres": [
+    {
+      "question": "alquileres",
+      "answer": "Si estás buscando alquilar una propiedad o poner la tuya en alquiler, podemos ayudarte con todo el proceso, desde la búsqueda hasta la firma del contrato."
+    }
+  ],
+  "tendencias_inmobiliarias": [
+    {
+      "question": "tendencias inmobiliarias",
+      "answer": "El mercado inmobiliario está en constante cambio, y es importante estar informado sobre las tendencias actuales."
+    }
+  ]
+}
