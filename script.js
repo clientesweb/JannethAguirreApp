@@ -487,37 +487,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para mostrar el modal de la propiedad
     function showPropertyModal(property) {
-        const modal = document.getElementById('gallery-modal');
-        const galleryImages = document.getElementById('gallery-images');
-        const galleryInfo = document.getElementById('gallery-info');
-        
-        // Limpiar imágenes anteriores
-        galleryImages.innerHTML = '';
-        
-        // Agregar nuevas imágenes
-        property.gallery.forEach(image => {
-            const img = document.createElement('img');
-            img.src = image;
-            img.alt = property.title;
-            img.className = 'w-full h-auto';
-            galleryImages.appendChild(img);
-        });
-        
-        // Destruir el slider existente si lo hay
-        if ($(galleryImages).hasClass('slick-initialized')) {
-            $(galleryImages).slick('unslick');
-        }
-        
-        // Inicializar el slider de la galería
-        $(galleryImages).slick({
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000
-        });
+    const modal = document.getElementById('gallery-modal');
+    const galleryImages = document.getElementById('gallery-images');
+    const galleryInfo = document.getElementById('gallery-info');
+    
+    galleryImages.innerHTML = '';
+
+    // Limitar a 5 imágenes
+    const imagesToShow = property.gallery.slice(0, 5);
+    
+    imagesToShow.forEach((image, index) => {
+        const img = document.createElement('img');
+        img.src = image;
+        img.alt = `${property.title} - Imagen ${index + 1}`;
+        img.className = 'w-full h-64 object-cover cursor-pointer';
+        img.onclick = () => showFullImage(image, index, imagesToShow);
+        galleryImages.appendChild(img);
+    });
+    
+    if ($(galleryImages).hasClass('slick-initialized')) {
+        $(galleryImages).slick('unslick');
+    }
+    
+    $(galleryImages).slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000
+    });
         
         // Actualizar información de la propiedad
         galleryInfo.innerHTML = `
