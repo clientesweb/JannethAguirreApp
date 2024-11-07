@@ -610,11 +610,21 @@ body {
 }
 /* Estilos para el preloader */
 #preloader {
-    transition: opacity 0.5s ease-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
 #preloader img {
-    animation: pulse 2s infinite;
+    width: 100px;
+    height: 100px;
 }
 
 @keyframes pulse {
@@ -631,6 +641,44 @@ body {
     100% {
         transform: scale(0.95);
         box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
+}
+
+#preloader .pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Estilos adicionales para mejorar la responsividad */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+
+    .property-card {
+        width: 100%;
+    }
+
+    #ai-real-estate-expert-chatbot,
+    .whatsapp-button {
+        bottom: 70px;
+    }
+
+    .bottom-nav {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .service-card {
+        padding: 1rem;
     }
 }
 
