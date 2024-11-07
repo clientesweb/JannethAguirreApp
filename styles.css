@@ -7,6 +7,10 @@
     --theme-color: #FF0000;
     --transition-speed: 0.3s;
 }
+html, body {
+    overflow-x: hidden;  /* Oculta el scroll horizontal */
+    width: 100%;          /* Asegura que el ancho no exceda el 100% */
+}
 
 body {
     font-family: 'Poppins', sans-serif;
