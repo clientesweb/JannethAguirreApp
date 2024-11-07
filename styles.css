@@ -1,9 +1,3 @@
-html, body {
-    overflow-x: hidden;
-    width: 100%;
-    position: relative;
-}
-
 /* Estilos generales y variables */
 :root {
     --primary-color: #FF0000;
@@ -298,16 +292,14 @@ body {
     transition: opacity 0.3s ease;
 }
 
-#gallery-modal .modal-content,
-#gallery-info {
+#gallery-modal .modal-content {
     max-width: 90%;
     max-height: 90vh;
     overflow-y: auto;
     background-color: transparent;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    color: white; /* Update 1: Changed text color to white */
 }
 
 #gallery-images {
@@ -694,7 +686,6 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
 }
 
 .loader {
@@ -734,20 +725,6 @@ body {
         transform: scale(0.85);
         opacity: 1;
     }
-}
-
-#preloader.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-#main-content {
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
-}
-
-#main-content.visible {
-    opacity: 1;
 }
 
 /* Estilos para el slider de propiedades */
