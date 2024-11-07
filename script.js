@@ -199,61 +199,100 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     };
 
-    // Función para crear el slider de imágenes del hero
-    function createHeroSlider() {
-        const heroSlider = document.querySelector('.hero-slider');
-        heroImages.forEach(image => {
-            const slide = document.createElement('div');
-            slide.style.backgroundImage = `url(${image})`;
-            slide.style.backgroundSize = 'cover';
-            slide.style.backgroundPosition = 'center';
-            heroSlider.appendChild(slide);
-        });
-        
-        $('.hero-slider').slick({
-            dots: true,
-            infinite: true,
-            speed: 500,
-            fade: true,
-            cssEase: 'linear',
-            autoplay: true,
-            autoplaySpeed: 5000
-        });
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+    // Data structures (heroImages, properties, services, testimonials, instagramPosts, faqs, investReasons)
+    // ... (keep existing data unchanged)
 
-    // Función para crear el slider de "Quienes Somos"
-    function createQuienesSomosSlider() {
-        $('.quienes-somos-slider').slick({
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
-    }
+    class WebsiteManager {
+        constructor() {
+            this.initializeComponents();
+        }
 
-    // Función para crear las tarjetas de propiedades destacadas
-    function createFeaturedProperties() {
-        const propertiesSlider = document.querySelector('.propiedades-slider');
-        properties.forEach(property => {
+        initializeComponents() {
+            this.createHeroSlider();
+            this.createQuienesSomosSlider();
+            this.createFeaturedProperties();
+            this.createPropertyCards();
+            this.createServiceCards();
+            this.createTestimonialsSlider();
+            this.createInstagramSlider();
+            this.createFAQs();
+            this.createInvestReasons();
+            this.handleViewDetails();
+            this.closeGalleryModal();
+            this.loadYouTubeVideos();
+            this.initContactForm();
+            this.handleBackToTop();
+            this.handleScrollAnimation();
+            this.handleInstallApp();
+            this.handlePreloader();
+            this.initChatbot();
+            this.improveResponsiveness();
+            this.preloadImages();
+        }
+
+        createSlider(selector, options) {
+            $(selector).slick(options);
+        }
+
+        createHeroSlider() {
+            const heroSlider = document.querySelector('.hero-slider');
+            heroImages.forEach(image => {
+                const slide = document.createElement('div');
+                slide.style.backgroundImage = `url(${image})`;
+                slide.style.backgroundSize = 'cover';
+                slide.style.backgroundPosition = 'center';
+                heroSlider.appendChild(slide);
+            });
+            
+            this.createSlider('.hero-slider', {
+                dots: true,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear',
+                autoplay: true,
+                autoplaySpeed: 5000
+            });
+        }
+
+        createQuienesSomosSlider() {
+            this.createSlider('.quienes-somos-slider', {
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        }
+
+        createFeaturedProperties() {
+            const propertiesSlider = document.querySelector('.propiedades-slider');
+            properties.forEach(property => {
+                const propertyCard = this.createPropertyCard(property);
+                propertiesSlider.appendChild(propertyCard);
+            });
+        }
+
+        createPropertyCard(property) {
             const propertyCard = document.createElement('div');
             propertyCard.className = 'property-card';
             propertyCard.innerHTML = `
@@ -264,307 +303,281 @@ document.addEventListener('DOMContentLoaded', function() {
                     <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-details" data-id="${property.id}">Ver Detalles</button>
                 </div>
             `;
-            propertiesSlider.appendChild(propertyCard);
-        });
-    }
+            return propertyCard;
+        }
 
-    // Función para crear las tarjetas de propiedades en la sección "Nuestras Propiedades"
-    function createPropertyCards() {
-        const propertiesGrid = document.getElementById('properties-grid');
-        properties.forEach(property => {
-            const propertyCard = document.createElement('div');
-            propertyCard.className = 'property-card flex-shrink-0';
-            propertyCard.innerHTML = `
-                <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-bold text-xl mb-2">${property.title}</h3>
-                    <p class="text-gray-700 text-base mb-4">${property.price}</p>
-                    <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors view-details" data-id="${property.id}">Ver Detalles</button>
-                </div>
-            `;
-            propertiesGrid.appendChild(propertyCard);
-        });
-
-        // Inicializar el slider después de crear las tarjetas
-        initializePropertySlider();
-    }
-
-    // Función para inicializar el slider de propiedades
-    function initializePropertySlider() {
-        const slider = document.querySelector('.properties-slider');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            slider.classList.add('active');
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-        });
-
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-            slider.classList.remove('active');
-        });
-
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-            slider.classList.remove('active');
-        });
-
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 3;
-            slider.scrollLeft = scrollLeft - walk;
-        });
-    }
-
-    // Función para crear las tarjetas de servicios
-    function createServiceCards() {
-        const serviceGrid = document.getElementById('service-grid');
-        services.forEach(service => {
-            const serviceCard = document.createElement('div');
-            serviceCard.className = 'service-card';
-            serviceCard.innerHTML = `
-                <i class="${service.icon} text-4xl text-primary mb-4"></i>
-                <h3 class="text-xl font-semibold mb-2">${service.title}</h3>
-                <p class="text-gray-600">${service.description}</p>
-            `;
-            serviceGrid.appendChild(serviceCard);
-        });
-    }
-
-    // Función para crear el slider de testimonios
-    function createTestimonialsSlider() {
-        const testimonialsSlider = document.getElementById('testimonials-slider');
-        testimonials.forEach(testimonial => {
-            const slide = document.createElement('div');
-            slide.className = 'bg-white p-6 rounded-lg shadow-md';
-            slide.innerHTML = `
-                <p class="text-gray-600 mb-4">"${testimonial.text}"</p>
-                <p class="font-semibold">- ${testimonial.name}</p>
-            `;
-            testimonialsSlider.appendChild(slide);
-        });
-        
-        $('#testimonials-slider').slick({
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 5000
-        });
-    }
-
-    // Función para crear el slider de Instagram
-    function createInstagramSlider() {
-        const instagramSlider = document.getElementById('instagram-slider');
-        instagramPosts.forEach(post => {
-            const slide = document.createElement('div');
-            slide.className = 'px-2';
-            slide.innerHTML = `
-                <a href="${post.link}" target="_blank" rel="noopener noreferrer">
-                    <img src="${post.image}" alt="Instagram post" class="w-full h-64 object-cover rounded-lg">
-                </a>
-            `;
-            instagramSlider.appendChild(slide);
-        });
-        
-        $('#instagram-slider').slick({
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
-    }
-
-    // Función para crear las preguntas frecuentes
-    function createFAQs() {
-        const faqContainer = document.getElementById('faq-container');
-        faqs.forEach((faq, index) => {
-            const faqItem = document.createElement('div');
-            faqItem.className = 'faq-item';
-            faqItem.innerHTML = `
-                <div class="faq-question flex justify-between items-center cursor-pointer">
-                    <span>${faq.question}</span>
-                    <i class="fas fa-chevron-down faq-icon"></i>
-                </div>
-                <div class="faq-answer mt-2 text-gray-600 hidden">
-                    ${faq.answer}
-                </div>
-            `;
-            faqContainer.appendChild(faqItem);
-
-            // Añadir evento de clic para mostrar/ocultar la respuesta
-            const question = faqItem.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                faqItem.classList.toggle('active');
-                const answer = faqItem.querySelector('.faq-answer');
-                answer.classList.toggle('hidden');
+        createPropertyCards() {
+            const propertiesGrid = document.getElementById('properties-grid');
+            properties.forEach(property => {
+                const propertyCard = this.createPropertyCard(property);
+                propertiesGrid.appendChild(propertyCard);
             });
-        });
-    }
+            this.initializePropertySlider();
+        }
 
-    // Función para crear el acordeón de razones para invertir
-    function createInvestReasons() {
-        const samborondonContainer = document.getElementById('invest-samborondon');
-        const usaContainer = document.getElementById('invest-usa');
-        const panamaContainer = document.getElementById('invest-panama');
+        initializePropertySlider() {
+            const slider = document.querySelector('.properties-slider');
+            let isDown = false;
+            let startX;
+            let scrollLeft;
 
-        function createAccordion(container, title, reasons, flagUrl) {
-            const accordionHeader = document.createElement('div');
-            accordionHeader.className = 'flex items-center cursor-pointer mb-4';
-            accordionHeader.innerHTML = `
-                <img src="${flagUrl}" alt="Bandera" class="w-8 h-8 mr-2">
-                <h3 class="text-xl font-bold">${title}</h3>
-                <i class="fas fa-chevron-down ml-auto"></i>
-            `;
-            container.appendChild(accordionHeader);
+            const mouseDownHandler = (e) => {
+                isDown = true;
+                slider.classList.add('active');
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            };
 
-            const accordionContent = document.createElement('div');
-            accordionContent.className = 'hidden';
-            reasons.forEach(reason => {
-                const reasonElement = document.createElement('p');
-                reasonElement.className = 'mb-2';
-                reasonElement.textContent = reason;
-                accordionContent.appendChild(reasonElement);
-            });
-            container.appendChild(accordionContent);
+            const mouseLeaveHandler = () => {
+                isDown = false;
+                slider.classList.remove('active');
+            };
 
-            accordionHeader.addEventListener('click', () => {
-                accordionContent.classList.toggle('hidden');
-                accordionHeader.querySelector('i').classList.toggle('fa-chevron-down');
-                accordionHeader.querySelector('i').classList.toggle('fa-chevron-up');
+            const mouseUpHandler = () => {
+                isDown = false;
+                slider.classList.remove('active');
+            };
+
+            const mouseMoveHandler = (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 3;
+                slider.scrollLeft = scrollLeft - walk;
+            };
+
+            slider.addEventListener('mousedown', mouseDownHandler);
+            slider.addEventListener('mouseleave', mouseLeaveHandler);
+            slider.addEventListener('mouseup', mouseUpHandler);
+            slider.addEventListener('mousemove', mouseMoveHandler);
+        }
+
+        createServiceCards() {
+            const serviceGrid = document.getElementById('service-grid');
+            services.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                serviceCard.innerHTML = `
+                    <i class="${service.icon} text-4xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">${service.title}</h3>
+                    <p class="text-gray-600">${service.description}</p>
+                `;
+                serviceGrid.appendChild(serviceCard);
             });
         }
 
-        createAccordion(samborondonContainer, 'Invertir en Samborondón', investReasons.samborondon, 'https://flagcdn.com/w40/ec.png');
-        createAccordion(usaContainer, 'Invertir en Estados Unidos', investReasons.usa, 'https://flagcdn.com/w40/us.png');
-        createAccordion(panamaContainer, 'Invertir en Panamá', investReasons.panama, 'https://flagcdn.com/w40/pa.png');
-    }
+        createTestimonialsSlider() {
+            const testimonialsSlider = document.getElementById('testimonials-slider');
+            testimonials.forEach(testimonial => {
+                const slide = document.createElement('div');
+                slide.className = 'bg-white p-6 rounded-lg shadow-md';
+                slide.innerHTML = `
+                    <p class="text-gray-600 mb-4">"${testimonial.text}"</p>
+                    <p class="font-semibold">- ${testimonial.name}</p>
+                `;
+                testimonialsSlider.appendChild(slide);
+            });
+            
+            this.createSlider('#testimonials-slider', {
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 5000
+            });
+        }
 
-    // Función para manejar el clic en "Ver Detalles"
-    function handleViewDetails() {
-        document.addEventListener('click', function(e) {
-            if (e.target && e.target.classList.contains('view-details')) {
-                const propertyId = parseInt(e.target.dataset.id);
-                const property = properties.find(p => p.id === propertyId);
-                showPropertyModal(property);
+        createInstagramSlider() {
+            const instagramSlider = document.getElementById('instagram-slider');
+            instagramPosts.forEach(post => {
+                const slide = document.createElement('div');
+                slide.className = 'px-2';
+                slide.innerHTML = `
+                    <a href="${post.link}" target="_blank" rel="noopener noreferrer">
+                        <img src="${post.image}" alt="Instagram post" class="w-full h-64 object-cover rounded-lg">
+                    </a>
+                `;
+                instagramSlider.appendChild(slide);
+            });
+            
+            this.createSlider('#instagram-slider', {
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        }
+
+        createFAQs() {
+            const faqContainer = document.getElementById('faq-container');
+            faqs.forEach((faq, index) => {
+                const faqItem = document.createElement('div');
+                faqItem.className = 'faq-item';
+                faqItem.innerHTML = `
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <span>${faq.question}</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer mt-2 text-gray-600 hidden">
+                        ${faq.answer}
+                    </div>
+                `;
+                faqContainer.appendChild(faqItem);
+
+                const question = faqItem.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    faqItem.classList.toggle('active');
+                    const answer = faqItem.querySelector('.faq-answer');
+                    answer.classList.toggle('hidden');
+                });
+            });
+        }
+
+        createInvestReasons() {
+            const createAccordion = (container, title, reasons, flagUrl) => {
+                const accordionHeader = document.createElement('div');
+                accordionHeader.className = 'flex items-center cursor-pointer mb-4';
+                accordionHeader.innerHTML = `
+                    <img src="${flagUrl}" alt="Bandera" class="w-8 h-8 mr-2">
+                    <h3 class="text-xl font-bold">${title}</h3>
+                    <i class="fas fa-chevron-down ml-auto"></i>
+                `;
+                container.appendChild(accordionHeader);
+
+                const accordionContent = document.createElement('div');
+                accordionContent.className = 'hidden';
+                reasons.forEach(reason => {
+                    const reasonElement = document.createElement('p');
+                    reasonElement.className = 'mb-2';
+                    reasonElement.textContent = reason;
+                    accordionContent.appendChild(reasonElement);
+                });
+                container.appendChild(accordionContent);
+
+                accordionHeader.addEventListener('click', () => {
+                    accordionContent.classList.toggle('hidden');
+                    accordionHeader.querySelector('i').classList.toggle('fa-chevron-down');
+                    accordionHeader.querySelector('i').classList.toggle('fa-chevron-up');
+                });
+            };
+
+            createAccordion(document.getElementById('invest-samborondon'), 'Invertir en Samborondón', investReasons.samborondon, 'https://flagcdn.com/w40/ec.png');
+            createAccordion(document.getElementById('invest-usa'), 'Invertir en Estados Unidos', investReasons.usa, 'https://flagcdn.com/w40/us.png');
+            createAccordion(document.getElementById('invest-panama'), 'Invertir en Panamá', investReasons.panama, 'https://flagcdn.com/w40/pa.png');
+        }
+
+        handleViewDetails() {
+            document.addEventListener('click', (e) => {
+                if (e.target && e.target.classList.contains('view-details')) {
+                    const propertyId = parseInt(e.target.dataset.id);
+                    const property = properties.find(p => p.id === propertyId);
+                    this.showPropertyModal(property);
+                }
+            });
+        }
+
+        showPropertyModal(property) {
+            const modal = document.getElementById('gallery-modal');
+            const galleryImages = document.getElementById('gallery-images');
+            const galleryInfo = document.getElementById('gallery-info');
+            
+            galleryImages.innerHTML = '';
+
+            const imagesToShow = property.gallery.slice(0, 5);
+            
+            imagesToShow.forEach((image, index) => {
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = `${property.title} - Imagen ${index + 1}`;
+                img.className = 'w-full h-64 object-cover cursor-pointer';
+                img.onclick = () => this.showFullImage(image, index, imagesToShow);
+                galleryImages.appendChild(img);
+            });
+            
+            if ($(galleryImages).hasClass('slick-initialized')) {
+                $(galleryImages).slick('unslick');
             }
-        });
-    }
+            
+            $(galleryImages).slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000
+            });
+                
+            galleryInfo.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">${property.title}</h3>
+                <p class="mb-2"><strong>Precio:</strong> ${property.price}</p>
+                <p class="mb-4">${property.description}</p>
+                <h4 class="font-bold mb-2">Características:</h4>
+                <ul class="list-disc pl-5 mb-4">
+                    ${property.features ? property.features.map(feature => `<li>${feature}</li>`).join('') : ''}
+                </ul>
+                <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Contactar Agente</button>
+            `;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
 
-    // Función para mostrar el modal de la propiedad
-    function showPropertyModal(property) {
-    const modal = document.getElementById('gallery-modal');
-    const galleryImages = document.getElementById('gallery-images');
-    const galleryInfo = document.getElementById('gallery-info');
-    
-    galleryImages.innerHTML = '';
-
-    // Limitar a 5 imágenes
-    const imagesToShow = property.gallery.slice(0, 5);
-    
-    imagesToShow.forEach((image, index) => {
-        const img = document.createElement('img');
-        img.src = image;
-        img.alt = `${property.title} - Imagen ${index + 1}`;
-        img.className = 'w-full h-64 object-cover cursor-pointer';
-        img.onclick = () => showFullImage(image, index, imagesToShow);
-        galleryImages.appendChild(img);
-    });
-    
-    if ($(galleryImages).hasClass('slick-initialized')) {
-        $(galleryImages).slick('unslick');
-    }
-    
-    $(galleryImages).slick({
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000
-    });
-        
-        // Actualizar información de la propiedad
-        galleryInfo.innerHTML = `
-            <h3 class="text-xl font-bold mb-2">${property.title}</h3>
-            <p class="mb-2"><strong>Precio:</strong> ${property.price}</p>
-            <p class="mb-4">${property.description}</p>
-            <h4 class="font-bold mb-2">Características:</h4>
-            <ul class="list-disc pl-5 mb-4">
-                ${property.features ? property.features.map(feature => `<li>${feature}</li>`).join('') : ''}
-            </ul>
-            <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Contactar Agente</button>
-        `;
-        
-        // Mostrar modal
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-    }
-
-    // Función para cerrar el modal de la galería
-    function closeGalleryModal() {
-        const modal = document.getElementById('gallery-modal');
-        const closeButton = document.getElementById('close-modal');
-        
-        closeButton.addEventListener('click', () => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        });
-        
-        // Cerrar modal al hacer clic fuera de él
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
+        closeGalleryModal() {
+            const modal = document.getElementById('gallery-modal');
+            const closeButton = document.getElementById('close-modal');
+            
+            closeButton.addEventListener('click', () => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
-            }
-        });
-    }
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+            });
+        }
 
-    // Función para cargar los videos de YouTube
-    function loadYouTubeVideos() {
-        const youtubeContainer = document.getElementById('youtube-slider');
-        const channelId = 'UCiahlQJxCgPY-tEfjvkab8g';
-        const maxResults = 10;
-        const apiKey = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
+        async loadYouTubeVideos() {
+            const youtubeContainer = document.getElementById('youtube-slider');
+            const channelId = 'UCiahlQJxCgPY-tEfjvkab8g';
+            const maxResults = 10;
+            const apiKey = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y';
 
-        fetch(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${maxResults}`)
-            .then(response => response.json())
-            .then(data => {
+            try {
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${maxResults}`);
+                const data = await response.json();
+
                 data.items.forEach(item => {
                     const videoId = item.id.videoId;
                     const title = item.snippet.title;
@@ -588,8 +601,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     youtubeContainer.appendChild(videoElement);
                 });
 
-                // Inicializar el slider después de cargar los videos
-                $('#youtube-slider').slick({
+                this.createSlider('#youtube-slider', {
                     dots: true,
                     infinite: false,
                     speed: 300,
@@ -612,175 +624,141 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     ]
                 });
-            })
-            .catch(error => console.error('Error fetching YouTube videos:', error));
-    }
+            } catch (error) {
+                console.error('Error fetching YouTube videos:', error);
+            }
+        }
 
-    // Función para manejar el formulario de contacto
-    function initContactForm() {
-        const form = document.getElementById('contact-form');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = form.elements.name.value;
-                const email = form.elements.email.value;
-                const message = form.elements.message.value;
-                const whatsappMessage = `Nombre: ${name}%0AEmail: ${email}%0AMensaje: ${message}`;
-                const whatsappUrl = `https://wa.me/593987167782?text=${whatsappMessage}`;
-                window.open(whatsappUrl, '_blank');
-                form.reset();
+        initContactForm() {
+            const form = document.getElementById('contact-form');
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const { name, email, message } = form.elements;
+                    const whatsappMessage = `Nombre: ${name.value}%0AEmail: ${email.value}%0AMensaje: ${message.value}`;
+                    const whatsappUrl = `https://wa.me/593987167782?text=${whatsappMessage}`;
+                    window.open(whatsappUrl, '_blank');
+                    form.reset();
+                });
+            }
+        }
+
+        handleBackToTop() {
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 100) {
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
             });
+            
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        handleScrollAnimation() {
+            const fadeElems = document.querySelectorAll('.fade-in-section');
+            
+            const fadeIn = (elem) => {
+                const distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
+                if (distInView < 0) {
+                    elem.classList.add('is-visible');
+                } else {
+                    elem.classList.remove('is-visible');
+                }
+            };
+            
+            fadeElems.forEach(elem => fadeIn(elem));
+            
+            window.addEventListener('scroll', () => {
+                fadeElems.forEach(elem => fadeIn(elem));
+            });
+        }
+
+        handleInstallApp() {
+            let deferredPrompt;
+            const installButton = document.getElementById('install-app');
+            
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                installButton.style.display = 'block';
+            });
+            
+            installButton.addEventListener('click', () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('Usuario aceptó la instalación de la PWA');
+                        }
+                        deferredPrompt = null;
+                    });
+                }
+            });
+        }
+
+        handlePreloader() {
+            const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('main-content');
+
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    preloader.style.visibility = 'hidden';
+                    mainContent.classList.remove('hidden');
+                }, 1000);
+            });
+        }
+
+        initChatbot() {
+            const chatbotButton = document.getElementById('open-chatbot');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const closeChatbot = document.getElementById('close-chatbot');
+
+            chatbotButton.addEventListener('click', () => {
+                chatbotWindow.classList.toggle('hidden');
+            });
+
+            closeChatbot.addEventListener('click', () => {
+                chatbotWindow.classList.add('hidden');
+            });
+        }
+
+        preloadImages() {
+            const allImages = [
+                ...heroImages,
+                ...properties.map(p => p.image),
+                ...properties.flatMap(p => p.gallery || []),
+                ...instagramPosts.map(p => p.image)
+            ];
+
+            allImages.forEach(image => {
+                const img = new Image();
+                img.src = image;
+            });
+        }
+
+        improveResponsiveness() {
+            const resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    if (entry.contentBoxSize) {
+                        if (entry.contentBoxSize[0].inlineSize < 768) {
+                            document.body.classList.add('mobile');
+                        } else {
+                            document.body.classList.remove('mobile');
+                        }
+                    }
+                }
+            });
+
+            resizeObserver.observe(document.body);
         }
     }
 
-    // Función para el botón "Volver arriba"
-    function handleBackToTop() {
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 100) {
-                backToTopButton.style.display = 'block';
-            } else {
-                backToTopButton.style.display = 'none';
-            }
-        });
-        
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-
-    // Función para manejar el efecto de aparición al hacer scroll
-    function handleScrollAnimation() {
-        const fadeElems = document.querySelectorAll('.fade-in-section');
-        
-        const fadeIn = (elem) => {
-            var distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
-            if (distInView < 0) {
-                elem.classList.add('is-visible');
-            } else {
-                elem.classList.remove('is-visible');
-            }
-        };
-        
-        fadeElems.forEach(elem => {
-            fadeIn(elem);
-        });
-        
-        window.addEventListener('scroll', () => {
-            fadeElems.forEach(elem => {
-                fadeIn(elem);
-            });
-        });
-    }
-
-    // Función para manejar la instalación de la PWA
-    function handleInstallApp() {
-        let deferredPrompt;
-        const installButton = document.getElementById('install-app');
-        
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installButton.style.display = 'block';
-        });
-        
-        installButton.addEventListener('click', () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('Usuario aceptó la instalación de la PWA');
-                    }
-                    deferredPrompt = null;
-                });
-            }
-        });
-    }
-
-    // Función para manejar el preloader
-    function handlePreloader() {
-        const preloader = document.getElementById('preloader');
-        const mainContent = document.getElementById('main-content');
-
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                preloader.style.visibility = 'hidden';
-                mainContent.classList.remove('hidden');
-            }, 1000);
-        });
-    }
-
-    // Función para manejar el chatbot
-    function initChatbot() {
-        const chatbotButton = document.getElementById('open-chatbot');
-        const chatbotWindow = document.getElementById('chatbot-window');
-        const closeChatbot = document.getElementById('close-chatbot');
-
-        chatbotButton.addEventListener('click', () => {
-            chatbotWindow.classList.toggle('hidden');
-        });
-
-        closeChatbot.addEventListener('click', () => {
-            chatbotWindow.classList.add('hidden');
-        });
-    }
-
-
-    // Función para precargar imágenes
-    function preloadImages(images) {
-        images.forEach(image => {
-            const img = new Image();
-            img.src = image;
-        });
-    }
-    // Función para mejorar la responsividad
-    function improveResponsiveness() {
-        const resizeObserver = new ResizeObserver(entries => {
-            for (let entry of entries) {
-                if (entry.contentBoxSize) {
-                    // Ajustar estilos basados en el tamaño de la pantalla
-                    if (entry.contentBoxSize[0].inlineSize < 768) {
-                        document.body.classList.add('mobile');
-                    } else {
-                        document.body.classList.remove('mobile');
-                    }
-                }
-            }
-        });
-
-        resizeObserver.observe(document.body);
-    }
-
-    // Precargar todas las imágenes
-    const allImages = [
-        ...heroImages,
-        ...properties.map(p => p.image),
-        ...properties.flatMap(p => p.gallery || []),
-        ...instagramPosts.map(p => p.image)
-    ];
-    preloadImages(allImages);
-
-    // Llamar a todas las funciones de inicialización
-    createHeroSlider();
-    createQuienesSomosSlider();
-    createFeaturedProperties();
-    createPropertyCards();
-    createServiceCards();
-    createTestimonialsSlider();
-    createInstagramSlider();
-    createFAQs();
-    createInvestReasons();
-    handleViewDetails();
-    closeGalleryModal();
-    loadYouTubeVideos();
-    initContactForm();
-    handleBackToTop();
-    handleScrollAnimation();
-    handleInstallApp();
-    handlePreloader();
-    handleViewDetails();
-    initChatbot();
-    improveResponsiveness();
+    // Initialize the website
+    const websiteManager = new WebsiteManager();
 });
