@@ -606,7 +606,6 @@ body {
     height: auto;
     scroll-snap-align: start;
 }
-/* Estilos para el preloader */
 #preloader {
     position: fixed;
     top: 0;
@@ -620,30 +619,24 @@ body {
     z-index: 9999;
 }
 
-#preloader img {
+#preloader .loader {
     width: 100px;
     height: 100px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite, pulse 2s ease-in-out infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 @keyframes pulse {
-    0% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
-    }
-    
-    70% {
-        transform: scale(1);
-        box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
-    }
-    
-    100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
-    }
-}
-
-#preloader .pulse {
-    animation: pulse 2s infinite;
+    0% { transform: scale(0.8); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.8); opacity: 0.5; }
 }
 
 /* Estilos adicionales para mejorar la responsividad */
@@ -711,7 +704,7 @@ body {
 }
 /* Estilos para el fondo SVG de cabañas */
 body {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='%23f0f0f0'/%3E%3Cpath d='M30 30 L70 30 L50 10 Z' fill='%23e0e0e0'/%3E%3Crect x='40' y='30' width='20' height='20' fill='%23d0d0d0'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='%23FF0000'/%3E%3Cpath d='M30 30 L70 30 L50 10 Z' fill='%23808080'/%3E%3Crect x='40' y='30' width='20' height='20' fill='%23FFFFFF'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 100px 100px;
 }
@@ -766,4 +759,43 @@ img {
 .gap-4 {
     gap: 1rem;
 }
+@media (max-width: 640px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.75rem;
+    }
+}
 
+@media (min-width: 641px) and (max-width: 1024px) {
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+.hero-slider .slick-slide {
+    height: 50vh;
+    min-height: 300px;
+}
+
+@media (min-width: 768px) {
+    .hero-slider .slick-slide {
+        height: 60vh;
+        min-height: 400px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-slider .slick-slide {
+        height: 70vh;
+        min-height: 500px;
+    }
+}
