@@ -30,20 +30,20 @@ body {
     box-sizing: border-box;
 }
 
-/* Estilos principales para la ventana emergente del chatbot */
+/* Estilos generales para el chat con burbujas */
 #ai-real-estate-expert-chatbot .chat-window {
     display: none;
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 350px;
-    height: 400px; /* Tamaño más cuadrado */
+    width: 360px;
+    height: 450px; /* Tamaño más espacioso */
     background-color: #fff;
-    border-radius: 10px; /* Bordes redondeados pero cuadrados */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 20px; /* Bordes más redondeados */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    transition: all 0.3s ease-in-out;
     overflow: hidden;
+    transition: all 0.3s ease-in-out;
 }
 
 #ai-real-estate-expert-chatbot .chat-window.active {
@@ -53,53 +53,51 @@ body {
 
 #chatbot-header {
     background-color: #4CAF50;
-    padding: 10px;
+    padding: 15px;
     color: white;
     text-align: center;
     font-size: 18px;
+    border-radius: 20px 20px 0 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 15px;
 }
 
 #chatbot-header img {
-    height: 30px;  /* Ajusta el tamaño del logo */
+    height: 30px;  /* Tamaño del logo ajustado */
 }
 
 #chatbot-messages {
     flex-grow: 1;
     overflow-y: auto;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 10px;
     font-size: 14px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    max-height: 250px; /* Limita la altura en dispositivos pequeños */
+    gap: 12px;
 }
 
 .chat-message {
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 12px 18px;
     max-width: 80%;
     word-wrap: break-word;
+    border-radius: 20px;
+    font-size: 15px;
     animation: fadeIn 0.3s ease-in-out;
+    margin: 5px 0;
 }
 
 .user-message {
     align-self: flex-end;
-    background-color: #e2f7f1;
-    color: #333;
-    border-radius: 15px 15px 0 15px;
+    background-color: #4CAF50; /* Burbuja de usuario */
+    color: white;
 }
 
 .bot-message {
     align-self: flex-start;
-    background-color: #f1f1f1;
+    background-color: #f1f1f1; /* Burbuja del bot */
     color: #333;
-    border-radius: 15px 15px 15px 0;
 }
 
 @keyframes fadeIn {
@@ -107,28 +105,31 @@ body {
     100% { opacity: 1; }
 }
 
-/* Estilos para el formulario de entrada del chatbot */
+/* Estilos del input y enviar */
 #chatbot-form {
     display: flex;
     padding: 10px;
     border-top: 1px solid #ddd;
+    background-color: #f7f7f7;
 }
 
 #chatbot-input {
     flex-grow: 1;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 15px;
+    border-radius: 20px;
     font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
 }
 
 #chatbot-submit {
-    padding: 10px 15px;
+    padding: 12px 20px;
     margin-left: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -137,18 +138,17 @@ body {
     background-color: #45a049;
 }
 
-/* Estilos para las opciones rápidas de respuesta mejoradas */
+/* Estilos para las opciones rápidas */
 .suggested-question {
     display: inline-block;
     margin: 5px;
-    padding: 10px 15px;
+    padding: 12px 18px;
     background-color: #007BFF;
     color: white;
-    border-radius: 8px;
+    border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 14px;
-    width: 48%; /* Hacemos los botones más pequeños y organizados */
     text-align: center;
 }
 
@@ -181,13 +181,12 @@ body {
     }
 
     #chatbot-messages {
-        max-height: 250px; /* Ajustar la altura del área de mensajes */
+        max-height: 250px;
     }
 
     .suggested-question {
         font-size: 12px;
-        width: 100%; /* Hacer que las preguntas ocupen el 100% en pantallas pequeñas */
-        padding: 8px 12px;
+        width: 100%; /* Botones a 100% de ancho en pantallas pequeñas */
     }
 }
 
