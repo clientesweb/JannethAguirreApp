@@ -30,18 +30,19 @@ body {
     box-sizing: border-box;
 }
 
-/* Estilos para el chatbot */
+/* Estilos principales para el chatbot */
 #ai-real-estate-expert-chatbot .chat-window {
     display: none;
     position: fixed;
-    bottom: 100px;
+    bottom: 20px;
     right: 20px;
-    width: 300px;
-    height: 400px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 350px;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+    transition: all 0.3s ease-in-out;
 }
 
 #ai-real-estate-expert-chatbot .chat-window.active {
@@ -49,32 +50,111 @@ body {
     flex-direction: column;
 }
 
-#chatbot-messages {
-    overflow-y: auto;
-    flex-grow: 1;
+#chatbot-header {
+    background-color: #4CAF50; /* Color de encabezado */
     padding: 10px;
+    color: white;
+    text-align: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    font-size: 18px;
 }
 
+#chatbot-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #e2f7f1;
+    color: #333;
+    border-radius: 15px 15px 0 15px;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+    color: #333;
+    border-radius: 15px 15px 15px 0;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Estilos para el formulario de entrada del chatbot */
 #chatbot-form {
     display: flex;
     padding: 10px;
+    border-top: 1px solid #ddd;
 }
 
 #chatbot-input {
     flex-grow: 1;
-    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 14px;
 }
 
-.suggested-question {
+#chatbot-submit {
+    padding: 10px 15px;
+    margin-left: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
-    background-color: #e2e8f0;
-    padding: 5px 10px;
-    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#chatbot-submit:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para las opciones rápidas de respuesta */
+.suggested-question {
+    display: inline-block;
     margin: 5px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .suggested-question:hover {
-    background-color: #cbd5e0;
+    background-color: #0056b3;
+}
+
+.suggested-question:active {
+    background-color: #004085;
+}
+
+/* Responsividad para dispositivos móviles */
+@media (max-width: 768px) {
+    #ai-real-estate-expert-chatbot .chat-window {
+        width: 95%;
+        height: 70vh;
+        bottom: 10px;
+    }
 }
 
 /* Estilos para el botón de WhatsApp */
