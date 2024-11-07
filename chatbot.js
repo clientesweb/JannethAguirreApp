@@ -1,206 +1,130 @@
-class AriaRealEstateBot {
+class Chatbot {
     constructor() {
-        this.name = "Aria";
-        this.expertise = "Experta en Bienes Raíces";
-        this.locations = {
-            ecuador: this.initEcuadorData(),
-            panama: this.initPanamaData(),
-            usa: this.initUSAData(),
-            samborondon: this.initSamborondonData()
+        this.messages = document.getElementById('chatbot-messages');
+        this.input = document.getElementById('chatbot-input');
+        this.form = document.getElementById('chatbot-form');
+        this.openButton = document.getElementById('open-chatbot');
+        this.closeButton = document.getElementById('close-chatbot');
+        this.chatWindow = document.getElementById('chatbot-window');
+        this.suggestedQuestions = document.getElementById('suggested-questions');
+
+        this.knowledge = {
+            "propiedades": "Ofrecemos una variedad de propiedades, incluyendo departamentos en Nuevo Samborondón, Isla Mocolí, Cuenca, locales comerciales y casas personalizadas.",
+            "servicios": "Nuestros servicios incluyen asesoría legal, avalúo de propiedades, asesoría dentro y fuera de Ecuador, gestión de proyectos, análisis de mercado, gestión de ventas, venta de proyectos en planos y gestión de alquileres.",
+            "contacto": "Puede contactarnos al +593 98 716 7782 o por email a info@jannethaguirre.com. Nuestra oficina está ubicada en Guayaquil, Ecuador.",
+            "sobre_nosotros": "Janneth Aguirre es una representante inmobiliaria líder desde 2009, reconocida en el mercado ecuatoriano por su servicio personalizado y de alta calidad.",
+            "invertir": "Ofrecemos oportunidades de inversión en Samborondón, Estados Unidos y Panamá. Cada ubicación tiene sus ventajas únicas para los inversores.",
+            "proceso_compra": "El proceso de compra generalmente incluye búsqueda de la propiedad, negociación del precio, firma de un contrato de compraventa, obtención de financiamiento si es necesario, y cierre de la transacción.",
+            "documentos_venta": "Para vender una propiedad, generalmente necesitará el título de propiedad, certificado de gravámenes, pago de impuestos al día, y cédula de identidad.",
+            "tiempo_venta": "El tiempo de venta puede variar, pero en promedio puede tomar entre 3 a 6 meses, dependiendo de factores como la ubicación, el precio y las condiciones del mercado."
         };
-        this.commonQuestions = this.initCommonQuestions();
+
+        this.suggestedQuestionsData = [
+            "¿Qué tipos de propiedades ofrecen?",
+            "¿Cuáles son sus servicios principales?",
+            "¿Cómo puedo contactarlos?",
+            "¿Quién es Janneth Aguirre?",
+            "¿Dónde puedo invertir?",
+            "¿Cuál es el proceso de compra de una propiedad?",
+            "¿Qué documentos necesito para vender mi propiedad?",
+            "¿Cuánto tiempo toma vender una propiedad?"
+        ];
+
+        this.addEventListeners();
+        this.displaySuggestedQuestions();
     }
 
-    initEcuadorData() {
-        return {
-            areas: ["Guayaquil", "Quito", "Cuenca", "Samborondón"],
-            propertyTypes: ["Casas", "Departamentos", "Terrenos", "Oficinas"],
-            priceRanges: {
-                economico: "50,000 - 150,000",
-                medio: "150,000 - 300,000",
-                alto: "300,000+"
-            },
-            marketInfo: {
-                tendencias: "Crecimiento sostenido en zonas residenciales premium",
-                rentabilidad: "7-12% anual en zonas prime"
-            }
-        };
+    addEventListeners() {
+        this.form.addEventListener('submit', this.handleSubmit.bind(this));
+        this.openButton.addEventListener('click', this.toggleChat.bind(this));
+        this.closeButton.addEventListener('click', this.toggleChat.bind(this));
+        this.suggestedQuestions.addEventListener('click', this.handleSuggestedQuestion.bind(this));
     }
 
-    initPanamaData() {
-        return {
-            areas: ["Ciudad de Panamá", "Costa del Este", "Punta Pacífica"],
-            propertyTypes: ["Apartamentos de Lujo", "Casas", "Condominios"],
-            priceRanges: {
-                medio: "200,000 - 500,000",
-                alto: "500,000 - 1,000,000",
-                lujo: "1,000,000+"
-            }
-        };
+    toggleChat() {
+        this.chatWindow.classList.toggle('hidden');
     }
 
-    initUSAData() {
-        return {
-            areas: ["Miami", "New York", "Los Angeles", "Houston"],
-            propertyTypes: ["Houses", "Condos", "Apartments", "Land"],
-            priceRanges: {
-                medio: "300,000 - 800,000",
-                alto: "800,000 - 2,000,000",
-                lujo: "2,000,000+"
-            }
-        };
+    handleSubmit(event) {
+        event.preventDefault();
+        const message = this.input.value.trim();
+        if (message !== '') {
+            this.addMessage('user', message);
+            this.input.value = '';
+            this.processMessage(message);
+        }
     }
 
-    initSamborondonData() {
-        return {
-            urbanizaciones: [
-                "La Laguna", 
-                "Ciudad Celeste",
-                "Lagos del Batán",
-                "La Isla"
-            ],
-            amenities: [
-                "Seguridad 24/7",
-                "Areas sociales",
-                "Canchas deportivas",
-                "Club house"
-            ],
-            propertyTypes: {
-                casas: "350,000 - 2,000,000",
-                terrenos: "200,000 - 800,000",
-                departamentos: "180,000 - 500,000"
-            }
-        };
+    addMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('mb-2', sender === 'user' ? 'text-right' : 'text-left');
+        messageElement.innerHTML = `
+            <span class="inline-block bg-${sender === 'user' ? 'blue' : 'gray'}-200 rounded px-2 py-1">
+                ${message}
+            </span>
+        `;
+        this.messages.appendChild(messageElement);
+        this.messages.scrollTop = this.messages.scrollHeight;
     }
 
-    initCommonQuestions() {
-        return {
-            "requisitos_compra": {
-                pregunta: "¿Cuáles son los requisitos para comprar una propiedad?",
-                respuesta: "Los requisitos principales son:\n" +
-                    "1. Identificación válida\n" +
-                    "2. Comprobantes de ingresos\n" +
-                    "3. Referencias bancarias\n" +
-                    "4. Entrada del 20-30% del valor\n" +
-                    "5. Capacidad de endeudamiento demostrable"
-            },
-            "proceso_compra": {
-                pregunta: "¿Cómo es el proceso de compra?",
-                respuesta: "El proceso incluye:\n" +
-                    "1. Selección de la propiedad\n" +
-                    "2. Negociación del precio\n" +
-                    "3. Promesa de compra-venta\n" +
-                    "4. Gestión de financiamiento\n" +
-                    "5. Escrituración\n" +
-                    "6. Entrega de la propiedad"
-            },
-            "financiamiento": {
-                pregunta: "¿Qué opciones de financiamiento hay disponibles?",
-                respuesta: "Ofrecemos múltiples opciones:\n" +
-                    "- Crédito hipotecario bancario\n" +
-                    "- Financiamiento directo del constructor\n" +
-                    "- Planes de pago flexibles\n" +
-                    "- Crédito BIESS (Ecuador)\n" +
-                    "Podemos asesorarte según tu caso específico."
-            }
-        };
+    processMessage(message) {
+        const response = this.generateResponse(message);
+        setTimeout(() => {
+            this.addMessage('bot', response);
+        }, 500);
     }
 
-    processQuery(userInput) {
-        const input = userInput.toLowerCase();
+    generateResponse(message) {
+        message = message.toLowerCase();
         
-        // Verificar si es una pregunta común
-        for (let key in this.commonQuestions) {
-            if (input.includes(this.commonQuestions[key].pregunta.toLowerCase())) {
-                return this.commonQuestions[key].respuesta;
-            }
-        }
-
-        // Procesar consultas específicas por ubicación
-        if (input.includes("samborondon") || input.includes("samborondón")) {
-            return this.getSamborondonInfo(input);
-        } else if (input.includes("ecuador")) {
-            return this.getEcuadorInfo(input);
-        } else if (input.includes("panama") || input.includes("panamá")) {
-            return this.getPanamaInfo(input);
-        } else if (input.includes("estados unidos") || input.includes("usa")) {
-            return this.getUSAInfo(input);
-        }
-
-        // Respuesta por defecto
-        return this.getDefaultResponse();
-    }
-
-    getSamborondonInfo(input) {
-        if (input.includes("urbanización") || input.includes("urbanizacion")) {
-            return `En Samborondón contamos con exclusivas urbanizaciones como: ${this.locations.samborondon.urbanizaciones.join(", ")}. Cada una cuenta con características únicas y amenities de primer nivel.`;
-        }
-        if (input.includes("precio")) {
-            return `Los precios en Samborondón varían según el tipo de propiedad:\n` +
-                   `- Casas: ${this.locations.samborondon.propertyTypes.casas}\n` +
-                   `- Terrenos: ${this.locations.samborondon.propertyTypes.terrenos}\n` +
-                   `- Departamentos: ${this.locations.samborondon.propertyTypes.departamentos}`;
-        }
-        return `Samborondón es una de las zonas más exclusivas y seguras, con múltiples urbanizaciones privadas, excelentes amenities y alta plusvalía. ¿Te gustaría conocer más sobre alguna urbanización en particular?`;
-    }
-
-    getEcuadorInfo(input) {
-        if (input.includes("precio")) {
-            return `En Ecuador manejamos diferentes rangos de precios:\n` +
-                   `- Económico: ${this.locations.ecuador.priceRanges.economico}\n` +
-                   `- Medio: ${this.locations.ecuador.priceRanges.medio}\n` +
-                   `- Alto: ${this.locations.ecuador.priceRanges.alto}`;
-        }
-        return `En Ecuador tenemos propiedades en las principales ciudades: ${this.locations.ecuador.areas.join(", ")}. ¿En qué ciudad estás interesado?`;
-    }
-
-    getPanamaInfo(input) {
-        if (input.includes("zona")) {
-            return `En Panamá nos especializamos en las siguientes zonas: ${this.locations.panama.areas.join(", ")}. Cada zona tiene sus características únicas y ventajas específicas.`;
-        }
-        return `Panamá ofrece excelentes oportunidades de inversión con propiedades desde ${this.locations.panama.priceRanges.medio}. ¿Te gustaría conocer más sobre alguna zona en particular?`;
-    }
-
-    getUSAInfo(input) {
-        if (input.includes("inversión") || input.includes("inversion")) {
-            return `Estados Unidos ofrece excelentes oportunidades de inversión en ciudades como ${this.locations.usa.areas.join(", ")}. Los precios varían según la ubicación y tipo de propiedad.`;
-        }
-        return `En Estados Unidos manejamos propiedades en las principales ciudades, con precios desde ${this.locations.usa.priceRanges.medio}. ¿En qué ciudad estás interesado?`;
-    }
-
-    getDefaultResponse() {
-        return `¡Hola! Soy ${this.name}, ${this.expertise}. Puedo ayudarte con información sobre propiedades en Ecuador, Panamá, Estados Unidos y especialmente en Samborondón. ¿En qué puedo ayudarte?`;
-    }
-
-    getGreeting() {
-        const hora = new Date().getHours();
-        let saludo = "";
-        
-        if (hora >= 5 && hora < 12) {
-            saludo = "¡Buenos días!";
-        } else if (hora >= 12 && hora < 18) {
-            saludo = "¡Buenas tardes!";
+        if (message.includes('propiedad') || message.includes('casa') || message.includes('departamento')) {
+            return this.knowledge.propiedades;
+        } else if (message.includes('servicio')) {
+            return this.knowledge.servicios;
+        } else if (message.includes('contacto') || message.includes('comunicar')) {
+            return this.knowledge.contacto;
+        } else if (message.includes('janneth') || message.includes('sobre ustedes') || message.includes('quienes son')) {
+            return this.knowledge.sobre_nosotros;
+        } else if (message.includes('invertir') || message.includes('inversión')) {
+            return this.knowledge.invertir;
+        } else if (message.includes('proceso de compra') || message.includes('cómo comprar')) {
+            return this.knowledge.proceso_compra;
+        } else if (message.includes('documentos') || message.includes('papeles') || message.includes('vender')) {
+            return this.knowledge.documentos_venta;
+        } else if (message.includes('tiempo') || message.includes('duración') || message.includes('cuánto tarda')) {
+            return this.knowledge.tiempo_venta;
         } else {
-            saludo = "¡Buenas noches!";
+            return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más sobre nuestras propiedades, servicios o proceso de compra/venta?";
         }
-        
-        return `${saludo} Soy ${this.name}, ${this.expertise} de Janneth Aguirre Bienes Raíces. ¿En qué puedo ayudarte hoy?`;
+    }
+
+    displaySuggestedQuestions() {
+        this.suggestedQuestions.innerHTML = '';
+        this.suggestedQuestionsData.forEach(question => {
+            const button = document.createElement('button');
+            button.textContent = question;
+            button.classList.add('suggested-question', 'bg-gray-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm');
+            this.suggestedQuestions.appendChild(button);
+        });
+    }
+
+    handleSuggestedQuestion(event) {
+        if (event.target.classList.contains('suggested-question')) {
+            const question = event.target.textContent;
+            this.addMessage('user', question);
+            this.processMessage(question);
+        }
+    }
+
+    addKnowledge(key, value) {
+        this.knowledge[key] = value;
     }
 }
 
-// Ejemplo de uso
-const ariaBot = new AriaRealEstateBot();
+// Initialize the chatbot when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const chatbot = new Chatbot();
 
-// Función para manejar la interacción del usuario
-function handleUserInput(userMessage) {
-    return ariaBot.processQuery(userMessage);
-}
-
-// Ejemplo de implementación en una interfaz web
-document.addEventListener('DOMContentLoaded', function() {
-    // Mostrar saludo inicial
-    console.log(ariaBot.getGreeting());
-    
-    // Aquí irían los event listeners para el input del usuario
-    // y la lógica para mostrar las respuestas en la interfaz
+    // Example of how to add more knowledge to the chatbot
+    chatbot.addKnowledge('nuevas_propiedades', 'Estamos constantemente agregando nuevas propiedades a nuestro portafolio. Por favor, consulta nuestra sección de propiedades destacadas para ver las últimas adiciones.');
 });
