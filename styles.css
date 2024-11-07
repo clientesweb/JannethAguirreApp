@@ -697,3 +697,38 @@ iframe {
         height: 400px; /* Ajuste de la altura en pantallas pequeñas */
     }
 }
+#testimonials {
+    background-color: #f9fafb;
+}
+
+.testimonial-item {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-5px);
+}
+
+.testimonial-item .text-secondary {
+    color: #6B7280;
+}
+
+.testimonial-item .text-primary {
+    color: #1D4ED8;
+}
+
+.testimonial-item .text-yellow-400 {
+    color: #fbbf24; /* Color de las estrellas */
+}
+
+.testimonial-item .text-gray-500 {
+    color: #6b7280;
+}
+
+.testimonial-item .text-gray-700 {
+    color: #4b5563;
+}
