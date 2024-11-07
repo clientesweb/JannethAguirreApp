@@ -33,9 +33,6 @@ class Chatbot {
 
     toggleChat() {
         this.chatWindow.classList.toggle('hidden');
-        if (!this.chatWindow.classList.contains('hidden')) {
-            this.showInitialSuggestions(); // Al abrir el chat, mostrar opciones iniciales
-        }
     }
 
     handleSubmit(event) {
@@ -64,7 +61,7 @@ class Chatbot {
         const response = this.generateResponse(message);
         setTimeout(() => {
             this.addMessage('bot', response);
-            // Siempre terminar en "contactar" si no se habla de ello
+            // Siempre terminar en "contactar"
             if (!message.toLowerCase().includes("contactar")) {
                 this.addMessage('bot', "Si necesitas más ayuda, no dudes en contactarnos.");
             }
@@ -79,18 +76,7 @@ class Chatbot {
                 return match.answer;
             }
         }
-        // Respuesta cuando no se encuentra información
-        return this.getContactLinks();
-    }
-
-    getContactLinks() {
-        return `
-            Lo siento, no tengo información específica sobre esa consulta. 
-            Si necesitas más ayuda, no dudes en contactarnos:
-            <br>
-            <a href="https://wa.me/1234567890" target="_blank">Contáctanos por WhatsApp</a><br>
-            <a href="https://www.ejemplo.com" target="_blank">Visita nuestra página web</a>
-        `;
+        return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más?";
     }
 
     // Mostrar sugerencias dinámicas mientras el usuario escribe
@@ -104,22 +90,7 @@ class Chatbot {
             }, 300); // Esperar 300ms después de que el usuario termine de escribir
         } else {
             this.suggestedQuestions.innerHTML = ''; // Si no hay texto, quitar sugerencias
-            this.showInitialSuggestions(); // Mostrar sugerencias iniciales
         }
-    }
-
-    // Mostrar opciones iniciales cuando el chat se abre
-    showInitialSuggestions() {
-        this.suggestedQuestions.innerHTML = '';
-        const initialQuestions = ['¿Cómo puedo ayudarte?', '¿Tienes alguna consulta?', 'Hazme una pregunta sobre nuestros servicios'];
-        initialQuestions.forEach(question => {
-            const button = document.createElement('button');
-            button.textContent = question;
-            button.classList.add('category-button', 'bg-blue-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2');
-            
-            button.addEventListener('click', () => this.processMessage(question));
-            this.suggestedQuestions.appendChild(button);
-        });
     }
 
     // Actualizar las categorías sugeridas basadas en el texto ingresado
