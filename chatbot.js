@@ -94,6 +94,7 @@ class Chatbot {
         this.suggestedQuestions.innerHTML = ''; // Limpiar las sugerencias previas
         const matchedCategories = this.getRelevantCategories(message);
 
+        // Mostrar varias sugerencias relacionadas
         matchedCategories.forEach(category => {
             const categoryButton = document.createElement('button');
             categoryButton.textContent = category.replace('_', ' ').toUpperCase();
