@@ -503,6 +503,11 @@ document.addEventListener('DOMContentLoaded', function() {
             galleryImages.appendChild(img);
         });
         
+        // Destruir el slider existente si lo hay
+        if ($(galleryImages).hasClass('slick-initialized')) {
+            $(galleryImages).slick('unslick');
+        }
+        
         // Inicializar el slider de la galería
         $(galleryImages).slick({
             dots: true,
@@ -695,14 +700,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para manejar el preloader
     function handlePreloader() {
+        const preloader = document.getElementById('preloader');
+        const mainContent = document.getElementById('main-content');
+
         window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            preloader.style.opacity = '0';
             setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+                mainContent.classList.remove('hidden');
+            }, 1000);
         });
     }
+
+    // Función para manejar el chatbot
+    function initChatbot() {
+        const chatbotButton = document.getElementById('open-chatbot');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const closeChatbot = document.getElementById('close-chatbot');
+
+        chatbotButton.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('hidden');
+        });
+
+        closeChatbot.addEventListener('click', () => {
+            chatbotWindow.classList.add('hidden');
+        });
+    }
+
 
     // Función para precargar imágenes
     function preloadImages(images) {
@@ -710,6 +734,23 @@ document.addEventListener('DOMContentLoaded', function() {
             const img = new Image();
             img.src = image;
         });
+    }
+    // Función para mejorar la responsividad
+    function improveResponsiveness() {
+        const resizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                if (entry.contentBoxSize) {
+                    // Ajustar estilos basados en el tamaño de la pantalla
+                    if (entry.contentBoxSize[0].inlineSize < 768) {
+                        document.body.classList.add('mobile');
+                    } else {
+                        document.body.classList.remove('mobile');
+                    }
+                }
+            }
+        });
+
+        resizeObserver.observe(document.body);
     }
 
     // Precargar todas las imágenes
@@ -739,4 +780,7 @@ document.addEventListener('DOMContentLoaded', function() {
     handleScrollAnimation();
     handleInstallApp();
     handlePreloader();
+    handleViewDetails();
+    initChatbot();
+    improveResponsiveness();
 });
