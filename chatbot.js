@@ -61,6 +61,10 @@ class Chatbot {
         const response = this.generateResponse(message);
         setTimeout(() => {
             this.addMessage('bot', response);
+            // Siempre terminar en "contactar"
+            if (!message.toLowerCase().includes("contactar")) {
+                this.addMessage('bot', "Si necesitas más ayuda, no dudes en contactarnos. ¿Te gustaría comunicarte por WhatsApp o a través de nuestro sitio web?");
+            }
         }, 500);
     }
 
@@ -72,6 +76,7 @@ class Chatbot {
                 return match.answer;
             }
         }
+        // Si no encontramos respuesta, ofrecemos contacto
         return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más?";
     }
 
@@ -136,6 +141,21 @@ class Chatbot {
             });
             this.suggestedQuestions.appendChild(button);
         });
+    }
+
+    // Redireccionar al WhatsApp o al sitio web si no encontramos respuesta
+    redirectToContactOptions() {
+        this.addMessage('bot', 'Para más información, puedes contactarnos a través de WhatsApp o nuestro sitio web.');
+        setTimeout(() => {
+            const contactMessage = document.createElement('div');
+            contactMessage.classList.add('mb-2', 'text-center');
+            contactMessage.innerHTML = `
+                <a href="https://wa.me/1234567890" target="_blank" class="bg-green-500 text-white rounded px-4 py-2">Contacta por WhatsApp</a>
+                <a href="https://www.jannethaguirrebienesraices.com/" target="_blank" class="bg-blue-500 text-white rounded px-4 py-2">Visita nuestro sitio web</a>
+            `;
+            this.messages.appendChild(contactMessage);
+            this.messages.scrollTop = this.messages.scrollHeight;
+        }, 1000);
     }
 }
 
