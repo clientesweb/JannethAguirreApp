@@ -76,10 +76,10 @@ $button-active-color: #B30000; // Rojo más oscuro al hacer clic
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 370px;
-    height: 500px;
+    width: 500px;  // Ancho mayor para hacerlo más horizontal
+    height: 380px; // Ajustar altura para que sea más rectangular
     background-color: $secondary-bg-color;
-    border-radius: 20px;
+    border-radius: 15px; // Bordes más suaves
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     overflow: hidden;
@@ -93,22 +93,24 @@ $button-active-color: #B30000; // Rojo más oscuro al hacer clic
     flex-direction: column;
 }
 
+// Ajustar el header para hacerlo más moderno
 #chatbot-header {
     background-color: $primary-bg-color;
     padding: 15px;
     color: white;
-    text-align: center;
+    text-align: left; // Cambiar para un diseño más limpio
     font-size: 18px;
-    border-radius: 20px 20px 0 0;
+    border-radius: 15px 15px 0 0;  // Bordes más suaves
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
 
 #chatbot-header img {
-    height: 30px; /* Tamaño del logo ajustado */
+    height: 35px;  // Ajuste del logo
 }
 
+// Ajustar el área de mensajes
 #chatbot-messages {
     flex-grow: 1;
     overflow-y: auto;
@@ -118,9 +120,11 @@ $button-active-color: #B30000; // Rojo más oscuro al hacer clic
     display: flex;
     flex-direction: column;
     gap: 12px;
+    max-height: 250px; // Limitar altura para no ocupar todo el espacio
     @include fancy-scrollbar();
 }
 
+// Ajustes en los mensajes
 .chat-message {
     padding: 12px 18px;
     max-width: 80%;
@@ -131,6 +135,7 @@ $button-active-color: #B30000; // Rojo más oscuro al hacer clic
     margin: 5px 0;
 }
 
+// Mensaje del usuario
 .user-message {
     align-self: flex-end;
     background-color: $primary-bg-color;
@@ -140,16 +145,7 @@ $button-active-color: #B30000; // Rojo más oscuro al hacer clic
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.user-message::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: -8px;
-    border-left: 8px solid transparent;
-    border-bottom: 8px solid $primary-bg-color;
-    border-top: 8px solid transparent;
-}
-
+// Mensaje del bot
 .bot-message {
     align-self: flex-start;
     background-color: #f1f1f1;
@@ -157,16 +153,6 @@ $button-active-color: #B30000; // Rojo más oscuro al hacer clic
     position: relative;
     border-radius: 20px 20px 20px 0;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.bot-message::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -8px;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid #f1f1f1;
-    border-top: 8px solid transparent;
 }
 
 @keyframes fadeIn {
@@ -180,6 +166,7 @@ $button-active-color: #B30000; // Rojo más oscuro al hacer clic
     padding: 10px;
     border-top: 1px solid #ddd;
     background-color: #f7f7f7;
+    border-radius: 0 0 15px 15px;  // Bordes redondeados en la parte inferior
 }
 
 #chatbot-input {
@@ -211,7 +198,7 @@ $button-active-color: #B30000; // Rojo más oscuro al hacer clic
     background-color: $button-active-color;
 }
 
-// Estilos para las opciones rápidas (preguntas sugeridas)
+// Ajustes para preguntas sugeridas
 .suggested-question {
     display: inline-block;
     margin: 5px;
@@ -233,7 +220,6 @@ $button-active-color: #B30000; // Rojo más oscuro al hacer clic
     background-color: $button-active-color;
 }
 
-// Contenedor para las preguntas sugeridas
 .suggested-questions-container {
     display: flex;
     flex-wrap: wrap;
@@ -245,7 +231,7 @@ $button-active-color: #B30000; // Rojo más oscuro al hacer clic
 @media (max-width: 768px) {
     #chatbot {
         width: 90%;
-        height: 70vh;
+        height: 65vh; // Ajuste para pantallas más pequeñas
         bottom: 10px;
     }
 
@@ -259,64 +245,14 @@ $button-active-color: #B30000; // Rojo más oscuro al hacer clic
 
     .suggested-question {
         font-size: 12px;
-        width: 100%; /* Botones a 100% de ancho en pantallas pequeñas */
+        width: 100%; // Asegurarse de que se ajusten en pantallas pequeñas
     }
 }
 
 @media (max-width: 480px) {
     #chatbot {
         width: 100%;
-        height: 60vh;
-    }
-
-    #chatbot-header {
-        font-size: 14px;
-    }
-
-    #chatbot-input {
-        font-size: 12px;
-    }
-
-    .suggested-question {
-        font-size: 12px;
-        padding: 6px 10px;
-    }
-}
-
-/* Agrupar las preguntas sugeridas */
-.suggested-questions-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-/* Responsividad para dispositivos móviles */
-@media (max-width: 768px) {
-    #ai-real-estate-expert-chatbot .chat-window {
-        width: 90%;
-        height: 70vh;
-        bottom: 10px;
-    }
-
-    #chatbot-header {
-        font-size: 16px;
-    }
-
-    #chatbot-messages {
-        max-height: 250px;
-    }
-
-    .suggested-question {
-        font-size: 12px;
-        width: 100%; /* Botones a 100% de ancho en pantallas pequeñas */
-    }
-}
-
-@media (max-width: 480px) {
-    #ai-real-estate-expert-chatbot .chat-window {
-        width: 100%;
-        height: 60vh;
+        height: 60vh; // Ajuste aún más pequeño en pantallas muy pequeñas
     }
 
     #chatbot-header {
