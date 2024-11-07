@@ -70,6 +70,31 @@ body {
 
 .suggested-question:hover {
     background-color: #e2e8f0;
+#open-chatbot {
+    background-color: white; /* Fondo blanco para el botón flotante */
+    color: #000; /* Color del ícono dentro del botón, negro para buen contraste */
+    border: 2px solid #ccc; /* Borde gris claro alrededor del botón */
+    width: 56px; /* Tamaño del botón flotante */
+    height: 56px;
+    border-radius: 50%; /* Hace el botón redondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Fijar el botón en la pantalla */
+    bottom: 36px; /* Distancia desde el fondo de la pantalla */
+    right: 4px; /* Distancia desde el lado derecho */
+    z-index: 50; /* Asegura que se muestra sobre otros elementos */
+    box-shadow: 0 0 10px rgba(0,0,0,0.2); /* Sombra sutil para dar efecto flotante */
+    cursor: pointer; /* Cambia el cursor a mano al pasar sobre el botón */
+}
+
+#open-chatbot:hover {
+    background-color: #f0f0f0; /* Cambio de color cuando el cursor pasa sobre el botón */
+}
+
+#open-chatbot img {
+    width: 30px; /* Tamaño del ícono dentro del botón */
+    height: 30px;
 }
 /* Estilos para el botón de WhatsApp */
 .whatsapp-button {
@@ -667,4 +692,19 @@ iframe {
 
 .gap-4 {
     gap: 1rem;
+}
+#powered-by {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.powered-by-link {
+    color: red;
+    font-weight: bold;
+    text-decoration: none; /* Sin subrayado por defecto */
+}
+
+.powered-by-link:hover {
+    text-decoration: underline; /* Subrayado cuando el cursor pasa por encima */
 }
