@@ -3,19 +3,22 @@
     --primary-color: #FF0000;
     --secondary-color: #808080;
     --background-color: #FFFFFF;
+    --text-color: #333333;
     --theme-color: #FF0000;
+    --transition-speed: 0.3s;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--background-color);
-    color: #333;
+    color: var(--text-color);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='%23f0f0f0'/%3E%3Cpath d='M30 30 L70 30 L50 10 Z' fill='%23e0e0e0'/%3E%3Crect x='40' y='30' width='20' height='20' fill='%23d0d0d0'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 100px 100px;
+    line-height: 1.6;
 }
 
 /* Contenedor principal */
@@ -23,52 +26,31 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 1rem;
     box-sizing: border-box;
 }
-
-@media (min-width: 1024px) {
-    .container {
-        padding: 0 30px;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-    .container {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}
-
-@media (min-width: 1025px) {
-    .container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-}
-
 
 /* Estilos para el chatbot */
 #ai-real-estate-expert-chatbot {
     position: fixed;
-    bottom: 140px;
-    right: 20px;
+    bottom: 9rem;
+    right: 1.25rem;
     z-index: 1001;
 }
 
 #ai-real-estate-expert-chatbot .chat-button {
     background-color: var(--primary-color);
     color: white;
-    width: 60px;
-    height: 60px;
+    width: 3.75rem;
+    height: 3.75rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 1.5rem;
     cursor: pointer;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-speed) ease;
 }
 
 #ai-real-estate-expert-chatbot .chat-button:hover {
@@ -77,12 +59,12 @@ body {
 
 #ai-real-estate-expert-chatbot .chat-window {
     position: absolute;
-    bottom: 70px;
+    bottom: 4.375rem;
     right: 0;
-    width: 300px;
-    height: 400px;
+    width: 18.75rem;
+    height: 25rem;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     display: none;
 }
@@ -90,20 +72,20 @@ body {
 /* Estilos para el botón de WhatsApp */
 .whatsapp-button {
     position: fixed;
-    bottom: 80px;
-    right: 20px;
+    bottom: 5rem;
+    right: 1.25rem;
     background-color: #25D366;
     color: white;
-    width: 60px;
-    height: 60px;
+    width: 3.75rem;
+    height: 3.75rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
+    font-size: 1.875rem;
     cursor: pointer;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-speed) ease;
     z-index: 1000;
 }
 
@@ -121,7 +103,7 @@ body {
     left: 0;
     right: 0;
     background-color: var(--theme-color);
-    padding: 10px;
+    padding: 0.625rem;
     z-index: 999;
 }
 
@@ -136,15 +118,15 @@ body {
 
 .bottom-nav i {
     font-size: 1.2rem;
-    margin-bottom: 5px;
+    margin-bottom: 0.3125rem;
 }
 
 /* Estilos para las tarjetas de propiedades */
 .property-card {
     flex: 0 0 auto;
-    width: 300px;
+    width: 18.75rem;
     margin-right: 1rem;
-    transition: transform 0.3s ease-in-out;
+    transition: transform var(--transition-speed) ease-in-out;
     background-color: white;
     border-radius: 0.5rem;
     overflow: hidden;
@@ -156,32 +138,22 @@ body {
 }
 
 /* Estilos para los sliders */
-.propiedades-slider, #properties-grid {
+.propiedades-slider, #properties-grid, .youtube-slider, #store-slider {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding-bottom: 1rem;
-    gap: 20px;
-    padding: 20px 0;
+    gap: 1.25rem;
+    padding: 1.25rem 0;
 }
 
-.propiedades-slider::-webkit-scrollbar, #properties-grid::-webkit-scrollbar {
+.propiedades-slider::-webkit-scrollbar, 
+#properties-grid::-webkit-scrollbar,
+.youtube-slider::-webkit-scrollbar, 
+#store-slider::-webkit-scrollbar {
     display: none;
-}
-
-@media (min-width: 640px) {
-    .property-card {
-        width: calc(50% - 10px);
-    }
-}
-
-@media (min-width: 1024px) {
-    .property-card {
-        width: calc(33.333% - 13.333px);
-    }
 }
 
 /* Estilos para los sliders */
@@ -200,52 +172,30 @@ body {
 }
 
 .hero-slider .slick-slide {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 5rem);
     background-size: cover;
     background-position: center;
-    min-height: 400px;
-}
-
-@media (min-width: 768px) {
-    .hero-slider .slick-slide {
-        height: calc(100vh - 100px);
-        min-height: 600px;
-    }
+    min-height: 25rem;
 }
 
 .hero-slider .slick-dots {
-    bottom: 20px;
+    bottom: 1.25rem;
 }
 
 .hero-slider .slick-dots li button:before {
     color: white;
 }
 
-.youtube-slider, #store-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    gap: 20px;
-    padding: 20px 0;
-}
-
-.youtube-slider::-webkit-scrollbar, #store-slider::-webkit-scrollbar {
-    display: none;
-}
-
 .youtube-video {
     flex: 0 0 100%;
     scroll-snap-align: start;
-    padding: 0 10px;
+    padding: 0 0.625rem;
 }
 
 .youtube-video iframe {
     width: 100%;
     height: 56.25vw;
-    max-height: 315px;
+    max-height: 19.6875rem;
 }
 
 #store-slider .property-card {
@@ -270,16 +220,16 @@ body {
 .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: max-height var(--transition-speed) ease-out;
 }
 
 .faq-item.active .faq-answer {
-    max-height: 500px;
+    max-height: 31.25rem;
     transition: max-height 0.5s ease-in;
 }
 
 .faq-icon {
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-speed) ease;
 }
 
 .faq-item.active .faq-icon {
@@ -289,7 +239,7 @@ body {
 /* Estilos para la galería */
 #gallery-modal {
     background-color: rgba(0, 0, 0, 0.9);
-    transition: opacity 0.3s ease;
+    transition: opacity var(--transition-speed) ease;
 }
 
 #gallery-modal .modal-content {
@@ -297,9 +247,9 @@ body {
     max-height: 90vh;
     overflow-y: auto;
     background-color: transparent;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    color: white; /* Update 1: Changed text color to white */
+    color: white;
 }
 
 #gallery-images {
@@ -317,7 +267,7 @@ body {
     height: auto;
     object-fit: contain;
     scroll-snap-align: center;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-speed) ease;
 }
 
 .gallery-nav {
@@ -326,12 +276,12 @@ body {
     transform: translateY(-50%);
     background-color: rgba(255, 255, 255, 0.2);
     color: white;
-    padding: 15px;
+    padding: 0.9375rem;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 1.5rem;
     z-index: 1002;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-speed) ease;
 }
 
 .gallery-nav:hover {
@@ -339,11 +289,11 @@ body {
 }
 
 #prev-image {
-    left: 20px;
+    left: 1.25rem;
 }
 
 #next-image {
-    right: 20px;
+    right: 1.25rem;
 }
 
 /* Estilos adicionales */
@@ -364,139 +314,25 @@ body {
 #back-to-top {
     display: none;
     position: fixed;
-    bottom: 20px;
-    right: 30px;
+    bottom: 1.25rem;
+    right: 1.875rem;
     z-index: 99;
     border: none;
     outline: none;
     background-color: var(--primary-color);
     color: white;
     cursor: pointer;
-    padding: 15px;
+    padding: 0.9375rem;
     border-radius: 50%;
-    font-size: 18px;
-    transition: opacity 0.3s;
+    font-size: 1.125rem;
+    transition: opacity var(--transition-speed);
 }
 
 #back-to-top:hover {
     opacity: 0.8;
 }
 
-/* Media queries para responsividad */
-@media (min-width: 641px) {
-    .youtube-video, #store-slider .property-card {
-        flex: 0 0 50%;
-    }
-}
-
-@media (min-width: 1024px) {
-    .youtube-video, #store-slider .property-card {
-        flex: 0 0 33.333%;
-    }
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 0 15px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.75rem;
-    }
-
-    .property-card {
-        width: calc(100% - 20px);
-        margin: 10px;
-    }
-
-    #ai-real-estate-expert-chatbot {
-        bottom: 160px;
-        right: 10px;
-    }
-
-    #ai-real-estate-expert-chatbot .chat-button {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-    }
-
-    .whatsapp-button {
-        bottom: 100px;
-        right: 10px;
-        width: 50px;
-        height: 50px;
-        font-size: 25px;
-    }
-
-    .bottom-nav {
-        display: flex;
-    }
-
-    .hero-slider .slick-slide {
-        height: calc(100vh - 60px);
-    }
-
-    #gallery-modal .modal-content {
-        max-width: 95%;
-    }
-
-    .gallery-nav {
-        padding: 10px;
-        font-size: 20px;
-    }
-
-    #prev-image {
-        left: 10px;
-    }
-
-    #next-image {
-        right: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.75rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .youtube-video iframe {
-        height: 180px;
-    }
-
-    #ai-real-estate-expert-chatbot {
-        bottom: 140px;
-    }
-
-    .whatsapp-button {
-        bottom: 100px;
-    }
-
-    .property-card {
-        width: 100%;
-        margin: 10px 0;
-    }
-
-    #gallery-modal .modal-content {
-        max-width: 100%;
-        height: 100vh;
-        border-radius: 0;
-    }
-
-    .gallery-nav {
-        padding: 8px;
-        font-size: 18px;
-    }
-}
-
-/* Estilos para la nueva sección "Quienes Somos" */
+/* Estilos para la sección "Quienes Somos" */
 #quienes-somos {
     background-color: #f8f9fa;
     padding: 4rem 0;
@@ -506,7 +342,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 1200px;
+    max-width: 75rem;
 }
 
 #quienes-somos img {
@@ -523,7 +359,7 @@ body {
 
 #quienes-somos p {
     text-align: center;
-    max-width: 800px;
+    max-width: 50rem;
     margin: 0 auto;
 }
 
@@ -533,31 +369,7 @@ body {
 }
 
 .quienes-somos-slider .slick-slide {
-    padding: 0 10px;
-}
-
-/* Estilos para la sección de propiedades destacadas */
-.propiedades-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: 1rem;
-    gap: 20px;
-    padding: 20px 0;
-}
-
-.propiedades-slider::-webkit-scrollbar {
-    display: none;
-}
-
-.propiedades-slider .property-card {
-    flex: 0 0 auto;
-    width: 300px;
-    margin-right: 1rem;
-    scroll-snap-align: start;
+    padding: 0 0.625rem;
 }
 
 /* Actualización de estilos para la sección de servicios */
@@ -568,7 +380,7 @@ body {
 
 #service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
     gap: 2rem;
 }
 
@@ -577,7 +389,7 @@ body {
     border-radius: 0.5rem;
     padding: 2rem;
     text-align: center;
-    transition: transform 0.3s ease-in-out;
+    transition: transform var(--transition-speed) ease-in-out;
 }
 
 .service-card:hover {
@@ -600,34 +412,13 @@ body {
     color: #666;
 }
 
-/* Media queries para responsividad */
-@media (min-width: 768px) {
-    #quienes-somos .flex-col {
-        flex-direction: row;
-    }
-
-    #quienes-somos .lg\:w-1/2 {
-        width: 50%;
-    }
-
-    #quienes-somos .lg\:pl-12 {
-        padding-left: 3rem;
-    }
-}
-
-@media (max-width: 767px) {
-    #service-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* Estilos para la sección invertir-samborondon */
 #invertir-samborondon .grid {
     gap: 1.5rem;
 }
 
 #invertir-samborondon .bg-white {
-    transition: transform 0.3s ease-in-out;
+    transition: transform var(--transition-speed) ease-in-out;
 }
 
 #invertir-samborondon .bg-white:hover {
@@ -647,33 +438,6 @@ body {
     background-color: rgba(255, 0, 0, 0.9);
 }
 
-/* Estilos para la sección de propiedades en grid */
-#properties-grid {
-    display: grid;
-    gap: 1.5rem;
-}
-
-/* Estilos para la galería de imágenes */
-.gallery-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.gallery-slider::-webkit-scrollbar {
-    display: none;
-}
-
-.gallery-slider img {
-    flex: 0 0 auto;
-    width: 100%;
-    height: auto;
-    scroll-snap-align: start;
-}
-
 /* Estilos para el preloader */
 #preloader {
     position: fixed;
@@ -690,8 +454,8 @@ body {
 
 .loader {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 6.25rem;
+    height: 6.25rem;
 }
 
 .loader img {
@@ -703,10 +467,10 @@ body {
 .loader::after {
     content: '';
     position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
+    top: -0.625rem;
+    left: -0.625rem;
+    right: -0.625rem;
+    bottom: -0.625rem;
     border: 3px solid var(--primary-color);
     border-radius: 50%;
     animation: pulse 1.5s linear infinite;
@@ -727,49 +491,46 @@ body {
     }
 }
 
-/* Estilos para el slider de propiedades */
-.properties-slider {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    gap: 20px;
-    padding: 20px 0;
-}
-
-.properties-slider::-webkit-scrollbar {
-    display: none;
-}
-
-#properties-grid {
-    display: flex;
-    gap: 1rem;
-}
-
-.property-card {
-    flex: 0 0 auto;
-    width: 300px;
-    scroll-snap-align: start;
-}
-
 /* Estilos para el efecto de arrastre del slider */
 .properties-slider.active {
     cursor: grabbing;
     cursor: -webkit-grabbing;
 }
 
+/* Media queries para responsividad */
+@media (min-width: 640px) {
+    .youtube-video, #store-slider .property-card {
+        flex: 0 0 50%;
+    }
+}
 
-/* Mejoras de responsividad */
+@media (min-width: 1024px) {
+    .youtube-video, #store-slider .property-card {
+        flex: 0 0 33.333%;
+    }
+
+    #quienes-somos .flex-col {
+        flex-direction: row;
+    }
+
+    #quienes-somos .lg\:w-1/2 {
+        width: 50%;
+    }
+
+    #quienes-somos .lg\:pl-12 {
+        padding-left: 3rem;
+    }
+}
+
 @media (max-width: 1024px) {
     .container {
-        padding: 0 20px;
+        padding: 0 1.25rem;
     }
 }
 
 @media (max-width: 768px) {
     body {
-        font-size: 14px;
+        font-size: 0.875rem;
     }
 
     h1 {
@@ -781,19 +542,61 @@ body {
     }
 
     .property-card {
-        width: calc(50% - 20px);
+        width: calc(50% - 1.25rem);
     }
-    .propiedades-slider,
-    .youtube-slider,
-    #store-slider {
-        gap: 15px;
-        padding: 15px 0;
+
+    #ai-real-estate-expert-chatbot {
+        bottom: 10rem;
+        right: 0.625rem;
+    }
+
+    #ai-real-estate-expert-chatbot .chat-button {
+        width: 3.125rem;
+        height: 3.125rem;
+        font-size: 1.25rem;
+    }
+
+    .whatsapp-button {
+        bottom: 6.25rem;
+        right: 0.625rem;
+        width: 3.125rem;
+        height: 3.125rem;
+        font-size: 1.5625rem;
+    }
+
+    .bottom-nav {
+        display: flex;
+    }
+
+    .hero-slider .slick-slide {
+        height: calc(100vh - 3.75rem);
+    }
+
+    #gallery-modal .modal-content {
+        max-width: 95%;
+    }
+
+    .gallery-nav {
+        padding: 0.625rem;
+        font-size: 1.25rem;
+    }
+
+    #prev-image {
+        left: 0.625rem;
+    }
+
+    #next-image {
+        right: 0.625rem;
+    }
+
+    #service-grid {
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 480px) {
     body {
-        font-size: 12px;
+        font-size: 0.75rem;
     }
 
     h1 {
@@ -804,29 +607,47 @@ body {
         font-size: 1.75rem;
     }
 
+    .youtube-video iframe {
+        height: 11.25rem;
+    }
+
+    #ai-real-estate-expert-chatbot {
+        bottom: 8.75rem;
+    }
+
+    .whatsapp-button {
+        bottom: 6.25rem;
+    }
+
     .property-card {
         width: 100%;
+        margin: 0.625rem 0;
+    }
+
+    #gallery-modal .modal-content {
+        max-width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .gallery-nav {
+        padding: 0.5rem;
+        font-size: 1.125rem;
     }
 
     #quienes-somos img {
         max-width: 80%;
-    }
-    .propiedades-slider,
-    .youtube-slider,
-    #store-slider {
-        gap: 10px;
-        padding: 10px 0;
     }
 }
 
 /* Ajustes para pantallas más grandes */
 @media (min-width: 1440px) {
     .container {
-        max-width: 1400px;
+        max-width: 87.5rem;
     }
 
     body {
-        font-size: 18px;
+        font-size: 1.125rem;
     }
 }
 
@@ -838,52 +659,10 @@ iframe {
     height: auto;
 }
 
-/* Improved Slider Responsiveness */
-.propiedades-slider,
-.youtube-slider,
-#store-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    gap: 20px;
-    padding: 20px 0;
-}
-
-.propiedades-slider::-webkit-scrollbar,
-.youtube-slider::-webkit-scrollbar,
-#store-slider::-webkit-scrollbar {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .propiedades-slider,
-    .youtube-slider,
-    #store-slider {
-        gap: 15px;
-        padding: 15px 0;
-    }
-}
-
-@media (max-width: 480px) {
-    .propiedades-slider,
-    .youtube-slider,
-    #store-slider {
-        gap: 10px;
-        padding: 10px 0;
-    }
-}
 .flex-wrap {
     flex-wrap: wrap;
 }
 
 .gap-4 {
     gap: 1rem;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
 }
