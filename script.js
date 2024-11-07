@@ -516,68 +516,54 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         showPropertyModal(property) {
-            const modal = document.getElementById('gallery-modal');
-            const galleryImages = document.getElementById('gallery-images');
-            const galleryInfo = document.getElementById('gallery-info');
-            
-            galleryImages.innerHTML = '';
+    const modal = document.getElementById('gallery-modal');
+    const galleryImages = document.getElementById('gallery-images');
+    const galleryInfo = document.getElementById('gallery-info');
+    
+    galleryImages.innerHTML = '';
 
-            const imagesToShow = property.gallery.slice(0, 5);
+    const imagesToShow = property.gallery.slice(0, 5);
+    
+    imagesToShow.forEach((image, index) => {
+        const img = document.createElement('img');
+        img.src = image;
+        img.alt = `${property.title} - Imagen ${index + 1}`;
+        img.className = 'w-full h-64 object-cover cursor-pointer';
+        img.onclick = () => this.showFullImage(image, index, imagesToShow);
+        galleryImages.appendChild(img);
+    });
+    
+    if ($(galleryImages).hasClass('slick-initialized')) {
+        $(galleryImages).slick('unslick');
+    }
+    
+    $(galleryImages).slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000
+    });
             
-            imagesToShow.forEach((image, index) => {
-                const img = document.createElement('img');
-                img.src = image;
-                img.alt = `${property.title} - Imagen ${index + 1}`;
-                img.className = 'w-full h-64 object-cover cursor-pointer';
-                img.onclick = () => this.showFullImage(image, index, imagesToShow);
-                galleryImages.appendChild(img);
-            });
-            
-            if ($(galleryImages).hasClass('slick-initialized')) {
-                $(galleryImages).slick('unslick');
-            }
-            
-            $(galleryImages).slick({
-                dots: true,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000
-            });
-                
-            galleryInfo.innerHTML = `
-                <h3 class="text-xl font-bold mb-2">${property.title}</h3>
-                <p class="mb-2"><strong>Precio:</strong> ${property.price}</p>
-                <p class="mb-4">${property.description}</p>
-                <h4 class="font-bold mb-2">Características:</h4>
-                <ul class="list-disc pl-5 mb-4">
-                    ${property.features ? property.features.map(feature => `<li>${feature}</li>`).join('') : ''}
-                </ul>
-                <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Contactar Agente</button>
-            `;
-            
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        closeGalleryModal() {
-            const modal = document.getElementById('gallery-modal');
-            const closeButton = document.getElementById('close-modal');
-            
-            closeButton.addEventListener('click', () => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            });
-            
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                }
-            });
-        }
+    galleryInfo.innerHTML = `
+        <h3 class="text-xl font-bold mb-2">${property.title}</h3>
+        <p class="mb-2"><strong>Precio:</strong> ${property.price}</p>
+        <p class="mb-4">${property.description}</p>
+        <h4 class="font-bold mb-2">Características:</h4>
+        <ul class="list-disc pl-5 mb-4">
+            ${property.features ? property.features.map(feature => `<li>${feature}</li>`).join('') : ''}
+        </ul>
+        <!-- Botón que redirige a WhatsApp -->
+        <a href="https://wa.me/593987167782?text=Hola,%20me%20interesa%20más%20información%20sobre%20${property.title}" target="_blank">
+            <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Contactar Agente</button>
+        </a>
+    `;
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
 
         async loadYouTubeVideos() {
             const youtubeContainer = document.getElementById('youtube-slider');
