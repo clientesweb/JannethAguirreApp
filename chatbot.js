@@ -7,25 +7,23 @@ class Chatbot {
         this.closeButton = document.getElementById('close-chatbot');
         this.chatWindow = document.getElementById('chatbot-window');
         this.suggestedQuestions = document.getElementById('suggested-questions');
-
-        // Datos de preguntas y respuestas directamente en el código
-        this.knowledge = [
-            { question: '¿Qué servicios ofrecen?', answer: 'Ofrecemos una amplia gama de servicios, incluyendo diseño web, desarrollo de aplicaciones, y consultoría.' },
-            { question: '¿Cómo puedo contactar?', answer: 'Puedes contactarnos a través del formulario en nuestra página de contacto o enviándonos un correo electrónico a contacto@empresa.com.' },
-            { question: '¿Cuáles son los precios?', answer: 'Los precios dependen de los servicios que necesites. Por favor, contáctanos para una cotización personalizada.' },
-            { question: '¿Tienen soporte técnico?', answer: 'Sí, ofrecemos soporte técnico para nuestros clientes durante y después de la implementación de sus proyectos.' }
-        ];
-
-        this.suggestedQuestionsData = [
-            '¿Qué servicios ofrecen?',
-            '¿Cómo puedo contactar?',
-            '¿Cuáles son los precios?',
-            '¿Tienen soporte técnico?'
-        ];
-
-        this.displaySuggestedQuestions();
+        
+        // Cargar las preguntas y respuestas desde el archivo JSON
+        this.loadKnowledge();
 
         this.addEventListeners();
+    }
+
+    // Cargar el archivo JSON
+    async loadKnowledge() {
+        try {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            this.knowledge = data; // Todo el JSON cargado
+            this.displaySuggestedQuestions();
+        } catch (error) {
+            console.error("Error al cargar el archivo JSON:", error);
+        }
     }
 
     addEventListeners() {
@@ -71,22 +69,40 @@ class Chatbot {
     // Filtrar preguntas y generar la respuesta
     generateResponse(message) {
         message = message.toLowerCase();
-        const match = this.knowledge.find(item => message.includes(item.question.toLowerCase()));
+        // Revisar en cada categoría
+        for (let category in this.knowledge) {
+            const match = this.knowledge[category].find(item => message.includes(item.question.toLowerCase()));
+            if (match) {
+                return match.answer;
+            }
+        }
+        return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más?";
+    }
 
-        if (match) {
-            return match.answer;
-        } else {
-            return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más?";
+    // Mostrar preguntas sugeridas con filtrado
+    displaySuggestedQuestions() {
+        this.suggestedQuestions.innerHTML = '';
+        
+        // Recorrer cada categoría y mostrar las primeras preguntas
+        for (let category in this.knowledge) {
+            const categoryButton = document.createElement('button');
+            categoryButton.textContent = category.replace('_', ' ').toUpperCase();
+            categoryButton.classList.add('category-button', 'bg-blue-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2');
+            categoryButton.addEventListener('click', () => this.showCategoryQuestions(category));
+            this.suggestedQuestions.appendChild(categoryButton);
         }
     }
 
-    displaySuggestedQuestions() {
-        this.suggestedQuestions.innerHTML = '';
-        this.suggestedQuestionsData.forEach(question => {
+    // Mostrar las preguntas dentro de una categoría
+    showCategoryQuestions(category) {
+        const questionsContainer = document.getElementById('category-questions');
+        questionsContainer.innerHTML = ''; // Limpiar el contenedor antes de añadir nuevas preguntas
+        this.knowledge[category].forEach(item => {
             const button = document.createElement('button');
-            button.textContent = question;
+            button.textContent = item.question;
             button.classList.add('suggested-question', 'bg-gray-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm');
-            this.suggestedQuestions.appendChild(button);
+            button.addEventListener('click', () => this.handleSuggestedQuestion({ target: button }));
+            questionsContainer.appendChild(button);
         });
     }
 
