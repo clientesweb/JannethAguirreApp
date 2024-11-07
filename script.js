@@ -125,10 +125,25 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const testimonials = [
-        { name: "Juan Pérez", text: "Excelente servicio, encontré mi casa ideal gracias a Janneth Aguirre." },
-        { name: "María González", text: "Profesionalismo y dedicación en cada paso del proceso de compra." },
-        { name: "Carlos Rodríguez", text: "La mejor experiencia en venta de propiedades. Altamente recomendado." }
-    ];
+    {
+        name: "Juan Pérez",
+        text: "Excelente servicio, encontré mi casa ideal gracias a Janneth Aguirre. Desde el primer momento me ofrecieron opciones que se ajustaban a mis necesidades, y todo el proceso fue transparente y fácil de seguir. El equipo se encargó de cada detalle, desde la negociación hasta la firma. Estoy muy contento con mi compra y la atención que recibí. ¡Recomiendo totalmente sus servicios!",
+        rating: 5, // Calificación de 1 a 5 estrellas
+        date: "Enero 2024"
+    },
+    {
+        name: "María González",
+        text: "Profesionalismo y dedicación en cada paso del proceso de compra. Me acompañaron durante todo el proceso, desde la búsqueda hasta la firma del contrato, explicándome todo con mucha claridad. Además, me brindaron asesoría sobre la mejor opción de financiamiento, lo cual hizo todo mucho más fácil. Estoy muy agradecida por la atención y la calidad de servicio.",
+        rating: 5, // Calificación de 1 a 5 estrellas
+        date: "Marzo 2024"
+    },
+    {
+        name: "Carlos Rodríguez",
+        text: "La mejor experiencia en venta de propiedades. Altamente recomendado. Desde el primer contacto hasta la venta final, todo fue rápido y eficiente. El equipo de Janneth Aguirre se encargó de gestionar cada detalle, manteniéndome informado en todo momento. Me dieron una excelente estrategia de venta y pude lograr una transacción rápida y beneficiosa.",
+        rating: 5, // Calificación de 1 a 5 estrellas
+        date: "Febrero 2024"
+    }
+];
 
     const instagramPosts = [
         { image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" },
