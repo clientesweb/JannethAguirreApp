@@ -106,14 +106,45 @@ document.addEventListener("DOMContentLoaded", function() {
   function handleUserMessage(message) {
     showMessage(message, "user");
 
-    let response = "";
-    if (message.toLowerCase().includes("propiedad")) {
-      response = getFilteredResponse("propiedades");
-    } else if (message.toLowerCase().includes("servicio")) {
-      response = getFilteredResponse("servicios");
-    } else if (message.toLowerCase().includes("contacto")) {
-      response = getFilteredResponse("contacto");
-    } else if (message.toLowerCase().includes("invertir")) {
-      response = getFilteredResponse("invertir");
-    } else if (message.toLowerCase().includes("compra")) {
-      response = get
+    response = getFilteredResponse("proceso_compra");
+    } else if (message.toLowerCase().includes("documentos")) {
+      response = getFilteredResponse("documentos_venta");
+    } else if (message.toLowerCase().includes("tiempo venta")) {
+      response = getFilteredResponse("tiempo_venta");
+    } else if (message.toLowerCase().includes("alquiler")) {
+      response = getFilteredResponse("alquileres");
+    } else if (message.toLowerCase().includes("tendencias")) {
+      response = getFilteredResponse("tendencias_inmobiliarias");
+    } else if (message.toLowerCase().includes("asesoria")) {
+      response = getFilteredResponse("asesoria_investment");
+    } else if (message.toLowerCase().includes("proyectos")) {
+      response = getFilteredResponse("proyectos_en_plano");
+    } else {
+      response = data.respuestas_completas[Math.floor(Math.random() * data.respuestas_completas.length)];
+    }
+
+    setTimeout(() => {
+      showMessage(response, "bot");
+    }, 1000); // Retraso para simular respuesta del bot
+  }
+
+  // Evento para el botón de enviar
+  sendButton.addEventListener("click", () => {
+    const userMessage = userInput.value.trim();
+    if (userMessage) {
+      handleUserMessage(userMessage);
+      userInput.value = ""; // Limpiar campo de entrada
+    }
+  });
+
+  // Evento para enviar mensaje presionando la tecla Enter
+  userInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter" && userInput.value.trim() !== "") {
+      handleUserMessage(userInput.value.trim());
+      userInput.value = ""; // Limpiar campo de entrada
+    }
+  });
+
+  // Mensaje inicial del bot
+  showMessage(data.pregunta_inicial, "bot");
+});
