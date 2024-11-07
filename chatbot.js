@@ -1,104 +1,50 @@
-class Chatbot {
-    constructor() {
-        this.messages = document.getElementById('chatbot-messages');
-        this.input = document.getElementById('chatbot-input');
-        this.form = document.getElementById('chatbot-form');
-        this.openButton = document.getElementById('open-chatbot');
-        this.closeButton = document.getElementById('close-chatbot');
-        this.chatWindow = document.getElementById('chatbot-window');
-        this.suggestedQuestions = document.getElementById('suggested-questions');
+class ChatBot {
+  constructor() {
+    this.knowledge = [];
+    this.loadKnowledge();
+  }
 
-        // Cargar las preguntas y respuestas desde el archivo JSON
-        this.loadKnowledge();
-
-        this.addEventListeners();
+  async loadKnowledge() {
+    try {
+      const response = await fetch('knowledge.json'); // Asegúrate de que el archivo JSON esté en la misma carpeta
+      const data = await response.json();
+      this.knowledge = data;
+    } catch (error) {
+      console.error('Error al cargar el archivo de conocimiento:', error);
     }
+  }
 
-    // Cargar el archivo JSON
-    async loadKnowledge() {
-        try {
-            const response = await fetch('data.json');
-            const data = await response.json();
-            this.knowledge = data.questions; // Supone que las preguntas y respuestas están dentro de un objeto 'questions'
-            this.suggestedQuestionsData = data.suggestedQuestions; // Lista de preguntas sugeridas
-            this.displaySuggestedQuestions();
-        } catch (error) {
-            console.error("Error al cargar el archivo JSON:", error);
-        }
+  generateResponse(message) {
+    // Convertir el mensaje del usuario a minúsculas para la comparación
+    const lowerCaseMessage = message.toLowerCase();
+
+    // Buscar la respuesta correspondiente en la base de datos de conocimiento
+    const match = this.knowledge.find(item => lowerCaseMessage.includes(item.question.toLowerCase()));
+
+    if (match) {
+      return match.answer;
+    } else {
+      return "Lo siento, no entiendo esa pregunta. ¿Puedo ayudarte con algo más?";
     }
-
-    addEventListeners() {
-        this.form.addEventListener('submit', this.handleSubmit.bind(this));
-        this.openButton.addEventListener('click', this.toggleChat.bind(this));
-        this.closeButton.addEventListener('click', this.toggleChat.bind(this));
-        this.suggestedQuestions.addEventListener('click', this.handleSuggestedQuestion.bind(this));
-    }
-
-    toggleChat() {
-        this.chatWindow.classList.toggle('hidden');
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        const message = this.input.value.trim();
-        if (message !== '') {
-            this.addMessage('user', message);
-            this.input.value = '';
-            this.processMessage(message);
-        }
-    }
-
-    addMessage(sender, message) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('mb-2', sender === 'user' ? 'text-right' : 'text-left');
-        messageElement.innerHTML = `
-            <span class="inline-block bg-${sender === 'user' ? 'blue' : 'gray'}-200 rounded px-2 py-1">
-                ${message}
-            </span>
-        `;
-        this.messages.appendChild(messageElement);
-        this.messages.scrollTop = this.messages.scrollHeight;
-    }
-
-    processMessage(message) {
-        const response = this.generateResponse(message);
-        setTimeout(() => {
-            this.addMessage('bot', response);
-        }, 500);
-    }
-
-    // Filtrar preguntas y generar la respuesta
-    generateResponse(message) {
-        message = message.toLowerCase();
-        const match = this.knowledge.find(item => message.includes(item.question.toLowerCase()));
-
-        if (match) {
-            return match.answer;
-        } else {
-            return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más?";
-        }
-    }
-
-    displaySuggestedQuestions() {
-        this.suggestedQuestions.innerHTML = '';
-        this.suggestedQuestionsData.forEach(question => {
-            const button = document.createElement('button');
-            button.textContent = question;
-            button.classList.add('suggested-question', 'bg-gray-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm');
-            this.suggestedQuestions.appendChild(button);
-        });
-    }
-
-    handleSuggestedQuestion(event) {
-        if (event.target.classList.contains('suggested-question')) {
-            const question = event.target.textContent;
-            this.addMessage('user', question);
-            this.processMessage(question);
-        }
-    }
+  }
 }
 
-// Inicializa el chatbot cuando el DOM esté completamente cargado
-document.addEventListener('DOMContentLoaded', () => {
-    const chatbot = new Chatbot();
-});
+// Crear una nueva instancia del chatbot
+const chatbot = new ChatBot();
+
+// Función para manejar la entrada del usuario y mostrar la respuesta
+function handleUserInput() {
+  const userInput = document.getElementById("userInput").value;
+  const response = chatbot.generateResponse(userInput);
+
+  const chatWindow = document.getElementById("chatWindow");
+  const userMessage = document.createElement("div");
+  userMessage.textContent = `Tú: ${userInput}`;
+  chatWindow.appendChild(userMessage);
+
+  const botMessage = document.createElement("div");
+  botMessage.textContent = `ARIA: ${response}`;
+  chatWindow.appendChild(botMessage);
+
+  document.getElementById("userInput").value = "";
+}
