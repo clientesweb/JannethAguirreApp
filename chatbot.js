@@ -8,30 +8,23 @@ class Chatbot {
         this.chatWindow = document.getElementById('chatbot-window');
         this.suggestedQuestions = document.getElementById('suggested-questions');
 
-        this.knowledge = {
-            "propiedades": "Ofrecemos una variedad de propiedades, incluyendo departamentos en Nuevo Samborondón, Isla Mocolí, Cuenca, locales comerciales y casas personalizadas.",
-            "servicios": "Nuestros servicios incluyen asesoría legal, avalúo de propiedades, asesoría dentro y fuera de Ecuador, gestión de proyectos, análisis de mercado, gestión de ventas, venta de proyectos en planos y gestión de alquileres.",
-            "contacto": "Puede contactarnos al +593 98 716 7782 o por email a info@jannethaguirre.com. Nuestra oficina está ubicada en Guayaquil, Ecuador.",
-            "sobre_nosotros": "Janneth Aguirre es una representante inmobiliaria líder desde 2009, reconocida en el mercado ecuatoriano por su servicio personalizado y de alta calidad.",
-            "invertir": "Ofrecemos oportunidades de inversión en Samborondón, Estados Unidos y Panamá. Cada ubicación tiene sus ventajas únicas para los inversores.",
-            "proceso_compra": "El proceso de compra generalmente incluye búsqueda de la propiedad, negociación del precio, firma de un contrato de compraventa, obtención de financiamiento si es necesario, y cierre de la transacción.",
-            "documentos_venta": "Para vender una propiedad, generalmente necesitará el título de propiedad, certificado de gravámenes, pago de impuestos al día, y cédula de identidad.",
-            "tiempo_venta": "El tiempo de venta puede variar, pero en promedio puede tomar entre 3 a 6 meses, dependiendo de factores como la ubicación, el precio y las condiciones del mercado."
-        };
-
-        this.suggestedQuestionsData = [
-            "¿Qué tipos de propiedades ofrecen?",
-            "¿Cuáles son sus servicios principales?",
-            "¿Cómo puedo contactarlos?",
-            "¿Quién es Janneth Aguirre?",
-            "¿Dónde puedo invertir?",
-            "¿Cuál es el proceso de compra de una propiedad?",
-            "¿Qué documentos necesito para vender mi propiedad?",
-            "¿Cuánto tiempo toma vender una propiedad?"
-        ];
+        // Cargar las preguntas y respuestas desde el archivo JSON
+        this.loadKnowledge();
 
         this.addEventListeners();
-        this.displaySuggestedQuestions();
+    }
+
+    // Cargar el archivo JSON
+    async loadKnowledge() {
+        try {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            this.knowledge = data.questions; // Supone que las preguntas y respuestas están dentro de un objeto 'questions'
+            this.suggestedQuestionsData = data.suggestedQuestions; // Lista de preguntas sugeridas
+            this.displaySuggestedQuestions();
+        } catch (error) {
+            console.error("Error al cargar el archivo JSON:", error);
+        }
     }
 
     addEventListeners() {
@@ -74,27 +67,15 @@ class Chatbot {
         }, 500);
     }
 
+    // Filtrar preguntas y generar la respuesta
     generateResponse(message) {
         message = message.toLowerCase();
-        
-        if (message.includes('propiedad') || message.includes('casa') || message.includes('departamento')) {
-            return this.knowledge.propiedades;
-        } else if (message.includes('servicio')) {
-            return this.knowledge.servicios;
-        } else if (message.includes('contacto') || message.includes('comunicar')) {
-            return this.knowledge.contacto;
-        } else if (message.includes('janneth') || message.includes('sobre ustedes') || message.includes('quienes son')) {
-            return this.knowledge.sobre_nosotros;
-        } else if (message.includes('invertir') || message.includes('inversión')) {
-            return this.knowledge.invertir;
-        } else if (message.includes('proceso de compra') || message.includes('cómo comprar')) {
-            return this.knowledge.proceso_compra;
-        } else if (message.includes('documentos') || message.includes('papeles') || message.includes('vender')) {
-            return this.knowledge.documentos_venta;
-        } else if (message.includes('tiempo') || message.includes('duración') || message.includes('cuánto tarda')) {
-            return this.knowledge.tiempo_venta;
+        const match = this.knowledge.find(item => message.includes(item.question.toLowerCase()));
+
+        if (match) {
+            return match.answer;
         } else {
-            return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más sobre nuestras propiedades, servicios o proceso de compra/venta?";
+            return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más?";
         }
     }
 
@@ -115,16 +96,9 @@ class Chatbot {
             this.processMessage(question);
         }
     }
-
-    addKnowledge(key, value) {
-        this.knowledge[key] = value;
-    }
 }
 
 // Initialize the chatbot when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     const chatbot = new Chatbot();
-
-    // Example of how to add more knowledge to the chatbot
-    chatbot.addKnowledge('nuevas_propiedades', 'Estamos constantemente agregando nuevas propiedades a nuestro portafolio. Por favor, consulta nuestra sección de propiedades destacadas para ver las últimas adiciones.');
 });
