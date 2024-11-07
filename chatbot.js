@@ -11,6 +11,7 @@ class Chatbot {
 
         this.loadKnowledge();
         this.addEventListeners();
+        this.debounceTimeout = null; // Para la optimización de búsquedas rápidas
     }
 
     async loadKnowledge() {
@@ -103,7 +104,7 @@ class Chatbot {
             }
         }
 
-        return relevantCategories;
+        return relevantCategories.length ? relevantCategories : ["default"]; // Si no hay categorías, sugerir algo por defecto
     }
 
     // Mostrar preguntas dentro de una categoría específica seleccionada
@@ -126,8 +127,11 @@ class Chatbot {
     // Filtrar sugerencias basadas en el texto ingresado por el usuario
     filterSuggestedQuestions() {
         const inputText = this.input.value.toLowerCase();
+        clearTimeout(this.debounceTimeout); // Limpiar el temporizador de debounce
         if (inputText) {
-            this.updateSuggestedCategories(inputText); // Filtrar categorías según el input actual
+            this.debounceTimeout = setTimeout(() => {
+                this.updateSuggestedCategories(inputText); // Filtrar categorías según el input actual
+            }, 300); // Esperar 300ms después de que el usuario termine de escribir
         }
     }
 }
