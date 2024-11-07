@@ -7,10 +7,10 @@ class Chatbot {
         this.closeButton = document.getElementById('close-chatbot');
         this.chatWindow = document.getElementById('chatbot-window');
         this.suggestedQuestions = document.getElementById('suggested-questions');
-        this.filteredKnowledge = {}; // Inicializar filtro vacío para comenzar sin sugerencias
-        this.knowledge = {}; // Almacén del conocimiento cargado
-        
-        // Cargar las preguntas y respuestas desde el archivo JSON
+        this.knowledge = {}; // Base de conocimientos cargada desde JSON
+        this.relevantCategories = []; // Lista de categorías relevantes para sugerencias dinámicas
+
+        // Cargar el conocimiento desde el archivo JSON
         this.loadKnowledge();
 
         this.addEventListeners();
@@ -65,69 +65,61 @@ class Chatbot {
         setTimeout(() => {
             this.addMessage('bot', response);
         }, 500);
-        this.suggestCategoriesBasedOnMessage(message); // Sugerir categorías dinámicamente
+        this.suggestDynamicCategories(message); // Sugerir categorías de forma dinámica
     }
 
-    // Generar una respuesta y sugerencias de categorías
+    // Generar una respuesta y filtrar categorías de acuerdo al mensaje
     generateResponse(message) {
         message = message.toLowerCase();
         for (let category in this.knowledge) {
             const match = this.knowledge[category].find(item => message.includes(item.question.toLowerCase()));
             if (match) {
+                this.updateRelevantCategories(category); // Actualiza categorías relevantes
                 return match.answer;
             }
         }
         return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más?";
     }
 
-    // Sugerir categorías basadas en el contexto de la conversación
-    suggestCategoriesBasedOnMessage(message) {
-        this.filteredKnowledge = {};
-
-        for (let category in this.knowledge) {
-            if (category.includes(message.toLowerCase()) || 
-                this.knowledge[category].some(item => item.question.toLowerCase().includes(message.toLowerCase()))) {
-                this.filteredKnowledge[category] = this.knowledge[category];
-            }
-        }
-
-        // Solo mostrar sugerencias si se encontró algún filtro relevante
-        if (Object.keys(this.filteredKnowledge).length > 0) {
-            this.displaySuggestedCategories();
+    // Agregar categorías relevantes dinámicamente sin mostrar todas a la vez
+    updateRelevantCategories(category) {
+        if (!this.relevantCategories.includes(category)) {
+            this.relevantCategories.push(category);
+            this.displaySuggestedCategories(); // Muestra solo las categorías nuevas
         }
     }
 
-    // Mostrar solo las categorías sugeridas dinámicamente
+    // Mostrar las categorías sugeridas de forma progresiva
     displaySuggestedCategories() {
         this.suggestedQuestions.innerHTML = '';
-        Object.keys(this.filteredKnowledge).forEach(category => {
+        this.relevantCategories.forEach(category => {
             const categoryButton = document.createElement('button');
             categoryButton.textContent = category.replace('_', ' ').toUpperCase();
             categoryButton.classList.add('category-button', 'bg-blue-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2');
             
-            // Cuando se hace clic, mostrar preguntas de la categoría sin activar respuesta inmediata
+            // Mostrar preguntas relacionadas cuando se selecciona la categoría sin activar una respuesta automática
             categoryButton.addEventListener('click', () => this.showCategoryQuestions(category));
             this.suggestedQuestions.appendChild(categoryButton);
         });
     }
 
-    // Mostrar preguntas dentro de una categoría sin activar la respuesta
+    // Mostrar preguntas dentro de una categoría específica
     showCategoryQuestions(category) {
         const questionsContainer = document.getElementById('category-questions');
         questionsContainer.innerHTML = '';
 
-        this.filteredKnowledge[category].forEach(item => {
+        this.knowledge[category].forEach(item => {
             const button = document.createElement('button');
             button.textContent = item.question;
             button.classList.add('suggested-question', 'bg-gray-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm');
             
-            // Al hacer clic en una pregunta, se activa el mensaje y la respuesta
+            // Al hacer clic en una pregunta, se procesa el mensaje y se muestra la respuesta
             button.addEventListener('click', () => this.handleSuggestedQuestion({ target: button }));
             questionsContainer.appendChild(button);
         });
     }
 
-    // Ejecutar la pregunta seleccionada
+    // Ejecutar la pregunta seleccionada por el usuario
     handleSuggestedQuestion(event) {
         if (event.target.classList.contains('suggested-question')) {
             const question = event.target.textContent;
@@ -136,22 +128,27 @@ class Chatbot {
         }
     }
 
-    // Filtrar dinámicamente en función del input del usuario
+    // Filtrar sugerencias basadas en el texto ingresado sin reiniciar categorías previas
     filterSuggestedQuestions() {
         const inputText = this.input.value.toLowerCase();
-        this.filteredKnowledge = {};
+        let filteredCategories = [];
 
         for (let category in this.knowledge) {
             const filteredQuestions = this.knowledge[category].filter(item =>
                 item.question.toLowerCase().includes(inputText)
             );
             if (filteredQuestions.length) {
-                this.filteredKnowledge[category] = filteredQuestions;
+                filteredCategories.push(category);
             }
         }
 
-        // Actualizar sugerencias solo si hay un input que coincida con alguna pregunta o categoría
+        // Si hay coincidencias, actualizamos las categorías relevantes sin duplicarlas
         if (inputText) {
+            filteredCategories.forEach(category => {
+                if (!this.relevantCategories.includes(category)) {
+                    this.relevantCategories.push(category);
+                }
+            });
             this.displaySuggestedCategories();
         }
     }
