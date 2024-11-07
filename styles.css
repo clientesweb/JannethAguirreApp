@@ -687,3 +687,13 @@ iframe {
 .powered-by-link:hover {
     text-decoration: underline; /* Subrayado cuando el cursor pasa por encima */
 }
+#mapa iframe {
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+@media (max-width: 768px) {
+    #mapa iframe {
+        height: 400px; /* Ajuste de la altura en pantallas pequeñas */
+    }
+}
