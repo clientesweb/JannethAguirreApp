@@ -657,9 +657,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 }
 
-// Asegúrate de ejecutar la función cuando el contenido esté completamente cargado
-document.addEventListener('DOMContentLoaded', handleBackToTop);
-
         handleScrollAnimation() {
             const fadeElems = document.querySelectorAll('.fade-in-section');
             
