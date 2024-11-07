@@ -8,23 +8,24 @@ class Chatbot {
         this.chatWindow = document.getElementById('chatbot-window');
         this.suggestedQuestions = document.getElementById('suggested-questions');
 
-        // Cargar las preguntas y respuestas desde el archivo JSON
-        this.loadKnowledge();
+        // Datos de preguntas y respuestas directamente en el código
+        this.knowledge = [
+            { question: '¿Qué servicios ofrecen?', answer: 'Ofrecemos una amplia gama de servicios, incluyendo diseño web, desarrollo de aplicaciones, y consultoría.' },
+            { question: '¿Cómo puedo contactar?', answer: 'Puedes contactarnos a través del formulario en nuestra página de contacto o enviándonos un correo electrónico a contacto@empresa.com.' },
+            { question: '¿Cuáles son los precios?', answer: 'Los precios dependen de los servicios que necesites. Por favor, contáctanos para una cotización personalizada.' },
+            { question: '¿Tienen soporte técnico?', answer: 'Sí, ofrecemos soporte técnico para nuestros clientes durante y después de la implementación de sus proyectos.' }
+        ];
+
+        this.suggestedQuestionsData = [
+            '¿Qué servicios ofrecen?',
+            '¿Cómo puedo contactar?',
+            '¿Cuáles son los precios?',
+            '¿Tienen soporte técnico?'
+        ];
+
+        this.displaySuggestedQuestions();
 
         this.addEventListeners();
-    }
-
-    // Cargar el archivo JSON
-    async loadKnowledge() {
-        try {
-            const response = await fetch('data.json');
-            const data = await response.json();
-            this.knowledge = data.questions; // Supone que las preguntas y respuestas están dentro de un objeto 'questions'
-            this.suggestedQuestionsData = data.suggestedQuestions; // Lista de preguntas sugeridas
-            this.displaySuggestedQuestions();
-        } catch (error) {
-            console.error("Error al cargar el archivo JSON:", error);
-        }
     }
 
     addEventListeners() {
