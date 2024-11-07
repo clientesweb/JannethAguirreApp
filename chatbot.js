@@ -150,7 +150,7 @@ class Chatbot {
             const contactMessage = document.createElement('div');
             contactMessage.classList.add('mb-2', 'text-center');
             contactMessage.innerHTML = `
-                <a href="https://wa.me/1234567890" target="_blank" class="bg-green-500 text-white rounded px-4 py-2">Contacta por WhatsApp</a>
+                <a href="https://wa.me/593987167782" target="_blank" class="bg-green-500 text-white rounded px-4 py-2">Contacta por WhatsApp</a>
                 <a href="https://www.jannethaguirrebienesraices.com/" target="_blank" class="bg-blue-500 text-white rounded px-4 py-2">Visita nuestro sitio web</a>
             `;
             this.messages.appendChild(contactMessage);
