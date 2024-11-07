@@ -20,7 +20,8 @@ class Chatbot {
             const response = await fetch('data.json');
             const data = await response.json();
             this.knowledge = data; // Todo el JSON cargado
-            this.displaySuggestedQuestions();
+            this.filteredKnowledge = { ...this.knowledge }; // Inicializar el filtro con todos los datos
+            this.displaySuggestedCategories();
         } catch (error) {
             console.error("Error al cargar el archivo JSON:", error);
         }
@@ -31,6 +32,7 @@ class Chatbot {
         this.openButton.addEventListener('click', this.toggleChat.bind(this));
         this.closeButton.addEventListener('click', this.toggleChat.bind(this));
         this.suggestedQuestions.addEventListener('click', this.handleSuggestedQuestion.bind(this));
+        this.input.addEventListener('input', this.filterSuggestedQuestions.bind(this)); // Nuevo evento para filtrado
     }
 
     toggleChat() {
@@ -64,12 +66,12 @@ class Chatbot {
         setTimeout(() => {
             this.addMessage('bot', response);
         }, 500);
+        this.updateSuggestedCategories(message); // Actualizar sugerencias dinámicamente
     }
 
     // Filtrar preguntas y generar la respuesta
     generateResponse(message) {
         message = message.toLowerCase();
-        // Revisar en cada categoría
         for (let category in this.knowledge) {
             const match = this.knowledge[category].find(item => message.includes(item.question.toLowerCase()));
             if (match) {
@@ -79,31 +81,58 @@ class Chatbot {
         return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más?";
     }
 
-    // Mostrar preguntas sugeridas con filtrado
-    displaySuggestedQuestions() {
+    // Mostrar categorías sugeridas dinámicamente
+    displaySuggestedCategories() {
         this.suggestedQuestions.innerHTML = '';
-        
-        // Recorrer cada categoría y mostrar las primeras preguntas
-        for (let category in this.knowledge) {
+        Object.keys(this.filteredKnowledge).forEach(category => {
             const categoryButton = document.createElement('button');
             categoryButton.textContent = category.replace('_', ' ').toUpperCase();
             categoryButton.classList.add('category-button', 'bg-blue-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2');
             categoryButton.addEventListener('click', () => this.showCategoryQuestions(category));
             this.suggestedQuestions.appendChild(categoryButton);
-        }
+        });
     }
 
-    // Mostrar las preguntas dentro de una categoría
+    // Mostrar preguntas dentro de una categoría
     showCategoryQuestions(category) {
         const questionsContainer = document.getElementById('category-questions');
-        questionsContainer.innerHTML = ''; // Limpiar el contenedor antes de añadir nuevas preguntas
-        this.knowledge[category].forEach(item => {
+        questionsContainer.innerHTML = '';
+        this.filteredKnowledge[category].forEach(item => {
             const button = document.createElement('button');
             button.textContent = item.question;
             button.classList.add('suggested-question', 'bg-gray-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm');
             button.addEventListener('click', () => this.handleSuggestedQuestion({ target: button }));
             questionsContainer.appendChild(button);
         });
+    }
+
+    // Filtrar sugerencias dinámicamente
+    filterSuggestedQuestions() {
+        const inputText = this.input.value.toLowerCase();
+        this.filteredKnowledge = {};
+
+        for (let category in this.knowledge) {
+            const filteredQuestions = this.knowledge[category].filter(item =>
+                item.question.toLowerCase().includes(inputText)
+            );
+            if (filteredQuestions.length) {
+                this.filteredKnowledge[category] = filteredQuestions;
+            }
+        }
+        this.displaySuggestedCategories();
+    }
+
+    // Actualizar categorías en función de la interacción del usuario
+    updateSuggestedCategories(message) {
+        const keyword = message.toLowerCase();
+        this.filteredKnowledge = {};
+        
+        for (let category in this.knowledge) {
+            if (category.includes(keyword) || this.knowledge[category].some(item => item.question.toLowerCase().includes(keyword))) {
+                this.filteredKnowledge[category] = this.knowledge[category];
+            }
+        }
+        this.displaySuggestedCategories();
     }
 
     handleSuggestedQuestion(event) {
