@@ -13,6 +13,9 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='%23f0f0f0'/%3E%3Cpath d='M30 30 L70 30 L50 10 Z' fill='%23e0e0e0'/%3E%3Crect x='40' y='30' width='20' height='20' fill='%23d0d0d0'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 100px 100px;
 }
 
 /* Contenedor principal */
@@ -146,6 +149,8 @@ body {
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding-bottom: 1rem;
+    gap: 20px;
+    padding: 20px 0;
 }
 
 .propiedades-slider::-webkit-scrollbar, #properties-grid::-webkit-scrollbar {
@@ -208,6 +213,8 @@ body {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    gap: 20px;
+    padding: 20px 0;
 }
 
 .youtube-slider::-webkit-scrollbar, #store-slider::-webkit-scrollbar {
@@ -277,6 +284,7 @@ body {
     background-color: transparent;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: white;
 }
 
 #gallery-images {
@@ -522,6 +530,8 @@ body {
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding-bottom: 1rem;
+    gap: 20px;
+    padding: 20px 0;
 }
 
 .propiedades-slider::-webkit-scrollbar {
@@ -709,6 +719,8 @@ body {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    gap: 20px;
+    padding: 20px 0;
 }
 
 .properties-slider::-webkit-scrollbar {
@@ -732,23 +744,81 @@ body {
     cursor: -webkit-grabbing;
 }
 
-/* Estilos para el fondo SVG de cabañas */
-body {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='%23f0f0f0'/%3E%3Cpath d='M30 30 L70 30 L50 10 Z' fill='%23e0e0e0'/%3E%3Crect x='40' y='30' width='20' height='20' fill='%23d0d0d0'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 100px 100px;
+
+/* Mejoras de responsividad */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
 }
 
-/* Mejoras adicionales para la responsividad */
-.flex-wrap {
-    flex-wrap: wrap;
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .property-card {
+        width: calc(50% - 20px);
+    }
+    .propiedades-slider,
+    .youtube-slider,
+    #store-slider {
+        gap: 15px;
+        padding: 15px 0;
+    }
 }
 
-.gap-4 {
-    gap: 1rem;
+@media (max-width: 480px) {
+    body {
+        font-size: 12px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .property-card {
+        width: 100%;
+    }
+
+    #quienes-somos img {
+        max-width: 80%;
+    }
+    .propiedades-slider,
+    .youtube-slider,
+    #store-slider {
+        gap: 10px;
+        padding: 10px 0;
+    }
 }
 
-img {
+/* Ajustes para pantallas más grandes */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    body {
+        font-size: 18px;
+    }
+}
+
+/* Mejora de la flexibilidad de imágenes y elementos multimedia */
+img,
+video,
+iframe {
     max-width: 100%;
     height: auto;
 }
@@ -789,4 +859,16 @@ img {
         gap: 10px;
         padding: 10px 0;
     }
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
