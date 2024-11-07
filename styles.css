@@ -30,29 +30,71 @@ body {
     box-sizing: border-box;
 }
 
-/* Estilos generales para el chat con burbujas */
-#ai-real-estate-expert-chatbot .chat-window {
+// Imports
+@import 'https://fonts.googleapis.com/css?family=Noto+Sans';
+
+// Variables (Colores de tu marca)
+$scrollbar-width: 5px;
+$chat-thread-bgd-color: rgba(255, 0, 0, 0.2); // Fondo de los mensajes
+$chat-thread-msg-arrow-size: 10px;
+$chat-thread-avatar-size: 25px;
+$chat-thread-offset: #{$chat-thread-avatar-size + 20px};
+$default-shadow-color: rgb(0, 0, 0);
+
+// Colores principales de la marca
+$primary-bg-color: #FF0000; // Rojo
+$secondary-bg-color: #FFFFFF; // Blanco
+$button-bg-color: #FF4D4D; // Rojo suave para botones
+$button-hover-color: #E60000; // Rojo oscuro en hover
+$button-active-color: #B30000; // Rojo más oscuro al hacer clic
+
+// Mixins
+@mixin fancy-background() {
+    background: -moz-linear-gradient(-45deg, $primary-bg-color 0, $primary-bg-color 25%, #F3F3F3 50%, $secondary-bg-color 75%, $secondary-bg-color 100%);
+    background: -webkit-linear-gradient(-45deg, $primary-bg-color 0, $primary-bg-color 25%, #F3F3F3 50%, $secondary-bg-color 75%, $secondary-bg-color 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+@mixin fancy-scrollbar() {
+    &::-webkit-scrollbar {
+        width: $scrollbar-width;
+    }
+    &::-webkit-scrollbar-track {
+        border-radius: $scrollbar-width;
+        background-color: rgba(255, 0, 0, 0.1);
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $primary-bg-color;
+        border-radius: $scrollbar-width;
+    }
+}
+
+// Estilos generales del chatbot
+#chatbot {
     display: none;
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 360px;
-    height: 450px; /* Tamaño más espacioso */
-    background-color: #fff;
-    border-radius: 20px; /* Bordes más redondeados */
+    width: 370px;
+    height: 500px;
+    background-color: $secondary-bg-color;
+    border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
+    font-family: 'Noto Sans', sans-serif;
+    @include fancy-background();
 }
 
-#ai-real-estate-expert-chatbot .chat-window.active {
+#chatbot.active {
     display: flex;
     flex-direction: column;
 }
 
 #chatbot-header {
-    background-color: #4CAF50;
+    background-color: $primary-bg-color;
     padding: 15px;
     color: white;
     text-align: center;
@@ -64,7 +106,7 @@ body {
 }
 
 #chatbot-header img {
-    height: 30px;  /* Tamaño del logo ajustado */
+    height: 30px; /* Tamaño del logo ajustado */
 }
 
 #chatbot-messages {
@@ -76,6 +118,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    @include fancy-scrollbar();
 }
 
 .chat-message {
@@ -90,14 +133,40 @@ body {
 
 .user-message {
     align-self: flex-end;
-    background-color: #4CAF50; /* Burbuja de usuario */
+    background-color: $primary-bg-color;
     color: white;
+    position: relative;
+    border-radius: 20px 20px 0 20px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-message::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -8px;
+    border-left: 8px solid transparent;
+    border-bottom: 8px solid $primary-bg-color;
+    border-top: 8px solid transparent;
 }
 
 .bot-message {
     align-self: flex-start;
-    background-color: #f1f1f1; /* Burbuja del bot */
+    background-color: #f1f1f1;
     color: #333;
+    position: relative;
+    border-radius: 20px 20px 20px 0;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bot-message::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -8px;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #f1f1f1;
+    border-top: 8px solid transparent;
 }
 
 @keyframes fadeIn {
@@ -105,7 +174,7 @@ body {
     100% { opacity: 1; }
 }
 
-/* Estilos del input y enviar */
+// Estilos del formulario de entrada
 #chatbot-form {
     display: flex;
     padding: 10px;
@@ -126,7 +195,7 @@ body {
 #chatbot-submit {
     padding: 12px 20px;
     margin-left: 10px;
-    background-color: #4CAF50;
+    background-color: $button-bg-color;
     color: white;
     border: none;
     border-radius: 20px;
@@ -135,15 +204,19 @@ body {
 }
 
 #chatbot-submit:hover {
-    background-color: #45a049;
+    background-color: $button-hover-color;
 }
 
-/* Estilos para las opciones rápidas */
+#chatbot-submit:active {
+    background-color: $button-active-color;
+}
+
+// Estilos para las opciones rápidas (preguntas sugeridas)
 .suggested-question {
     display: inline-block;
     margin: 5px;
     padding: 12px 18px;
-    background-color: #007BFF;
+    background-color: $primary-bg-color;
     color: white;
     border-radius: 30px;
     cursor: pointer;
@@ -153,11 +226,61 @@ body {
 }
 
 .suggested-question:hover {
-    background-color: #0056b3;
+    background-color: $button-hover-color;
 }
 
 .suggested-question:active {
-    background-color: #004085;
+    background-color: $button-active-color;
+}
+
+// Contenedor para las preguntas sugeridas
+.suggested-questions-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+// Responsividad para dispositivos móviles
+@media (max-width: 768px) {
+    #chatbot {
+        width: 90%;
+        height: 70vh;
+        bottom: 10px;
+    }
+
+    #chatbot-header {
+        font-size: 16px;
+    }
+
+    #chatbot-messages {
+        max-height: 250px;
+    }
+
+    .suggested-question {
+        font-size: 12px;
+        width: 100%; /* Botones a 100% de ancho en pantallas pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    #chatbot {
+        width: 100%;
+        height: 60vh;
+    }
+
+    #chatbot-header {
+        font-size: 14px;
+    }
+
+    #chatbot-input {
+        font-size: 12px;
+    }
+
+    .suggested-question {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
 }
 
 /* Agrupar las preguntas sugeridas */
