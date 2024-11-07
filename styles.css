@@ -121,185 +121,166 @@ body {
     margin-bottom: 5px;
 }
 
-/* Estilos para las tarjetas de propiedades */
+/* Estilos para las tarj etas de propiedades */
 .property-card {
-    flex: 0 0 auto;
-    width: 300px;
-    margin-right: 1rem;
-    transition: transform 0.3s ease-in-out;
     background-color: white;
-    border-radius: 0.5rem;
-    overflow: hidden;
+    border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .property-card:hover {
     transform: translateY(-5px);
 }
 
-/* Estilos para los sliders */
-.propiedades-slider, #properties-grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: 1rem;
-}
-
-.propiedades-slider::-webkit-scrollbar, #properties-grid::-webkit-scrollbar {
-    display: none;
-}
-
-@media (min-width: 640px) {
-    .property-card {
-        width: calc(50% - 10px);
-    }
-}
-
-@media (min-width: 1024px) {
-    .property-card {
-        width: calc(33.333% - 13.333px);
-    }
-}
-
-/* Estilos para los sliders */
-.slick-prev:before, .slick-next:before {
-    color: var(--primary-color);
-}
-
-.hero-slider {
-    width: 100%;
-    height: 100%;
-}
-
-.hero-slider .slick-list,
-.hero-slider .slick-track {
-    height: 100%;
-}
-
-.hero-slider .slick-slide {
-    height: calc(100vh - 80px);
-    background-size: cover;
-    background-position: center;
-    min-height: 400px;
-}
-
-@media (min-width: 768px) {
-    .hero-slider .slick-slide {
-        height: calc(100vh - 100px);
-        min-height: 600px;
-    }
-}
-
-.hero-slider .slick-dots {
-    bottom: 20px;
-}
-
-.hero-slider .slick-dots li button:before {
-    color: white;
-}
-
-.youtube-slider, #store-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.youtube-slider::-webkit-scrollbar, #store-slider::-webkit-scrollbar {
-    display: none;
-}
-
-.youtube-video {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-    padding: 0 10px;
-}
-
-.youtube-video iframe {
+.property-card img {
     width: 100%;
     height: 200px;
-}
-
-#store-slider .property-card {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-}
-
-/* Estilos para las FAQ */
-.faq-item {
-    border-bottom: 1px solid #e2e8f0;
-    padding: 1rem 0;
-}
-
-.faq-question {
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-}
-
-.faq-item.active .faq-answer {
-    max-height: 500px;
-    transition: max-height 0.5s ease-in;
-}
-
-.faq-icon {
-    transition: transform 0.3s ease;
-}
-
-.faq-item.active .faq-icon {
-    transform: rotate(180deg);
-}
-
-/* Estilos para la galería */
-#gallery-modal {
-    background-color: rgba(0, 0, 0, 0.9);
-}
-
-#gallery-modal .modal-content {
-    max-width: 90%;
-    max-height: 90%;
-    overflow-y: auto;
-}
-
-#gallery-images {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-#gallery-images img {
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%; /* Esto hace que las imágenes sean cuadradas */
     object-fit: cover;
 }
 
-#gallery-images img:hover {
-    transform: scale(1.1);
+.property-card .property-info {
+    padding: 15px;
 }
 
-#full-image-container {
+.property-card h3 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+}
+
+.property-card p {
+    margin: 0;
+    color: #666;
+}
+
+/* Estilos para el slider de propiedades */
+.properties-slider {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.properties-slider::-webkit-scrollbar {
     display: none;
+}
+
+#properties-grid {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+/* Estilos para el botón "Volver arriba" */
+#back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+#back-to-top:hover {
+    background-color: #555;
+}
+
+/* Estilos para el preloader */
+#preloader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Estilos para el fondo SVG */
+.svg-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+/* Estilos para la galería modal */
+#gallery-modal {
+    display: none;
+    position: fixed;
     z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+#close-modal {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#close-modal:hover,
+#close-modal:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos para las imágenes en pantalla completa */
+#full-image-container {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
     justify-content: center;
     align-items: center;
 }
@@ -307,7 +288,6 @@ body {
 #full-image {
     max-width: 90%;
     max-height: 90%;
-    object-fit: contain;
 }
 
 .gallery-nav {
@@ -315,20 +295,40 @@ body {
     top: 50%;
     transform: translateY(-50%);
     color: white;
-    font-size: 2rem;
+    font-size: 30px;
     cursor: pointer;
-    z-index: 1001;
+    padding: 10px;
 }
 
-#prev-image {
-    left: 20px;
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .bottom-nav {
+        display: flex;
+    }
+
+    #back-to-top {
+        bottom: 70px;
+    }
+
+    .whatsapp-button {
+        bottom: 130px;
+    }
+
+    #ai-real-estate-expert-chatbot {
+        bottom: 190px;
+    }
 }
 
-#next-image {
-    right: 20px;
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Estilos adicionales */
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
 .fade-in-section {
     opacity: 0;
     transform: translateY(20vh);
@@ -343,459 +343,665 @@ body {
     visibility: visible;
 }
 
-#back-to-top {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    z-index: 99;
-    border: none;
-    outline: none;
-    background-color: var(--primary-color);
-    color: white;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 50%;
-    font-size: 18px;
-    transition: opacity 0.3s;
-}
-
-#back-to-top:hover {
-    opacity: 0.8;
-}
-
-/* Media queries para responsividad */
-@media (min-width: 641px) {
-    .youtube-video, #store-slider .property-card {
-        flex: 0 0 50%;
-    }
-}
-
-@media (min-width: 1024px) {
-    .youtube-video, #store-slider .property-card {
-        flex: 0 0 33.333%;
-    }
-}
-
-@media (max-width: 768px) {
-    #ai-real-estate-expert-chatbot {
-        bottom: 160px;
-        right: 10px;
-    }
-
-    #ai-real-estate-expert-chatbot .chat-button {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-    }
-
-    .whatsapp-button {
-        bottom: 100px;
-        right: 10px;
-        width: 50px;
-        height: 50px;
-        font-size: 25px;
-    }
-
-    .bottom-nav {
-        display: flex;
-    }
-
-    .hero-slider .slick-slide {
-        height: calc(100vh - 60px);
-    }
-
-    #gallery-images img {
-        width: 80px;
-        height: 80px;
-    }
-}
-
-@media (max-width: 480px) {
-    #gallery-images img {
-        width: 60px;
-        height: 60px;
-    }
-
-    .youtube-video iframe {
-        height: 180px;
-    }
-
-    #ai-real-estate-expert-chatbot {
-        bottom: 180px;
-    }
-
-    .whatsapp-button {
-        bottom: 120px;
-    }
-}
-
-/* Estilos para la nueva sección "Quienes Somos" */
-#quienes-somos {
-    background-color: #f8f9fa;
-    padding: 4rem 0;
-}
-
-#quienes-somos .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 1200px;
-}
-
-#quienes-somos img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
-}
-
-#quienes-somos h3 {
-    color: var(--secondary-color);
-}
-
-#quienes-somos p {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.quienes-somos-slider {
-    width: 100%;
-    margin-top: 2rem;
-}
-
-.quienes-somos-slider .slick-slide {
-    padding: 0 10px;
-}
-
-/* Estilos para la sección de propiedades destacadas */
-.propiedades-slider {
+/* Estilos para el slider de YouTube */
+.youtube-slider {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: 1rem;
 }
 
-.propiedades-slider::-webkit-scrollbar {
+.youtube-slider::-webkit-scrollbar {
     display: none;
 }
 
-.propiedades-slider .property-card {
+.youtube-slider .video-container {
     flex: 0 0 auto;
     width: 300px;
-    margin-right: 1rem;
+    margin-right: 20px;
     scroll-snap-align: start;
 }
 
-/* Actualización de estilos para la sección de servicios */
-#servicios {
-    background-color: var(--secondary-color);
-    padding: 4rem 0;
+.youtube-slider iframe {
+    width: 100%;
+    height: 169px;
 }
 
-#service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+/* Estilos para el slider de Instagram */
+.instagram-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
-.service-card {
-    background-color: var(--background-color);
-    border-radius: 0.5rem;
-    padding: 2rem;
+.instagram-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.instagram-slider .instagram-post {
+    flex: 0 0 auto;
+    width: 300px;
+    margin-right: 20px;
+    scroll-snap-align: start;
+}
+
+/* Estilos para las preguntas frecuentes */
+.faq-item {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.faq-question {
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-answer {
+    margin-top: 0.5rem;
+    display: none;
+}
+
+.faq-icon {
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}
+
+/* Estilos para los testimonios */
+.testimonial {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
     text-align: center;
-    transition: transform 0.3s ease-in-out;
+}
+
+.testimonial img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.testimonial-text {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.testimonial-author {
+    font-weight: bold;
+}
+
+/* Estilos para el formulario de contacto */
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#contact-form input,
+#contact-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#contact-form button {
+    align-self: flex-start;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#contact-form button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Estilos para el mapa */
+#mapa iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 2rem 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.footer-logo {
+    max-width: 150px;
+    margin-bottom: 1rem;
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.footer-social-icons a {
+    font-size: 1.5rem;
+}
+
+/* Estilos adicionales para mejorar la accesibilidad */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Estilos para mejorar el contraste y la legibilidad */
+body {
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+}
+
+/* Estilos para el botón de instalación de la PWA */
+#install-app {
+    display: none;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#install-app:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Media queries para diseño responsivo */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .property-card {
+        width: 100%;
+    }
+
+    #contact-form {
+        width: 100%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .property-card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (min-width: 1025px) {
+    .container {
+        padding: 0 30px;
+    }
+
+    .property-card {
+        width: calc(33.333% - 20px);
+    }
+}
+
+/* Estilos para la accesibilidad del teclado */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Estilos para el modo oscuro */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #f0f0f0;
+    }
+
+    .property-card,
+    .testimonial,
+    #contact-form input,
+    #contact-form textarea {
+        background-color: #2a2a2a;
+        color: #f0f0f0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--primary-color);
+    }
+
+    a {
+        color: var(--primary-color);
+    }
+
+    footer {
+        background-color: #2a2a2a;
+    }
+}
+
+/* Animaciones suaves para transiciones */
+.smooth-transition {
+    transition: all 0.3s ease;
+}
+
+/* Estilos para el botón de compartir */
+.share-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.share-button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Estilos para el menú de navegación */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para las secciones de la página */
+section {
+    padding: 40px 0;
+}
+
+/* Estilos para el hero */
+.hero {
+    background-image: url('path/to/hero-image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Estilos para las tarjetas de servicios */
+.service-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
 }
 
 .service-card:hover {
     transform: translateY(-5px);
 }
 
-.service-card i {
-    font-size: 3rem;
+.service-icon {
+    font-size: 2rem;
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
 }
 
-.service-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
+/* Estilos para la sección de estadísticas */
+.stats-section {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 40px 0;
+    text-align: center;
 }
 
-.service-card p {
-    font-size: 0.9rem;
+.stat-item {
+    margin-bottom: 20px;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+/* Estilos para la sección de socios */
+.partners-section {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.partner-logo {
+    max-width: 150px;
+    margin: 20px;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.partner-logo:hover {
+    filter: grayscale(0%);
+}
+
+/* Estilos para el botón de llamada a la acción (CTA) */
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--secondary-color);
+    text-decoration: none;
+}
+
+/* Estilos para la sección de blog o noticias */
+.blog-post {
+    margin-bottom: 30px;
+}
+
+.blog-post img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.blog-post h3 {
+    margin-bottom: 10px;
+}
+
+.blog-post p {
     color: #666;
 }
 
-/* Media queries para responsividad */
-@media (min-width: 768px) {
-    
-    #quienes-somos .flex-col {
-        flex-direction: row;
-    }
-
-    #quienes-somos .lg\:w-1/2 {
-        width: 50%;
-    }
-
-    #quienes-somos .lg\:pl-12 {
-        padding-left: 3rem;
-    }
-}
-
-@media (max-width: 767px) {
-    #service-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Estilos para la sección invertir-samborondon */
-#invertir-samborondon .grid {
-    gap: 1.5rem;
-}
-
-#invertir-samborondon .bg-white {
-    transition: transform 0.3s ease-in-out;
-}
-
-#invertir-samborondon .bg-white:hover {
-    transform: translateY(-5px);
-}
-
-/* Estilos para los botones */
-.bg-primary {
-    background-color: var(--primary-color);
-}
-
-.text-primary {
+.read-more {
     color: var(--primary-color);
+    font-weight: bold;
 }
 
-.hover\:bg-primary\/90:hover {
-    background-color: rgba(255, 0, 0, 0.9);
+/* Estilos para la paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-/* Estilos para la sección de propiedades en grid */
-#properties-grid {
-    display: grid;
-    gap: 1.5rem;
+.pagination a {
+    color: var(--primary-color);
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+}
+
+.pagination a.active {
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid var(--primary-color);
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+/* Estilos para el formulario de búsqueda de propiedades */
+.property-search-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.property-search-form select,
+.property-search-form input[type="text"],
+.property-search-form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.property-search-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.property-search-form button:hover {
+    background-color: var(--secondary-color);
 }
 
 /* Estilos para la galería de imágenes */
-.gallery-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
 }
 
-.gallery-slider::-webkit-scrollbar {
-    display: none;
-}
-
-.gallery-slider img {
-    flex: 0 0 auto;
+.gallery-item img {
     width: 100%;
-    height: auto;
-    scroll-snap-align: start;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
 }
-#preloader {
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+/* Estilos para el chatbot */
+#chatbot-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-#preloader .loader {
-    width: 100px;
-    height: 100px;
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid var(--primary-color);
-    border-radius: 50%;
-    animation: spin 1s linear infinite, pulse 2s ease-in-out infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes pulse {
-    0% { transform: scale(0.8); opacity: 0.5; }
-    50% { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(0.8); opacity: 0.5; }
-}
-
-/* Estilos adicionales para mejorar la responsividad */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 10px;
-    }
-
-    .property-card {
-        width: 100%;
-    }
-
-    #ai-real-estate-expert-chatbot,
-    .whatsapp-button {
-        bottom: 70px;
-    }
-
-    .bottom-nav {
-        display: flex;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .service-card {
-        padding: 1rem;
-    }
-}
-
-/* Estilos para el slider de propiedades */
-.properties-slider {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.properties-slider::-webkit-scrollbar {
-    display: none;
-}
-
-#properties-grid {
-    display: flex;
-    gap: 1rem;
-}
-
-.property-card {
-    flex: 0 0 auto;
+    bottom: 20px;
+    right: 20px;
     width: 300px;
-    scroll-snap-align: start;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Estilos para el efecto de arrastre del slider */
-.properties-slider.active {
-    cursor: grabbing;
-    cursor: -webkit-grabbing;
+#chatbot-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
 }
-/* Estilos para el fondo SVG de cabañas */
+
+#chatbot-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+#chatbot-input input {
+    flex-grow: 1;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#chatbot-input button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilos para el modo de alto contraste */
+@media (prefers-contrast: high) {
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    a, button {
+        color: yellow;
+    }
+
+    input, textarea, select {
+        background-color: black;
+        color: white;
+        border: 1px solid white;
+    }
+}
+
+/* Estilos para reducir el movimiento */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Estilos para mejorar la legibilidad */
 body {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='%23FF0000'/%3E%3Cpath d='M30 30 L70 30 L50 10 Z' fill='%23808080'/%3E%3Crect x='40' y='30' width='20' height='20' fill='%23FFFFFF'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 100px 100px;
-}
-/* Ajustes para el botón del chatbot en dispositivos móviles */
-@media (max-width: 768px) {
-    #ai-real-estate-expert-chatbot {
-        bottom: 160px; /* Ajusta este valor según sea necesario */
-    }
-}
-
-/* Mejoras de responsividad */
-@media (max-width: 640px) {
-    .container {
-        padding: 0 10px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .property-card {
-        width: 100%;
-    }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-    .property-card {
-        width: calc(50% - 10px);
-    }
-}
-
-@media (min-width: 1025px) {
-    .property-card {
-        width: calc(33.333% - 13.333px);
-    }
-}
-
-/* Ajustes generales para mejorar la responsividad */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-.flex-wrap {
-    flex-wrap: wrap;
-}
-
-.gap-4 {
-    gap: 1rem;
-}
-@media (max-width: 640px) {
-    .container {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
-    h2 {
-        font-size: 1.75rem;
-    }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-    .container {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
-}
-
-.hero-slider .slick-slide {
-    height: 50vh;
-    min-height: 300px;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 @media (min-width: 768px) {
-    .hero-slider .slick-slide {
-        height: 60vh;
-        min-height: 400px;
+    body {
+        font-size: 18px;
     }
 }
 
-@media (min-width: 1024px) {
-    .hero-slider .slick-slide {
-        height: 70vh;
-        min-height: 500px;
+/* Estilos para el foco visible */
+*:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Estilos para mejorar la interactividad */
+button, 
+a, 
+input[type="submit"] {
+    cursor: pointer;
+}
+
+/* Estilos para el modo de impresión */
+@media print {
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+        background: #fff;
+    }
+
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+
+    .no-print {
+        display: none;
     }
 }
