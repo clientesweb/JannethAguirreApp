@@ -33,6 +33,9 @@ class Chatbot {
 
     toggleChat() {
         this.chatWindow.classList.toggle('hidden');
+        if (!this.chatWindow.classList.contains('hidden')) {
+            this.showInitialSuggestions(); // Al abrir el chat, mostrar opciones iniciales
+        }
     }
 
     handleSubmit(event) {
@@ -61,9 +64,9 @@ class Chatbot {
         const response = this.generateResponse(message);
         setTimeout(() => {
             this.addMessage('bot', response);
-            // Siempre terminar en "contactar"
+            // Siempre terminar en "contactar" si no se habla de ello
             if (!message.toLowerCase().includes("contactar")) {
-                this.addMessage('bot', "Si necesitas más ayuda, no dudes en contactarnos. ¿Te gustaría comunicarte por WhatsApp o a través de nuestro sitio web?");
+                this.addMessage('bot', "Si necesitas más ayuda, no dudes en contactarnos.");
             }
         }, 500);
     }
@@ -76,8 +79,18 @@ class Chatbot {
                 return match.answer;
             }
         }
-        // Si no encontramos respuesta, ofrecemos contacto
-        return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más?";
+        // Respuesta cuando no se encuentra información
+        return this.getContactLinks();
+    }
+
+    getContactLinks() {
+        return `
+            Lo siento, no tengo información específica sobre esa consulta. 
+            Si necesitas más ayuda, no dudes en contactarnos:
+            <br>
+            <a href="https://wa.me/1234567890" target="_blank">Contáctanos por WhatsApp</a><br>
+            <a href="https://www.ejemplo.com" target="_blank">Visita nuestra página web</a>
+        `;
     }
 
     // Mostrar sugerencias dinámicas mientras el usuario escribe
@@ -91,7 +104,22 @@ class Chatbot {
             }, 300); // Esperar 300ms después de que el usuario termine de escribir
         } else {
             this.suggestedQuestions.innerHTML = ''; // Si no hay texto, quitar sugerencias
+            this.showInitialSuggestions(); // Mostrar sugerencias iniciales
         }
+    }
+
+    // Mostrar opciones iniciales cuando el chat se abre
+    showInitialSuggestions() {
+        this.suggestedQuestions.innerHTML = '';
+        const initialQuestions = ['¿Cómo puedo ayudarte?', '¿Tienes alguna consulta?', 'Hazme una pregunta sobre nuestros servicios'];
+        initialQuestions.forEach(question => {
+            const button = document.createElement('button');
+            button.textContent = question;
+            button.classList.add('category-button', 'bg-blue-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2');
+            
+            button.addEventListener('click', () => this.processMessage(question));
+            this.suggestedQuestions.appendChild(button);
+        });
     }
 
     // Actualizar las categorías sugeridas basadas en el texto ingresado
@@ -143,19 +171,30 @@ class Chatbot {
         });
     }
 
-    // Redireccionar al WhatsApp o al sitio web si no encontramos respuesta
-    redirectToContactOptions() {
-        this.addMessage('bot', 'Para más información, puedes contactarnos a través de WhatsApp o nuestro sitio web.');
-        setTimeout(() => {
-            const contactMessage = document.createElement('div');
-            contactMessage.classList.add('mb-2', 'text-center');
-            contactMessage.innerHTML = `
-                <a href="https://wa.me/593987167782" target="_blank" class="bg-green-500 text-white rounded px-4 py-2">Contacta por WhatsApp</a>
-                <a href="https://www.jannethaguirrebienesraices.com/" target="_blank" class="bg-blue-500 text-white rounded px-4 py-2">Visita nuestro sitio web</a>
-            `;
-            this.messages.appendChild(contactMessage);
-            this.messages.scrollTop = this.messages.scrollHeight;
-        }, 1000);
+    // Detectar similitudes con las palabras claves mientras el usuario escribe
+    detectSimilarIntentions(inputText) {
+        const suggestions = [];
+        
+        // Analizar las palabras clave y generar sugerencias de intenciones similares
+        for (let category in this.knowledge) {
+            this.knowledge[category].forEach(item => {
+                if (this.isSimilar(inputText, item.question)) {
+                    suggestions.push(item.question);
+                }
+            });
+        }
+
+        return suggestions;
+    }
+
+    // Función para evaluar similitudes entre lo escrito y las preguntas predefinidas
+    isSimilar(inputText, referenceText) {
+        const similarityThreshold = 0.6;
+        const inputWords = inputText.split(' ');
+        const referenceWords = referenceText.split(' ');
+        const commonWords = inputWords.filter(word => referenceWords.includes(word));
+        
+        return (commonWords.length / referenceWords.length) >= similarityThreshold;
     }
 }
 
