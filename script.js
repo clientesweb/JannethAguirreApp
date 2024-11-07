@@ -711,18 +711,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         initChatbot() {
-            const chatbotButton = document.getElementById('open-chatbot');
-            const chatbotWindow = document.getElementById('chatbot-window');
-            const closeChatbot = document.getElementById('close-chatbot');
+    const chatbotButton = document.getElementById('open-chatbot');
+    const chatbotWindow = document.getElementById('chatbot-window');
+    const closeChatbot = document.getElementById('close-chatbot');
 
-            chatbotButton.addEventListener('click', () => {
-                chatbotWindow.classList.toggle('hidden');
-            });
+    // Cuando el botón de abrir el chatbot es presionado
+    chatbotButton.addEventListener('click', () => {
+        // Alternar la visibilidad del chatbot (usando la clase 'active' para mostrarla)
+        chatbotWindow.classList.toggle('active');
+    });
 
-            closeChatbot.addEventListener('click', () => {
-                chatbotWindow.classList.add('hidden');
-            });
-        }
+    // Cuando el botón de cerrar el chatbot es presionado
+    closeChatbot.addEventListener('click', () => {
+        // Añadir la clase 'hidden' para ocultar el chatbot
+        chatbotWindow.classList.remove('active');
+    });
+}
 
         preloadImages() {
             const allImages = [
