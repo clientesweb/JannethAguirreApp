@@ -1,148 +1,119 @@
-class Chatbot {
-    constructor() {
-        this.messages = document.getElementById('chatbot-messages');
-        this.input = document.getElementById('chatbot-input');
-        this.form = document.getElementById('chatbot-form');
-        this.openButton = document.getElementById('open-chatbot');
-        this.closeButton = document.getElementById('close-chatbot');
-        this.chatWindow = document.getElementById('chatbot-window');
-        this.suggestedQuestions = document.getElementById('suggested-questions');
+// chatbot.js
 
-        // Cargar el archivo JSON
-        this.loadKnowledge().then((data) => {
-            this.knowledge = data;
-            // Mostrar las preguntas sugeridas
-            this.displaySuggestedQuestions();
-        }).catch((error) => {
-            console.error('Error cargando el archivo JSON:', error);
-        });
+// Cargar el JSON con los datos de la conversación
+const data = {
+  "saludos": [
+    "¡Hola! Soy ARIA, tu asistente inmobiliario. ¿Cómo puedo ayudarte hoy? Si tienes alguna duda sobre propiedades, servicios o el mercado, ¡estoy aquí para ayudarte!",
+    "¡Buenos días! Bienvenido, soy ARIA. ¿En qué puedo ayudarte en tu búsqueda de la propiedad perfecta? Estoy aquí para facilitarte todo el proceso.",
+    "¡Hola! ¿Cómo estás? Soy ARIA, tu asistente virtual para todo lo relacionado con bienes raíces. ¿Te gustaría explorar nuestras propiedades o tal vez saber más sobre nuestros servicios?"
+  ],
+  "despedidas": [
+    "¡Gracias por tu tiempo! Si necesitas más información, estaré aquí para ayudarte en cualquier momento. ¡Que tengas un excelente día!",
+    "¡Fue un placer ayudarte! Recuerda que siempre puedes volver si tienes más preguntas. ¡Hasta pronto!",
+    "¡Hasta la próxima! Si tienes alguna otra duda, no dudes en preguntar. ¡Que todo te vaya bien!"
+  ],
+  "propiedades": {
+    "introduccion": "Tenemos una amplia selección de propiedades que se ajustan a todos los gustos y necesidades. Desde modernos departamentos hasta casas de lujo, en ubicaciones exclusivas como Samborondón y Cuenca.",
+    "detalle": "Dime, ¿estás buscando una propiedad en una ubicación específica o prefieres que te recomiende las opciones más populares? También puedo ayudarte a encontrar propiedades con características especiales, como jardín, piscina o cercanía a centros comerciales. ¡Cuéntame qué prefieres!"
+  },
+  "servicios": {
+    "introduccion": "Ofrecemos servicios completos que incluyen asesoría legal, gestión de ventas y análisis de mercado. Nuestro enfoque es brindarte un servicio personalizado adaptado a tus necesidades.",
+    "detalle": "¿Te gustaría que profundice más en alguno de estos servicios? Podemos hablar sobre cómo podemos ayudarte con la compra o venta, o si necesitas asesoría legal o fiscal, ¡también te puedo ayudar con eso!"
+  },
+  "contacto": {
+    "introduccion": "Estar en contacto con nosotros es muy sencillo. Puedes llamarnos o escribirnos por email, y siempre estamos dispuestos a coordinar reuniones virtuales.",
+    "detalle": "Si prefieres un contacto más inmediato, te invito a llamarnos al +593 98 716 7782, o si lo prefieres, puedes escribirnos a info@jannethaguirre.com. ¿Cómo te gustaría ponerte en contacto conmigo?"
+  },
+  "sobre_nosotros": {
+    "introduccion": "Desde 2009, Janneth Aguirre es una figura clave en el sector inmobiliario ecuatoriano. Nuestra misión es brindarte un servicio de alta calidad y personalizado, asegurándonos de que encuentres la propiedad de tus sueños.",
+    "detalle": "Nuestro equipo está compuesto por expertos que te acompañarán en cada paso del proceso. ¿Te gustaría conocer más sobre nuestra historia o los servicios específicos que ofrecemos?"
+  },
+  "invertir": {
+    "introduccion": "Si estás interesado en invertir en bienes raíces, tenemos excelentes oportunidades en lugares como Samborondón, EE.UU. y Panamá. Cada lugar tiene ventajas únicas para los inversionistas.",
+    "detalle": "Si deseas saber más sobre los beneficios de invertir en cualquiera de estos lugares, o si necesitas ayuda para elegir la mejor opción de inversión, ¡estoy aquí para ayudarte! ¿Te gustaría que hablemos de eso?"
+  },
+  "proceso_compra": {
+    "introduccion": "Comprar una propiedad es un proceso que puede parecer complicado, pero con la orientación adecuada es mucho más fácil. Nuestro equipo te acompañará en todo momento.",
+    "detalle": "El proceso incluye la búsqueda de la propiedad, la negociación, la firma del contrato y el financiamiento si lo necesitas. ¿Te gustaría saber más sobre cómo empezar o los documentos necesarios para la compra?"
+  },
+  "documentos_venta": {
+    "introduccion": "Para vender una propiedad, necesitas contar con algunos documentos clave que aseguren que todo el proceso se realiza correctamente.",
+    "detalle": "El título de propiedad, certificado de gravámenes y otros documentos son esenciales. Si no estás seguro de los documentos que tienes que preparar, ¡no dudes en preguntarme! Te guiaré en cada paso."
+  },
+  "tiempo_venta": {
+    "introduccion": "El tiempo para vender una propiedad puede variar, pero con la estrategia correcta, podemos ayudarte a vender más rápido.",
+    "detalle": "Generalmente, el proceso toma entre 3 a 6 meses, pero depende de la ubicación, el precio y la demanda del mercado. ¿Te gustaría conocer algunas estrategias que pueden acelerar tu venta?"
+  },
+  "alquileres": {
+    "introduccion": "Si estás buscando alquilar una propiedad o poner la tuya en alquiler, podemos ayudarte con todo el proceso, desde la búsqueda hasta la firma del contrato.",
+    "detalle": "Nuestro equipo puede ayudarte a encontrar el inquilino ideal, o si prefieres alquilar, podemos ofrecerte propiedades que se ajusten a tus necesidades. ¿Te gustaría más información sobre alquileres?"
+  },
+  "tendencias_inmobiliarias": {
+    "introduccion": "El mercado inmobiliario está en constante cambio, y es importante estar informado sobre las tendencias actuales.",
+    "detalle": "Actualmente, la demanda está creciendo en zonas cercanas a áreas comerciales y turísticas. También hay un fuerte interés por propiedades de lujo. ¿Te gustaría saber más sobre estas tendencias y cómo pueden impactar tu decisión de compra o venta?"
+  },
+  "asesoria_investment": {
+    "introduccion": "Contar con asesoría especializada es crucial para tomar decisiones acertadas en el mundo de las inversiones inmobiliarias.",
+    "detalle": "Nuestro equipo de expertos te ofrece un análisis personalizado, destacando las mejores oportunidades de inversión y las mejores zonas para maximizar tu rentabilidad. ¿Te gustaría que analicemos una zona específica?"
+  },
+  "proyectos_en_plano": {
+    "introduccion": "Tenemos proyectos en plano que permiten personalizar tu futura propiedad. Estos proyectos ofrecen la posibilidad de elegir acabados y características antes de la construcción.",
+    "detalle": "Además, los proyectos en plano tienen precios competitivos y un alto potencial de revalorización. ¿Te gustaría saber más sobre alguna de estas opciones? Puedo darte detalles de los proyectos disponibles."
+  },
+  "pregunta_inicial": "¡Hola! Soy ARIA, tu asistente virtual en todo lo relacionado con bienes raíces. ¿En qué te puedo ayudar hoy? Si estás buscando propiedades, servicios o consejos, estoy aquí para ti.",
+  "respuestas_completas": [
+    "Claro, puedo ofrecerte detalles adicionales sobre nuestros servicios o propiedades. ¿Qué te gustaría saber más a fondo?",
+    "¿Te gustaría obtener más información sobre cómo funciona el proceso de compra o alquilar una propiedad? Estoy aquí para brindarte toda la ayuda que necesites.",
+    "Si tienes dudas sobre los documentos o el tiempo de venta, puedo ofrecerte información detallada y ayudarte a hacer todo más fácil. ¿Te gustaría empezar con eso?"
+  ],
+  "saludos_nuevos": [
+    "¡Hola! ¿Cómo estás? Soy ARIA, tu asistente virtual. Si estás buscando propiedades o servicios, ¡estoy aquí para ayudarte!",
+    "¡Bienvenido! Soy ARIA, y estoy lista para asistirte. ¿En qué te gustaría que te ayude hoy? Podemos hablar de propiedades, servicios, o incluso inversiones."
+  ],
+  "asesoria_extra": [
+    "Recuerda que también puedo ofrecerte asesoría personalizada si estás buscando la propiedad ideal o si necesitas un análisis de inversión. ¿Te gustaría que hagamos un análisis juntos?",
+    "Si en algún momento necesitas orientación adicional o tienes dudas, siempre puedes contar conmigo para guiarte paso a paso. ¡Pregúntame lo que necesites!"
+  ]
+};
 
-        // Preguntas sugeridas (puedes mantenerlas aquí)
-        this.suggestedQuestionsData = [
-            "¿Qué tipos de propiedades ofrecen?",
-            "¿Cuáles son sus servicios principales?",
-            "¿Cómo puedo contactarlos?",
-            "¿Quién es Janneth Aguirre?",
-            "¿Dónde puedo invertir?",
-            "¿Cuál es el proceso de compra de una propiedad?",
-            "¿Qué documentos necesito para vender mi propiedad?",
-            "¿Cuánto tiempo toma vender una propiedad?",
-            "¿Ofrecen propiedades en alquiler?",
-            "¿Cuáles son las tendencias actuales del mercado inmobiliario?",
-            "¿Cómo puedo invertir en propiedades?",
-            "¿Tienen proyectos en plano disponibles?"
-        ];
+// Filtrar las respuestas según la categoría seleccionada
+function getFilteredResponse(category) {
+  const response = data[category];
 
-        // Añadir los eventos
-        this.addEventListeners();
-    }
+  if (!response) {
+    return `No tengo información sobre ${category} en este momento.`;
+  }
 
-    // Cargar el archivo JSON
-    loadKnowledge() {
-        return fetch('knowledge.json') // Asegúrate de que la ruta al archivo JSON es correcta
-            .then(response => response.json())
-            .then(data => data);
-    }
-
-    // Añadir los listeners de eventos
-    addEventListeners() {
-        this.form.addEventListener('submit', this.handleSubmit.bind(this));
-        this.openButton.addEventListener('click', this.toggleChat.bind(this));
-        this.closeButton.addEventListener('click', this.toggleChat.bind(this));
-        this.suggestedQuestions.addEventListener('click', this.handleSuggestedQuestion.bind(this));
-    }
-
-    // Mostrar u ocultar el chat
-    toggleChat() {
-        this.chatWindow.classList.toggle('hidden');
-    }
-
-    // Manejar la respuesta al enviar un mensaje
-    handleSubmit(event) {
-        event.preventDefault();
-        const message = this.input.value.trim();
-        if (message !== '') {
-            this.addMessage('user', message);
-            this.input.value = '';
-            this.processMessage(message);
-        }
-    }
-
-    // Añadir un mensaje en la ventana de chat
-    addMessage(sender, message) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('mb-2', sender === 'user' ? 'text-right' : 'text-left');
-        messageElement.innerHTML = `
-            <span class="inline-block bg-${sender === 'user' ? 'blue' : 'gray'}-200 rounded px-2 py-1">
-                ${message}
-            </span>
-        `;
-        this.messages.appendChild(messageElement);
-        this.messages.scrollTop = this.messages.scrollHeight;
-    }
-
-    // Procesar el mensaje y generar respuesta
-    processMessage(message) {
-        const response = this.generateResponse(message);
-        setTimeout(() => {
-            this.addMessage('bot', response);
-        }, 500);
-    }
-
-    // Generar la respuesta según el mensaje
-    generateResponse(message) {
-        message = message.toLowerCase();
-
-        // Usar expresiones regulares para mejorar las respuestas
-        if (/\b(propiedad|casa|departamento)\b/.test(message)) {
-            return this.knowledge.propiedades;
-        } else if (/\b(servicio)\b/.test(message)) {
-            return this.knowledge.servicios;
-        } else if (/\b(contacto|comunicar)\b/.test(message)) {
-            return this.knowledge.contacto;
-        } else if (/\b(janneth|quiénes somos|sobre ustedes)\b/.test(message)) {
-            return this.knowledge.sobre_nosotros;
-        } else if (/\b(invertir|inversión)\b/.test(message)) {
-            return this.knowledge.invertir;
-        } else if (/\b(proceso de compra|cómo comprar)\b/.test(message)) {
-            return this.knowledge.proceso_compra;
-        } else if (/\b(documentos|papeles|vender)\b/.test(message)) {
-            return this.knowledge.documentos_venta;
-        } else if (/\b(tiempo|cuánto tarda)\b/.test(message)) {
-            return this.knowledge.tiempo_venta;
-        } else if (/\b(alquileres)\b/.test(message)) {
-            return this.knowledge.alquileres;
-        } else if (/\b(tendencias|mercado)\b/.test(message)) {
-            return this.knowledge.tendencias_inmobiliarias;
-        } else if (/\b(investment|asesoría)\b/.test(message)) {
-            return this.knowledge.asesoria_investment;
-        } else if (/\b(proyectos en plano)\b/.test(message)) {
-            return this.knowledge.proyectos_en_plano;
-        } else {
-            return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más sobre nuestras propiedades, servicios o proceso de compra/venta?";
-        }
-    }
-
-    // Mostrar las preguntas sugeridas
-    displaySuggestedQuestions() {
-        this.suggestedQuestionsData.forEach((question) => {
-const button = document.createElement('button');
-            button.classList.add('suggested-question');
-            button.innerText = question;
-            button.addEventListener('click', () => this.handleSuggestedQuestion(question));
-            this.suggestedQuestions.appendChild(button);
-        });
-    }
-
-    // Manejar las preguntas sugeridas
-    handleSuggestedQuestion(question) {
-        this.addMessage('user', question);
-        const response = this.generateResponse(question);
-        setTimeout(() => {
-            this.addMessage('bot', response);
-        }, 500);
-    }
+  return response.introduccion + " " + response.detalle;
 }
 
-// Crear una nueva instancia del chatbot
-const chatbot = new Chatbot();
+// Inicialización del chatbot
+document.addEventListener("DOMContentLoaded", function() {
+  const chatContainer = document.querySelector("#chat-container");
+  const userInput = document.querySelector("#user-input");
+  const sendButton = document.querySelector("#send-button");
+
+  // Función para mostrar los mensajes
+  function showMessage(message, sender) {
+    const messageElement = document.createElement("div");
+    messageElement.classList.add(sender === "user" ? "user-message" : "bot-message");
+    messageElement.textContent = message;
+    chatContainer.appendChild(messageElement);
+    chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll hacia abajo
+  }
+
+  // Responder al usuario
+  function handleUserMessage(message) {
+    showMessage(message, "user");
+
+    let response = "";
+    if (message.toLowerCase().includes("propiedad")) {
+      response = getFilteredResponse("propiedades");
+    } else if (message.toLowerCase().includes("servicio")) {
+      response = getFilteredResponse("servicios");
+    } else if (message.toLowerCase().includes("contacto")) {
+      response = getFilteredResponse("contacto");
+    } else if (message.toLowerCase().includes("invertir")) {
+      response = getFilteredResponse("invertir");
+    } else if (message.toLowerCase().includes("compra")) {
+      response = get
