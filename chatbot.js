@@ -11,7 +11,7 @@ class Chatbot {
 
         this.loadKnowledge();
         this.addEventListeners();
-        this.debounceTimeout = null; // Para la optimización de búsquedas rápidas
+        this.debounceTimeout = null; // Para optimización de las búsquedas rápidas
     }
 
     async loadKnowledge() {
@@ -62,7 +62,6 @@ class Chatbot {
         setTimeout(() => {
             this.addMessage('bot', response);
         }, 500);
-        this.updateSuggestedCategories(message); // Actualizar sugerencias dinámicas
     }
 
     generateResponse(message) {
@@ -76,9 +75,23 @@ class Chatbot {
         return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más?";
     }
 
-    // Actualizar las sugerencias dinámicas según el contexto actual del mensaje
+    // Mostrar sugerencias dinámicas mientras el usuario escribe
+    filterSuggestedQuestions() {
+        const inputText = this.input.value.trim().toLowerCase();
+        clearTimeout(this.debounceTimeout); // Limpiar el temporizador de debounce
+
+        if (inputText) {
+            this.debounceTimeout = setTimeout(() => {
+                this.updateSuggestedCategories(inputText); // Filtrar sugerencias según el texto ingresado
+            }, 300); // Esperar 300ms después de que el usuario termine de escribir
+        } else {
+            this.suggestedQuestions.innerHTML = ''; // Si no hay texto, quitar sugerencias
+        }
+    }
+
+    // Actualizar las categorías sugeridas basadas en el texto ingresado
     updateSuggestedCategories(message) {
-        this.suggestedQuestions.innerHTML = ''; // Limpiar sugerencias anteriores
+        this.suggestedQuestions.innerHTML = ''; // Limpiar las sugerencias previas
         const matchedCategories = this.getRelevantCategories(message);
 
         matchedCategories.forEach(category => {
@@ -91,7 +104,7 @@ class Chatbot {
         });
     }
 
-    // Obtener categorías relevantes según el contenido del mensaje
+    // Obtener categorías relevantes basadas en las palabras del mensaje
     getRelevantCategories(message) {
         const relevantCategories = [];
 
@@ -107,9 +120,9 @@ class Chatbot {
         return relevantCategories.length ? relevantCategories : ["default"]; // Si no hay categorías, sugerir algo por defecto
     }
 
-    // Mostrar preguntas dentro de una categoría específica seleccionada
+    // Mostrar preguntas dentro de una categoría seleccionada
     showCategoryQuestions(category) {
-        this.suggestedQuestions.innerHTML = ''; // Limpiar botones de categoría
+        this.suggestedQuestions.innerHTML = ''; // Limpiar los botones de categorías
 
         this.knowledge[category].forEach(item => {
             const button = document.createElement('button');
@@ -123,20 +136,9 @@ class Chatbot {
             this.suggestedQuestions.appendChild(button);
         });
     }
-
-    // Filtrar sugerencias basadas en el texto ingresado por el usuario
-    filterSuggestedQuestions() {
-        const inputText = this.input.value.toLowerCase();
-        clearTimeout(this.debounceTimeout); // Limpiar el temporizador de debounce
-        if (inputText) {
-            this.debounceTimeout = setTimeout(() => {
-                this.updateSuggestedCategories(inputText); // Filtrar categorías según el input actual
-            }, 300); // Esperar 300ms después de que el usuario termine de escribir
-        }
-    }
 }
 
-// Inicializa el chatbot cuando el DOM esté completamente cargado
+// Inicializar el chatbot cuando el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', () => {
     const chatbot = new Chatbot();
 });
