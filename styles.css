@@ -46,19 +46,6 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     z-index: 1000;
-}
-
-#ai-real-estate-expert-chatbot .chat-window {
-    display: none;
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    width: 300px;
-    height: 400px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    z-index: 1000;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
 }
@@ -114,11 +101,12 @@ body {
     padding: 5px 10px;
     margin: 5px;
     font-size: 0.9em;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .suggested-question:hover {
     background-color: #e2e8f0;
+    transform: translateY(-2px);
 }
 
 .message {
@@ -155,10 +143,54 @@ body {
 .powered-by-link {
     color: #4299e1;
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 .powered-by-link:hover {
+    color: #2b6cb0;
     text-decoration: underline;
+}
+
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.dot-typing {
+    position: relative;
+    left: -9999px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #9ae6b4;
+    color: #9ae6b4;
+    box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+    animation: dot-typing 1.5s infinite linear;
+}
+
+@keyframes dot-typing {
+    0% {
+        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+    }
+    16.667% {
+        box-shadow: 9984px -10px 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+    }
+    33.333% {
+        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+    }
+    50% {
+        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px -10px 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+    }
+    66.667% {
+        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+    }
+    83.333% {
+        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px -10px 0 0 #9ae6b4;
+    }
+    100% {
+        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+    }
 }
 /* Estilos para el botón de WhatsApp */
 .whatsapp-button {
