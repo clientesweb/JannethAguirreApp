@@ -48,9 +48,36 @@ body {
     z-index: 1000;
 }
 
+#ai-real-estate-expert-chatbot .chat-window {
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
 #ai-real-estate-expert-chatbot .chat-window.active {
     display: flex;
     flex-direction: column;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 #chatbot-messages {
@@ -62,19 +89,95 @@ body {
 #chatbot-form {
     display: flex;
     padding: 10px;
+    border-top: 1px solid #e2e8f0;
 }
 
 #chatbot-input {
     flex-grow: 1;
     margin-right: 10px;
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+#chatbot-input:focus {
+    outline: none;
+    border-color: #4299e1;
 }
 
 .suggested-question {
     cursor: pointer;
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 5px;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
 }
 
 .suggested-question:hover {
     background-color: #e2e8f0;
+}
+
+.message {
+    max-width: 80%;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 18px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.user-message {
+    background-color: #4299e1;
+    color: white;
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.bot-message {
+    background-color: #e2e8f0;
+    color: #2d3748;
+    align-self: flex-start;
+}
+
+.typing-indicator {
+    display: flex;
+    padding: 10px;
+    background-color: #e2e8f0;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    width: fit-content;
+}
+
+.typing-indicator span {
+    height: 8px;
+    width: 8px;
+    background-color: #2d3748;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    animation: typing 1s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
 }
 /* Estilos para el botón de WhatsApp */
 .whatsapp-button {
