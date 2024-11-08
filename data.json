@@ -22,6 +22,17 @@
         "respuesta": "Janneth Aguirre ofrece una amplia gama de servicios inmobiliarios, incluyendo compra y venta de propiedades, asesoría en inversiones, servicios para propietarios e inquilinos, y gestión de propiedades tanto en Ecuador como en el extranjero.",
         "etiquetas": ["servicios", "asesoría", "gestión"],
         "seguimiento": ["propiedades", "inversion", "internacional"]
+      },
+      {
+        "id": "inicio_3",
+        "preguntas": [
+          "¿Cuál es el lema de Janneth Aguirre?",
+          "¿Qué frase representa a Janneth Aguirre?",
+          "Dime el eslogan de Janneth Aguirre"
+        ],
+        "respuesta": "El lema de Janneth Aguirre es 'Encontrá Tu Hogar Especial'. Nos especializamos en lo mejor de Bienes Raíces en Ecuador y en el Mundo.",
+        "etiquetas": ["lema", "especialización", "alcance"],
+        "seguimiento": ["propiedades", "internacional"]
       }
     ],
     "propiedades": [
@@ -139,6 +150,19 @@
         "etiquetas": ["financiamiento", "hipotecas", "opciones de pago"],
         "seguimiento": ["inversion", "propiedades"]
       }
+    ],
+    "contacto": [
+      {
+        "id": "cont_1",
+        "preguntas": [
+          "¿Cómo puedo contactar a Janneth Aguirre?",
+          "¿Cuál es la información de contacto?",
+          "¿Cómo puedo obtener más información?"
+        ],
+        "respuesta": "Puedes contactar a Janneth Aguirre llamando al +593 98 716 7782 o enviando un correo electrónico a info@jannethaguirre.com. También puedes visitar nuestro sitio web en https://www.jannethaguirrebienesraices.com/ para obtener más información sobre nuestros servicios y propiedades.",
+        "etiquetas": ["contacto", "información", "sitio web"],
+        "seguimiento": ["servicios", "propiedades", "cita"]
+      }
     ]
   },
   "intenciones": {
@@ -147,6 +171,7 @@
     "inversion": ["invertir", "rendimiento", "oportunidad"],
     "financiamiento": ["préstamo", "hipoteca", "crédito"],
     "valoracion": ["tasar", "valuar", "cuánto vale"],
-    "informacion": ["información", "detalles", "más sobre"]
+    "informacion": ["información", "detalles", "más sobre"],
+    "contacto": ["contactar", "llamar", "comunicarme"]
   }
 }
