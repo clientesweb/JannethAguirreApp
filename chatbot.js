@@ -9,6 +9,7 @@ class Chatbot {
         this.suggestedQuestions = document.getElementById('suggested-questions');
         this.knowledge = {}; // Base de conocimientos cargada desde JSON
         this.context = []; // Mantener contexto de la conversación
+        this.isTyping = false;
 
         this.loadKnowledge();
         this.addEventListeners();
@@ -30,6 +31,7 @@ class Chatbot {
         this.openButton.addEventListener('click', this.toggleChat.bind(this));
         this.closeButton.addEventListener('click', this.toggleChat.bind(this));
         this.input.addEventListener('input', this.handleInput.bind(this));
+        document.addEventListener('click', this.handleOutsideClick.bind(this));
     }
 
     toggleChat() {
@@ -40,6 +42,14 @@ class Chatbot {
                 this.addMessage('bot', '¡Hola! Soy ARIA, tu asistente virtual de bienes raíces. ¿En qué puedo ayudarte hoy?');
                 this.showInitialSuggestions();
             }
+        }
+    }
+
+    handleOutsideClick(event) {
+        if (!this.chatWindow.classList.contains('hidden') &&
+            !this.chatWindow.contains(event.target) &&
+            event.target !== this.openButton) {
+            this.toggleChat();
         }
     }
 
@@ -78,10 +88,16 @@ class Chatbot {
     addMessage(sender, message) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('mb-2', sender === 'user' ? 'text-right' : 'text-left');
+        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         messageElement.innerHTML = `
-            <span class="inline-block ${sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'} rounded px-2 py-1">
-                ${message}
-            </span>
+            <div class="flex ${sender === 'user' ? 'justify-end' : 'justify-start'}">
+                <div>
+                    <span class="text-xs text-gray-500 mb-1 ${sender === 'user' ? 'mr-2' : 'ml-2'}">${currentTime}</span>
+                    <span class="inline-block ${sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'} rounded px-2 py-1">
+                        ${message}
+                    </span>
+                </div>
+            </div>
         `;
         this.messages.appendChild(messageElement);
         this.messages.scrollTop = this.messages.scrollHeight;
@@ -99,12 +115,35 @@ class Chatbot {
     }
 
     async processMessage(message) {
+        this.showTypingIndicator();
         const response = await this.generateResponse(message);
-        setTimeout(() => {
-            this.addMessage('bot', response);
-            this.updateContext(message, response);
-            this.suggestFollowUp(response);
-        }, 500);
+        this.hideTypingIndicator();
+        this.addMessage('bot', response);
+        this.updateContext(message, response);
+        this.suggestFollowUp(response);
+    }
+
+    showTypingIndicator() {
+        if (!this.isTyping) {
+            this.isTyping = true;
+            const typingElement = document.createElement('div');
+            typingElement.classList.add('typing-indicator', 'mb-2');
+            typingElement.innerHTML = `
+                <div class="flex items-center">
+                    <div class="dot-typing"></div>
+                </div>
+            `;
+            this.messages.appendChild(typingElement);
+            this.messages.scrollTop = this.messages.scrollHeight;
+        }
+    }
+
+    hideTypingIndicator() {
+        const typingIndicator = this.messages.querySelector('.typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+        this.isTyping = false;
     }
 
     async generateResponse(message) {
@@ -121,6 +160,7 @@ class Chatbot {
         }
 
         if (bestMatch.score > 0.6) {
+            await this.simulateTyping(bestMatch.answer);
             return bestMatch.answer;
         } else {
             return this.generateFallbackResponse(message);
@@ -134,14 +174,21 @@ class Chatbot {
         return commonWords.length / Math.max(inputWords.length, referenceWords.length);
     }
 
-    generateFallbackResponse(message) {
+    async generateFallbackResponse(message) {
         const fallbacks = [
             "No tengo información específica sobre eso, pero puedo ayudarte con preguntas sobre propiedades, servicios inmobiliarios o el proceso de compra/venta. ¿Hay algo en particular que te interese?",
             "Esa es una pregunta interesante. Aunque no tengo una respuesta directa, puedo proporcionarte información sobre nuestras propiedades o servicios. ¿Qué te gustaría saber?",
             "Disculpa, no tengo datos concretos sobre eso. Sin embargo, estoy especializada en temas inmobiliarios. ¿Puedo ayudarte con alguna consulta sobre propiedades o el mercado inmobiliario?",
             "Parece que esa pregunta requiere más información. ¿Te gustaría que te conecte con uno de nuestros agentes para una consulta más detallada? Puedes contactarnos por WhatsApp al +593 99 999 9999."
         ];
-        return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+        const response = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+        await this.simulateTyping(response);
+        return response;
+    }
+
+    async simulateTyping(text) {
+        const typingSpeed = 50; // milisegundos por carácter
+        await new Promise(resolve => setTimeout(resolve, text.length * typingSpeed));
     }
 
     updateContext(message, response) {
@@ -183,7 +230,7 @@ class Chatbot {
         suggestions.forEach(suggestion => {
             const button = document.createElement('button');
             button.textContent = suggestion;
-            button.classList.add('suggested-question', 'bg-gray-100', 'text-gray-700', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm');
+            button.classList.add('suggested-question', 'bg-gray-100', 'text-gray-700', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm', 'hover:bg-gray-200', 'transition-colors', 'duration-200');
             button.addEventListener('click', () => {
                 this.input.value = suggestion;
                 this.handleSubmit(new Event('submit'));
