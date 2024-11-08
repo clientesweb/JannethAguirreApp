@@ -10,6 +10,9 @@ class Chatbot {
         this.knowledge = {}; // Base de conocimientos cargada desde JSON
         this.context = []; // Mantener contexto de la conversación
         this.isTyping = false;
+        this.conversationHistory = [];
+        this.maxHistoryLength = 5;
+        this.userIntentions = new Set();
 
         this.loadKnowledge();
         this.addEventListeners();
@@ -116,6 +119,7 @@ class Chatbot {
 
     async processMessage(message) {
         this.showTypingIndicator();
+        this.detectUserIntentions(message);
         const response = await this.generateResponse(message);
         this.hideTypingIndicator();
         this.addMessage('bot', response);
@@ -150,9 +154,14 @@ class Chatbot {
         message = message.toLowerCase();
         let bestMatch = { score: 0, answer: '' };
 
+        const context = this.conversationHistory.join(' ').toLowerCase();
+
         for (let category in this.knowledge) {
             this.knowledge[category].forEach(item => {
-                const score = this.calculateSimilarity(message, item.question.toLowerCase());
+                const questionScore = this.calculateSimilarity(message, item.question.toLowerCase());
+                const contextScore = this.calculateSimilarity(context, item.question.toLowerCase());
+                const score = questionScore * 0.7 + contextScore * 0.3;
+
                 if (score > bestMatch.score) {
                     bestMatch = { score, answer: item.answer };
                 }
@@ -161,10 +170,31 @@ class Chatbot {
 
         if (bestMatch.score > 0.6) {
             await this.simulateTyping(bestMatch.answer);
-            return bestMatch.answer;
+            return this.personalizeResponse(bestMatch.answer);
         } else {
             return this.generateFallbackResponse(message);
         }
+    }
+
+    personalizeResponse(response) {
+        const personalizations = [
+            { trigger: 'propiedad', prefix: '¡Excelente pregunta sobre propiedades! ' },
+            { trigger: 'servicio', prefix: 'En cuanto a nuestros servicios, ' },
+            { trigger: 'inver', prefix: 'Hablando de inversiones, ' },
+            { trigger: 'contact', prefix: 'Respecto a contactarnos, ' },
+            { trigger: 'financia', prefix: 'Sobre el financiamiento, ' },
+            { trigger: 'valor', prefix: 'En cuanto a la valoración de propiedades, ' },
+            { trigger: 'compra', prefix: 'Para los compradores, ' },
+            { trigger: 'vend', prefix: 'Para los vendedores, ' }
+        ];
+
+        for (let personalization of personalizations) {
+            if (response.toLowerCase().includes(personalization.trigger)) {
+                return personalization.prefix + response;
+            }
+        }
+
+        return response;
     }
 
     calculateSimilarity(input, reference) {
@@ -172,6 +202,14 @@ class Chatbot {
         const referenceWords = reference.split(' ');
         const commonWords = inputWords.filter(word => referenceWords.includes(word));
         return commonWords.length / Math.max(inputWords.length, referenceWords.length);
+    }
+
+    updateContext(message, response) {
+        this.conversationHistory.push(message);
+        this.conversationHistory.push(response);
+        if (this.conversationHistory.length > this.maxHistoryLength * 2) {
+            this.conversationHistory = this.conversationHistory.slice(-this.maxHistoryLength * 2);
+        }
     }
 
     async generateFallbackResponse(message) {
@@ -187,15 +225,8 @@ class Chatbot {
     }
 
     async simulateTyping(text) {
-        const typingSpeed = 50; // milisegundos por carácter
+        const typingSpeed = 50;
         await new Promise(resolve => setTimeout(resolve, text.length * typingSpeed));
-    }
-
-    updateContext(message, response) {
-        this.context.push({ message, response });
-        if (this.context.length > 5) {
-            this.context.shift();
-        }
     }
 
     suggestFollowUp(lastResponse) {
@@ -204,7 +235,7 @@ class Chatbot {
     }
 
     generateSuggestions(input) {
-        const keywords = ['propiedades', 'servicios', 'inversión', 'contacto', 'internacional'];
+        const keywords = ['propiedades', 'servicios', 'inversión', 'contacto', 'internacional', 'financiamiento', 'valoración', 'compra', 'venta'];
         const relevantKeywords = keywords.filter(keyword => input.toLowerCase().includes(keyword));
 
         let suggestions = [];
@@ -246,6 +277,40 @@ class Chatbot {
             "¿Cómo puedo contactarlos?"
         ];
         this.showSuggestions(initialSuggestions);
+    }
+
+    detectUserIntentions(message) {
+        const intentKeywords = {
+            'compra': ['comprar', 'adquirir', 'busco', 'quiero'],
+            'venta': ['vender', 'poner en venta', 'quiero vender'],
+            'inversion': ['invertir', 'rendimiento', 'oportunidad'],
+            'financiamiento': ['préstamo', 'hipoteca', 'crédito'],
+            'valoracion': ['tasar', 'valuar', 'cuánto vale'],
+            'informacion': ['información', 'detalles', 'más sobre']
+        };
+
+        for (let intent in intentKeywords) {
+            if (intentKeywords[intent].some(keyword => message.toLowerCase().includes(keyword))) {
+                this.userIntentions.add(intent);
+            }
+        }
+    }
+
+    guideConversation() {
+        if (this.userIntentions.has('compra')) {
+            return "Veo que estás interesado en comprar una propiedad. ¿Tienes alguna preferencia en cuanto a ubicación o tipo de propiedad?";
+        } else if (this.userIntentions.has('venta')) {
+            return "Entiendo que quieres vender una propiedad. ¿Podrías darme más detalles sobre la propiedad que deseas vender?";
+        } else if (this.userIntentions.has('inversion')) {
+            return "La inversión inmobiliaria es una excelente opción. ¿Tienes en mente algún tipo específico de inversión o rendimiento esperado?";
+        } else if (this.userIntentions.has('financiamiento')) {
+            return "El financiamiento es un aspecto crucial. ¿Te gustaría conocer nuestras opciones de financiamiento o tienes alguna pregunta específica al respecto?";
+        } else if (this.userIntentions.has('valoracion')) {
+            return "La valoración de propiedades es un servicio que ofrecemos. ¿Tienes una propiedad específica que te gustaría valorar?";
+        } else if (this.userIntentions.has('informacion')) {
+            return "Estoy aquí para proporcionarte toda la información que necesites. ¿Hay algún aspecto específico sobre el que te gustaría saber más?";
+        }
+        return null;
     }
 }
 
