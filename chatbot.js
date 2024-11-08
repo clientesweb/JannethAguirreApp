@@ -1,9 +1,3 @@
-// Asegúrate de que el archivo data.json esté en el mismo directorio que este script
-const data = {
-  // Aquí va todo el contenido del archivo data.json que proporcioné anteriormente
-  // Por razones de espacio, no lo incluyo aquí, pero debe ser el mismo contenido
-};
-
 class Chatbot {
   constructor() {
     this.isOpen = false;
@@ -11,13 +5,25 @@ class Chatbot {
     this.suggestions = [];
     this.isTyping = false;
     this.context = {};
+    this.data = null;
 
     this.chatbotContainer = document.createElement('div');
     this.chatbotContainer.className = 'chatbot-container';
     document.body.appendChild(this.chatbotContainer);
 
-    this.render();
-    this.addEventListeners();
+    this.fetchData().then(() => {
+      this.render();
+      this.addEventListeners();
+    });
+  }
+
+  async fetchData() {
+    try {
+      const response = await fetch('data.json');
+      this.data = await response.json();
+    } catch (error) {
+      console.error('Error fetching chatbot data:', error);
+    }
   }
 
   render() {
@@ -42,7 +48,7 @@ class Chatbot {
       <div class="chat-window">
         <div class="chat-header">
           <img src="/logo.png" alt="Janneth Aguirre Real Estate" class="logo">
-          <h2>Asistente Virtual</h2>
+          <h2>Asistente Virtual ARIA</h2>
           <button class="close-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
@@ -84,9 +90,8 @@ class Chatbot {
 
   renderSuggestions() {
     return this.suggestions.map(sugg => `
-      <button class="suggestion-button" data-suggestion="${sugg.text}">
-        ${sugg.text}
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      <button class="suggestion-button" data-suggestion="${sugg}">
+        ${sugg}
       </button>
     `).join('');
   }
@@ -120,11 +125,8 @@ class Chatbot {
   toggleChat() {
     this.isOpen = !this.isOpen;
     if (this.isOpen && this.messages.length === 0) {
-      this.addBotMessage(data.inicio[0].answer);
-      this.suggestions = data.inicio[0].suggestions.map(sugg => ({
-        text: sugg,
-        action: () => this.handleSuggestionClick(sugg)
-      }));
+      this.addBotMessage(this.getRandomGreeting());
+      this.updateSuggestions(['propiedades', 'servicios', 'sobre nosotros']);
     }
     this.render();
   }
@@ -154,7 +156,7 @@ class Chatbot {
         this.isTyping = false;
         this.render();
       }
-    }, 30);
+    }, 50);
   }
 
   handleSubmit(message) {
@@ -166,37 +168,47 @@ class Chatbot {
 
   processMessage(message) {
     const response = this.generateResponse(message);
-    this.addBotMessage(response.answer);
-    this.updateContext(message, response);
-    
-    if (response.suggestions) {
-      this.suggestions = response.suggestions.map(sugg => ({
-        text: sugg,
-        action: () => this.handleSuggestionClick(sugg)
-      }));
-    }
-    this.render();
+    this.addBotMessage(response);
+    this.updateContext(message);
+    this.suggestNextTopics();
   }
 
   generateResponse(message) {
     const lowerMessage = message.toLowerCase();
-    for (const category in data) {
-      const matchedItem = data[category].find(item => 
-        item.keywords.some(keyword => lowerMessage.includes(keyword.toLowerCase()))
+    for (const category in this.data) {
+      const matchedItem = this.data[category].find(item => 
+        lowerMessage.includes(item.question.toLowerCase())
       );
       if (matchedItem) {
-        return matchedItem;
+        return matchedItem.answer;
       }
     }
-    return data.default[0];
+    return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más sobre nuestras propiedades, servicios o el proceso de compra/venta?";
   }
 
-  updateContext(message, response) {
-    this.context = {
-      ...this.context,
-      lastTopic: response.question,
-      userPreferences: [...(this.context.userPreferences || []), message]
-    };
+  updateContext(message) {
+    // Simple context tracking
+    if (message.toLowerCase().includes('comprar')) {
+      this.context.intent = 'comprar';
+    } else if (message.toLowerCase().includes('vender')) {
+      this.context.intent = 'vender';
+    } else if (message.toLowerCase().includes('alquilar')) {
+      this.context.intent = 'alquilar';
+    }
+  }
+
+  suggestNextTopics() {
+    let suggestions = [];
+    if (this.context.intent === 'comprar') {
+      suggestions = ['proceso de compra', 'financiamiento', 'propiedades disponibles'];
+    } else if (this.context.intent === 'vender') {
+      suggestions = ['valoración de propiedades', 'documentos venta', 'tiempo venta'];
+    } else if (this.context.intent === 'alquilar') {
+      suggestions = ['alquileres', 'servicios', 'contacto'];
+    } else {
+      suggestions = ['propiedades', 'servicios', 'invertir', 'contacto'];
+    }
+    this.updateSuggestions(suggestions);
   }
 
   handleSuggestionClick(suggestion) {
@@ -204,26 +216,14 @@ class Chatbot {
     this.processMessage(suggestion);
   }
 
-  handleFeedback(isPositive) {
-    const feedbackMessage = isPositive
-      ? "Me alegra haber sido de ayuda. ¿Hay algo más en lo que pueda asistirte?"
-      : "Lamento no haber cumplido tus expectativas. ¿Podrías decirme cómo puedo mejorar mi asistencia?";
-    this.addBotMessage(feedbackMessage);
-    
-    if (!isPositive) {
-      this.suggestions = [
-        { text: "Hablar con un asesor", action: () => this.handleContactRequest("llamada") },
-        { text: "Intentar otra pregunta", action: () => {} }
-      ];
-    }
+  updateSuggestions(suggestions) {
+    this.suggestions = suggestions;
     this.render();
   }
 
-  handleContactRequest(method) {
-    this.addBotMessage(`Excelente, te conectaré con uno de nuestros asesores premium vía ${method}. Por favor, proporciona tu número de contacto o correo electrónico y te contactaremos a la brevedad.`);
-    this.suggestions = [];
-    this.context = { ...this.context, contactRequest: method };
-    this.render();
+  getRandomGreeting() {
+    const greetings = this.data.saludos.map(item => item.answer);
+    return greetings[Math.floor(Math.random() * greetings.length)];
   }
 }
 
