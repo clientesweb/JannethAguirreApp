@@ -13,17 +13,16 @@ class Chatbot {
         this.conversationHistory = [];
         this.maxHistoryLength = 5;
         this.userIntentions = new Set();
+        this.lastSuggestions = [];
 
         this.loadKnowledge();
         this.addEventListeners();
-        this.debounceTimeout = null;
     }
 
     async loadKnowledge() {
         try {
             const response = await fetch('data.json');
-            const data = await response.json();
-            this.knowledge = data;
+            this.knowledge = await response.json();
         } catch (error) {
             console.error("Error al cargar el archivo JSON:", error);
         }
@@ -77,15 +76,12 @@ class Chatbot {
     }
 
     handleInput() {
-        clearTimeout(this.debounceTimeout);
-        this.debounceTimeout = setTimeout(() => {
-            const inputText = this.input.value.trim().toLowerCase();
-            if (inputText) {
-                this.showSuggestions(this.generateSuggestions(inputText));
-            } else {
-                this.suggestedQuestions.innerHTML = '';
-            }
-        }, 300);
+        const inputText = this.input.value.trim().toLowerCase();
+        if (inputText) {
+            this.showSuggestions(this.generateSuggestions(inputText));
+        } else {
+            this.suggestedQuestions.innerHTML = '';
+        }
     }
 
     addMessage(sender, message) {
@@ -169,7 +165,6 @@ class Chatbot {
         }
 
         if (bestMatch.score > 0.6) {
-            await this.simulateTyping(bestMatch.answer);
             return this.personalizeResponse(bestMatch.answer);
         } else {
             return this.generateFallbackResponse(message);
@@ -212,21 +207,14 @@ class Chatbot {
         }
     }
 
-    async generateFallbackResponse(message) {
+    generateFallbackResponse(message) {
         const fallbacks = [
             "No tengo información específica sobre eso, pero puedo ayudarte con preguntas sobre propiedades, servicios inmobiliarios o el proceso de compra/venta. ¿Hay algo en particular que te interese?",
             "Esa es una pregunta interesante. Aunque no tengo una respuesta directa, puedo proporcionarte información sobre nuestras propiedades o servicios. ¿Qué te gustaría saber?",
             "Disculpa, no tengo datos concretos sobre eso. Sin embargo, estoy especializada en temas inmobiliarios. ¿Puedo ayudarte con alguna consulta sobre propiedades o el mercado inmobiliario?",
             "Parece que esa pregunta requiere más información. ¿Te gustaría que te conecte con uno de nuestros agentes para una consulta más detallada? Puedes contactarnos por WhatsApp al +593 99 999 9999."
         ];
-        const response = fallbacks[Math.floor(Math.random() * fallbacks.length)];
-        await this.simulateTyping(response);
-        return response;
-    }
-
-    async simulateTyping(text) {
-        const typingSpeed = 50;
-        await new Promise(resolve => setTimeout(resolve, text.length * typingSpeed));
+        return fallbacks[Math.floor(Math.random() * fallbacks.length)];
     }
 
     suggestFollowUp(lastResponse) {
@@ -253,7 +241,14 @@ class Chatbot {
                 "¿Cómo puedo contactar a un agente?"
             ];
         }
-        return suggestions.slice(0, 3);
+
+        // Filtrar sugerencias para evitar repeticiones
+        suggestions = suggestions.filter(suggestion => !this.lastSuggestions.includes(suggestion));
+        
+        // Actualizar lastSuggestions
+        this.lastSuggestions = suggestions.slice(0, 3);
+
+        return this.lastSuggestions;
     }
 
     showSuggestions(suggestions) {
