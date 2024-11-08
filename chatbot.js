@@ -7,12 +7,23 @@ class Chatbot {
         this.closeButton = document.getElementById('close-chatbot');
         this.chatWindow = document.getElementById('chatbot-window');
         this.suggestedQuestions = document.getElementById('suggested-questions');
-        this.knowledge = {};
-        this.context = [];
+        this.knowledge = {}; // Base de conocimientos cargada desde JSON
+        this.context = []; // Mantener contexto de la conversación
         this.isTyping = false;
 
         this.loadKnowledge();
         this.addEventListeners();
+        this.debounceTimeout = null;
+    }
+
+    async loadKnowledge() {
+        try {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            this.knowledge = data;
+        } catch (error) {
+            console.error("Error al cargar el archivo JSON:", error);
+        }
     }
 
     addEventListeners() {
@@ -32,16 +43,6 @@ class Chatbot {
                 this.showInitialSuggestions();
             }
         }
-    }
-
-    animateEntry() {
-        this.chatWindow.style.opacity = '0';
-        this.chatWindow.style.transform = 'translateY(20px)';
-        this.chatWindow.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
-        setTimeout(() => {
-            this.chatWindow.style.opacity = '1';
-            this.chatWindow.style.transform = 'translateY(0)';
-        }, 50);
     }
 
     handleOutsideClick(event) {
