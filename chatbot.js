@@ -1,207 +1,237 @@
 class Chatbot {
     constructor() {
-        this.knowledge = require('./data.json');
+        this.messages = document.getElementById('chatbot-messages');
+        this.input = document.getElementById('chatbot-input');
+        this.form = document.getElementById('chatbot-form');
+        this.openButton = document.getElementById('open-chatbot');
+        this.closeButton = document.getElementById('close-chatbot');
+        this.chatWindow = document.getElementById('chatbot-window');
+        this.suggestedQuestions = document.getElementById('suggested-questions');
+        this.knowledge = {}; // Base de conocimientos cargada desde JSON
+        this.context = []; // Mantener contexto de la conversación
+        this.isTyping = false;
         this.conversationHistory = [];
-        this.shortTermMemory = [];
-        this.conversationFlow = [];
-        this.lastTopic = null;
+        this.maxHistoryLength = 5;
         this.userIntentions = new Set();
-        this.propertyTypes = ['departamentos', 'locales comerciales', 'casas personalizadas'];
-        this.locations = ['Nuevo Samborondón', 'Isla Mocoli', 'Cuenca'];
-        this.greetings = ['Hola', 'Buenos días', 'Buenas tardes', 'Buenas noches'];
-        this.farewells = ['Adiós', 'Hasta luego', 'Gracias por tu visita', 'Que tengas un buen día'];
+
+        this.loadKnowledge();
+        this.addEventListeners();
+        this.debounceTimeout = null;
+    }
+
+    async loadKnowledge() {
+        try {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            this.knowledge = data;
+        } catch (error) {
+            console.error("Error al cargar el archivo JSON:", error);
+        }
+    }
+
+    addEventListeners() {
+        this.form.addEventListener('submit', this.handleSubmit.bind(this));
+        this.openButton.addEventListener('click', this.toggleChat.bind(this));
+        this.closeButton.addEventListener('click', this.toggleChat.bind(this));
+        this.input.addEventListener('input', this.handleInput.bind(this));
+        document.addEventListener('click', this.handleOutsideClick.bind(this));
+    }
+
+    toggleChat() {
+        this.chatWindow.classList.toggle('hidden');
+        if (!this.chatWindow.classList.contains('hidden')) {
+            this.animateEntry();
+            if (this.messages.children.length === 0) {
+                this.addMessage('bot', '¡Hola! Soy ARIA, tu asistente virtual de bienes raíces. ¿En qué puedo ayudarte hoy?');
+                this.showInitialSuggestions();
+            }
+        }
+    }
+
+    handleOutsideClick(event) {
+        if (!this.chatWindow.classList.contains('hidden') &&
+            !this.chatWindow.contains(event.target) &&
+            event.target !== this.openButton) {
+            this.toggleChat();
+        }
+    }
+
+    animateEntry() {
+        this.chatWindow.style.opacity = '0';
+        this.chatWindow.style.transform = 'translateY(20px)';
+        this.chatWindow.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+        setTimeout(() => {
+            this.chatWindow.style.opacity = '1';
+            this.chatWindow.style.transform = 'translateY(0)';
+        }, 50);
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const message = this.input.value.trim();
+        if (message !== '') {
+            this.addMessage('user', message);
+            this.input.value = '';
+            this.processMessage(message);
+        }
+    }
+
+    handleInput() {
+        clearTimeout(this.debounceTimeout);
+        this.debounceTimeout = setTimeout(() => {
+            const inputText = this.input.value.trim().toLowerCase();
+            if (inputText) {
+                this.showSuggestions(this.generateSuggestions(inputText));
+            } else {
+                this.suggestedQuestions.innerHTML = '';
+            }
+        }, 300);
+    }
+
+    addMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('mb-2', sender === 'user' ? 'text-right' : 'text-left');
+        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        messageElement.innerHTML = `
+            <div class="flex ${sender === 'user' ? 'justify-end' : 'justify-start'}">
+                <div>
+                    <span class="text-xs text-gray-500 mb-1 ${sender === 'user' ? 'mr-2' : 'ml-2'}">${currentTime}</span>
+                    <span class="inline-block ${sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'} rounded px-2 py-1">
+                        ${message}
+                    </span>
+                </div>
+            </div>
+        `;
+        this.messages.appendChild(messageElement);
+        this.messages.scrollTop = this.messages.scrollHeight;
+        this.animateMessage(messageElement);
+    }
+
+    animateMessage(element) {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+        setTimeout(() => {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+        }, 50);
     }
 
     async processMessage(message) {
-        this.updateConversationHistory(message);
+        this.showTypingIndicator();
         this.detectUserIntentions(message);
         const response = await this.generateResponse(message);
-        this.updateShortTermMemory(message, response);
-        this.updateConversationFlow(response);
+        this.hideTypingIndicator();
+        this.addMessage('bot', response);
+        this.updateContext(message, response);
         this.suggestFollowUp(response);
-        return response;
     }
 
-    updateConversationHistory(message) {
-        this.conversationHistory.push(message);
-        if (this.conversationHistory.length > 10) {
-            this.conversationHistory.shift();
+    showTypingIndicator() {
+        if (!this.isTyping) {
+            this.isTyping = true;
+            const typingElement = document.createElement('div');
+            typingElement.classList.add('typing-indicator', 'mb-2');
+            typingElement.innerHTML = `
+                <div class="flex items-center">
+                    <div class="dot-typing"></div>
+                </div>
+            `;
+            this.messages.appendChild(typingElement);
+            this.messages.scrollTop = this.messages.scrollHeight;
         }
     }
 
-    updateShortTermMemory(message, response) {
-        this.shortTermMemory.push({ message, response });
-        if (this.shortTermMemory.length > 5) {
-            this.shortTermMemory.shift();
+    hideTypingIndicator() {
+        const typingIndicator = this.messages.querySelector('.typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
         }
-    }
-
-    updateConversationFlow(response) {
-        const topic = this.extractTopic(response);
-        this.conversationFlow.push(topic);
-        this.lastTopic = topic;
-    }
-
-    extractTopic(text) {
-        const topics = ['propiedades', 'inversión', 'financiamiento', 'servicios', 'contacto'];
-        return topics.find(topic => text.toLowerCase().includes(topic)) || 'general';
+        this.isTyping = false;
     }
 
     async generateResponse(message) {
         message = message.toLowerCase();
-        
-        if (this.isGreeting(message)) {
-            return this.generateGreeting();
-        }
+        let bestMatch = { score: 0, answer: '' };
 
-        if (this.isFarewell(message)) {
-            return this.generateFarewell();
-        }
-
-        let bestMatch = this.findBestMatch(message);
-
-        if (bestMatch.score > 0.6) {
-            await this.simulateTyping(bestMatch.answer);
-            return this.personalizeResponse(bestMatch.answer, bestMatch.id);
-        } else {
-            const propertyResponse = this.generatePropertyResponse(message);
-            if (propertyResponse) {
-                return propertyResponse;
-            } else {
-                return this.generateContextualResponse(message) || this.generateFallbackResponse(message);
-            }
-        }
-    }
-
-    findBestMatch(message) {
-        let bestMatch = { score: 0, answer: '', id: '' };
         const context = this.conversationHistory.join(' ').toLowerCase();
-        const shortTermContext = this.shortTermMemory.map(item => item.message + ' ' + item.response).join(' ').toLowerCase();
 
-        for (let category in this.knowledge.categorias) {
-            this.knowledge.categorias[category].forEach(item => {
-                const questionScores = item.preguntas.map(q => this.calculateSimilarity(message, q.toLowerCase()));
-                const questionScore = Math.max(...questionScores);
-                const contextScore = this.calculateSimilarity(context, item.respuesta.toLowerCase());
-                const shortTermScore = this.calculateSimilarity(shortTermContext, item.respuesta.toLowerCase());
-                const intentionScore = this.calculateIntentionScore(item.etiquetas);
-                const score = questionScore * 0.4 + contextScore * 0.2 + shortTermScore * 0.2 + intentionScore * 0.2;
+        for (let category in this.knowledge) {
+            this.knowledge[category].forEach(item => {
+                const questionScore = this.calculateSimilarity(message, item.question.toLowerCase());
+                const contextScore = this.calculateSimilarity(context, item.question.toLowerCase());
+                const score = questionScore * 0.7 + contextScore * 0.3;
 
                 if (score > bestMatch.score) {
-                    bestMatch = { score, answer: item.respuesta, id: item.id };
+                    bestMatch = { score, answer: item.answer };
                 }
             });
         }
 
-        return bestMatch;
+        if (bestMatch.score > 0.6) {
+            await this.simulateTyping(bestMatch.answer);
+            return this.personalizeResponse(bestMatch.answer);
+        } else {
+            return this.generateFallbackResponse(message);
+        }
     }
 
-    calculateSimilarity(str1, str2) {
-        const set1 = new Set(str1.split(' '));
-        const set2 = new Set(str2.split(' '));
-        const intersection = new Set([...set1].filter(x => set2.has(x)));
-        return intersection.size / Math.max(set1.size, set2.size);
-    }
+    personalizeResponse(response) {
+        const personalizations = [
+            { trigger: 'propiedad', prefix: '¡Excelente pregunta sobre propiedades! ' },
+            { trigger: 'servicio', prefix: 'En cuanto a nuestros servicios, ' },
+            { trigger: 'inver', prefix: 'Hablando de inversiones, ' },
+            { trigger: 'contact', prefix: 'Respecto a contactarnos, ' },
+            { trigger: 'financia', prefix: 'Sobre el financiamiento, ' },
+            { trigger: 'valor', prefix: 'En cuanto a la valoración de propiedades, ' },
+            { trigger: 'compra', prefix: 'Para los compradores, ' },
+            { trigger: 'vend', prefix: 'Para los vendedores, ' }
+        ];
 
-    calculateIntentionScore(tags) {
-        const matchingIntentions = tags.filter(tag => this.userIntentions.has(tag));
-        return matchingIntentions.length / tags.length;
-    }
-
-    generatePropertyResponse(message) {
-        const propertyType = this.propertyTypes.find(type => message.includes(type));
-        const location = this.locations.find(loc => message.includes(loc.toLowerCase()));
-
-        if (propertyType && location) {
-            const propertyInfo = this.getPropertyInfo(propertyType, location);
-            if (propertyInfo) {
-                return `Respecto a ${propertyType} en ${location}: ${propertyInfo}`;
+        for (let personalization of personalizations) {
+            if (response.toLowerCase().includes(personalization.trigger)) {
+                return personalization.prefix + response;
             }
         }
 
-        return null;
-    }
-
-    getPropertyInfo(propertyType, location) {
-        const propertyMap = {
-            'departamentos': {
-                'Nuevo Samborondón': "Ofrecemos departamentos con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Incluyen áreas sociales como piscina, gimnasio y salón de eventos, además de seguridad 24/7.",
-                'Isla Mocoli': "Disponemos de departamentos exclusivos de 3 habitaciones con vistas impresionantes, 3.5 baños completos, área de lavado y secado. Cuentan con seguridad 24/7, gimnasio, piscina y estacionamiento privado.",
-                'Cuenca': "Tenemos departamentos ideales para Airbnb, con 2 y 3 habitaciones, 2 y 3 baños completos, salón-comedor con cocina integrada y vistas a la ciudad. Incluyen áreas sociales y seguridad 24/7."
-            },
-            'locales comerciales': {
-                'Nuevo Samborondón': "Ofrecemos locales comerciales de diferentes tamaños y diseños, con ventanas y fachadas amplias para maximizar la visibilidad. Cuentan con fácil acceso e instalaciones modernas."
-            },
-            'casas personalizadas': {
-                'general': "Nuestras casas personalizadas se adaptan a sus necesidades. Ofrecemos diseño personalizado, materiales de alta calidad, construcción eficiente y atención al detalle para crear la casa de sus sueños."
-            }
-        };
-
-        return propertyMap[propertyType][location] || propertyMap[propertyType]['general'];
-    }
-
-    generateContextualResponse(message) {
-        const recentTopics = this.conversationFlow.slice(-3);
-        const contextualResponses = {
-            'propiedades': "Hablando de propiedades, ¿hay alguna zona en particular que te interese? Tenemos excelentes opciones en Nuevo Samborondón, Isla Mocoli y Cuenca.",
-            'inversión': "En cuanto a inversiones, ¿has considerado el potencial de retorno de inversión en nuestras propiedades? Podemos discutir algunas opciones que se ajusten a tus objetivos financieros.",
-            'financiamiento': "Respecto al financiamiento, trabajamos con varias instituciones financieras que ofrecen tasas competitivas. ¿Te gustaría que te proporcione más información sobre las opciones disponibles?",
-            'servicios': "Nuestros servicios van más allá de la simple compra y venta. Ofrecemos asesoría completa en todo el proceso. ¿Hay algún servicio en particular sobre el que quieras saber más?",
-            'contacto': "Si necesitas más información o quieres programar una visita, no dudes en contactarnos al +593 98 716 7782 o por correo a info@jannethaguirre.com. ¿Prefieres que te contactemos nosotros?"
-        };
-
-        for (let topic of recentTopics) {
-            if (contextualResponses[topic]) {
-                return contextualResponses[topic];
-            }
-        }
-
-        return null;
-    }
-
-    personalizeResponse(response, id) {
-        const item = this.findItemById(id);
-        if (item && item.etiquetas) {
-            const personalization = item.etiquetas[Math.floor(Math.random() * item.etiquetas.length)];
-            return `En relación a ${personalization}, ${response}`;
-        }
         return response;
     }
 
-    findItemById(id) {
-        for (let category in this.knowledge.categorias) {
-            const item = this.knowledge.categorias[category].find(item => item.id === id);
-            if (item) return item;
+    calculateSimilarity(input, reference) {
+        const inputWords = input.split(' ');
+        const referenceWords = reference.split(' ');
+        const commonWords = inputWords.filter(word => referenceWords.includes(word));
+        return commonWords.length / Math.max(inputWords.length, referenceWords.length);
+    }
+
+    updateContext(message, response) {
+        this.conversationHistory.push(message);
+        this.conversationHistory.push(response);
+        if (this.conversationHistory.length > this.maxHistoryLength * 2) {
+            this.conversationHistory = this.conversationHistory.slice(-this.maxHistoryLength * 2);
         }
-        return null;
+    }
+
+    async generateFallbackResponse(message) {
+        const fallbacks = [
+            "No tengo información específica sobre eso, pero puedo ayudarte con preguntas sobre propiedades, servicios inmobiliarios o el proceso de compra/venta. ¿Hay algo en particular que te interese?",
+            "Esa es una pregunta interesante. Aunque no tengo una respuesta directa, puedo proporcionarte información sobre nuestras propiedades o servicios. ¿Qué te gustaría saber?",
+            "Disculpa, no tengo datos concretos sobre eso. Sin embargo, estoy especializada en temas inmobiliarios. ¿Puedo ayudarte con alguna consulta sobre propiedades o el mercado inmobiliario?",
+            "Parece que esa pregunta requiere más información. ¿Te gustaría que te conecte con uno de nuestros agentes para una consulta más detallada? Puedes contactarnos por WhatsApp al +593 99 999 9999."
+        ];
+        const response = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+        await this.simulateTyping(response);
+        return response;
+    }
+
+    async simulateTyping(text) {
+        const typingSpeed = 50;
+        await new Promise(resolve => setTimeout(resolve, text.length * typingSpeed));
     }
 
     suggestFollowUp(lastResponse) {
-        const item = this.findItemByResponse(lastResponse);
-        if (item && item.seguimiento) {
-            const followUpTopic = item.seguimiento[Math.floor(Math.random() * item.seguimiento.length)];
-            const suggestions = this.generateSuggestions(followUpTopic);
-            this.showSuggestions(suggestions);
-        } else {
-            const suggestions = this.generateSuggestions(lastResponse);
-            this.showSuggestions(suggestions);
-        }
-    }
-
-    findItemByResponse(response) {
-        for (let category in this.knowledge.categorias) {
-            const item = this.knowledge.categorias[category].find(item => item.respuesta === response);
-            if (item) return item;
-        }
-        return null;
-    }
-
-    detectUserIntentions(message) {
-        for (let intent in this.knowledge.intenciones) {
-            if (this.knowledge.intenciones[intent].some(keyword => message.toLowerCase().includes(keyword))) {
-                this.userIntentions.add(intent);
-            }
-        }
+        const suggestions = this.generateSuggestions(lastResponse);
+        this.showSuggestions(suggestions);
     }
 
     generateSuggestions(input) {
@@ -211,74 +241,79 @@ class Chatbot {
         let suggestions = [];
         if (relevantKeywords.length > 0) {
             relevantKeywords.forEach(keyword => {
-                if (this.knowledge.categorias[keyword]) {
-                    suggestions = suggestions.concat(this.knowledge.categorias[keyword].map(item => item.preguntas[0]));
+                if (this.knowledge[keyword]) {
+                    suggestions = suggestions.concat(this.knowledge[keyword].map(item => item.question));
                 }
             });
         } else {
             suggestions = [
-                "¿Qué tipos de propiedades ofrecen en Nuevo Samborondón?",
-                "¿Cómo puedo invertir en bienes raíces en Ecuador?",
-                "¿Qué servicios brindan para la compra de departamentos?",
-                "¿Tienen opciones de financiamiento para casas personalizadas?"
+                "¿Qué tipos de propiedades ofrecen?",
+                "¿Cómo puedo invertir en bienes raíces?",
+                "¿Qué servicios brindan a los compradores?",
+                "¿Cómo puedo contactar a un agente?"
             ];
         }
-
-        if (this.lastTopic) {
-            suggestions.push(`¿Quieres saber más sobre ${this.lastTopic}?`);
-        }
-
         return suggestions.slice(0, 3);
     }
 
     showSuggestions(suggestions) {
-        console.log("Sugerencias:");
-        suggestions.forEach((suggestion, index) => {
-            console.log(`${index + 1}. ${suggestion}`);
+        this.suggestedQuestions.innerHTML = '';
+        suggestions.forEach(suggestion => {
+            const button = document.createElement('button');
+            button.textContent = suggestion;
+            button.classList.add('suggested-question', 'bg-gray-100', 'text-gray-700', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm', 'hover:bg-gray-200', 'transition-colors', 'duration-200');
+            button.addEventListener('click', () => {
+                this.input.value = suggestion;
+                this.handleSubmit(new Event('submit'));
+            });
+            this.suggestedQuestions.appendChild(button);
         });
     }
 
-    generateFallbackResponse(message) {
-        const fallbacks = [
-            "Interesante pregunta. Aunque no tengo una respuesta directa, puedo proporcionarte información sobre nuestras propiedades o servicios. ¿Hay algo en particular que te gustaría saber?",
-            "No tengo información específica sobre eso, pero estaré encantado de ayudarte con preguntas sobre nuestras propiedades, servicios inmobiliarios o el proceso de compra/venta. ¿En qué área te puedo asistir?",
-            "Esa es una consulta intrigante. Si bien no puedo responderla directamente, ¿te gustaría que te conecte con uno de nuestros agentes para una consulta más detallada? Puedes contactarnos al +593 98 716 7782.",
-            "Gracias por tu pregunta. Aunque no tengo una respuesta específica, estoy especializado en temas inmobiliarios. ¿Puedo ayudarte con alguna consulta sobre nuestras propiedades o servicios?"
+    showInitialSuggestions() {
+        const initialSuggestions = [
+            "¿Qué servicios ofrecen?",
+            "¿Tienen propiedades en venta?",
+            "¿Cómo puedo contactarlos?"
         ];
-        return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+        this.showSuggestions(initialSuggestions);
     }
 
-    isGreeting(message) {
-        return this.greetings.some(greeting => message.toLowerCase().includes(greeting.toLowerCase()));
+    detectUserIntentions(message) {
+        const intentKeywords = {
+            'compra': ['comprar', 'adquirir', 'busco', 'quiero'],
+            'venta': ['vender', 'poner en venta', 'quiero vender'],
+            'inversion': ['invertir', 'rendimiento', 'oportunidad'],
+            'financiamiento': ['préstamo', 'hipoteca', 'crédito'],
+            'valoracion': ['tasar', 'valuar', 'cuánto vale'],
+            'informacion': ['información', 'detalles', 'más sobre']
+        };
+
+        for (let intent in intentKeywords) {
+            if (intentKeywords[intent].some(keyword => message.toLowerCase().includes(keyword))) {
+                this.userIntentions.add(intent);
+            }
+        }
     }
 
-    isFarewell(message) {
-        return this.farewells.some(farewell => message.toLowerCase().includes(farewell.toLowerCase()));
-    }
-
-    generateGreeting() {
-        const greetings = [
-            "¡Hola! Bienvenido a Janneth Aguirre Bienes Raíces. ¿En qué puedo ayudarte hoy?",
-            "¡Saludos! Soy el asistente virtual de Janneth Aguirre. ¿Qué información sobre bienes raíces necesitas?",
-            "¡Bienvenido! Estoy aquí para ayudarte con cualquier consulta sobre propiedades en Ecuador. ¿Qué te gustaría saber?"
-        ];
-        return greetings[Math.floor(Math.random() * greetings.length)];
-    }
-
-    generateFarewell() {
-        const farewells = [
-            "¡Gracias por tu visita! Si necesitas más información, no dudes en contactarnos al +593 98 716 7782. ¡Que tengas un excelente día!",
-            "Ha sido un placer ayudarte. Recuerda que puedes encontrar más información en nuestra web https://www.jannethaguirrebienesraices.com/. ¡Hasta pronto!",
-            "Espero haber sido de ayuda. Si tienes más preguntas, no dudes en volver a contactarnos. ¡Que tengas un buen día!"
-        ];
-        return farewells[Math.floor(Math.random() * farewells.length)];
-    }
-
-    async simulateTyping(text) {
-        const typingSpeed = 50; // milliseconds per character
-        const delay = text.length * typingSpeed;
-        await new Promise(resolve => setTimeout(resolve, delay));
+    guideConversation() {
+        if (this.userIntentions.has('compra')) {
+            return "Veo que estás interesado en comprar una propiedad. ¿Tienes alguna preferencia en cuanto a ubicación o tipo de propiedad?";
+        } else if (this.userIntentions.has('venta')) {
+            return "Entiendo que quieres vender una propiedad. ¿Podrías darme más detalles sobre la propiedad que deseas vender?";
+        } else if (this.userIntentions.has('inversion')) {
+            return "La inversión inmobiliaria es una excelente opción. ¿Tienes en mente algún tipo específico de inversión o rendimiento esperado?";
+        } else if (this.userIntentions.has('financiamiento')) {
+            return "El financiamiento es un aspecto crucial. ¿Te gustaría conocer nuestras opciones de financiamiento o tienes alguna pregunta específica al respecto?";
+        } else if (this.userIntentions.has('valoracion')) {
+            return "La valoración de propiedades es un servicio que ofrecemos. ¿Tienes una propiedad específica que te gustaría valorar?";
+        } else if (this.userIntentions.has('informacion')) {
+            return "Estoy aquí para proporcionarte toda la información que necesites. ¿Hay algún aspecto específico sobre el que te gustaría saber más?";
+        }
+        return null;
     }
 }
 
-module.exports = Chatbot;
+document.addEventListener('DOMContentLoaded', () => {
+    const chatbot = new Chatbot();
+});
