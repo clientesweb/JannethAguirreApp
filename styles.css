@@ -35,28 +35,56 @@ body {
 }
 
 
+#ai-real-estate-expert-chatbot {
+    font-family: 'Arial', sans-serif;
+}
+
+#ai-real-estate-expert-chatbot .chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4a90e2;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1000;
+}
+
+#ai-real-estate-expert-chatbot .chat-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
 #ai-real-estate-expert-chatbot .chat-window {
     display: none;
     position: fixed;
     bottom: 100px;
     right: 20px;
-    width: 300px;
-    height: 400px;
+    width: 350px;
+    height: 500px;
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     overflow: hidden;
-    transition: all 0.3s ease-in-out;
-}
-
-#ai-real-estate-expert-chatbot .chat-window {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
 }
 
 #ai-real-estate-expert-chatbot .chat-window.active {
-    transform: translateY(0) scale(1);
+    display: flex;
+    flex-direction: column;
     opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: slideIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
 }
 
 @keyframes slideIn {
@@ -70,26 +98,145 @@ body {
     }
 }
 
-.message {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+#ai-real-estate-expert-chatbot .chat-header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
-.suggested-question {
+#ai-real-estate-expert-chatbot .chat-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#ai-real-estate-expert-chatbot .close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#ai-real-estate-expert-chatbot .close-button:hover {
+    transform: scale(1.1);
+}
+
+#ai-real-estate-expert-chatbot .chat-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#ai-real-estate-expert-chatbot .message {
+    max-width: 80%;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    animation: messageAppear 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+@keyframes messageAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#ai-real-estate-expert-chatbot .user-message {
+    align-self: flex-end;
+    background-color: #4a90e2;
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+#ai-real-estate-expert-chatbot .bot-message {
+    align-self: flex-start;
+    background-color: #f0f0f0;
+    color: #333;
+    border-bottom-left-radius: 5px;
+}
+
+#ai-real-estate-expert-chatbot .suggested-questions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+#ai-real-estate-expert-chatbot .suggested-question {
+    background-color: #e9f2fd;
+    color: #4a90e2;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
     transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.suggested-question:hover {
-    transform: translateY(-2px) scale(1.05);
+#ai-real-estate-expert-chatbot .suggested-question:hover {
+    background-color: #4a90e2;
+    color: white;
+    transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.typing-indicator {
+#ai-real-estate-expert-chatbot .chat-input {
+    display: flex;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #e0e0e0;
+}
+
+#ai-real-estate-expert-chatbot .chat-input input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#ai-real-estate-expert-chatbot .chat-input input:focus {
+    border-color: #4a90e2;
+}
+
+#ai-real-estate-expert-chatbot .send-button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#ai-real-estate-expert-chatbot .send-button:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+#ai-real-estate-expert-chatbot .typing-indicator {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.dot-typing {
+#ai-real-estate-expert-chatbot .dot-typing {
     position: relative;
     left: -9999px;
     width: 8px;
@@ -122,6 +269,20 @@ body {
     }
     100% {
         box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
+    }
+}
+
+@media (max-width: 480px) {
+    #ai-real-estate-expert-chatbot .chat-window {
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        right: 0;
+        border-radius: 0;
+    }
+
+    #ai-real-estate-expert-chatbot .chat-header {
+        border-radius: 0;
     }
 }
 /* Estilos para el botón de WhatsApp */
