@@ -329,30 +329,30 @@
         </div>
     </footer>
 
-    <div id="ai-real-estate-expert-chatbot" class="fixed bottom-36 right-4 z-50">
-    <button id="open-chatbot" class="bg-white text-primary w-14 h-14 rounded-full flex items-center justify-center text-2xl">
-    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Chatbot" width="40" height="40" class="w-10 h-10">
-</button>
-    <div id="chatbot-window" class="hidden fixed bottom-36 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
+    <div id="ai-real-estate-expert-chatbot" class="fixed bottom-4 right-4 z-50">
+    <button id="open-chatbot" class="bg-white text-primary w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Chatbot" width="40" height="40" class="w-10 h-10">
+    </button>
+    <div id="chatbot-window" class="hidden fixed bottom-20 right-4 bg-white rounded-lg shadow-2xl p-4 w-80 max-w-full">
         <div class="flex justify-between items-center mb-4">
             <div class="flex items-center">
                 <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo" width="32" height="32" class="h-8 mr-2">
                 <h3 class="text-lg font-bold">ARIA - Experta en bienes raíces</h3>
             </div>
-            <button id="close-chatbot" class="text-gray-500 hover:text-gray-700">
-                <i class="fas fa-times"></i>
+            <button id="close-chatbot" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
             </button>
         </div>
-        <div id="chatbot-messages" class="h-60 overflow-y-auto mb-4"></div>
-        <div id="suggested-questions" class="mb-4"></div>
+        <div id="chatbot-messages" class="h-60 overflow-y-auto mb-4 space-y-2"></div>
+        <div id="suggested-questions" class="mb-4 flex flex-wrap"></div>
         <form id="chatbot-form" class="flex">
-            <input type="text" id="chatbot-input" class="flex-grow border rounded-l px-2 py-1" placeholder="Escribe tu pregunta...">
-            <button type="submit" class="bg-primary text-white px-4 py-1 rounded-r">Enviar</button>
+            <input type="text" id="chatbot-input" class="flex-grow border rounded-l px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Escribe tu pregunta...">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600 transition-colors duration-200">Enviar</button>
         </form>
-
-        <!-- Aquí agregamos el texto "Powered by Duality Domain" debajo del formulario -->
-        <div id="powered-by" class="text-center mt-4">
-            Powered by <a href="https://www.dualitydomain.com" target="_blank" class="powered-by-link">Duality Domain</a>
+        <div id="powered-by" class="text-center mt-4 text-sm text-gray-500">
+            Powered by <a href="https://www.dualitydomain.com" target="_blank" class="text-blue-500 hover:underline">Duality Domain</a>
         </div>
     </div>
 </div>
