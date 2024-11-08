@@ -1,231 +1,226 @@
 class Chatbot {
-  constructor() {
-    this.isOpen = false;
-    this.messages = [];
-    this.suggestions = [];
-    this.isTyping = false;
-    this.context = {};
-    this.data = null;
+    constructor() {
+        this.messages = document.getElementById('chatbot-messages');
+        this.input = document.getElementById('chatbot-input');
+        this.form = document.getElementById('chatbot-form');
+        this.openButton = document.getElementById('open-chatbot');
+        this.closeButton = document.getElementById('close-chatbot');
+        this.chatWindow = document.getElementById('chatbot-window');
+        this.suggestedQuestions = document.getElementById('suggested-questions');
+        this.knowledge = {}; // Base de conocimientos cargada desde JSON
+        this.context = []; // Mantener contexto de la conversación
+        this.typingIndicator = document.createElement('div');
+        this.typingIndicator.className = 'typing-indicator';
+        this.typingIndicator.innerHTML = '<span></span><span></span><span></span>';
 
-    this.chatbotContainer = document.createElement('div');
-    this.chatbotContainer.className = 'chatbot-container';
-    document.body.appendChild(this.chatbotContainer);
-
-    this.fetchData().then(() => {
-      this.render();
-      this.addEventListeners();
-    });
-  }
-
-  async fetchData() {
-    try {
-      const response = await fetch('data.json');
-      this.data = await response.json();
-    } catch (error) {
-      console.error('Error fetching chatbot data:', error);
+        this.loadKnowledge();
+        this.addEventListeners();
+        this.debounceTimeout = null;
     }
-  }
 
-  render() {
-    const chatbotHTML = `
-      <div class="chatbot ${this.isOpen ? 'open' : ''}">
-        ${this.isOpen ? this.renderChatWindow() : this.renderChatButton()}
-      </div>
-    `;
-    this.chatbotContainer.innerHTML = chatbotHTML;
-  }
-
-  renderChatButton() {
-    return `
-      <button class="chat-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-      </button>
-    `;
-  }
-
-  renderChatWindow() {
-    return `
-      <div class="chat-window">
-        <div class="chat-header">
-          <img src="/logo.png" alt="Janneth Aguirre Real Estate" class="logo">
-          <h2>Asistente Virtual ARIA</h2>
-          <button class="close-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-          </button>
-        </div>
-        <div class="chat-messages">
-          ${this.renderMessages()}
-        </div>
-        <div class="chat-suggestions">
-          ${this.renderSuggestions()}
-        </div>
-        <form class="chat-input-form">
-          <input type="text" placeholder="Escribe tu mensaje..." class="chat-input">
-          <button type="submit" class="send-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-          </button>
-        </form>
-      </div>
-    `;
-  }
-
-  renderMessages() {
-    return this.messages.map(msg => `
-      <div class="message ${msg.sender}">
-        <p>${msg.content}</p>
-        <span class="timestamp">${this.formatTimestamp(msg.timestamp)}</span>
-      </div>
-    `).join('') + (this.isTyping ? this.renderTypingIndicator() : '');
-  }
-
-  renderTypingIndicator() {
-    return `
-      <div class="typing-indicator">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    `;
-  }
-
-  renderSuggestions() {
-    return this.suggestions.map(sugg => `
-      <button class="suggestion-button" data-suggestion="${sugg}">
-        ${sugg}
-      </button>
-    `).join('');
-  }
-
-  formatTimestamp(timestamp) {
-    return new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  }
-
-  addEventListeners() {
-    this.chatbotContainer.addEventListener('click', (e) => {
-      if (e.target.closest('.chat-button')) {
-        this.toggleChat();
-      } else if (e.target.closest('.close-button')) {
-        this.toggleChat();
-      } else if (e.target.closest('.suggestion-button')) {
-        const suggestion = e.target.closest('.suggestion-button').dataset.suggestion;
-        this.handleSuggestionClick(suggestion);
-      }
-    });
-
-    this.chatbotContainer.addEventListener('submit', (e) => {
-      if (e.target.closest('.chat-input-form')) {
-        e.preventDefault();
-        const input = e.target.querySelector('.chat-input');
-        this.handleSubmit(input.value);
-        input.value = '';
-      }
-    });
-  }
-
-  toggleChat() {
-    this.isOpen = !this.isOpen;
-    if (this.isOpen && this.messages.length === 0) {
-      this.addBotMessage(this.getRandomGreeting());
-      this.updateSuggestions(['propiedades', 'servicios', 'sobre nosotros']);
-    }
-    this.render();
-  }
-
-  addMessage(sender, content) {
-    this.messages.push({ sender, content, timestamp: new Date() });
-    this.render();
-  }
-
-  addBotMessage(content) {
-    this.isTyping = true;
-    this.render();
-
-    const words = content.split(' ');
-    let i = 0;
-    const intervalId = setInterval(() => {
-      if (i < words.length) {
-        if (this.messages.length > 0 && this.messages[this.messages.length - 1].sender === 'bot') {
-          this.messages[this.messages.length - 1].content += ' ' + words[i];
-        } else {
-          this.messages.push({ sender: 'bot', content: words[i], timestamp: new Date() });
+    async loadKnowledge() {
+        try {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            this.knowledge = data;
+        } catch (error) {
+            console.error("Error al cargar el archivo JSON:", error);
         }
-        this.render();
-        i++;
-      } else {
-        clearInterval(intervalId);
-        this.isTyping = false;
-        this.render();
-      }
-    }, 50);
-  }
-
-  handleSubmit(message) {
-    if (message.trim()) {
-      this.addMessage('user', message);
-      this.processMessage(message);
     }
-  }
 
-  processMessage(message) {
-    const response = this.generateResponse(message);
-    this.addBotMessage(response);
-    this.updateContext(message);
-    this.suggestNextTopics();
-  }
-
-  generateResponse(message) {
-    const lowerMessage = message.toLowerCase();
-    for (const category in this.data) {
-      const matchedItem = this.data[category].find(item => 
-        lowerMessage.includes(item.question.toLowerCase())
-      );
-      if (matchedItem) {
-        return matchedItem.answer;
-      }
+    addEventListeners() {
+        this.form.addEventListener('submit', this.handleSubmit.bind(this));
+        this.openButton.addEventListener('click', this.toggleChat.bind(this));
+        this.closeButton.addEventListener('click', this.toggleChat.bind(this));
+        this.input.addEventListener('input', this.handleInput.bind(this));
     }
-    return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más sobre nuestras propiedades, servicios o el proceso de compra/venta?";
-  }
 
-  updateContext(message) {
-    // Simple context tracking
-    if (message.toLowerCase().includes('comprar')) {
-      this.context.intent = 'comprar';
-    } else if (message.toLowerCase().includes('vender')) {
-      this.context.intent = 'vender';
-    } else if (message.toLowerCase().includes('alquilar')) {
-      this.context.intent = 'alquilar';
+    toggleChat() {
+        this.chatWindow.classList.toggle('active');
+        if (this.chatWindow.classList.contains('active')) {
+            this.animateEntry();
+            if (this.messages.children.length === 0) {
+                this.addMessage('bot', '¡Hola! Soy ARIA, tu asistente virtual de bienes raíces. ¿En qué puedo ayudarte hoy?');
+                this.showInitialSuggestions();
+            }
+        }
     }
-  }
 
-  suggestNextTopics() {
-    let suggestions = [];
-    if (this.context.intent === 'comprar') {
-      suggestions = ['proceso de compra', 'financiamiento', 'propiedades disponibles'];
-    } else if (this.context.intent === 'vender') {
-      suggestions = ['valoración de propiedades', 'documentos venta', 'tiempo venta'];
-    } else if (this.context.intent === 'alquilar') {
-      suggestions = ['alquileres', 'servicios', 'contacto'];
-    } else {
-      suggestions = ['propiedades', 'servicios', 'invertir', 'contacto'];
+    animateEntry() {
+        this.chatWindow.style.opacity = '0';
+        this.chatWindow.style.transform = 'translateY(20px)';
+        this.chatWindow.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+        setTimeout(() => {
+            this.chatWindow.style.opacity = '1';
+            this.chatWindow.style.transform = 'translateY(0)';
+        }, 50);
     }
-    this.updateSuggestions(suggestions);
-  }
 
-  handleSuggestionClick(suggestion) {
-    this.addMessage('user', suggestion);
-    this.processMessage(suggestion);
-  }
+    handleSubmit(event) {
+        event.preventDefault();
+        const message = this.input.value.trim();
+        if (message !== '') {
+            this.addMessage('user', message);
+            this.input.value = '';
+            this.processMessage(message);
+        }
+    }
 
-  updateSuggestions(suggestions) {
-    this.suggestions = suggestions;
-    this.render();
-  }
+    handleInput() {
+        clearTimeout(this.debounceTimeout);
+        this.debounceTimeout = setTimeout(() => {
+            const inputText = this.input.value.trim().toLowerCase();
+            if (inputText) {
+                this.showSuggestions(this.generateSuggestions(inputText));
+            } else {
+                this.suggestedQuestions.innerHTML = '';
+            }
+        }, 300);
+    }
 
-  getRandomGreeting() {
-    const greetings = this.data.saludos.map(item => item.answer);
-    return greetings[Math.floor(Math.random() * greetings.length)];
-  }
+    addMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
+        messageElement.innerHTML = `<span>${message}</span>`;
+        this.messages.appendChild(messageElement);
+        this.messages.scrollTop = this.messages.scrollHeight;
+        this.animateMessage(messageElement);
+    }
+
+    animateMessage(element) {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+        setTimeout(() => {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+        }, 50);
+    }
+
+    async processMessage(message) {
+        this.showTypingIndicator();
+        const response = await this.generateResponse(message);
+        this.hideTypingIndicator();
+        this.addMessage('bot', response);
+        this.updateContext(message, response);
+        this.suggestFollowUp(response);
+    }
+
+    showTypingIndicator() {
+        this.messages.appendChild(this.typingIndicator);
+        this.messages.scrollTop = this.messages.scrollHeight;
+    }
+
+    hideTypingIndicator() {
+        if (this.typingIndicator.parentNode === this.messages) {
+            this.messages.removeChild(this.typingIndicator);
+        }
+    }
+
+    async generateResponse(message) {
+        message = message.toLowerCase();
+        let bestMatch = { score: 0, answer: '' };
+
+        for (let category in this.knowledge) {
+            this.knowledge[category].forEach(item => {
+                const score = this.calculateSimilarity(message, item.question.toLowerCase());
+                if (score > bestMatch.score) {
+                    bestMatch = { score, answer: item.answer };
+                }
+            });
+        }
+
+        if (bestMatch.score > 0.6) {
+            await this.simulateTyping(bestMatch.answer);
+            return bestMatch.answer;
+        } else {
+            return this.generateFallbackResponse(message);
+        }
+    }
+
+    calculateSimilarity(input, reference) {
+        const inputWords = input.split(' ');
+        const referenceWords = reference.split(' ');
+        const commonWords = inputWords.filter(word => referenceWords.includes(word));
+        return commonWords.length / Math.max(inputWords.length, referenceWords.length);
+    }
+
+    async generateFallbackResponse(message) {
+        const fallbacks = [
+            "No tengo información específica sobre eso, pero puedo ayudarte con preguntas sobre propiedades, servicios inmobiliarios o el proceso de compra/venta. ¿Hay algo en particular que te interese?",
+            "Esa es una pregunta interesante. Aunque no tengo una respuesta directa, puedo proporcionarte información sobre nuestras propiedades o servicios. ¿Qué te gustaría saber?",
+            "Disculpa, no tengo datos concretos sobre eso. Sin embargo, estoy especializada en temas inmobiliarios. ¿Puedo ayudarte con alguna consulta sobre propiedades o el mercado inmobiliario?",
+            "Parece que esa pregunta requiere más información. ¿Te gustaría que te conecte con uno de nuestros agentes para una consulta más detallada? Puedes contactarnos por WhatsApp al +593 99 999 9999."
+        ];
+        const response = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+        await this.simulateTyping(response);
+        return response;
+    }
+
+    async simulateTyping(text) {
+        const typingSpeed = 50; // milisegundos por carácter
+        await new Promise(resolve => setTimeout(resolve, text.length * typingSpeed));
+    }
+
+    updateContext(message, response) {
+        this.context.push({ message, response });
+        if (this.context.length > 5) {
+            this.context.shift();
+        }
+    }
+
+    suggestFollowUp(lastResponse) {
+        const suggestions = this.generateSuggestions(lastResponse);
+        this.showSuggestions(suggestions);
+    }
+
+    generateSuggestions(input) {
+        const keywords = ['propiedades', 'servicios', 'inversión', 'contacto', 'internacional'];
+        const relevantKeywords = keywords.filter(keyword => input.toLowerCase().includes(keyword));
+
+        let suggestions = [];
+        if (relevantKeywords.length > 0) {
+            relevantKeywords.forEach(keyword => {
+                if (this.knowledge[keyword]) {
+                    suggestions = suggestions.concat(this.knowledge[keyword].map(item => item.question));
+                }
+            });
+        } else {
+            // Si no hay palabras clave relevantes, sugerir preguntas generales
+            suggestions = [
+                "¿Qué tipos de propiedades ofrecen?",
+                "¿Cómo puedo invertir en bienes raíces?",
+                "¿Qué servicios brindan a los compradores?",
+                "¿Cómo puedo contactar a un agente?"
+            ];
+        }
+        return suggestions.slice(0, 3); // Limitar a 3 sugerencias
+    }
+
+    showSuggestions(suggestions) {
+        this.suggestedQuestions.innerHTML = '';
+        suggestions.forEach(suggestion => {
+            const button = document.createElement('button');
+            button.textContent = suggestion;
+            button.classList.add('suggested-question');
+            button.addEventListener('click', () => {
+                this.input.value = suggestion;
+                this.handleSubmit(new Event('submit'));
+            });
+            this.suggestedQuestions.appendChild(button);
+        });
+    }
+
+    showInitialSuggestions() {
+        const initialSuggestions = [
+            "¿Qué servicios ofrecen?",
+            "¿Tienen propiedades en venta?",
+            "¿Cómo puedo contactarlos?"
+        ];
+        this.showSuggestions(initialSuggestions);
+    }
 }
 
-// Inicializar el chatbot
-const chatbot = new Chatbot();
+document.addEventListener('DOMContentLoaded', () => {
+    const chatbot = new Chatbot();
+});
