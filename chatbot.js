@@ -1,175 +1,231 @@
+// Asegúrate de que el archivo data.json esté en el mismo directorio que este script
+const data = {
+  // Aquí va todo el contenido del archivo data.json que proporcioné anteriormente
+  // Por razones de espacio, no lo incluyo aquí, pero debe ser el mismo contenido
+};
+
 class Chatbot {
-    constructor() {
-        this.messages = document.getElementById('chatbot-messages');
-        this.input = document.getElementById('chatbot-input');
-        this.form = document.getElementById('chatbot-form');
-        this.openButton = document.getElementById('open-chatbot');
-        this.closeButton = document.getElementById('close-chatbot');
-        this.chatWindow = document.getElementById('chatbot-window');
-        this.suggestedQuestions = document.getElementById('suggested-questions');
-        this.knowledge = {}; // Base de conocimientos cargada desde JSON
+  constructor() {
+    this.isOpen = false;
+    this.messages = [];
+    this.suggestions = [];
+    this.isTyping = false;
+    this.context = {};
 
-        this.loadKnowledge();
-        this.addEventListeners();
-        this.debounceTimeout = null; // Para optimización de las búsquedas rápidas
+    this.chatbotContainer = document.createElement('div');
+    this.chatbotContainer.className = 'chatbot-container';
+    document.body.appendChild(this.chatbotContainer);
+
+    this.render();
+    this.addEventListeners();
+  }
+
+  render() {
+    const chatbotHTML = `
+      <div class="chatbot ${this.isOpen ? 'open' : ''}">
+        ${this.isOpen ? this.renderChatWindow() : this.renderChatButton()}
+      </div>
+    `;
+    this.chatbotContainer.innerHTML = chatbotHTML;
+  }
+
+  renderChatButton() {
+    return `
+      <button class="chat-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      </button>
+    `;
+  }
+
+  renderChatWindow() {
+    return `
+      <div class="chat-window">
+        <div class="chat-header">
+          <img src="/logo.png" alt="Janneth Aguirre Real Estate" class="logo">
+          <h2>Asistente Virtual</h2>
+          <button class="close-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+        <div class="chat-messages">
+          ${this.renderMessages()}
+        </div>
+        <div class="chat-suggestions">
+          ${this.renderSuggestions()}
+        </div>
+        <form class="chat-input-form">
+          <input type="text" placeholder="Escribe tu mensaje..." class="chat-input">
+          <button type="submit" class="send-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+      </div>
+    `;
+  }
+
+  renderMessages() {
+    return this.messages.map(msg => `
+      <div class="message ${msg.sender}">
+        <p>${msg.content}</p>
+        <span class="timestamp">${this.formatTimestamp(msg.timestamp)}</span>
+      </div>
+    `).join('') + (this.isTyping ? this.renderTypingIndicator() : '');
+  }
+
+  renderTypingIndicator() {
+    return `
+      <div class="typing-indicator">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    `;
+  }
+
+  renderSuggestions() {
+    return this.suggestions.map(sugg => `
+      <button class="suggestion-button" data-suggestion="${sugg.text}">
+        ${sugg.text}
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    `).join('');
+  }
+
+  formatTimestamp(timestamp) {
+    return new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  addEventListeners() {
+    this.chatbotContainer.addEventListener('click', (e) => {
+      if (e.target.closest('.chat-button')) {
+        this.toggleChat();
+      } else if (e.target.closest('.close-button')) {
+        this.toggleChat();
+      } else if (e.target.closest('.suggestion-button')) {
+        const suggestion = e.target.closest('.suggestion-button').dataset.suggestion;
+        this.handleSuggestionClick(suggestion);
+      }
+    });
+
+    this.chatbotContainer.addEventListener('submit', (e) => {
+      if (e.target.closest('.chat-input-form')) {
+        e.preventDefault();
+        const input = e.target.querySelector('.chat-input');
+        this.handleSubmit(input.value);
+        input.value = '';
+      }
+    });
+  }
+
+  toggleChat() {
+    this.isOpen = !this.isOpen;
+    if (this.isOpen && this.messages.length === 0) {
+      this.addBotMessage(data.inicio[0].answer);
+      this.suggestions = data.inicio[0].suggestions.map(sugg => ({
+        text: sugg,
+        action: () => this.handleSuggestionClick(sugg)
+      }));
     }
+    this.render();
+  }
 
-    async loadKnowledge() {
-        try {
-            const response = await fetch('data.json');
-            const data = await response.json();
-            this.knowledge = data;
-        } catch (error) {
-            console.error("Error al cargar el archivo JSON:", error);
-        }
-    }
+  addMessage(sender, content) {
+    this.messages.push({ sender, content, timestamp: new Date() });
+    this.render();
+  }
 
-    addEventListeners() {
-        this.form.addEventListener('submit', this.handleSubmit.bind(this));
-        this.openButton.addEventListener('click', this.toggleChat.bind(this));
-        this.closeButton.addEventListener('click', this.toggleChat.bind(this));
-        this.input.addEventListener('input', this.filterSuggestedQuestions.bind(this));
-    }
+  addBotMessage(content) {
+    this.isTyping = true;
+    this.render();
 
-    toggleChat() {
-        this.chatWindow.classList.toggle('hidden');
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        const message = this.input.value.trim();
-        if (message !== '') {
-            this.addMessage('user', message);
-            this.input.value = '';
-            this.processMessage(message);
-        }
-    }
-
-    addMessage(sender, message) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('mb-2', sender === 'user' ? 'text-right' : 'text-left');
-        messageElement.innerHTML = `
-            <span class="inline-block bg-${sender === 'user' ? 'blue' : 'gray'}-200 rounded px-2 py-1">
-                ${message}
-            </span>
-        `;
-        this.messages.appendChild(messageElement);
-        this.messages.scrollTop = this.messages.scrollHeight;
-    }
-
-    processMessage(message) {
-        const response = this.generateResponse(message);
-        setTimeout(() => {
-            this.addMessage('bot', response);
-            // Siempre terminar en "contactar"
-            if (!message.toLowerCase().includes("contactar")) {
-                this.addMessage('bot', "Si necesitas más ayuda, no dudes en contactarnos.");
-            }
-        }, 500);
-    }
-
-    generateResponse(message) {
-        message = message.toLowerCase();
-        for (let category in this.knowledge) {
-            const match = this.knowledge[category].find(item => message.includes(item.question.toLowerCase()));
-            if (match) {
-                return match.answer;
-            }
-        }
-        return "Lo siento, no tengo información específica sobre esa consulta. ¿Puedo ayudarte con algo más?";
-    }
-
-    // Mostrar sugerencias dinámicas mientras el usuario escribe
-    filterSuggestedQuestions() {
-        const inputText = this.input.value.trim().toLowerCase();
-        clearTimeout(this.debounceTimeout); // Limpiar el temporizador de debounce
-
-        if (inputText) {
-            this.debounceTimeout = setTimeout(() => {
-                this.updateSuggestedCategories(inputText); // Filtrar sugerencias según el texto ingresado
-            }, 300); // Esperar 300ms después de que el usuario termine de escribir
+    const words = content.split(' ');
+    let i = 0;
+    const intervalId = setInterval(() => {
+      if (i < words.length) {
+        if (this.messages.length > 0 && this.messages[this.messages.length - 1].sender === 'bot') {
+          this.messages[this.messages.length - 1].content += ' ' + words[i];
         } else {
-            this.suggestedQuestions.innerHTML = ''; // Si no hay texto, quitar sugerencias
+          this.messages.push({ sender: 'bot', content: words[i], timestamp: new Date() });
         }
+        this.render();
+        i++;
+      } else {
+        clearInterval(intervalId);
+        this.isTyping = false;
+        this.render();
+      }
+    }, 30);
+  }
+
+  handleSubmit(message) {
+    if (message.trim()) {
+      this.addMessage('user', message);
+      this.processMessage(message);
     }
+  }
 
-    // Actualizar las categorías sugeridas basadas en el texto ingresado
-    updateSuggestedCategories(message) {
-        this.suggestedQuestions.innerHTML = ''; // Limpiar las sugerencias previas
-        const matchedCategories = this.getRelevantCategories(message);
-
-        // Mostrar varias sugerencias relacionadas
-        matchedCategories.forEach(category => {
-            const categoryButton = document.createElement('button');
-            categoryButton.textContent = category.replace('_', ' ').toUpperCase();
-            categoryButton.classList.add('category-button', 'bg-blue-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2');
-            
-            categoryButton.addEventListener('click', () => this.showCategoryQuestions(category));
-            this.suggestedQuestions.appendChild(categoryButton);
-        });
+  processMessage(message) {
+    const response = this.generateResponse(message);
+    this.addBotMessage(response.answer);
+    this.updateContext(message, response);
+    
+    if (response.suggestions) {
+      this.suggestions = response.suggestions.map(sugg => ({
+        text: sugg,
+        action: () => this.handleSuggestionClick(sugg)
+      }));
     }
+    this.render();
+  }
 
-    // Obtener categorías relevantes basadas en las palabras del mensaje
-    getRelevantCategories(message) {
-        const relevantCategories = [];
-
-        for (let category in this.knowledge) {
-            const hasRelevantQuestions = this.knowledge[category].some(item =>
-                message.includes(item.question.toLowerCase())
-            );
-            if (hasRelevantQuestions) {
-                relevantCategories.push(category);
-            }
-        }
-
-        return relevantCategories.length ? relevantCategories : ["default"]; // Si no hay categorías, sugerir algo por defecto
+  generateResponse(message) {
+    const lowerMessage = message.toLowerCase();
+    for (const category in data) {
+      const matchedItem = data[category].find(item => 
+        item.keywords.some(keyword => lowerMessage.includes(keyword.toLowerCase()))
+      );
+      if (matchedItem) {
+        return matchedItem;
+      }
     }
+    return data.default[0];
+  }
 
-    // Mostrar preguntas dentro de una categoría seleccionada
-    showCategoryQuestions(category) {
-        this.suggestedQuestions.innerHTML = ''; // Limpiar los botones de categorías
+  updateContext(message, response) {
+    this.context = {
+      ...this.context,
+      lastTopic: response.question,
+      userPreferences: [...(this.context.userPreferences || []), message]
+    };
+  }
 
-        this.knowledge[category].forEach(item => {
-            const button = document.createElement('button');
-            button.textContent = item.question;
-            button.classList.add('suggested-question', 'bg-gray-200', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm');
+  handleSuggestionClick(suggestion) {
+    this.addMessage('user', suggestion);
+    this.processMessage(suggestion);
+  }
 
-            button.addEventListener('click', () => {
-                this.addMessage('user', item.question);
-                this.processMessage(item.question);
-            });
-            this.suggestedQuestions.appendChild(button);
-        });
+  handleFeedback(isPositive) {
+    const feedbackMessage = isPositive
+      ? "Me alegra haber sido de ayuda. ¿Hay algo más en lo que pueda asistirte?"
+      : "Lamento no haber cumplido tus expectativas. ¿Podrías decirme cómo puedo mejorar mi asistencia?";
+    this.addBotMessage(feedbackMessage);
+    
+    if (!isPositive) {
+      this.suggestions = [
+        { text: "Hablar con un asesor", action: () => this.handleContactRequest("llamada") },
+        { text: "Intentar otra pregunta", action: () => {} }
+      ];
     }
+    this.render();
+  }
 
-    // Detectar similitudes con las palabras claves mientras el usuario escribe
-    detectSimilarIntentions(inputText) {
-        const suggestions = [];
-        
-        // Analizar las palabras clave y generar sugerencias de intenciones similares
-        for (let category in this.knowledge) {
-            this.knowledge[category].forEach(item => {
-                if (this.isSimilar(inputText, item.question)) {
-                    suggestions.push(item.question);
-                }
-            });
-        }
-
-        return suggestions;
-    }
-
-    // Función para evaluar similitudes entre lo escrito y las preguntas predefinidas
-    isSimilar(inputText, referenceText) {
-        const similarityThreshold = 0.6;
-        const inputWords = inputText.split(' ');
-        const referenceWords = referenceText.split(' ');
-        const commonWords = inputWords.filter(word => referenceWords.includes(word));
-        
-        return (commonWords.length / referenceWords.length) >= similarityThreshold;
-    }
+  handleContactRequest(method) {
+    this.addBotMessage(`Excelente, te conectaré con uno de nuestros asesores premium vía ${method}. Por favor, proporciona tu número de contacto o correo electrónico y te contactaremos a la brevedad.`);
+    this.suggestions = [];
+    this.context = { ...this.context, contactRequest: method };
+    this.render();
+  }
 }
 
-// Inicializar el chatbot cuando el DOM esté completamente cargado
-document.addEventListener('DOMContentLoaded', () => {
-    const chatbot = new Chatbot();
-});
+// Inicializar el chatbot
+const chatbot = new Chatbot();
