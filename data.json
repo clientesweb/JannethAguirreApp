@@ -78,5 +78,67 @@
       "question": "¿Tienen presencia en redes sociales?",
       "answer": "Sí, puedes encontrarnos en Instagram, Facebook y LinkedIn como @JannethAguirreRealEstate. Seguirnos es una excelente manera de mantenerte actualizado sobre las últimas propiedades y noticias del mercado inmobiliario."
     }
+  ],
+  "tendencias": [
+    {
+      "question": "tendencias del mercado",
+      "answer": "Las tendencias actuales incluyen propiedades con tecnología de hogar inteligente, eficiencia energética y ubicaciones en zonas de desarrollo. Además, la inversión en propiedades internacionales ha crecido entre los compradores ecuatorianos."
+    }
+  ],
+  "financiamiento": [
+    {
+      "question": "financiamiento",
+      "answer": "Ofrecemos asesoría en financiamiento para que puedas acceder a tu propiedad de manera cómoda y conveniente. Te ayudamos a evaluar diferentes opciones de crédito y financiamiento."
+    },
+    {
+      "question": "opciones de financiamiento",
+      "answer": "Trabajamos con diferentes entidades bancarias que ofrecen opciones de financiamiento flexibles. Desde créditos hipotecarios hasta planes de pago personalizados, te ayudamos a encontrar la opción ideal."
+    },
+    {
+      "question": "cómo funciona el financiamiento",
+      "answer": "El financiamiento permite pagar la propiedad en plazos, generalmente a través de un crédito hipotecario. Te ayudamos en la gestión de trámites y en la elección de la mejor opción financiera."
+    }
+  ],
+  "valoracion_propiedades": [
+    {
+      "question": "valoración de propiedades",
+      "answer": "Contamos con servicios de valoración de propiedades para ayudarte a conocer el valor actual de tu inmueble en el mercado, esencial para vender o invertir."
+    },
+    {
+      "question": "cómo valorar mi propiedad",
+      "answer": "Para valorar tu propiedad, realizamos un análisis que incluye ubicación, características y condiciones del mercado actual. Nuestro equipo de expertos puede ofrecerte un informe detallado."
+    },
+    {
+      "question": "por qué es importante valorar una propiedad",
+      "answer": "Valorar una propiedad es esencial para establecer un precio justo y competitivo. Ayuda a atraer compradores serios y asegura que obtengas el mejor retorno sobre tu inversión."
+    }
+  ],
+  "tips_compradores": [
+    {
+      "question": "consejos para compradores",
+      "answer": "Al comprar una propiedad, considera siempre la ubicación, el potencial de crecimiento de la zona y tus necesidades a largo plazo. Estamos aquí para ayudarte a evaluar cada detalle."
+    },
+    {
+      "question": "qué debo saber al comprar",
+      "answer": "Es fundamental verificar la documentación, el estado de la propiedad y entender los costos adicionales. Podemos guiarte para que tomes la mejor decisión en tu compra."
+    },
+    {
+      "question": "cómo elegir una propiedad",
+      "answer": "La elección de una propiedad depende de tus necesidades y estilo de vida. Piensa en la proximidad a tu trabajo, colegios, y otros servicios importantes. Te ayudaremos a identificar la mejor opción."
+    }
+  ],
+  "tips_vendedores": [
+    {
+      "question": "consejos para vendedores",
+      "answer": "Para vender rápidamente, asegúrate de que la propiedad esté en buenas condiciones, toma fotos de alta calidad y fija un precio competitivo. También, contar con un buen agente facilita mucho el proceso."
+    },
+    {
+      "question": "cómo preparar mi propiedad para la venta",
+      "answer": "Limpia y organiza el espacio, realiza pequeñas reparaciones y resalta los aspectos positivos. Las propiedades que causan una buena impresión tienden a venderse más rápido."
+    },
+    {
+      "question": "cuándo es un buen momento para vender",
+      "answer": "Depende de las condiciones del mercado, pero por lo general, los meses de mayor demanda pueden ofrecer mejores oportunidades. Nosotros te asesoramos sobre el momento ideal para maximizar la venta."
+    }
   ]
 }
