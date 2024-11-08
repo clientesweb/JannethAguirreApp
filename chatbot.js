@@ -7,16 +7,20 @@ class Chatbot {
         this.closeButton = document.getElementById('close-chatbot');
         this.chatWindow = document.getElementById('chatbot-window');
         this.suggestedQuestions = document.getElementById('suggested-questions');
-        this.knowledge = {}; // Base de conocimientos cargada desde JSON
-        this.context = []; // Mantener contexto de la conversación
+        this.knowledge = {};
+        this.context = [];
         this.isTyping = false;
         this.conversationHistory = [];
         this.maxHistoryLength = 5;
         this.userIntentions = new Set();
         this.lastSuggestions = [];
+        this.isOpen = false;
+        this.entityExtractor = new EntityExtractor();
+        this.sentimentAnalyzer = new SentimentAnalyzer();
 
         this.loadKnowledge();
         this.addEventListeners();
+        this.initializeChatWindow();
     }
 
     async loadKnowledge() {
@@ -36,33 +40,36 @@ class Chatbot {
         document.addEventListener('click', this.handleOutsideClick.bind(this));
     }
 
+    initializeChatWindow() {
+        this.chatWindow.style.display = 'flex';
+        this.chatWindow.style.opacity = '0';
+        this.chatWindow.style.transform = 'translateY(20px) scale(0.95)';
+    }
+
     toggleChat() {
-        this.chatWindow.classList.toggle('hidden');
-        if (!this.chatWindow.classList.contains('hidden')) {
+        this.isOpen = !this.isOpen;
+        
+        if (this.isOpen) {
+            this.chatWindow.classList.add('active');
             this.animateEntry();
             if (this.messages.children.length === 0) {
                 this.addMessage('bot', '¡Hola! Soy ARIA, tu asistente virtual de bienes raíces. ¿En qué puedo ayudarte hoy?');
                 this.showInitialSuggestions();
             }
+        } else {
+            this.chatWindow.classList.remove('active');
         }
     }
 
     handleOutsideClick(event) {
-        if (!this.chatWindow.classList.contains('hidden') &&
-            !this.chatWindow.contains(event.target) &&
-            event.target !== this.openButton) {
+        if (this.isOpen && !this.chatWindow.contains(event.target) && event.target !== this.openButton) {
             this.toggleChat();
         }
     }
 
     animateEntry() {
-        this.chatWindow.style.opacity = '0';
-        this.chatWindow.style.transform = 'translateY(20px)';
-        this.chatWindow.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
-        setTimeout(() => {
-            this.chatWindow.style.opacity = '1';
-            this.chatWindow.style.transform = 'translateY(0)';
-        }, 50);
+        this.chatWindow.style.opacity = '1';
+        this.chatWindow.style.transform = 'translateY(0) scale(1)';
     }
 
     handleSubmit(event) {
@@ -86,16 +93,12 @@ class Chatbot {
 
     addMessage(sender, message) {
         const messageElement = document.createElement('div');
-        messageElement.classList.add('mb-2', sender === 'user' ? 'text-right' : 'text-left');
+        messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
         const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         messageElement.innerHTML = `
-            <div class="flex ${sender === 'user' ? 'justify-end' : 'justify-start'}">
-                <div>
-                    <span class="text-xs text-gray-500 mb-1 ${sender === 'user' ? 'mr-2' : 'ml-2'}">${currentTime}</span>
-                    <span class="inline-block ${sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'} rounded px-2 py-1">
-                        ${message}
-                    </span>
-                </div>
+            <div class="message-content">
+                <p>${message}</p>
+                <span class="message-time">${currentTime}</span>
             </div>
         `;
         this.messages.appendChild(messageElement);
@@ -106,7 +109,6 @@ class Chatbot {
     animateMessage(element) {
         element.style.opacity = '0';
         element.style.transform = 'translateY(20px)';
-        element.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
         setTimeout(() => {
             element.style.opacity = '1';
             element.style.transform = 'translateY(0)';
@@ -115,8 +117,10 @@ class Chatbot {
 
     async processMessage(message) {
         this.showTypingIndicator();
+        const entities = this.entityExtractor.extract(message);
+        const sentiment = this.sentimentAnalyzer.analyze(message);
         this.detectUserIntentions(message);
-        const response = await this.generateResponse(message);
+        const response = await this.generateResponse(message, entities, sentiment);
         this.hideTypingIndicator();
         this.addMessage('bot', response);
         this.updateContext(message, response);
@@ -127,12 +131,8 @@ class Chatbot {
         if (!this.isTyping) {
             this.isTyping = true;
             const typingElement = document.createElement('div');
-            typingElement.classList.add('typing-indicator', 'mb-2');
-            typingElement.innerHTML = `
-                <div class="flex items-center">
-                    <div class="dot-typing"></div>
-                </div>
-            `;
+            typingElement.classList.add('typing-indicator');
+            typingElement.innerHTML = '<div class="dot-typing"></div>';
             this.messages.appendChild(typingElement);
             this.messages.scrollTop = this.messages.scrollHeight;
         }
@@ -146,7 +146,7 @@ class Chatbot {
         this.isTyping = false;
     }
 
-    async generateResponse(message) {
+    async generateResponse(message, entities, sentiment) {
         message = message.toLowerCase();
         let bestMatch = { score: 0, answer: '' };
 
@@ -156,7 +156,8 @@ class Chatbot {
             this.knowledge[category].forEach(item => {
                 const questionScore = this.calculateSimilarity(message, item.question.toLowerCase());
                 const contextScore = this.calculateSimilarity(context, item.question.toLowerCase());
-                const score = questionScore * 0.7 + contextScore * 0.3;
+                const entityScore = this.calculateEntityScore(entities, item.entities);
+                const score = questionScore * 0.5 + contextScore * 0.3 + entityScore * 0.2;
 
                 if (score > bestMatch.score) {
                     bestMatch = { score, answer: item.answer };
@@ -165,31 +166,38 @@ class Chatbot {
         }
 
         if (bestMatch.score > 0.6) {
-            return this.personalizeResponse(bestMatch.answer);
+            return this.personalizeResponse(bestMatch.answer, entities, sentiment);
         } else {
-            return this.generateFallbackResponse(message);
+            return this.generateFallbackResponse(message, entities, sentiment);
         }
     }
 
-    personalizeResponse(response) {
-        const personalizations = [
-            { trigger: 'propiedad', prefix: '¡Excelente pregunta sobre propiedades! ' },
-            { trigger: 'servicio', prefix: 'En cuanto a nuestros servicios, ' },
-            { trigger: 'inver', prefix: 'Hablando de inversiones, ' },
-            { trigger: 'contact', prefix: 'Respecto a contactarnos, ' },
-            { trigger: 'financia', prefix: 'Sobre el financiamiento, ' },
-            { trigger: 'valor', prefix: 'En cuanto a la valoración de propiedades, ' },
-            { trigger: 'compra', prefix: 'Para los compradores, ' },
-            { trigger: 'vend', prefix: 'Para los vendedores, ' }
-        ];
+    personalizeResponse(response, entities, sentiment) {
+        let personalizedResponse = response;
 
-        for (let personalization of personalizations) {
-            if (response.toLowerCase().includes(personalization.trigger)) {
-                return personalization.prefix + response;
-            }
+        // Personalización basada en entidades
+        if (entities.location) {
+            personalizedResponse = personalizedResponse.replace('[LOCATION]', entities.location);
+        }
+        if (entities.propertyType) {
+            personalizedResponse = personalizedResponse.replace('[PROPERTY_TYPE]', entities.propertyType);
         }
 
-        return response;
+        // Personalización basada en sentimiento
+        if (sentiment === 'positive') {
+            personalizedResponse = "¡Me alegra que estés interesado! " + personalizedResponse;
+        } else if (sentiment === 'negative') {
+            personalizedResponse = "Entiendo tu preocupación. Permíteme ayudarte: " + personalizedResponse;
+        }
+
+        // Personalización basada en intenciones del usuario
+        if (this.userIntentions.has('compra')) {
+            personalizedResponse += " ¿Hay alguna característica específica que estés buscando en una propiedad?";
+        } else if (this.userIntentions.has('venta')) {
+            personalizedResponse += " ¿Tienes una idea del valor de mercado de tu propiedad?";
+        }
+
+        return personalizedResponse;
     }
 
     calculateSimilarity(input, reference) {
@@ -197,6 +205,12 @@ class Chatbot {
         const referenceWords = reference.split(' ');
         const commonWords = inputWords.filter(word => referenceWords.includes(word));
         return commonWords.length / Math.max(inputWords.length, referenceWords.length);
+    }
+
+    calculateEntityScore(userEntities, itemEntities) {
+        if (!itemEntities) return 0;
+        const matchingEntities = Object.keys(userEntities).filter(entity => itemEntities.includes(entity));
+        return matchingEntities.length / itemEntities.length;
     }
 
     updateContext(message, response) {
@@ -207,14 +221,28 @@ class Chatbot {
         }
     }
 
-    generateFallbackResponse(message) {
+    generateFallbackResponse(message, entities, sentiment) {
         const fallbacks = [
             "No tengo información específica sobre eso, pero puedo ayudarte con preguntas sobre propiedades, servicios inmobiliarios o el proceso de compra/venta. ¿Hay algo en particular que te interese?",
             "Esa es una pregunta interesante. Aunque no tengo una respuesta directa, puedo proporcionarte información sobre nuestras propiedades o servicios. ¿Qué te gustaría saber?",
             "Disculpa, no tengo datos concretos sobre eso. Sin embargo, estoy especializada en temas inmobiliarios. ¿Puedo ayudarte con alguna consulta sobre propiedades o el mercado inmobiliario?",
-            "Parece que esa pregunta requiere más información. ¿Te gustaría que te conecte con uno de nuestros agentes para una consulta más detallada? Puedes contactarnos por WhatsApp al +593 99 999 9999."
+            "Parece que esa pregunta requiere más información. ¿Te gustaría que te conecte con uno de nuestros agentes para una consulta más detallada?"
         ];
-        return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+
+        let response = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+
+        if (entities.location) {
+            response += ` ¿Estás interesado específicamente en propiedades en ${entities.location}?`;
+        }
+        if (entities.propertyType) {
+            response += ` ¿Buscas información sobre ${entities.propertyType}?`;
+        }
+
+        if (sentiment === 'negative') {
+            response = "Lamento no poder ayudarte directamente con eso. " + response;
+        }
+
+        return response;
     }
 
     suggestFollowUp(lastResponse) {
@@ -256,7 +284,7 @@ class Chatbot {
         suggestions.forEach(suggestion => {
             const button = document.createElement('button');
             button.textContent = suggestion;
-            button.classList.add('suggested-question', 'bg-gray-100', 'text-gray-700', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm', 'hover:bg-gray-200', 'transition-colors', 'duration-200');
+            button.classList.add('suggested-question');
             button.addEventListener('click', () => {
                 this.input.value = suggestion;
                 this.handleSubmit(new Event('submit'));
@@ -290,22 +318,49 @@ class Chatbot {
             }
         }
     }
+}
 
-    guideConversation() {
-        if (this.userIntentions.has('compra')) {
-            return "Veo que estás interesado en comprar una propiedad. ¿Tienes alguna preferencia en cuanto a ubicación o tipo de propiedad?";
-        } else if (this.userIntentions.has('venta')) {
-            return "Entiendo que quieres vender una propiedad. ¿Podrías darme más detalles sobre la propiedad que deseas vender?";
-        } else if (this.userIntentions.has('inversion')) {
-            return "La inversión inmobiliaria es una excelente opción. ¿Tienes en mente algún tipo específico de inversión o rendimiento esperado?";
-        } else if (this.userIntentions.has('financiamiento')) {
-            return "El financiamiento es un aspecto crucial. ¿Te gustaría conocer nuestras opciones de financiamiento o tienes alguna pregunta específica al respecto?";
-        } else if (this.userIntentions.has('valoracion')) {
-            return "La valoración de propiedades es un servicio que ofrecemos. ¿Tienes una propiedad específica que te gustaría valorar?";
-        } else if (this.userIntentions.has('informacion')) {
-            return "Estoy aquí para proporcionarte toda la información que necesites. ¿Hay algún aspecto específico sobre el que te gustaría saber más?";
+class EntityExtractor {
+    extract(message) {
+        const entities = {};
+        
+        // Extraer ubicaciones
+        const locationRegex = /en\s([\w\s]+)/i;
+        const locationMatch = message.match(locationRegex);
+        if (locationMatch) {
+            entities.location = locationMatch[1];
         }
-        return null;
+
+        // Extraer tipos de propiedad
+        const propertyTypes = ['casa', 'apartamento', 'terreno', 'oficina', 'local comercial'];
+        propertyTypes.forEach(type => {
+            if (message.toLowerCase().includes(type)) {
+                entities.propertyType = type;
+            }
+        });
+
+        return entities;
+    }
+}
+
+class SentimentAnalyzer {
+    analyze(message) {
+        const positiveWords = ['excelente', 'genial', 'fantástico', 'increíble', 'maravilloso', 'perfecto', 'me gusta', 'me encanta'];
+        const negativeWords = ['malo', 'terrible', 'horrible', 'pésimo', 'no me gusta', 'odio', 'decepcionante'];
+
+        let positiveScore = 0;
+        let negativeScore = 0;
+
+        const words = message.toLowerCase().split(' ');
+
+        words.forEach(word => {
+            if (positiveWords.includes(word)) positiveScore++;
+            if (negativeWords.includes(word)) negativeScore++;
+        });
+
+        if (positiveScore > negativeScore) return 'positive';
+        if (negativeScore > positiveScore) return 'negative';
+        return 'neutral';
     }
 }
 
