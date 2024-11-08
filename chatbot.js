@@ -9,9 +9,6 @@ class Chatbot {
         this.suggestedQuestions = document.getElementById('suggested-questions');
         this.knowledge = {}; // Base de conocimientos cargada desde JSON
         this.context = []; // Mantener contexto de la conversación
-        this.typingIndicator = document.createElement('div');
-        this.typingIndicator.className = 'typing-indicator';
-        this.typingIndicator.innerHTML = '<span></span><span></span><span></span>';
 
         this.loadKnowledge();
         this.addEventListeners();
@@ -36,8 +33,8 @@ class Chatbot {
     }
 
     toggleChat() {
-        this.chatWindow.classList.toggle('active');
-        if (this.chatWindow.classList.contains('active')) {
+        this.chatWindow.classList.toggle('hidden');
+        if (!this.chatWindow.classList.contains('hidden')) {
             this.animateEntry();
             if (this.messages.children.length === 0) {
                 this.addMessage('bot', '¡Hola! Soy ARIA, tu asistente virtual de bienes raíces. ¿En qué puedo ayudarte hoy?');
@@ -80,8 +77,12 @@ class Chatbot {
 
     addMessage(sender, message) {
         const messageElement = document.createElement('div');
-        messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
-        messageElement.innerHTML = `<span>${message}</span>`;
+        messageElement.classList.add('mb-2', sender === 'user' ? 'text-right' : 'text-left');
+        messageElement.innerHTML = `
+            <span class="inline-block ${sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'} rounded px-2 py-1">
+                ${message}
+            </span>
+        `;
         this.messages.appendChild(messageElement);
         this.messages.scrollTop = this.messages.scrollHeight;
         this.animateMessage(messageElement);
@@ -98,23 +99,12 @@ class Chatbot {
     }
 
     async processMessage(message) {
-        this.showTypingIndicator();
         const response = await this.generateResponse(message);
-        this.hideTypingIndicator();
-        this.addMessage('bot', response);
-        this.updateContext(message, response);
-        this.suggestFollowUp(response);
-    }
-
-    showTypingIndicator() {
-        this.messages.appendChild(this.typingIndicator);
-        this.messages.scrollTop = this.messages.scrollHeight;
-    }
-
-    hideTypingIndicator() {
-        if (this.typingIndicator.parentNode === this.messages) {
-            this.messages.removeChild(this.typingIndicator);
-        }
+        setTimeout(() => {
+            this.addMessage('bot', response);
+            this.updateContext(message, response);
+            this.suggestFollowUp(response);
+        }, 500);
     }
 
     async generateResponse(message) {
@@ -131,7 +121,6 @@ class Chatbot {
         }
 
         if (bestMatch.score > 0.6) {
-            await this.simulateTyping(bestMatch.answer);
             return bestMatch.answer;
         } else {
             return this.generateFallbackResponse(message);
@@ -145,21 +134,14 @@ class Chatbot {
         return commonWords.length / Math.max(inputWords.length, referenceWords.length);
     }
 
-    async generateFallbackResponse(message) {
+    generateFallbackResponse(message) {
         const fallbacks = [
             "No tengo información específica sobre eso, pero puedo ayudarte con preguntas sobre propiedades, servicios inmobiliarios o el proceso de compra/venta. ¿Hay algo en particular que te interese?",
             "Esa es una pregunta interesante. Aunque no tengo una respuesta directa, puedo proporcionarte información sobre nuestras propiedades o servicios. ¿Qué te gustaría saber?",
             "Disculpa, no tengo datos concretos sobre eso. Sin embargo, estoy especializada en temas inmobiliarios. ¿Puedo ayudarte con alguna consulta sobre propiedades o el mercado inmobiliario?",
             "Parece que esa pregunta requiere más información. ¿Te gustaría que te conecte con uno de nuestros agentes para una consulta más detallada? Puedes contactarnos por WhatsApp al +593 99 999 9999."
         ];
-        const response = fallbacks[Math.floor(Math.random() * fallbacks.length)];
-        await this.simulateTyping(response);
-        return response;
-    }
-
-    async simulateTyping(text) {
-        const typingSpeed = 50; // milisegundos por carácter
-        await new Promise(resolve => setTimeout(resolve, text.length * typingSpeed));
+        return fallbacks[Math.floor(Math.random() * fallbacks.length)];
     }
 
     updateContext(message, response) {
@@ -186,7 +168,6 @@ class Chatbot {
                 }
             });
         } else {
-            // Si no hay palabras clave relevantes, sugerir preguntas generales
             suggestions = [
                 "¿Qué tipos de propiedades ofrecen?",
                 "¿Cómo puedo invertir en bienes raíces?",
@@ -194,7 +175,7 @@ class Chatbot {
                 "¿Cómo puedo contactar a un agente?"
             ];
         }
-        return suggestions.slice(0, 3); // Limitar a 3 sugerencias
+        return suggestions.slice(0, 3);
     }
 
     showSuggestions(suggestions) {
@@ -202,7 +183,7 @@ class Chatbot {
         suggestions.forEach(suggestion => {
             const button = document.createElement('button');
             button.textContent = suggestion;
-            button.classList.add('suggested-question');
+            button.classList.add('suggested-question', 'bg-gray-100', 'text-gray-700', 'px-2', 'py-1', 'rounded', 'mr-2', 'mb-2', 'text-sm');
             button.addEventListener('click', () => {
                 this.input.value = suggestion;
                 this.handleSubmit(new Event('submit'));
