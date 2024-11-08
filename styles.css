@@ -50,105 +50,37 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
+#ai-real-estate-expert-chatbot .chat-window {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
 #ai-real-estate-expert-chatbot .chat-window.active {
-    display: flex;
-    flex-direction: column;
-    animation: slideIn 0.3s ease-out;
+    transform: translateY(0) scale(1);
+    opacity: 1;
 }
 
 @keyframes slideIn {
     from {
-        transform: translateY(100%);
+        transform: translateY(20px) scale(0.95);
         opacity: 0;
     }
     to {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
     }
 }
 
-#chatbot-messages {
-    overflow-y: auto;
-    flex-grow: 1;
-    padding: 10px;
-}
-
-#chatbot-form {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #e2e8f0;
-}
-
-#chatbot-input {
-    flex-grow: 1;
-    margin-right: 10px;
-    padding: 8px;
-    border: 1px solid #e2e8f0;
-    border-radius: 4px;
-    transition: border-color 0.2s ease;
-}
-
-#chatbot-input:focus {
-    outline: none;
-    border-color: #4299e1;
+.message {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .suggested-question {
-    cursor: pointer;
-    background-color: #f7fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 4px;
-    padding: 5px 10px;
-    margin: 5px;
-    font-size: 0.9em;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .suggested-question:hover {
-    background-color: #e2e8f0;
-    transform: translateY(-2px);
-}
-
-.message {
-    max-width: 80%;
-    margin-bottom: 10px;
-    padding: 8px 12px;
-    border-radius: 18px;
-    animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.user-message {
-    background-color: #4299e1;
-    color: white;
-    align-self: flex-end;
-    margin-left: auto;
-}
-
-.bot-message {
-    background-color: #e2e8f0;
-    color: #2d3748;
-    align-self: flex-start;
-}
-
-#powered-by {
-    font-size: 0.8em;
-    color: #718096;
-}
-
-.powered-by-link {
-    color: #4299e1;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.powered-by-link:hover {
-    color: #2b6cb0;
-    text-decoration: underline;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .typing-indicator {
@@ -160,36 +92,36 @@ body {
 .dot-typing {
     position: relative;
     left: -9999px;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-    background-color: #9ae6b4;
-    color: #9ae6b4;
-    box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: #8e8e8e;
+    color: #8e8e8e;
+    box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
     animation: dot-typing 1.5s infinite linear;
 }
 
 @keyframes dot-typing {
     0% {
-        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
     }
     16.667% {
-        box-shadow: 9984px -10px 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+        box-shadow: 9984px -10px 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
     }
     33.333% {
-        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
     }
     50% {
-        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px -10px 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px -10px 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
     }
     66.667% {
-        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
     }
     83.333% {
-        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px -10px 0 0 #9ae6b4;
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px -10px 0 0 #8e8e8e;
     }
     100% {
-        box-shadow: 9984px 0 0 0 #9ae6b4, 9999px 0 0 0 #9ae6b4, 10014px 0 0 0 #9ae6b4;
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
     }
 }
 /* Estilos para el botón de WhatsApp */
