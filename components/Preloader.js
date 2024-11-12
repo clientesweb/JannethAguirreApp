@@ -6,6 +6,8 @@ class Preloader {
 
     render() {
         const preloader = document.getElementById('preloader');
+        if (!preloader) return; // Verifica si el contenedor existe
+
         preloader.innerHTML = `
             <div class="fixed inset-0 z-50 flex items-center justify-center bg-white">
                 <div class="relative">
@@ -19,8 +21,11 @@ class Preloader {
     init() {
         window.addEventListener('load', () => {
             setTimeout(() => {
-                document.getElementById('preloader').style.display = 'none';
-            }, 1000);
+                const preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.classList.add('hidden'); // Utilizamos una clase de CSS para ocultarlo
+                }
+            }, 1000); // Tiempo para mostrar el preloader antes de ocultarlo
         });
     }
 }
