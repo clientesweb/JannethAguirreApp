@@ -125,25 +125,25 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const testimonials = [
-    {
-        name: "Juan Pérez",
-        text: "Excelente servicio, encontré mi casa ideal gracias a Janneth Aguirre. Desde el primer momento me ofrecieron opciones que se ajustaban a mis necesidades, y todo el proceso fue transparente y fácil de seguir. El equipo se encargó de cada detalle, desde la negociación hasta la firma. Estoy muy contento con mi compra y la atención que recibí. ¡Recomiendo totalmente sus servicios!",
-        rating: 5, // Calificación de 1 a 5 estrellas
-        date: "Enero 2024"
-    },
-    {
-        name: "María González",
-        text: "Profesionalismo y dedicación en cada paso del proceso de compra. Me acompañaron durante todo el proceso, desde la búsqueda hasta la firma del contrato, explicándome todo con mucha claridad. Además, me brindaron asesoría sobre la mejor opción de financiamiento, lo cual hizo todo mucho más fácil. Estoy muy agradecida por la atención y la calidad de servicio.",
-        rating: 5, // Calificación de 1 a 5 estrellas
-        date: "Marzo 2024"
-    },
-    {
-        name: "Carlos Rodríguez",
-        text: "La mejor experiencia en venta de propiedades. Altamente recomendado. Desde el primer contacto hasta la venta final, todo fue rápido y eficiente. El equipo de Janneth Aguirre se encargó de gestionar cada detalle, manteniéndome informado en todo momento. Me dieron una excelente estrategia de venta y pude lograr una transacción rápida y beneficiosa.",
-        rating: 5, // Calificación de 1 a 5 estrellas
-        date: "Febrero 2024"
-    }
-];
+        {
+            name: "Juan Pérez",
+            text: "Excelente servicio, encontré mi casa ideal gracias a Janneth Aguirre. Desde el primer momento me ofrecieron opciones que se ajustaban a mis necesidades, y todo el proceso fue transparente y fácil de seguir. El equipo se encargó de cada detalle, desde la negociación hasta la firma. Estoy muy contento con mi compra y la atención que recibí. ¡Recomiendo totalmente sus servicios!",
+            rating: 5,
+            date: "Enero 2024"
+        },
+        {
+            name: "María González",
+            text: "Profesionalismo y dedicación en cada paso del proceso de compra. Me acompañaron durante todo el proceso, desde la búsqueda hasta la firma del contrato, explicándome todo con mucha claridad. Además, me brindaron asesoría sobre la mejor opción de financiamiento, lo cual hizo todo mucho más fácil. Estoy muy agradecida por la atención y la calidad de servicio.",
+            rating: 5,
+            date: "Marzo 2024"
+        },
+        {
+            name: "Carlos Rodríguez",
+            text: "La mejor experiencia en venta de propiedades. Altamente recomendado. Desde el primer contacto hasta la venta final, todo fue rápido y eficiente. El equipo de Janneth Aguirre se encargó de gestionar cada detalle, manteniéndome informado en todo momento. Me dieron una excelente estrategia de venta y pude lograr una transacción rápida y beneficiosa.",
+            rating: 5,
+            date: "Febrero 2024"
+        }
+    ];
 
     const instagramPosts = [
         { image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" },
@@ -505,7 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
             createAccordion(document.getElementById('invest-panama'), 'Invertir en Panamá', investReasons.panama, 'https://flagcdn.com/w40/pa.png');
         }
 
-        handleViewDetails() {
+        handleViewDetails()  {
             document.addEventListener('click', (e) => {
                 if (e.target && e.target.classList.contains('view-details')) {
                     const propertyId = parseInt(e.target.dataset.id);
@@ -555,11 +555,47 @@ document.addEventListener('DOMContentLoaded', function() {
                 <ul class="list-disc pl-5 mb-4">
                     ${property.features ? property.features.map(feature => `<li>${feature}</li>`).join('') : ''}
                 </ul>
-                <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Contactar Agente</button>
+                <button id="contact-agent" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Contactar Agente</button>
             `;
             
+            document.getElementById('contact-agent').addEventListener('click', () => {
+                const whatsappMessage = `Hola, estoy interesado en la propiedad: ${property.title}. Precio: ${property.price}`;
+                const whatsappUrl = `https://wa.me/593987167782?text=${encodeURIComponent(whatsappMessage)}`;
+                window.open(whatsappUrl, '_blank');
+            });
+
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+        }
+
+        showFullImage(image, index, images) {
+            const container = document.getElementById('full-image-container');
+            const fullImage = document.getElementById('full-image');
+            const prevButton = document.getElementById('prev-image');
+            const nextButton = document.getElementById('next-image');
+
+            fullImage.src = image;
+            container.classList.remove('hidden');
+
+            const updateImage = (newIndex) => {
+                fullImage.src = images[newIndex];
+            };
+
+            prevButton.onclick = () => {
+                index = (index - 1 + images.length) % images.length;
+                updateImage(index);
+            };
+
+            nextButton.onclick = () => {
+                index = (index + 1) % images.length;
+                updateImage(index);
+            };
+
+            container.onclick = (e) => {
+                if (e.target === container) {
+                    container.classList.add('hidden');
+                }
+            };
         }
 
         closeGalleryModal() {
@@ -581,49 +617,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
         async loadYouTubeVideos() {
             const youtubeContainer = document.getElementById('youtube-slider');
-            const channelId = 'UCiahlQJxCgPY-tEfjvkab8g';
-            const maxResults = 10;
-            const apiKey ='AIzaSyBf5wzygVChOBD-3pPb4BR2v5NA4uE9J5c';
+            const playlistId = 'PLgGXSWYM2FpOa4Hy5YXDSPGNKdZVmhvXe';
+            const apiKey = 'AIzaSyDWvnKQXXYXXXXXXXXXXXXXXXXXXXXXXXX'; // Reemplaza con tu clave de API de YouTube
 
             try {
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${maxResults}`);
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${playlistId}&key=${apiKey}`);
                 const data = await response.json();
 
                 data.items.forEach(item => {
-                    const videoId = item.id.videoId;
-                    const title = item.snippet.title;
-                    const thumbnail = item.snippet.thumbnails.medium.url;
+                    const videoId = item.snippet.resourceId.videoId;
+                    const videoTitle = item.snippet.title;
+                    const videoThumbnail = item.snippet.thumbnails.medium.url;
 
                     const videoElement = document.createElement('div');
                     videoElement.className = 'youtube-video';
                     videoElement.innerHTML = `
-                        <img src="${thumbnail}" alt="${title}" class="w-full cursor-pointer">
-                        <h3 class="text-lg font-semibold mt-2">${title}</h3>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" title="${videoTitle}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     `;
-                    videoElement.addEventListener('click', () => {
-                        const iframe = document.createElement('iframe');
-                        iframe.src = `https://www.youtube.com/embed/${videoId}`;
-                        iframe.width = '100%';
-                        iframe.height = '200';
-                        iframe.allowFullscreen = true;
-                        videoElement.innerHTML = '';
-                        videoElement.appendChild(iframe);
-                    });
+
                     youtubeContainer.appendChild(videoElement);
                 });
 
+                // Inicializar el slider de YouTube después de cargar los videos
                 this.createSlider('#youtube-slider', {
                     dots: true,
-                    infinite: false,
-                    speed: 300,
+                    infinite: true,
+                    speed: 500,
                     slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 5000,
                     responsive: [
                         {
                             breakpoint: 1024,
                             settings: {
                                 slidesToShow: 2,
-                                slidesToScroll: 2
+                                slidesToScroll: 1,
                             }
                         },
                         {
@@ -636,124 +665,107 @@ document.addEventListener('DOMContentLoaded', function() {
                     ]
                 });
             } catch (error) {
-                console.error('Error fetching YouTube videos:', error);
+                console.error('Error al cargar los videos de YouTube:', error);
             }
         }
 
         initContactForm() {
             const form = document.getElementById('contact-form');
-            if (form) {
-                form.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const { name, email, message } = form.elements;
-                    const whatsappMessage = `Nombre: ${name.value}%0AEmail: ${email.value}%0AMensaje: ${message.value}`;
-                    const whatsappUrl = `https://wa.me/593987167782?text=${whatsappMessage}`;
-                    window.open(whatsappUrl, '_blank');
-                    form.reset();
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    body: formData
                 });
-            }
+                const result = await response.json();
+                if (result.success) {
+                    alert('Mensaje enviado con éxito');
+                    form.reset();
+                } else {
+                    alert('Error al enviar el mensaje');
+                }
+            });
         }
 
         handleBackToTop() {
-            const backToTopButton = document.getElementById('back-to-top');
-            
+            const backToTopButton = document.createElement('button');
+            backToTopButton.innerHTML = '&uarr;';
+            backToTopButton.className = 'fixed bottom-20 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl z-50 shadow-lg hover:bg-primary/90 transition-colors';
+            backToTopButton.style.display = 'none';
+            document.body.appendChild(backToTopButton);
+
             window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 100) {
-                    backToTopButton.style.display = 'block';
+                if (window.pageYOffset > 300) {
+                    backToTopButton.style.display = 'flex';
                 } else {
                     backToTopButton.style.display = 'none';
                 }
             });
-            
+
             backToTopButton.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
 
         handleScrollAnimation() {
-            const fadeElems = document.querySelectorAll('.fade-in-section');
-            
-            const fadeIn = (elem) => {
-                const distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
-                if (distInView < 0) {
-                    elem.classList.add('is-visible');
-                } else {
-                    elem.classList.remove('is-visible');
-                }
-            };
-            
-            fadeElems.forEach(elem => fadeIn(elem));
-            
-            window.addEventListener('scroll', () => {
-                fadeElems.forEach(elem => fadeIn(elem));
+            const fadeInSections = document.querySelectorAll('.fade-in-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            fadeInSections.forEach(section => {
+                observer.observe(section);
             });
         }
 
         handleInstallApp() {
             let deferredPrompt;
             const installButton = document.getElementById('install-app');
-            
+
             window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 deferredPrompt = e;
                 installButton.style.display = 'block';
             });
-            
-            installButton.addEventListener('click', () => {
+
+            installButton.addEventListener('click', async () => {
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then((choiceResult) => {
-                        if (choiceResult.outcome === 'accepted') {
-                            console.log('Usuario aceptó la instalación de la PWA');
-                        }
-                        deferredPrompt = null;
-                    });
+                    const { outcome } = await deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
                 }
             });
         }
 
         handlePreloader() {
-            const preloader = document.getElementById('preloader');
-            const mainContent = document.getElementById('main-content');
-
             window.addEventListener('load', () => {
+                const preloader = document.getElementById('preloader');
+                preloader.style.opacity = '0';
                 setTimeout(() => {
-                    preloader.style.opacity = '0';
-                    preloader.style.visibility = 'hidden';
-                    mainContent.classList.remove('hidden');
-                }, 1000);
+                    preloader.style.display = 'none';
+                }, 500);
             });
         }
 
         initChatbot() {
-    const chatbotButton = document.getElementById('open-chatbot');
-    const chatbotWindow = document.getElementById('chatbot-window');
-    const closeChatbot = document.getElementById('close-chatbot');
+            const chatbotButton = document.getElementById('open-chatbot');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const closeChatbot = document.getElementById('close-chatbot');
 
-    // Cuando el botón de abrir el chatbot es presionado
-    chatbotButton.addEventListener('click', () => {
-        // Alternar la visibilidad del chatbot (usando la clase 'active' para mostrarla)
-        chatbotWindow.classList.toggle('active');
-    });
+            chatbotButton.addEventListener('click', () => {
+                chatbotWindow.classList.toggle('active');
+            });
 
-    // Cuando el botón de cerrar el chatbot es presionado
-    closeChatbot.addEventListener('click', () => {
-        // Añadir la clase 'hidden' para ocultar el chatbot
-        chatbotWindow.classList.remove('active');
-    });
-}
-
-        preloadImages() {
-            const allImages = [
-                ...heroImages,
-                ...properties.map(p => p.image),
-                ...properties.flatMap(p => p.gallery || []),
-                ...instagramPosts.map(p => p.image)
-            ];
-
-            allImages.forEach(image => {
-                const img = new Image();
-                img.src = image;
+            closeChatbot.addEventListener('click', () => {
+                chatbotWindow.classList.remove('active');
             });
         }
 
@@ -761,19 +773,49 @@ document.addEventListener('DOMContentLoaded', function() {
             const resizeObserver = new ResizeObserver(entries => {
                 for (let entry of entries) {
                     if (entry.contentBoxSize) {
-                        if (entry.contentBoxSize[0].inlineSize < 768) {
-                            document.body.classList.add('mobile');
-                        } else {
-                            document.body.classList.remove('mobile');
-                        }
+                        // Ajustar el diseño basado en el tamaño del contenido
+                        this.adjustLayout(entry.contentBoxSize[0].inlineSize);
                     }
                 }
             });
 
             resizeObserver.observe(document.body);
         }
+
+        adjustLayout(width) {
+            // Ajustar el diseño basado en el ancho de la pantalla
+            if (width < 640) {
+                // Diseño para móviles
+                document.body.classList.add('mobile-layout');
+                document.body.classList.remove('tablet-layout', 'desktop-layout');
+            } else if (width < 1024) {
+                // Diseño para tablets
+                document.body.classList.add('tablet-layout');
+                document.body.classList.remove('mobile-layout', 'desktop-layout');
+            } else {
+                // Diseño para escritorio
+                document.body.classList.add('desktop-layout');
+                document.body.classList.remove('mobile-layout', 'tablet-layout');
+            }
+        }
+
+        preloadImages() {
+            const imagesToPreload = [
+                ...heroImages,
+                ...properties.map(p => p.image),
+                ...properties.flatMap(p => p.gallery || [])
+            ];
+
+            imagesToPreload.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
     }
 
     // Initialize the website
     const websiteManager = new WebsiteManager();
 });
+
+// Log a message to show the script has run
+console.log("Website manager initialized successfully!");
