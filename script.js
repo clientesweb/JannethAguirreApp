@@ -233,7 +233,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.closeGalleryModal();
             this.loadYouTubeVideos();
             this.initContactForm();
-            this.handleBackToTop();
             this.handleScrollAnimation();
             this.handleInstallApp();
             this.handlePreloader();
@@ -763,28 +762,51 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         initChatbot() {
-            const chatbotButton = document.getElementById('open-chatbot');
-            const chatbotWindow = document.getElementById('chatbot-window');
-            const closeChatbot = document.getElementById('close-chatbot');
+    const chatbotButton = document.getElementById('open-chatbot');
+    const chatbotWindow = document.getElementById('chatbot-window');
+    const closeChatbot = document.getElementById('close-chatbot');
 
-            chatbotButton.addEventListener('click', () => {
-                chatbotWindow.classList.toggle('active');
-            });
+    // Agregar evento para abrir el chatbot
+    chatbotButton.addEventListener('click', () => {
+        chatbotWindow.classList.toggle('active');
+    });
 
-            closeChatbot.addEventListener('click', () => {
-                chatbotWindow.classList.remove('active');
-            });
+    // Agregar evento para cerrar el chatbot
+    closeChatbot.addEventListener('click', () => {
+        chatbotWindow.classList.remove('active');
+    });
+
+    this.improveResponsiveness(); // Llamar la función de mejorar la responsividad
+}
+
+improveResponsiveness() {
+    const resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+            if (entry.contentBoxSize) {
+                this.adjustLayout(entry.contentBoxSize[0].inlineSize);
+            }
         }
+    });
 
-        improveResponsiveness() {
-            const resizeObserver = new ResizeObserver(entries => {
-                for (let entry of entries) {
-                    if (entry.contentBoxSize) {
-                        // Ajustar el diseño basado en el tamaño del contenido
-                        this.adjustLayout(entry.contentBoxSize[0].inlineSize);
-                    }
-                }
-            });
+    // Observamos los cambios en el tamaño de la ventana
+    resizeObserver.observe(document.body);
+}
+
+adjustLayout(windowWidth) {
+    const chatbotWindow = document.getElementById('chatbot-window');
+    const chatbotButton = document.getElementById('open-chatbot');
+
+    // Ajustar el tamaño y posición según el tamaño de la ventana
+    if (windowWidth <= 600) { // Dispositivos móviles
+        chatbotButton.style.bottom = '80px'; // Mover botón un poco más arriba
+        chatbotWindow.style.width = '250px'; // Reducir tamaño del chatbot
+        chatbotWindow.style.height = '350px'; // Ajustar la altura
+    } else { // Escritorio
+        chatbotButton.style.bottom = '140px';
+        chatbotWindow.style.width = '300px';
+        chatbotWindow.style.height = '400px';
+    }
+}
 
             resizeObserver.observe(document.body);
         }
