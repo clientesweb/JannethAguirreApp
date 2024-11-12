@@ -1,0 +1,144 @@
+{
+  "inicio": [
+    {
+      "question": "¿Quién es Janneth Aguirre?",
+      "answer": "Janneth Aguirre es una destacada profesional inmobiliaria con más de 10 años de experiencia en el mercado ecuatoriano e internacional. Es conocida por su enfoque personalizado y su compromiso con la excelencia en cada transacción."
+    },
+    {
+      "question": "¿Qué servicios ofrece Janneth Aguirre?",
+      "answer": "Janneth Aguirre ofrece una amplia gama de servicios inmobiliarios, incluyendo compra y venta de propiedades, asesoría en inversiones, servicios para propietarios e inquilinos, y gestión de propiedades tanto en Ecuador como en el extranjero."
+    }
+  ],
+  "propiedades": [
+    {
+      "question": "¿Qué tipos de propiedades manejan?",
+      "answer": "Manejamos una variedad de propiedades que incluyen casas, departamentos, terrenos, oficinas y locales comerciales. Nuestro portafolio abarca desde propiedades de lujo hasta opciones más accesibles, todas en excelentes ubicaciones."
+    },
+    {
+      "question": "¿Dónde están ubicadas las propiedades?",
+      "answer": "Nuestras propiedades están ubicadas en las mejores zonas de Ecuador, incluyendo Guayaquil, Samborondón, Cuenca y otras ciudades importantes. También ofrecemos opciones en destinos internacionales como Estados Unidos y Panamá."
+    },
+    {
+      "question": "¿Tienen propiedades de lujo?",
+      "answer": "Sí, contamos con un exclusivo portafolio de propiedades de lujo. Estas incluyen mansiones, penthouses y villas en las ubicaciones más prestigiosas, diseñadas para satisfacer los gustos más exigentes."
+    }
+  ],
+  "servicios": [
+    {
+      "question": "¿Qué servicios ofrecen para compradores?",
+      "answer": "Para compradores, ofrecemos búsqueda personalizada de propiedades, asesoría en negociación, asistencia en trámites legales y financieros, y acompañamiento durante todo el proceso de compra para asegurar una transacción exitosa."
+    },
+    {
+      "question": "¿Qué servicios ofrecen para vendedores?",
+      "answer": "Para vendedores, proporcionamos valoración de propiedades, estrategias de marketing personalizadas, gestión de visitas, negociación con potenciales compradores y asesoría en todos los aspectos legales y financieros de la venta."
+    },
+    {
+      "question": "¿Ofrecen servicios de administración de propiedades?",
+      "answer": "Sí, ofrecemos servicios completos de administración de propiedades. Esto incluye mantenimiento, gestión de inquilinos, cobro de rentas, y resolución de problemas, permitiendo a los propietarios maximizar su inversión sin preocupaciones."
+    }
+  ],
+  "inversion": [
+    {
+      "question": "¿Por qué invertir en bienes raíces en Ecuador?",
+      "answer": "Invertir en bienes raíces en Ecuador ofrece excelentes oportunidades debido al crecimiento del mercado, precios competitivos y un entorno favorable para inversores extranjeros. Además, Ecuador ofrece una gran calidad de vida y paisajes diversos."
+    },
+    {
+      "question": "¿Qué opciones de inversión ofrecen?",
+      "answer": "Ofrecemos diversas opciones de inversión, desde propiedades residenciales y comerciales hasta proyectos de desarrollo. Nuestro equipo puede ayudarte a identificar las mejores oportunidades según tu presupuesto y objetivos de inversión."
+    },
+    {
+      "question": "¿Cómo puedo financiar una inversión inmobiliaria?",
+      "answer": "Existen varias opciones de financiamiento disponibles, incluyendo hipotecas bancarias y financiamiento del desarrollador. Trabajamos con instituciones financieras de confianza y podemos asesorarte sobre la mejor opción según tu situación."
+    }
+  ],
+  "internacional": [
+    {
+      "question": "¿Ofrecen servicios para compradores internacionales?",
+      "answer": "Sí, tenemos amplia experiencia trabajando con compradores internacionales. Ofrecemos asesoría especializada en temas legales, fiscales y de inmigración relacionados con la compra de propiedades en Ecuador por extranjeros."
+    },
+    {
+      "question": "¿Qué propiedades ofrecen en el extranjero?",
+      "answer": "Ofrecemos una selección de propiedades en destinos internacionales populares, principalmente en Estados Unidos y Panamá. Estas incluyen apartamentos, casas y oportunidades de inversión en zonas de alto potencial."
+    },
+    {
+      "question": "¿Cómo funciona el proceso de compra para extranjeros en Ecuador?",
+      "answer": "El proceso de compra para extranjeros en Ecuador es relativamente sencillo. No hay mayores restricciones para la propiedad extranjera. Nuestro equipo te guiará en cada paso, desde la selección de la propiedad hasta la obtención de los documentos necesarios y el cierre de la transacción."
+    }
+  ],
+  "contacto": [
+    {
+      "question": "¿Cómo puedo contactar a Janneth Aguirre?",
+      "answer": "Puedes contactar a Janneth Aguirre a través de nuestro sitio web, por teléfono al +593 99 999 9999, o por correo electrónico a info@jannethaguirre.com. También puedes visitarnos en nuestra oficina en Guayaquil, Ecuador."
+    },
+    {
+      "question": "¿Ofrecen consultas gratuitas?",
+      "answer": "Sí, ofrecemos consultas iniciales gratuitas para discutir tus necesidades y cómo podemos ayudarte. Puedes programar una cita a través de nuestro sitio web o llamándonos directamente."
+    },
+    {
+      "question": "¿Tienen presencia en redes sociales?",
+      "answer": "Sí, puedes encontrarnos en Instagram, Facebook y LinkedIn como @JannethAguirreRealEstate. Seguirnos es una excelente manera de mantenerte actualizado sobre las últimas propiedades y noticias del mercado inmobiliario."
+    }
+  ],
+  "tendencias": [
+    {
+      "question": "tendencias del mercado",
+      "answer": "Las tendencias actuales incluyen propiedades con tecnología de hogar inteligente, eficiencia energética y ubicaciones en zonas de desarrollo. Además, la inversión en propiedades internacionales ha crecido entre los compradores ecuatorianos."
+    }
+  ],
+  "financiamiento": [
+    {
+      "question": "financiamiento",
+      "answer": "Ofrecemos asesoría en financiamiento para que puedas acceder a tu propiedad de manera cómoda y conveniente. Te ayudamos a evaluar diferentes opciones de crédito y financiamiento."
+    },
+    {
+      "question": "opciones de financiamiento",
+      "answer": "Trabajamos con diferentes entidades bancarias que ofrecen opciones de financiamiento flexibles. Desde créditos hipotecarios hasta planes de pago personalizados, te ayudamos a encontrar la opción ideal."
+    },
+    {
+      "question": "cómo funciona el financiamiento",
+      "answer": "El financiamiento permite pagar la propiedad en plazos, generalmente a través de un crédito hipotecario. Te ayudamos en la gestión de trámites y en la elección de la mejor opción financiera."
+    }
+  ],
+  "valoracion_propiedades": [
+    {
+      "question": "valoración de propiedades",
+      "answer": "Contamos con servicios de valoración de propiedades para ayudarte a conocer el valor actual de tu inmueble en el mercado, esencial para vender o invertir."
+    },
+    {
+      "question": "cómo valorar mi propiedad",
+      "answer": "Para valorar tu propiedad, realizamos un análisis que incluye ubicación, características y condiciones del mercado actual. Nuestro equipo de expertos puede ofrecerte un informe detallado."
+    },
+    {
+      "question": "por qué es importante valorar una propiedad",
+      "answer": "Valorar una propiedad es esencial para establecer un precio justo y competitivo. Ayuda a atraer compradores serios y asegura que obtengas el mejor retorno sobre tu inversión."
+    }
+  ],
+  "tips_compradores": [
+    {
+      "question": "consejos para compradores",
+      "answer": "Al comprar una propiedad, considera siempre la ubicación, el potencial de crecimiento de la zona y tus necesidades a largo plazo. Estamos aquí para ayudarte a evaluar cada detalle."
+    },
+    {
+      "question": "qué debo saber al comprar",
+      "answer": "Es fundamental verificar la documentación, el estado de la propiedad y entender los costos adicionales. Podemos guiarte para que tomes la mejor decisión en tu compra."
+    },
+    {
+      "question": "cómo elegir una propiedad",
+      "answer": "La elección de una propiedad depende de tus necesidades y estilo de vida. Piensa en la proximidad a tu trabajo, colegios, y otros servicios importantes. Te ayudaremos a identificar la mejor opción."
+    }
+  ],
+  "tips_vendedores": [
+    {
+      "question": "consejos para vendedores",
+      "answer": "Para vender rápidamente, asegúrate de que la propiedad esté en buenas condiciones, toma fotos de alta calidad y fija un precio competitivo. También, contar con un buen agente facilita mucho el proceso."
+    },
+    {
+      "question": "cómo preparar mi propiedad para la venta",
+      "answer": "Limpia y organiza el espacio, realiza pequeñas reparaciones y resalta los aspectos positivos. Las propiedades que causan una buena impresión tienden a venderse más rápido."
+    },
+    {
+      "question": "cuándo es un buen momento para vender",
+      "answer": "Depende de las condiciones del mercado, pero por lo general, los meses de mayor demanda pueden ofrecer mejores oportunidades. Nosotros te asesoramos sobre el momento ideal para maximizar la venta."
+    }
+  ]
+}
