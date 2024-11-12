@@ -158,7 +158,8 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(255, 0, 0, 0.9); /* Usamos --primary-color con transparencia */
+    background-color: var(--primary-color); /* Usamos el color rojo definido */
+    opacity: 0.9; /* Ligera transparencia */
     backdrop-filter: blur(8px); /* Efecto de desenfoque */
     padding: 0.75rem 1rem;
     z-index: 999;
