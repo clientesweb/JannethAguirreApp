@@ -1,7 +1,9 @@
 class App {
     constructor() {
-        this.render();
-        this.initializeComponents();
+        document.addEventListener('DOMContentLoaded', () => {
+            this.render();
+            this.initializeComponents();
+        });
     }
 
     render() {
@@ -33,30 +35,33 @@ class App {
     }
 
     initializeComponents() {
-        new Preloader();
-        new Header();
-        new Hero();
-        new AboutUs();
-        new FeaturedProperties();
-        new Services();
-        new Properties();
-        new InvestReasons();
-        new GalleryModal();
-        new YouTubePlaylist();
-        new Testimonials();
-        new Instagram();
-        new FAQs();
-        new Map();
-        new Contact();
-        new Footer();
-        new ChatBot();
-        new WhatsAppButton();
-        new BottomNav();
-        new BackToTop();
+        // Usamos un try-catch para diagnosticar problemas de inicialización
+        try {
+            new Preloader();
+            new Header();
+            new Hero();
+            new AboutUs();
+            new FeaturedProperties();
+            new Services();
+            new Properties();
+            new InvestReasons();
+            new GalleryModal();
+            new YouTubePlaylist();
+            new Testimonials();
+            new Instagram();
+            new FAQs();
+            new Map();
+            new Contact();
+            new Footer();
+            new ChatBot();
+            new WhatsAppButton();
+            new BottomNav();
+            new BackToTop();
+        } catch (error) {
+            console.error("Error inicializando los componentes:", error);
+        }
     }
 }
 
-// Initialize the app
-document.addEventListener('DOMContentLoaded', () => {
-    new App();
-});
+// Inicializar la app
+new App();
