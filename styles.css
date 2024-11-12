@@ -9,8 +9,8 @@
 }
 
 html, body {
-    overflow-x: hidden;
-    width: 100%;
+    overflow-x: hidden;  /* Oculta el scroll horizontal */
+    width: 100%;          /* Asegura que el ancho no exceda el 100% */
 }
 
 body {
@@ -33,6 +33,22 @@ body {
     margin: 0 auto;
     padding: 0 1rem;
     box-sizing: border-box;
+}
+
+
+#ai-real-estate-expert-chatbot .chat-window {
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
 }
 
 #ai-real-estate-expert-chatbot .chat-window {
@@ -135,21 +151,20 @@ body {
 
 /* Estilos para el menú inferior */
 .bottom-nav {
-    display: flex;
+    display: none;
     justify-content: space-around;
     align-items: center;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: white;
-    padding: 10px;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
+    background-color: var(--theme-color);
+    padding: 0.625rem;
+    z-index: 999;
 }
 
 .bottom-nav a {
-    color: var(--text-color);
+    color: white;
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -159,21 +174,17 @@ body {
 
 .bottom-nav i {
     font-size: 1.2rem;
-    margin-bottom: 5px;
-}
-
-.bottom-nav a:hover, .bottom-nav a:focus {
-    color: var(--primary-color);
+    margin-bottom: 0.3125rem;
 }
 
 /* Estilos para las tarjetas de propiedades */
 .property-card {
     flex: 0 0 auto;
-    width: 300px;
+    width: 18.75rem;
     margin-right: 1rem;
     transition: transform var(--transition-speed) ease-in-out;
     background-color: white;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -190,8 +201,8 @@ body {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    gap: 20px;
-    padding: 20px 0;
+    gap: 1.25rem;
+    padding: 1.25rem 0;
 }
 
 .propiedades-slider::-webkit-scrollbar, 
@@ -201,6 +212,7 @@ body {
     display: none;
 }
 
+/* Estilos para los sliders */
 .slick-prev:before, .slick-next:before {
     color: var(--primary-color);
 }
@@ -293,13 +305,6 @@ body {
     background-color: transparent;
     border-radius: 0.625rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    color: white; /* Asegura que el texto en la modal sea blanco */
-}
-
-/* Aseguramos que los textos dentro del modal sean blancos */
-#gallery-modal .modal-content h3,
-#gallery-modal .modal-content p,
-#gallery-modal .modal-content ul {
     color: white;
 }
 
@@ -346,6 +351,7 @@ body {
 #next-image {
     right: 1.25rem;
 }
+
 /* Estilos adicionales */
 .fade-in-section {
     opacity: 0;
@@ -361,6 +367,26 @@ body {
     visibility: visible;
 }
 
+#back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 1.25rem;  /* Asegúrate de que esté un poco por encima del menú inferior */
+    right: 1.875rem;  /* Alineado a la derecha */
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    padding: 0.9375rem;
+    border-radius: 50%;
+    font-size: 1.125rem;
+    transition: opacity var(--transition-speed);
+}
+
+#back-to-top:hover {
+    opacity: 0.8;
+}
 /* Estilos para la sección "Quienes Somos" */
 #quienes-somos {
     background-color: #f8f9fa;
@@ -526,108 +552,6 @@ body {
     cursor: -webkit-grabbing;
 }
 
-/* Estilos para la sección de descarga de la app */
-#descargar-app {
-    background: linear-gradient(to right, var(--primary-color), var(--primary-color-light, #FF6666));
-    color: white;
-    padding: 40px 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-#descargar-app h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-#descargar-app .flex {
-    justify-content: space-between;
-    align-items: center;
-}
-
-#descargar-app .app-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-#descargar-app .app-buttons a {
-    background-color: black;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.3s ease;
-}
-
-#descargar-app .app-buttons a:hover {
-    background-color: #333;
-}
-
-#descargar-app img {
-    max-width: 200px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-#powered-by {
-    font-size: 12px;
-    color: #666;
-    margin-top: 10px;
-}
-
-.powered-by-link {
-    color: red;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.powered-by-link:hover {
-    text-decoration: underline;
-}
-
-#mapa iframe {
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-#testimonials {
-    background-color: #f9fafb;
-}
-
-.testimonial-item {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.testimonial-item:hover {
-    transform: translateY(-5px);
-}
-
-.testimonial-item .text-secondary {
-    color: #6B7280;
-}
-
-.testimonial-item .text-primary {
-    color: #1D4ED8;
-}
-
-.testimonial-item .text-yellow-400 {
-    color: #fbbf24;
-}
-
-.testimonial-item .text-gray-500 {
-    color: #6b7280;
-}
-
-.testimonial-item .text-gray-700 {
-    color: #4b5563;
-}
-
 /* Media queries para responsividad */
 @media (min-width: 640px) {
     .youtube-video, #store-slider .property-card {
@@ -676,29 +600,27 @@ body {
         width: calc(50% - 1.25rem);
     }
 
-    #ai-real-estate-expert-chatbot,
+    #ai-real-estate-expert-chatbot {
+        bottom: 10rem;
+        right: 0.625rem;
+    }
+
+    #ai-real-estate-expert-chatbot .chat-button {
+        width: 3.125rem;
+        height: 3.125rem;
+        font-size: 1.25rem;
+    }
+
     .whatsapp-button {
-        bottom: 70px;
+        bottom: 6.25rem;
+        right: 0.625rem;
+        width: 3.125rem;
+        height: 3.125rem;
+        font-size: 1.5625rem;
     }
 
     .bottom-nav {
-        padding: 5px;
-    }
-
-    .bottom-nav a {
-        font-size: 0.7rem;
-    }
-
-    .bottom-nav i {
-        font-size: 1rem;
-    }
-
-    #descargar-app .flex {
-        flex-direction: column;
-    }
-
-    #descargar-app img {
-        margin-top: 20px;
+        display: flex;
     }
 
     .hero-slider .slick-slide {
@@ -725,10 +647,6 @@ body {
     #service-grid {
         grid-template-columns: 1fr;
     }
-
-    #mapa iframe {
-        height: 400px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -748,25 +666,12 @@ body {
         height: 11.25rem;
     }
 
-    #ai-real-estate-expert-chatbot,
+    #ai-real-estate-expert-chatbot {
+        bottom: 8.75rem;
+    }
+
     .whatsapp-button {
-        bottom: 60px;
-        right: 10px;
-    }
-
-    #open-chatbot,
-    .whatsapp-button {
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-    }
-
-    #descargar-app h2 {
-        font-size: 1.5rem;
-    }
-
-    #descargar-app .app-buttons {
-        flex-direction: column;
+        bottom: 6.25rem;
     }
 
     .property-card {
@@ -815,4 +720,64 @@ iframe {
 
 .gap-4 {
     gap: 1rem;
+}
+#powered-by {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.powered-by-link {
+    color: red;
+    font-weight: bold;
+    text-decoration: none; /* Sin subrayado por defecto */
+}
+
+.powered-by-link:hover {
+    text-decoration: underline; /* Subrayado cuando el cursor pasa por encima */
+}
+#mapa iframe {
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+@media (max-width: 768px) {
+    #mapa iframe {
+        height: 400px; /* Ajuste de la altura en pantallas pequeñas */
+    }
+}
+#testimonials {
+    background-color: #f9fafb;
+}
+
+.testimonial-item {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-5px);
+}
+
+.testimonial-item .text-secondary {
+    color: #6B7280;
+}
+
+.testimonial-item .text-primary {
+    color: #1D4ED8;
+}
+
+.testimonial-item .text-yellow-400 {
+    color: #fbbf24; /* Color de las estrellas */
+}
+
+.testimonial-item .text-gray-500 {
+    color: #6b7280;
+}
+
+.testimonial-item .text-gray-700 {
+    color: #4b5563;
 }
