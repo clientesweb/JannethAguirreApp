@@ -35,10 +35,9 @@ body {
     box-sizing: border-box;
 }
 
-/* Estilos para el chatbot */
 #ai-real-estate-expert-chatbot {
     position: fixed;
-    bottom: 80px;
+    bottom: 140px; /* Ajustar según sea necesario para que esté encima del botón de WhatsApp */
     right: 20px;
     z-index: 1000;
 }
