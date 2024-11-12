@@ -171,7 +171,7 @@ body {
 
 /* Estilos para los enlaces del menú */
 .bottom-nav a {
-    color: white; /* Texto e íconos en blanco para contraste */
+    color: #FFFFFF; /* Color blanco para mejor visibilidad */
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -180,29 +180,35 @@ body {
     transition: color var(--transition-speed) ease;
 }
 
-/* Color de íconos */
+/* Estilo especial para íconos */
 .bottom-nav i {
     font-size: 1.5rem;
     margin-bottom: 0.2rem;
+    color: #FFFFFF; /* Asegura que los íconos sean blancos */
     transition: transform 0.2s ease, color var(--transition-speed);
 }
 
 /* Efecto hover para enlaces e íconos */
 .bottom-nav a:hover {
-    color: var(--secondary-color); /* Cambia el texto e íconos a gris en hover */
+    color: var(--secondary-color); /* Cambia texto a gris en hover */
 }
 
 .bottom-nav a:hover i {
     transform: scale(1.2); /* Agrandamiento del ícono en hover */
+    color: var(--secondary-color); /* Cambia íconos a gris en hover */
 }
 
-/* Efecto para el botón especial (App) */
+/* Efecto especial para el botón "App" */
 .bottom-nav a[href="#descargar-app"] {
-    color: var(--background-color); /* Ícono y texto en blanco */
+    color: #FFFFFF; /* Ícono y texto en blanco */
+    border: 2px solid #FFFFFF; /* Borde blanco para destacar */
+    padding: 0.2rem;
+    border-radius: 50%;
 }
 
 .bottom-nav a[href="#descargar-app"]:hover {
     color: var(--secondary-color); /* Cambia a gris en hover */
+    border-color: var(--secondary-color); /* Borde gris en hover */
 }
 
 /* Estilos para las tarjetas de propiedades */
