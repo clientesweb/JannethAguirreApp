@@ -696,24 +696,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         handleBackToTop() {
-            const backToTopButton = document.createElement('button');
-            backToTopButton.innerHTML = '&uarr;';
-            backToTopButton.className = 'fixed bottom-20 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl z-50 shadow-lg hover:bg-primary/90 transition-colors';
+    const backToTopButton = document.createElement('button');
+    backToTopButton.innerHTML = '&uarr;';
+    backToTopButton.className = 'fixed bottom-20 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl z-50 shadow-lg hover:bg-primary/90 transition-colors';
+    backToTopButton.style.display = 'none';
+    document.body.appendChild(backToTopButton);
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.style.display = 'flex';
+        } else {
             backToTopButton.style.display = 'none';
-            document.body.appendChild(backToTopButton);
-
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.style.display = 'flex';
-                } else {
-                    backToTopButton.style.display = 'none';
-                }
-            });
-
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
         }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
 
         handleScrollAnimation() {
             const fadeInSections = document.querySelectorAll('.fade-in-section');
