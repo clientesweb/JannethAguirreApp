@@ -513,8 +513,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const modal = document.createElement('div');
             modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
             modal.innerHTML = `
-                <div class="bg-white p-8 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto relative">
-                    <button class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 text-2xl close-modal">&times;</button>
+                <div class="bg-white p-8 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
                     <h2 class="text-2xl font-bold mb-4">${property.title}</h2>
                     <p class="text-xl mb-4">${property.price}</p>
                     <p class="mb-4">${property.description}</p>
@@ -527,6 +526,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <img src="${image}" alt="Imagen de la propiedad" class="w-full h-48 object-cover rounded cursor-pointer gallery-image">
                         `).join('')}
                     </div>
+                    <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors close-modal">Cerrar</button>
                 </div>
             `;
             document.body.appendChild(modal);
@@ -547,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
             galleryModal.className = 'fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50';
             galleryModal.innerHTML = `
                 <div class="relative w-full h-full">
-                    <button class="absolute top-4 right-4 text-white text-2xl z-10 close-gallery">&times;</button>
+                    <button class="absolute top-4 right-4 text-white text-2xl close-gallery">&times;</button>
                     <div class="gallery-slider h-full flex items-center justify-center">
                         ${images.map(image => `
                             <div class="w-full h-full flex items-center justify-center">
@@ -573,6 +573,16 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
+        closeGalleryModal() {
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('close-gallery')) {
+                    const galleryModal = e.target.closest('.fixed');
+                    if (galleryModal) {
+                        document.body.removeChild(galleryModal);
+                    }
+                }
+            });
+        }
 
         loadYouTubeVideos() {
             const youtubeSlider = document.getElementById('youtube-slider');
