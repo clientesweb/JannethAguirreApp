@@ -327,52 +327,43 @@ body {
 #gallery-modal {
     background-color: rgba(0, 0, 0, 0.9);
     transition: opacity var(--transition-speed) ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
 }
 
 #gallery-modal .modal-content {
-    display: flex;
-    flex-direction: column;
     max-width: 90%;
     max-height: 90vh;
+    overflow-y: auto;
     background-color: transparent;
     border-radius: 0.625rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: white; /* Asegura que el texto en la modal sea blanco */
+}
+
+/* Aseguramos que los textos dentro del modal sean blancos */
+#gallery-modal .modal-content h3,
+#gallery-modal .modal-content p,
+#gallery-modal .modal-content ul {
     color: white;
-    padding: 20px;
-    overflow: hidden;
 }
 
 #gallery-images {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: auto;
+    overflow-x: hidden;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    gap: 10px;
 }
 
 #gallery-images img {
-    flex: 0 0 auto;
+    flex: 0 0 100%;
     width: 100%;
-    max-width: 100%;
     height: auto;
     object-fit: contain;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     transition: transform var(--transition-speed) ease;
-    border-radius: 8px;
 }
 
-/* Estilo para los controles de navegación */
 .gallery-nav {
     position: absolute;
     top: 50%;
@@ -398,34 +389,6 @@ body {
 #next-image {
     right: 1.25rem;
 }
-
-/* Estilo para la información de la propiedad */
-#gallery-info {
-    margin-top: 20px;
-    color: white; /* Asegura que el texto sea blanco */
-}
-
-#gallery-info h3,
-#gallery-info p,
-#gallery-info ul {
-    margin-bottom: 10px;
-}
-
-/* Botón de "Contactar Agente" */
-#contact-agent {
-    background-color: #3498db;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#contact-agent:hover {
-    background-color: #2980b9;
-}
-
 /* Estilos adicionales */
 .fade-in-section {
     opacity: 0;
