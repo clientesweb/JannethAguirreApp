@@ -37,9 +37,9 @@ body {
 
 #ai-real-estate-expert-chatbot {
     position: fixed;
-    bottom: 140px; /* Ajustar según sea necesario para que esté encima del botón de WhatsApp */
+    bottom: 100px; /* Ajustado para que esté encima del botón de WhatsApp */
     right: 20px;
-    z-index: 1000;
+    z-index: 1001; /* Asegura que esté por encima de WhatsApp */
 }
 
 #open-chatbot {
@@ -155,7 +155,7 @@ body {
 /* Estilos para el botón de WhatsApp */
 .whatsapp-button {
     position: fixed;
-    bottom: 80px;
+    bottom: 60px; /* Ajustado para que no se solape con el chatbot */
     right: 20px;
     background-color: #25D366;
     color: white;
