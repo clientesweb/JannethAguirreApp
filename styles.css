@@ -151,30 +151,51 @@ body {
 
 /* Estilos para el menú inferior */
 .bottom-nav {
-    display: none;
+    display: flex; /* Aseguramos que esté visible para pruebas */
     justify-content: space-around;
     align-items: center;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: var(--theme-color);
-    padding: 0.625rem;
+    background-color: rgba(255, 0, 0, 0.9); /* Usamos --primary-color con transparencia */
+    backdrop-filter: blur(8px); /* Efecto de desenfoque */
+    padding: 0.75rem 1rem;
     z-index: 999;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    transition: transform var(--transition-speed) ease, background-color var(--transition-speed);
+}
+
+/* Efecto de ocultar y mostrar el menú */
+.bottom-nav.hide {
+    transform: translateY(100%);
 }
 
 .bottom-nav a {
-    color: white;
+    color: var(--background-color); /* Texto blanco */
     text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 0.8rem;
+    transition: color var(--transition-speed) ease;
+}
+
+.bottom-nav a:hover {
+    color: var(--secondary-color); /* Color de hover gris */
 }
 
 .bottom-nav i {
-    font-size: 1.2rem;
-    margin-bottom: 0.3125rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+    transition: transform 0.2s ease, color var(--transition-speed);
+}
+
+.bottom-nav a:hover i {
+    transform: scale(1.2); /* Efecto de agrandamiento en hover */
+    color: var(--background-color);
 }
 
 /* Estilos para las tarjetas de propiedades */
@@ -375,10 +396,10 @@ body {
 }
 
 #back-to-top {
-    display: none;
+    display: none !important; /* Asegura que el botón no se muestre nunca */
     position: fixed;
-    bottom: 1.25rem;  /* Asegúrate de que esté un poco por encima del menú inferior */
-    right: 1.875rem;  /* Alineado a la derecha */
+    bottom: 1.25rem; /* Asegúrate de que esté un poco por encima del menú inferior */
+    right: 1.875rem; /* Alineado a la derecha */
     z-index: 99;
     border: none;
     outline: none;
