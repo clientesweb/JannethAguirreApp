@@ -419,18 +419,68 @@ footer a:hover {
     color: white;
 }
 
-/* Property Slider */
-.properties-slider {
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.properties-slider::-webkit-scrollbar {
-    display: none;
-}
-
-#properties-grid {
+/* Properties Section */
+#propiedades .propiedades-slider {
     display: flex;
-    transition: transform 0.3s ease;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+#propiedades .propiedades-slider::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+#propiedades .property-card {
+    flex: 0 0 auto;
+    width: 300px;
+    margin-right: 1rem;
+    scroll-snap-align: start;
+}
+/* Back to Top Button */
+#back-to-top {
+    transition: opacity 0.3s, visibility 0.3s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+/* WhatsApp and Chatbot positioning */
+.whatsapp-button,
+#ai-real-estate-expert-chatbot {
+    z-index: 1000;
+}
+/* Bottom Navigation with Gradient */
+.bottom-nav {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+}
+
+.bottom-nav a {
+    color: white;
+    transition: transform var(--transition-speed) ease;
+}
+
+.bottom-nav a:hover,
+.bottom-nav a.active {
+    color: var(--background-color);
+    transform: translateY(-5px);
+}
+
+/* Global Gradient Text */
+.gradient-text {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Apply gradient text to headings */
+h1, h2, h3, h4, h5, h6 {
+    @apply gradient-text;
 }
