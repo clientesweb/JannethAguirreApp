@@ -151,31 +151,27 @@ body {
 
 /* Estilos para el menú inferior */
 .bottom-nav {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: var(--primary-color); /* Usamos el color rojo definido */
-    opacity: 0.95; /* Ligera transparencia para un efecto moderno */
+    background-color: var(--primary-color); /* Fondo rojo personalizado */
+    opacity: 0.95; /* Ligera transparencia */
     backdrop-filter: blur(8px); /* Efecto de desenfoque */
     padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     z-index: 999;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     transition: transform var(--transition-speed) ease, background-color var(--transition-speed);
 }
 
-/* Efecto de ocultar y mostrar el menú */
-.bottom-nav.hide {
-    transform: translateY(100%);
-}
-
+/* Estilos para los enlaces del menú */
 .bottom-nav a {
-    color: white; /* Cambiamos a blanco para un mejor contraste */
+    color: white; /* Texto e íconos en blanco para contraste */
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -184,20 +180,29 @@ body {
     transition: color var(--transition-speed) ease;
 }
 
-.bottom-nav a:hover {
-    color: var(--secondary-color); /* Color de hover gris */
-}
-
+/* Color de íconos */
 .bottom-nav i {
     font-size: 1.5rem;
     margin-bottom: 0.2rem;
-    color: white; /* Aseguramos que los íconos sean blancos */
     transition: transform 0.2s ease, color var(--transition-speed);
 }
 
+/* Efecto hover para enlaces e íconos */
+.bottom-nav a:hover {
+    color: var(--secondary-color); /* Cambia el texto e íconos a gris en hover */
+}
+
 .bottom-nav a:hover i {
-    transform: scale(1.2); /* Efecto de agrandamiento en hover */
-    color: var(--secondary-color); /* Ícono cambia a gris en hover */
+    transform: scale(1.2); /* Agrandamiento del ícono en hover */
+}
+
+/* Efecto para el botón especial (App) */
+.bottom-nav a[href="#descargar-app"] {
+    color: var(--background-color); /* Ícono y texto en blanco */
+}
+
+.bottom-nav a[href="#descargar-app"]:hover {
+    color: var(--secondary-color); /* Cambia a gris en hover */
 }
 
 /* Estilos para las tarjetas de propiedades */
