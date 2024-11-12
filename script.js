@@ -233,6 +233,8 @@ document.addEventListener('DOMContentLoaded', function() {
             this.closeGalleryModal();
             this.loadYouTubeVideos();
             this.initContactForm();
+            this.handleBackToTop();
+            this.handleScrollAnimation();
             this.handleInstallApp();
             this.handlePreloader();
             this.initChatbot();
@@ -615,4 +617,205 @@ document.addEventListener('DOMContentLoaded', function() {
 
         async loadYouTubeVideos() {
             const youtubeContainer = document.getElementById('youtube-slider');
-            const playlist
+            const playlistId = 'PLgGXSWYM2FpOa4Hy5YXDSPGNKdZVmhvXe';
+            const apiKey = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y'; // Reemplaza con tu clave de API de YouTube
+
+            try {
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${playlistId}&key=${apiKey}`);
+                const data = await response.json();
+
+                data.items.forEach(item => {
+                    const videoId = item.snippet.resourceId.videoId;
+                    const videoTitle = item.snippet.title;
+                    const videoThumbnail = item.snippet.thumbnails.medium.url;
+
+                    const videoElement = document.createElement('div');
+                    videoElement.className = 'youtube-video';
+                    videoElement.innerHTML = `
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" title="${videoTitle}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    `;
+
+                    youtubeContainer.appendChild(videoElement);
+                });
+
+                // Inicializar el slider de YouTube después de cargar los videos
+                this.createSlider('#youtube-slider', {
+                    dots: true,
+                    infinite: true,
+                    speed: 500,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 5000,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 1,
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
+                        }
+                    ]
+                });
+            } catch (error) {
+                console.error('Error al cargar los videos de YouTube:', error);
+            }
+        }
+
+        initContactForm() {
+            const form = document.getElementById('contact-form');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert('Mensaje enviado con éxito');
+                    form.reset();
+                } else {
+                    alert('Error al enviar el mensaje');
+                }
+            });
+        }
+
+        handleBackToTop() {
+            const backToTopButton = document.createElement('button');
+            backToTopButton.innerHTML = '&uarr;';
+            backToTopButton.className = 'fixed bottom-20 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl z-50 shadow-lg hover:bg-primary/90 transition-colors';
+            backToTopButton.style.display = 'none';
+            document.body.appendChild(backToTopButton);
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.style.display = 'flex';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        handleScrollAnimation() {
+            const fadeInSections = document.querySelectorAll('.fade-in-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            fadeInSections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        handleInstallApp() {
+            let deferredPrompt;
+            const installButton = document.getElementById('install-app');
+
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                installButton.style.display = 'block';
+            });
+
+            installButton.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                }
+            });
+        }
+
+        handlePreloader() {
+            window.addEventListener('load', () => {
+                const preloader = document.getElementById('preloader');
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            });
+        }
+
+        initChatbot() {
+            const chatbotButton = document.getElementById('open-chatbot');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const closeChatbot = document.getElementById('close-chatbot');
+
+            chatbotButton.addEventListener('click', () => {
+                chatbotWindow.classList.toggle('active');
+            });
+
+            closeChatbot.addEventListener('click', () => {
+                chatbotWindow.classList.remove('active');
+            });
+        }
+
+        improveResponsiveness() {
+            const resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    if (entry.contentBoxSize) {
+                        // Ajustar el diseño basado en el tamaño del contenido
+                        this.adjustLayout(entry.contentBoxSize[0].inlineSize);
+                    }
+                }
+            });
+
+            resizeObserver.observe(document.body);
+        }
+
+        adjustLayout(width) {
+            // Ajustar el diseño basado en el ancho de la pantalla
+            if (width < 640) {
+                // Diseño para móviles
+                document.body.classList.add('mobile-layout');
+                document.body.classList.remove('tablet-layout', 'desktop-layout');
+            } else if (width < 1024) {
+                // Diseño para tablets
+                document.body.classList.add('tablet-layout');
+                document.body.classList.remove('mobile-layout', 'desktop-layout');
+            } else {
+                // Diseño para escritorio
+                document.body.classList.add('desktop-layout');
+                document.body.classList.remove('mobile-layout', 'tablet-layout');
+            }
+        }
+
+        preloadImages() {
+            const imagesToPreload = [
+                ...heroImages,
+                ...properties.map(p => p.image),
+                ...properties.flatMap(p => p.gallery || [])
+            ];
+
+            imagesToPreload.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
+    }
+
+    // Initialize the website
+    const websiteManager = new WebsiteManager();
+});
+
+// Log a message to show the script has run
+console.log("Website manager initialized successfully!");
