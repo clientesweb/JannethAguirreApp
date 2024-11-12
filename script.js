@@ -220,27 +220,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         initializeComponents() {
-    this.createHeroSlider();
-    this.createQuienesSomosSlider();
-    this.createFeaturedProperties();
-    this.createPropertyCards();
-    this.createServiceCards();
-    this.createTestimonialsSlider();
-    this.createInstagramSlider();
-    this.createFAQs();
-    this.createInvestReasons();
-    this.handleViewDetails();
-    this.closeGalleryModal();
-    this.loadYouTubeVideos();
-    this.initContactForm();
-    // this.handleBackToTop(); // <- Comentar esta línea para desactivar el botón
-    this.handleScrollAnimation();
-    this.handleInstallApp();
-    this.handlePreloader();
-    this.initChatbot();
-    this.improveResponsiveness();
-    this.preloadImages();
-}
+            this.createHeroSlider();
+            this.createQuienesSomosSlider();
+            this.createFeaturedProperties();
+            this.createPropertyCards();
+            this.createServiceCards();
+            this.createTestimonialsSlider();
+            this.createInstagramSlider();
+            this.createFAQs();
+            this.createInvestReasons();
+            this.handleViewDetails();
+            this.closeGalleryModal();
+            this.loadYouTubeVideos();
+            this.initContactForm();
+            this.handleBackToTop();
+            this.handleScrollAnimation();
+            this.handleInstallApp();
+            this.handlePreloader();
+            this.initChatbot();
+            this.improveResponsiveness();
+            this.preloadImages();
+        }
 
         createSlider(selector, options) {
             $(selector).slick(options);
@@ -695,21 +695,20 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        function handleBackToTop() {
+        handleBackToTop() {
     const backToTopButton = document.createElement('button');
     backToTopButton.innerHTML = '&uarr;';
-    backToTopButton.className = 'fixed bottom-20 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl z-50 shadow-lg hover:bg-primary/90 transition-colors';
-    backToTopButton.style.display = 'none'; // Aseguramos que nunca sea visible
+    backToTopButton.className = 'fixed bottom-20 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl z-50 shadow-lg hover:bg-primary/90 transition-colors hidden-back-to-top';
+    
     document.body.appendChild(backToTopButton);
 
-    // Comentamos o eliminamos el código que muestra el botón al hacer scroll
-    // window.addEventListener('scroll', () => {
-    //     if (window.pageYOffset > 300) {
-    //         backToTopButton.style.display = 'flex';
-    //     } else {
-    //         backToTopButton.style.display = 'none';
-    //     }
-    // });
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.remove('hidden-back-to-top');
+        } else {
+            backToTopButton.classList.add('hidden-back-to-top');
+        }
+    });
 
     backToTopButton.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
