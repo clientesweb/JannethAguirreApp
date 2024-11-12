@@ -7,28 +7,22 @@
     --theme-color: #FF0000;
     --transition-speed: 0.3s;
 }
-
-/* Reset y estilos base */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
 html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    width: 100%;
-    scroll-behavior: smooth;
+    overflow-x: hidden;  /* Oculta el scroll horizontal */
+    width: 100%;          /* Asegura que el ancho no exceda el 100% */
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='%23f0f0f0'/%3E%3Cpath d='M30 30 L70 30 L50 10 Z' fill='%23e0e0e0'/%3E%3Crect x='40' y='30' width='20' height='20' fill='%23d0d0d0'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 100px 100px;
+    line-height: 1.6;
 }
 
 /* Contenedor principal */
@@ -37,9 +31,10 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
+    box-sizing: border-box;
 }
 
-/* Estilos para el AI chatbot */
+
 #ai-real-estate-expert-chatbot .chat-window {
     display: none;
     position: fixed;
@@ -52,6 +47,10 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     z-index: 1000;
     overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+#ai-real-estate-expert-chatbot .chat-window {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -71,8 +70,12 @@ body {
     }
 }
 
-.message, .suggested-question {
+.message {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.suggested-question {
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .suggested-question:hover {
@@ -99,15 +102,28 @@ body {
 }
 
 @keyframes dot-typing {
-    0% { box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e; }
-    16.667% { box-shadow: 9984px -10px 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e; }
-    33.333% { box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e; }
-    50% { box-shadow: 9984px 0 0 0 #8e8e8e, 9999px -10px 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e; }
-    66.667% { box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e; }
-    83.333% { box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px -10px 0 0 #8e8e8e; }
-    100% { box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e; }
+    0% {
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
+    }
+    16.667% {
+        box-shadow: 9984px -10px 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
+    }
+    33.333% {
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
+    }
+    50% {
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px -10px 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
+    }
+    66.667% {
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
+    }
+    83.333% {
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px -10px 0 0 #8e8e8e;
+    }
+    100% {
+        box-shadow: 9984px 0 0 0 #8e8e8e, 9999px 0 0 0 #8e8e8e, 10014px 0 0 0 #8e8e8e;
+    }
 }
-
 /* Estilos para el botón de WhatsApp */
 .whatsapp-button {
     position: fixed;
@@ -195,7 +211,11 @@ body {
     display: none;
 }
 
-/* Estilos para el slider principal */
+/* Estilos para los sliders */
+.slick-prev:before, .slick-next:before {
+    color: var(--primary-color);
+}
+
 .hero-slider {
     width: 100%;
     height: 100%;
@@ -221,7 +241,6 @@ body {
     color: white;
 }
 
-/* Estilos para los videos de YouTube */
 .youtube-video {
     flex: 0 0 100%;
     scroll-snap-align: start;
@@ -350,8 +369,8 @@ body {
 #back-to-top {
     display: none;
     position: fixed;
-    bottom: 1.25rem;
-    right: 1.875rem;
+    bottom: 1.25rem;  /* Asegúrate de que esté un poco por encima del menú inferior */
+    right: 1.875rem;  /* Alineado a la derecha */
     z-index: 99;
     border: none;
     outline: none;
@@ -367,7 +386,6 @@ body {
 #back-to-top:hover {
     opacity: 0.8;
 }
-
 /* Estilos para la sección "Quienes Somos" */
 #quienes-somos {
     background-color: #f8f9fa;
@@ -702,7 +720,6 @@ iframe {
 .gap-4 {
     gap: 1rem;
 }
-
 #powered-by {
     font-size: 12px;
     color: #666;
@@ -712,24 +729,22 @@ iframe {
 .powered-by-link {
     color: red;
     font-weight: bold;
-    text-decoration: none;
+    text-decoration: none; /* Sin subrayado por defecto */
 }
 
 .powered-by-link:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Subrayado cuando el cursor pasa por encima */
 }
-
 #mapa iframe {
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
 @media (max-width: 768px) {
     #mapa iframe {
-        height: 400px;
+        height: 400px; /* Ajuste de la altura en pantallas pequeñas */
     }
 }
-
 #testimonials {
     background-color: #f9fafb;
 }
@@ -755,7 +770,7 @@ iframe {
 }
 
 .testimonial-item .text-yellow-400 {
-    color: #fbbf24;
+    color: #fbbf24; /* Color de las estrellas */
 }
 
 .testimonial-item .text-gray-500 {

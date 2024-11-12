@@ -33,6 +33,9 @@
     <!-- Preload critical assets -->
     <link rel="preload" href="/img/Logo-Janneth-Aguirre-2020-ecuador.png" as="image">
     <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -52,82 +55,13 @@
             }
         }
     </script>
-    
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- Slick CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 
     <!-- Custom CSS -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: white;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            padding: 10px 0;
-            z-index: 1000;
-        }
-        .bottom-nav a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #808080;
-            text-decoration: none;
-            font-size: 0.8rem;
-        }
-        .bottom-nav a i {
-            font-size: 1.2rem;
-            margin-bottom: 4px;
-        }
-        #back-to-top {
-            display: none;
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            z-index: 99;
-            border: none;
-            outline: none;
-            background-color: #FF0000;
-            color: white;
-            cursor: pointer;
-            padding: 15px;
-            border-radius: 50%;
-            font-size: 18px;
-            transition: background-color 0.3s;
-        }
-        #back-to-top:hover {
-            background-color: #CC0000;
-        }
-        .gallery-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.5);
-            color: #000;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 24px;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-        }
-        .gallery-nav:hover {
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-    </style>
+    <link rel="stylesheet" href="/styles.css">
 
     <!-- Structured data for SEO -->
     <script type="application/ld+json">
@@ -207,8 +141,8 @@
         </section>
 
         <section id="quienes-somos" class="py-16 bg-gray-100 fade-in-section">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12 text-primary">¿Quiénes Somos?</h2>
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold mb-12 text-primary">¿Quiénes Somos?</h2>
                 <div class="flex flex-col lg:flex-row items-center justify-between mb-8">
                     <div class="lg:w-1/2 mb-8 lg:mb-0">
                         <img src="/img/Janneth-Aguirre-M-bienes-raices-ecuador-Licencia-Profesional-609-G-CRS-Realtor-NAR-ID-61242209-350x350.png" alt="Janneth Aguirre" width="350" height="350" class="rounded-lg shadow-lg mx-auto lg:mx-0 w-full max-w-md">
@@ -271,15 +205,15 @@
         </section>
 
         <div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-75 hidden justify-center items-center z-50">
-            <div class="modal-content bg-white rounded-lg p-4 max-w-4xl w-full shadow-lg">
-                <span id="close-modal" class="cursor-pointer text-gray-500 float-right text-2xl">&times;</span>
-                <h2 class="text-2xl font-bold mb-4">Galería de Imágenes</h2>
-                <div id="gallery-images" class="gallery-slider mb-4">
-                    <!-- Las imágenes de la galería se insertarán aquí mediante JavaScript -->
-                </div>
-                <div id="gallery-info" class="mt-4 text-gray-700"></div>
-            </div>
+    <div class="modal-content bg-white rounded-lg p-4 max-w-4xl w-full shadow-lg">
+        <span id="close-modal" class="cursor-pointer text-gray-500 float-right text-2xl">&times;</span>
+        <h2 class="text-2xl font-bold mb-4">Galería de Imágenes</h2>
+        <div id="gallery-images" class="gallery-slider mb-4">
+            <!-- Las imágenes de la galería se insertarán aquí mediante JavaScript -->
         </div>
+        <div id="gallery-info" class="mt-4 text-white"></div> <!-- Aquí se cambió text-gray-700 a text-white -->
+    </div>
+</div>
 
         <div id="full-image-container" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex justify-center items-center">
             <img id="full-image" src="" alt="Imagen completa" class="max-w-full max-h-full">
@@ -325,44 +259,44 @@
         </section>
 
         <section id="mapa" class="py-16 fade-in-section">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-primary">Nuestra Ubicación</h2>
-                <div class="w-full h-96 rounded-lg shadow-lg overflow-hidden">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.9168!2d-79.8890662!3d-2.1894128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTEnMjEuOSJTIDc5wrA1MycyMC42Ilc!5e0!3m2!1ses!2sec!4v1620000000000!5m2!1ses!2sec" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
-                </div>
-            </div>
-        </section>
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-8 text-primary">Nuestra Ubicación</h2>
+        <div class="w-full h-96 rounded-lg shadow-lg overflow-hidden">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.9168!2d-79.8890662!3d-2.1894128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTEnMjEuOSJTIDc5wrA1MycyMC42Ilc!5e0!3m2!1ses!2sec!4v1620000000000!5m2!1ses!2sec" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+</section>
 
         <section id="contacto" class="py-16 fade-in-section">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-primary">Contáctanos</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Formulario de contacto -->
-                    <form id="contact-form" class="space-y-4">
-                        <input type="text" name="name" placeholder="Nombre" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                        <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                        <textarea name="message" placeholder="Mensaje" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
-                        <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Enviar</button>
-                    </form>
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-8 text-primary">Contáctanos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Formulario de contacto -->
+            <form id="contact-form" class="space-y-4">
+                <input type="text" name="name" placeholder="Nombre" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <textarea name="message" placeholder="Mensaje" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Enviar</button>
+            </form>
 
-                    <!-- Información de contacto -->
-                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-semibold mb-4 text-secondary">Información de Contacto</h3>
-                        <p class="mb-2"><i class="fas fa-phone mr-2" aria-hidden="true"></i> +593 98 716 7782</p>
-                        <p class="mb-2"><i class="fas fa-envelope mr-2" aria-hidden="true"></i> <a href="mailto:info@jannethaguirre.com">info@jannethaguirre.com</a></p>
-                        <p class="mb-2"><i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i> Guayaquil, Ecuador</p>
-                        <!-- Agregar enlace con ícono de la página web -->
-                        <p class="mt-4"><i class="fas fa-globe mr-2" aria-hidden="true"></i> <a href="https://www.jannethaguirrebienesraices.com" target="_blank" class="text-primary hover:text-primary/80">Visita nuestra página web</a></p>
-                    </div>
-                </div>
+            <!-- Información de contacto -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-4 text-secondary">Información de Contacto</h3>
+                <p class="mb-2"><i class="fas fa-phone mr-2" aria-hidden="true"></i> +593 98 716 7782</p>
+                <p class="mb-2"><i class="fas fa-envelope mr-2" aria-hidden="true"></i> <a href="mailto:info@jannethaguirre.com">info@jannethaguirre.com</a></p>
+                <p class="mb-2"><i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i> Guayaquil, Ecuador</p>
+                <!-- Agregar enlace con ícono de la página web -->
+                <p class="mt-4"><i class="fas fa-globe mr-2" aria-hidden="true"></i> <a href="https://www.jannethaguirrebienesraices.com" target="_blank" class="text-primary hover:text-primary/80">Visita nuestra página web</a></p>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
     </main>
 
     <footer class="bg-white py-16 text-gray-800">
@@ -396,32 +330,32 @@
     </footer>
 
     <div id="ai-real-estate-expert-chatbot" class="fixed bottom-4 right-4 z-50">
-        <button id="open-chatbot" class="bg-white text-primary w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Chatbot" width="40" height="40" class="w-10 h-10">
-        </button>
-        <div id="chatbot-window" class="hidden fixed bottom-20 right-4 bg-white rounded-lg shadow-2xl p-4 w-80 max-w-full">
-            <div class="flex justify-between items-center mb-4">
-                <div class="flex items-center">
-                    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo" width="32" height="32" class="h-8 mr-2">
-                    <h3 class="text-lg font-bold">ARIA - Experta en bienes raíces</h3>
-                </div>
-                <button id="close-chatbot" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+    <button id="open-chatbot" class="bg-white text-primary w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Chatbot" width="40" height="40" class="w-10 h-10">
+    </button>
+    <div id="chatbot-window" class="hidden fixed bottom-20 right-4 bg-white rounded-lg shadow-2xl p-4 w-80 max-w-full">
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center">
+                <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo" width="32" height="32" class="h-8 mr-2">
+                <h3 class="text-lg font-bold">ARIA - Experta en bienes raíces</h3>
             </div>
-            <div id="chatbot-messages" class="h-60 overflow-y-auto mb-4 space-y-2"></div>
-            <div id="suggested-questions" class="mb-4 flex flex-wrap"></div>
-            <form id="chatbot-form" class="flex">
-                <input type="text" id="chatbot-input" class="flex-grow border rounded-l px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Escribe tu pregunta...">
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600 transition-colors duration-200">Enviar</button>
-            </form>
-            <div id="powered-by" class="text-center mt-4 text-sm text-gray-500">
-                Powered by <a href="https://www.dualitydomain.com" target="_blank" class="text-blue-500 hover:underline">Duality Domain</a>
-            </div>
+            <button id="close-chatbot" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div id="chatbot-messages" class="h-60 overflow-y-auto mb-4 space-y-2"></div>
+        <div id="suggested-questions" class="mb-4 flex flex-wrap"></div>
+        <form id="chatbot-form" class="flex">
+            <input type="text" id="chatbot-input" class="flex-grow border rounded-l px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Escribe tu pregunta...">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600 transition-colors duration-200">Enviar</button>
+        </form>
+        <div id="powered-by" class="text-center mt-4 text-sm text-gray-500">
+            Powered by <a href="https://www.dualitydomain.com" target="_blank" class="text-blue-500 hover:underline">Duality Domain</a>
         </div>
     </div>
+</div>
 
     <a href="https://wa.me/593987167782" class="fixed bottom-20 right-4 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp" aria-hidden="true"></i>
