@@ -617,42 +617,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
         async loadYouTubeVideos() {
             const youtubeContainer = document.getElementById('youtube-slider');
-            const playlistId = 'PLgGXSWYM2FpOa4Hy5YXDSPGNKdZVmhvXe';
-            const apiKey = 'AIzaSyBPsHN1pv1ZCeRipAJL0CY50VD08uC4Q_Y'; // Reemplaza con tu clave de API de YouTube
+            const channelId = 'UCiahlQJxCgPY-tEfjvkab8g';
+            const maxResults = 10;
+            const apiKey ='AIzaSyBf5wzygVChOBD-3pPb4BR2v5NA4uE9J5c';
 
             try {
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${playlistId}&key=${apiKey}`);
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${maxResults}`);
                 const data = await response.json();
 
                 data.items.forEach(item => {
-                    const videoId = item.snippet.resourceId.videoId;
-                    const videoTitle = item.snippet.title;
-                    const videoThumbnail = item.snippet.thumbnails.medium.url;
+                    const videoId = item.id.videoId;
+                    const title = item.snippet.title;
+                    const thumbnail = item.snippet.thumbnails.medium.url;
 
                     const videoElement = document.createElement('div');
                     videoElement.className = 'youtube-video';
                     videoElement.innerHTML = `
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" title="${videoTitle}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <img src="${thumbnail}" alt="${title}" class="w-full cursor-pointer">
+                        <h3 class="text-lg font-semibold mt-2">${title}</h3>
                     `;
-
+                    videoElement.addEventListener('click', () => {
+                        const iframe = document.createElement('iframe');
+                        iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                        iframe.width = '100%';
+                        iframe.height = '200';
+                        iframe.allowFullscreen = true;
+                        videoElement.innerHTML = '';
+                        videoElement.appendChild(iframe);
+                    });
                     youtubeContainer.appendChild(videoElement);
                 });
 
-                // Inicializar el slider de YouTube después de cargar los videos
                 this.createSlider('#youtube-slider', {
                     dots: true,
-                    infinite: true,
-                    speed: 500,
+                    infinite: false,
+                    speed: 300,
                     slidesToShow: 3,
-                    slidesToScroll: 1,
-                    autoplay: true,
-                    autoplaySpeed: 5000,
+                    slidesToScroll: 3,
                     responsive: [
                         {
                             breakpoint: 1024,
                             settings: {
                                 slidesToShow: 2,
-                                slidesToScroll: 1,
+                                slidesToScroll: 2
                             }
                         },
                         {
@@ -665,7 +672,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ]
                 });
             } catch (error) {
-                console.error('Error al cargar los videos de YouTube:', error);
+                console.error('Error fetching YouTube videos:', error);
             }
         }
 
