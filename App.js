@@ -8,10 +8,12 @@ class App {
 
     render() {
         const appContainer = document.getElementById('app');
+        if (!appContainer) return; // Asegurarse de que el contenedor exista
+
         appContainer.innerHTML = `
             <div id="preloader"></div>
             <header id="header"></header>
-            <main id="main-content">
+            <main>
                 <section id="hero"></section>
                 <section id="about-us"></section>
                 <section id="featured-properties"></section>
@@ -37,6 +39,7 @@ class App {
     initializeComponents() {
         // Usamos un try-catch para diagnosticar problemas de inicialización
         try {
+            // Instanciar los componentes uno por uno
             new Preloader();
             new Header();
             new Hero();
