@@ -502,161 +502,135 @@ document.addEventListener('DOMContentLoaded', function() {
 
             createAccordion(document.getElementById('invest-samborondon'), 'Invertir en Samborondón', investReasons.samborondon, 'https://flagcdn.com/w40/ec.png');
             createAccordion(document.getElementById('invest-usa'), 'Invertir en Estados Unidos', investReasons.usa, 'https://flagcdn.com/w40/us.png');
-            createAccordion(document.getElementById('invest-panama'), 'Invertir en Panamá', investReasons.panama, 'https://flagcdn.com/w40/pa.png');
+            createAccordion(document.getElementById('invest-panama'), 'Invertir en Panamá', investReasons.panama, 'https://flag.pk/flags/4x3/pa.png');
         }
 
         handleViewDetails() {
             document.addEventListener('click', (e) => {
-                if (e.target && e.target.classList.contains('view-details')) {
-                    const propertyId = parseInt(e.target.dataset.id);
-                    const property = properties.find(p => p.id === propertyId);
-                    this.showPropertyModal(property);
+                if (e.target.classList.contains('view-details')) {
+                    const propertyId = e.target.getAttribute('data-id');
+                    const property = properties.find(p => p.id == propertyId);
+                    if (property) {
+                        this.showPropertyDetails(property);
+                    }
                 }
             });
         }
 
-        showPropertyModal(property) {
+        showPropertyDetails(property) {
             const modal = document.getElementById('gallery-modal');
-            const galleryImages = document.getElementById('gallery-images');
-            const galleryInfo = document.getElementById('gallery-info');
-            
-            galleryImages.innerHTML = '';
-
-            const imagesToShow = property.gallery.slice(0, 5);
-            
-            imagesToShow.forEach((image, index) => {
-                const img = document.createElement('img');
-                img.src = image;
-                img.alt = `${property.title} - Imagen ${index + 1}`;
-                img.className = 'w-full h-64 object-cover cursor-pointer';
-                img.onclick = () => this.showFullImage(image, index, imagesToShow);
-                galleryImages.appendChild(img);
-            });
-            
-            if ($(galleryImages).hasClass('slick-initialized')) {
-                $(galleryImages).slick('unslick');
-            }
-            
-            $(galleryImages).slick({
-                dots: true,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000
-            });
-                
-            galleryInfo.innerHTML = `
-                <h3 class="text-xl font-bold mb-2">${property.title}</h3>
-                <p class="mb-2"><strong>Precio:</strong> ${property.price}</p>
-                <p class="mb-4">${property.description}</p>
-                <h4 class="font-bold mb-2">Características:</h4>
-                <ul class="list-disc pl-5 mb-4">
-                    ${property.features ? property.features.map(feature => `<li>${feature}</li>`).join('') : ''}
-                </ul>
-                <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Contactar Agente</button>
+            const modalContent = modal.querySelector('.modal-content');
+            modalContent.innerHTML = `
+                <span id="close-modal" class="cursor-pointer text-gray-500 float-right text-2xl">&times;</span>
+                <h2 class="text-2xl font-bold mb-4">${property.title}</h2>
+                <div id="gallery-images" class="mb-4">
+                    ${property.gallery.map(img => `<img src="${img}" alt="${property.title}" class="w-full h-64 object-cover mb-2">`).join('')}
+                </div>
+                <div id="gallery-info">
+                    <p class="mb-2"><strong>Precio:</strong> ${property.price}</p>
+                    <p class="mb-2"><strong>Tipo:</strong> ${property.type}</p>
+                    <p class="mb-4">${property.description}</p>
+                    <h3 class="text-xl font-bold mb-2">Características:</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        ${property.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
             `;
-            
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+
+            const closeModal = modal.querySelector('#close-modal');
+            closeModal.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            });
+
+            this.initializeGallerySlider();
+        }
+
+        initializeGallerySlider() {
+            const galleryImages = document.getElementById('gallery-images');
+            const images = galleryImages.querySelectorAll('img');
+            let currentIndex = 0;
+
+            const showImage = (index) => {
+                images.forEach((img, i) => {
+                    if (i === index) {
+                        img.style.display = 'block';
+                    } else {
+                        img.style.display = 'none';
+                    }
+                });
+            };
+
+            const nextImage = () => {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            };
+
+            const prevImage = () => {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            };
+
+            const nextButton = document.createElement('button');
+            nextButton.innerHTML = '&gt;';
+            nextButton.className = 'gallery-nav right-4';
+            nextButton.addEventListener('click', nextImage);
+
+            const prevButton = document.createElement('button');
+            prevButton.innerHTML = '&lt;';
+            prevButton.className = 'gallery-nav left-4';
+            prevButton.addEventListener('click', prevImage);
+
+            galleryImages.appendChild(nextButton);
+            galleryImages.appendChild(prevButton);
+
+            showImage(currentIndex);
         }
 
         closeGalleryModal() {
             const modal = document.getElementById('gallery-modal');
             const closeButton = document.getElementById('close-modal');
-            
             closeButton.addEventListener('click', () => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
             });
-            
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                }
-            });
         }
 
-        async loadYouTubeVideos() {
-            const youtubeContainer = document.getElementById('youtube-slider');
-            const channelId = 'UCiahlQJxCgPY-tEfjvkab8g';
-            const maxResults = 10;
-            const apiKey ='AIzaSyBf5wzygVChOBD-3pPb4BR2v5NA4uE9J5c';
+        loadYouTubeVideos() {
+            const youtubeSlider = document.getElementById('youtube-slider');
+            const videoIds = ['VIDEO_ID_1', 'VIDEO_ID_2', 'VIDEO_ID_3']; // Reemplaza con los IDs reales de tus videos
+            videoIds.forEach(videoId => {
+                const videoContainer = document.createElement('div');
+                videoContainer.className = 'youtube-video';
+                videoContainer.innerHTML = `
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                `;
+                youtubeSlider.appendChild(videoContainer);
+            });
 
-            try {
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${maxResults}`);
-                const data = await response.json();
-
-                data.items.forEach(item => {
-                    const videoId = item.id.videoId;
-                    const title = item.snippet.title;
-                    const thumbnail = item.snippet.thumbnails.medium.url;
-
-                    const videoElement = document.createElement('div');
-                    videoElement.className = 'youtube-video';
-                    videoElement.innerHTML = `
-                        <img src="${thumbnail}" alt="${title}" class="w-full cursor-pointer">
-                        <h3 class="text-lg font-semibold mt-2">${title}</h3>
-                    `;
-                    videoElement.addEventListener('click', () => {
-                        const iframe = document.createElement('iframe');
-                        iframe.src = `https://www.youtube.com/embed/${videoId}`;
-                        iframe.width = '100%';
-                        iframe.height = '200';
-                        iframe.allowFullscreen = true;
-                        videoElement.innerHTML = '';
-                        videoElement.appendChild(iframe);
-                    });
-                    youtubeContainer.appendChild(videoElement);
-                });
-
-                this.createSlider('#youtube-slider', {
-                    dots: true,
-                    infinite: false,
-                    speed: 300,
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    responsive: [
-                        {
-                            breakpoint: 1024,
-                            settings: {
-                                slidesToShow: 2,
-                                slidesToScroll: 2
-                            }
-                        },
-                        {
-                            breakpoint: 600,
-                            settings: {
-                                slidesToShow: 1,
-                                slidesToScroll: 1
-                            }
-                        }
-                    ]
-                });
-            } catch (error) {
-                console.error('Error fetching YouTube videos:', error);
-            }
+            this.createSlider('#youtube-slider', {
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            });
         }
 
         initContactForm() {
             const form = document.getElementById('contact-form');
-            if (form) {
-                form.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const { name, email, message } = form.elements;
-                    const whatsappMessage = `Nombre: ${name.value}%0AEmail: ${email.value}%0AMensaje: ${message.value}`;
-                    const whatsappUrl = `https://wa.me/593987167782?text=${whatsappMessage}`;
-                    window.open(whatsappUrl, '_blank');
-                    form.reset();
-                });
-            }
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Aquí iría la lógica para enviar el formulario
+                alert('Gracias por contactarnos. Te responderemos pronto.');
+                form.reset();
+            });
         }
 
         handleBackToTop() {
             const backToTopButton = document.getElementById('back-to-top');
-            
             window.addEventListener('scroll', () => {
                 if (window.pageYOffset > 100) {
                     backToTopButton.style.display = 'block';
@@ -664,41 +638,37 @@ document.addEventListener('DOMContentLoaded', function() {
                     backToTopButton.style.display = 'none';
                 }
             });
-            
+
             backToTopButton.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({top: 0, behavior: 'smooth'});
             });
         }
 
         handleScrollAnimation() {
-            const fadeElems = document.querySelectorAll('.fade-in-section');
-            
-            const fadeIn = (elem) => {
-                const distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
-                if (distInView < 0) {
-                    elem.classList.add('is-visible');
-                } else {
-                    elem.classList.remove('is-visible');
-                }
-            };
-            
-            fadeElems.forEach(elem => fadeIn(elem));
-            
-            window.addEventListener('scroll', () => {
-                fadeElems.forEach(elem => fadeIn(elem));
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            });
+
+            fadeElements.forEach(element => {
+                observer.observe(element);
             });
         }
 
         handleInstallApp() {
             let deferredPrompt;
             const installButton = document.getElementById('install-app');
-            
+
             window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 deferredPrompt = e;
                 installButton.style.display = 'block';
             });
-            
+
             installButton.addEventListener('click', () => {
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
@@ -713,67 +683,93 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         handlePreloader() {
-            const preloader = document.getElementById('preloader');
-            const mainContent = document.getElementById('main-content');
-
             window.addEventListener('load', () => {
-                setTimeout(() => {
-                    preloader.style.opacity = '0';
-                    preloader.style.visibility = 'hidden';
-                    mainContent.classList.remove('hidden');
-                }, 1000);
+                const preloader = document.getElementById('preloader');
+                preloader.style.display = 'none';
             });
         }
 
         initChatbot() {
-    const chatbotButton = document.getElementById('open-chatbot');
-    const chatbotWindow = document.getElementById('chatbot-window');
-    const closeChatbot = document.getElementById('close-chatbot');
+            const chatbotButton = document.getElementById('open-chatbot');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const closeChatbotButton = document.getElementById('close-chatbot');
+            const chatbotForm = document.getElementById('chatbot-form');
+            const chatbotInput = document.getElementById('chatbot-input');
+            const chatbotMessages = document.getElementById('chatbot-messages');
 
-    // Cuando el botón de abrir el chatbot es presionado
-    chatbotButton.addEventListener('click', () => {
-        // Alternar la visibilidad del chatbot (usando la clase 'active' para mostrarla)
-        chatbotWindow.classList.toggle('active');
-    });
+            chatbotButton.addEventListener('click', () => {
+                chatbotWindow.classList.toggle('hidden');
+            });
 
-    // Cuando el botón de cerrar el chatbot es presionado
-    closeChatbot.addEventListener('click', () => {
-        // Añadir la clase 'hidden' para ocultar el chatbot
-        chatbotWindow.classList.remove('active');
-    });
-}
+            closeChatbotButton.addEventListener('click', () => {
+                chatbotWindow.classList.add('hidden');
+            });
 
-        preloadImages() {
-            const allImages = [
-                ...heroImages,
-                ...properties.map(p => p.image),
-                ...properties.flatMap(p => p.gallery || []),
-                ...instagramPosts.map(p => p.image)
-            ];
-
-            allImages.forEach(image => {
-                const img = new Image();
-                img.src = image;
+            chatbotForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const message = chatbotInput.value.trim();
+                if (message) {
+                    this.addChatMessage('user', message);
+                    chatbotInput.value = '';
+                    // Aquí iría la lógica para procesar la pregunta y obtener una respuesta
+                    setTimeout(() => {
+                        this.addChatMessage('bot', 'Gracias por tu pregunta. Un agente se pondrá en contacto contigo pronto.');
+                    }, 1000);
+                }
             });
         }
 
+        addChatMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.className = `mb-2 ${sender === 'user' ? 'text-right' : 'text-left'}`;
+            messageElement.innerHTML = `
+                <span class="inline-block bg-${sender === 'user' ? 'blue' : 'gray'}-200 rounded px-2 py-1">
+                    ${message}
+                </span>
+            `;
+            chatbotMessages.appendChild(messageElement);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
         improveResponsiveness() {
-            const resizeObserver = new ResizeObserver(entries => {
-                for (let entry of entries) {
-                    if (entry.contentBoxSize) {
-                        if (entry.contentBoxSize[0].inlineSize < 768) {
-                            document.body.classList.add('mobile');
-                        } else {
-                            document.body.classList.remove('mobile');
-                        }
+            const bottomNav = document.querySelector('.bottom-nav');
+            const header = document.querySelector('header');
+
+            window.addEventListener('scroll', () => {
+                if (window.innerWidth <= 768) {
+                    if (window.pageYOffset > header.offsetHeight) {
+                        bottomNav.style.display = 'flex';
+                    } else {
+                        bottomNav.style.display = 'none';
                     }
                 }
             });
 
-            resizeObserver.observe(document.body);
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    bottomNav.style.display = 'none';
+                } else {
+                    if (window.pageYOffset > header.offsetHeight) {
+                        bottomNav.style.display = 'flex';
+                    }
+                }
+            });
+        }
+
+        preloadImages() {
+            const imagesToPreload = [
+                ...heroImages,
+                ...properties.map(p => p.image),
+                ...instagramPosts.map(p => p.image)
+            ];
+
+            imagesToPreload.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
         }
     }
 
-    // Initialize the website
+    // Inicializar el gestor del sitio web
     const websiteManager = new WebsiteManager();
 });
