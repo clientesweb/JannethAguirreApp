@@ -305,6 +305,13 @@ body {
     background-color: transparent;
     border-radius: 0.625rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: white; /* Asegura que el texto en la modal sea blanco */
+}
+
+/* Aseguramos que los textos dentro del modal sean blancos */
+#gallery-modal .modal-content h3,
+#gallery-modal .modal-content p,
+#gallery-modal .modal-content ul {
     color: white;
 }
 
