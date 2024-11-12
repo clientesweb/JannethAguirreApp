@@ -117,12 +117,15 @@
 
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" width="48" height="48" class="h-12">
+            <nav class="flex justify-between items-center py-4">
+                <a href="#inicio" class="flex items-center">
+                    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" width="48" height="48" class="h-12">
+                    <span class="ml-2 text-xl font-semibold text-primary">Janneth Aguirre</span>
+                </a>
                 <button id="install-app" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">
                     <i class="fas fa-download mr-2" aria-hidden="true"></i> Instalar App
                 </button>
-            </div>
+            </nav>
         </div>
     </header>
 
@@ -131,7 +134,7 @@
             <div class="hero-slider absolute inset-0">
                 <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
             </div>
-            <div class="absolute inset-0 flex items-center justify-center z-10">
+            <div class="absolute inset-0 flex items-center justify-center z-10 bg-black bg-opacity-50">
                 <div class="text-center text-white p-4">
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg">Encontrá Tu Hogar Especial</h1>
                     <p class="text-xl md:text-2xl mb-6 drop-shadow-lg">Lo mejor de Bienes Raices en Ecuador y en el Mundo.</p>
@@ -141,8 +144,8 @@
         </section>
 
         <section id="quienes-somos" class="py-16 bg-gray-100 fade-in-section">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl font-bold mb-12 text-primary">¿Quiénes Somos?</h2>
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-primary text-center">¿Quiénes Somos?</h2>
                 <div class="flex flex-col lg:flex-row items-center justify-between mb-8">
                     <div class="lg:w-1/2 mb-8 lg:mb-0">
                         <img src="/img/Janneth-Aguirre-M-bienes-raices-ecuador-Licencia-Profesional-609-G-CRS-Realtor-NAR-ID-61242209-350x350.png" alt="Janneth Aguirre" width="350" height="350" class="rounded-lg shadow-lg mx-auto lg:mx-0 w-full max-w-md">
@@ -203,23 +206,6 @@
                 <div id="invest-panama" class="mb-8"></div>
             </div>
         </section>
-
-        <div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-75 hidden justify-center items-center z-50">
-            <div class="modal-content bg-white rounded-lg p-4 max-w-4xl w-full shadow-lg">
-                <span id="close-modal" class="cursor-pointer text-gray-500 float-right text-2xl">&times;</span>
-                <h2 class="text-2xl font-bold mb-4">Galería de Imágenes</h2>
-                <div id="gallery-images" class="gallery-slider mb-4">
-                    <!-- Las imágenes de la galería se insertarán aquí mediante JavaScript -->
-                </div>
-                <div id="gallery-info" class="mt-4 text-gray-700"></div>
-            </div>
-        </div>
-
-        <div id="full-image-container" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex justify-center items-center">
-            <img id="full-image" src="" alt="Imagen completa" class="max-w-full max-h-full">
-            <div id="prev-image" class="gallery-nav left-4">&lt;</div>
-            <div id="next-image" class="gallery-nav right-4">&gt;</div>
-        </div>
 
         <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
@@ -289,7 +275,7 @@
                     <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
                         <h3 class="text-xl font-semibold mb-4 text-secondary">Información de Contacto</h3>
                         <p class="mb-2"><i class="fas fa-phone mr-2" aria-hidden="true"></i> +593 98 716 7782</p>
-                        <p class="mb-2"><i class="fas fa-envelope mr-2" aria-hidden="true"></i> <a href="mailto:info@jannethaguirre.com">info@jannethaguirre.com</a></p>
+                        <p class="mb-2"><i class="fas fa-envelope mr-2" aria-hidden="true"></i> <a href="/cdn-cgi/l/email-protection#630a0d050c2309020d0d06170b0204160a1111064d000c0e"><span class="__cf_email__" data-cfemail="157c7b737a557f747b7b70617d7472607c6767703b767a78">[email&#160;protected]</span></a></p>
                         <p class="mb-2"><i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i> Guayaquil, Ecuador</p>
                         <!-- Agregar enlace con ícono de la página web -->
                         <p class="mt-4"><i class="fas fa-globe mr-2" aria-hidden="true"></i> <a href="https://www.jannethaguirrebienesraices.com" target="_blank" class="text-primary hover:text-primary/80">Visita nuestra página web</a></p>
@@ -327,7 +313,7 @@
                 <div class="fade-in-section">
                     <h3 class="text-xl font-bold mb-4 text-primary">Contacto</h3>
                     <p class="mb-2 text-gray-400"><i class="fas fa-phone mr-2" aria-hidden="true"></i> +593 98 716 7782</p>
-                    <p class="mb-2 text-gray-400"><i class="fas fa-envelope mr-2" aria-hidden="true"></i> <a href="mailto:info@jannethaguirre.com" class="hover:text-primary transition-colors">info@jannethaguirre.com</a></p>
+                    <p class="mb-2 text-gray-400"><i class="fas fa-envelope mr-2" aria-hidden="true"></i> <a href="/cdn-cgi/l/email-protection#d8b1b6beb798b2b9b6b6bdacb0b9bfadb1aaaabdf6bbb7b5" class="hover:text-primary transition-colors"><span class="__cf_email__" data-cfemail="f49d9a929bb49e959a9a91809c9593819d868691da979b99">[email&#160;protected]</span></a></p>
                     <p class="text-gray-400"><i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i> Guayaquil, Ecuador</p>
                 </div>
                 <div class="fade-in-section">
@@ -405,7 +391,7 @@
     </nav>
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Slick JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="chatbot.js"></script>
