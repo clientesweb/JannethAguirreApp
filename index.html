@@ -115,11 +115,6 @@
         </div>
     </div>
 
-    <!-- Top Banner -->
-    <div id="top-banner" class="bg-primary text-white py-2 px-4 text-center">
-        <p id="banner-message"></p>
-    </div>
-
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4">
             <nav class="flex justify-between items-center py-4">
@@ -134,8 +129,8 @@
         </div>
     </header>
 
-    <main id="main-content" class="snap-y snap-mandatory h-screen overflow-y-scroll">
-        <section id="inicio" class="relative h-screen overflow-hidden fade-in-section snap-start">
+    <main id="main-content">
+        <section id="inicio" class="relative h-[calc(100vh-80px)] overflow-hidden fade-in-section">
             <div class="hero-slider absolute inset-0">
                 <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
             </div>
@@ -148,14 +143,14 @@
             </div>
         </section>
 
-        <section id="quienes-somos" class="py-16 bg-gray-100 fade-in-section snap-start">
+        <section id="quienes-somos" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold mb-12 text-primary text-center">¿Quiénes Somos?</h2>
-                <div class="flex flex-col lg:flex-row items-center justify-center mb-8">
-                    <div class="lg:w-1/2 mb-8 lg:mb-0 text-center">
+                <div class="flex flex-col lg:flex-row items-center justify-between mb-8">
+                    <div class="lg:w-1/2 mb-8 lg:mb-0">
                         <img src="/img/Janneth-Aguirre-M-bienes-raices-ecuador-Licencia-Profesional-609-G-CRS-Realtor-NAR-ID-61242209-350x350.png" alt="Janneth Aguirre" width="350" height="350" class="rounded-lg shadow-lg mx-auto lg:mx-0 w-full max-w-md">
                     </div>
-                    <div class="lg:w-1/2 lg:pl-12 text-center lg:text-left">
+                    <div class="lg:w-1/2 lg:pl-12">
                         <h3 class="text-2xl font-semibold mb-4 text-secondary">Janneth Aguirre</h3>
                         <p class="text-lg mb-6">
                              Es una representante inmobiliaria líder en su ramo desde 2009, consolidada como una reconocida Corredora de Bienes Raíces dentro del mercado ecuatoriano gracias a la satisfacción lograda entre sus clientes por los diversos servicios que presta.
@@ -174,23 +169,16 @@
             </div>
         </section>
 
-        <section id="propiedades" class="py-16 fade-in-section snap-start">
+        <section id="propiedades" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Propiedades Destacadas</h2>
-                <div class="properties-filter mb-8">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="venta">Venta</button>
-                    <button class="filter-btn" data-filter="alquiler">Alquiler</button>
-                </div>
-                <div class="properties-slider overflow-x-auto">
-                    <div id="properties-grid" class="flex space-x-4 pb-4">
-                        <!-- Las tarjetas de propiedades se insertarán aquí mediante JavaScript -->
-                    </div>
+                <div class="propiedades-slider overflow-x-auto whitespace-nowrap">
+                    <!-- Las propiedades destacadas se insertarán aquí mediante JavaScript -->
                 </div>
             </div>
         </section>
 
-        <section id="servicios" class="bg-secondary py-16 fade-in-section snap-start">
+        <section id="servicios" class="bg-secondary py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-white">Nuestros Servicios</h2>
                 <div id="service-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -199,7 +187,7 @@
             </div>
         </section>
 
-        <section id="tienda" class="py-16 fade-in-section snap-start">
+        <section id="tienda" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Nuestras Propiedades</h2>
                 <div class="properties-slider overflow-x-auto">
@@ -210,7 +198,7 @@
             </div>
         </section>
 
-        <section id="invest-reasons" class="py-16 bg-gray-100 fade-in-section snap-start">
+        <section id="invest-reasons" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">¿Por qué invertir?</h2>
                 <div id="invest-samborondon" class="mb-8"></div>
@@ -219,7 +207,7 @@
             </div>
         </section>
 
-        <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section snap-start">
+        <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Nuestro Canal de YouTube</h2>
                 <div id="youtube-slider" class="youtube-slider">
@@ -228,7 +216,7 @@
             </div>
         </section>
         
-        <section id="testimonials" class="py-16 fade-in-section snap-start">
+        <section id="testimonials" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Lo que dicen nuestros clientes</h2>
                 <div id="testimonials-slider" class="testimonials-slider">
@@ -237,7 +225,7 @@
             </div>
         </section>
 
-        <section id="instagram" class="py-16 bg-gray-100 fade-in-section snap-start">
+        <section id="instagram" class="py-16 bg-gray-100 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Síguenos en Instagram</h2>
                 <div id="instagram-slider" class="instagram-slider">
@@ -246,7 +234,7 @@
             </div>
         </section>
 
-        <section id="faqs" class="py-16 fade-in-section snap-start">
+        <section id="faqs" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Preguntas Frecuentes</h2>
                 
@@ -256,7 +244,7 @@
             </div>
         </section>
 
-        <section id="mapa" class="py-16 fade-in-section snap-start">
+        <section id="mapa" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Nuestra Ubicación</h2>
                 <div class="w-full h-96 rounded-lg shadow-lg overflow-hidden">
@@ -271,7 +259,7 @@
             </div>
         </section>
 
-        <section id="contacto" class="py-16 fade-in-section snap-start">
+        <section id="contacto" class="py-16 fade-in-section">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-8 text-primary">Contáctanos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -296,7 +284,7 @@
             </div>
         </section>
 
-        <section id="descargar-app" class="mb-12 bg-gradient-to-r from-primary to-primary/80 text-white rounded-xl shadow-lg p-8 fade-in snap-start">
+        <section id="descargar-app" class="mb-12 bg-gradient-to-r from-primary to-primary/80 text-white rounded-xl shadow-lg p-8 fade-in">
             <h2 class="text-4xl font-serif font-bold text-center mb-6">Encontrá Tu Hogar Especial</h2>
             <div class="flex flex-col md:flex-row items-center justify-center gap-8">
                 <div class="text-center md:text-left">
@@ -375,413 +363,9 @@
         </div>
     </div>
 
-    <div class="fixed bottom-20 left-4 flex flex-col items-center space-y-4 z-50">
-        <a href="https://wa.me/593987167782" class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl" aria-label="Contactar por WhatsApp">
-            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        </a>
-        <button id="open-chatbot" class="bg-white text-primary w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Chatbot" width="40" height="40" class="w-10 h-10">
-        </button>
-    </div>
-
-    <button id="back-to-top" class="Entendido. Voy a implementar los cambios adicionales que has solicitado y te proporcionaré los archivos completos con todas las modificaciones. 
-
-
-
-Aquí están los archivos completos con todas las modificaciones solicitadas:
-
-1. HTML (index.html):
-
-```html
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janneth Aguirre Bienes Raíces - Expertos en Propiedades en Ecuador</title>
-    <meta name="description" content="Janneth Aguirre Bienes Raíces: Expertos en propiedades en Ecuador. Ofrecemos las mejores casas, departamentos y locales comerciales en venta y alquiler en Guayaquil, Quito y más ciudades.">
-    <meta name="keywords" content="bienes raíces, propiedades, venta de casas, alquiler de apartamentos, Ecuador, Guayaquil, Quito, Janneth Aguirre">
-    <meta name="author" content="Janneth Aguirre">
-    <link rel="canonical" href="https://www.jannethaguirre.com/">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#FF0000">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.jannethaguirre.com/">
-    <meta property="og:title" content="Janneth Aguirre Bienes Raíces - Expertos en Propiedades en Ecuador">
-    <meta property="og:description" content="Encuentra tu hogar ideal con Janneth Aguirre Bienes Raíces. Ofrecemos las mejores propiedades en venta y alquiler en Ecuador.">
-    <meta property="og:image" content="https://www.jannethaguirre.com/og-image.jpg">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://www.jannethaguirre.com/">
-    <meta name="twitter:title" content="Janneth Aguirre Bienes Raíces - Expertos en Propiedades en Ecuador">
-    <meta name="twitter:description" content="Encuentra tu hogar ideal con Janneth Aguirre Bienes Raíces. Ofrecemos las mejores propiedades en venta y alquiler en Ecuador.">
-    <meta name="twitter:image" content="https://www.jannethaguirre.com/twitter-image.jpg">
-
-    <!-- Preload critical assets -->
-    <link rel="preload" href="/img/Logo-Janneth-Aguirre-2020-ecuador.png" as="image">
-    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#FF0000',
-                        secondary: '#808080',
-                        background: '#FFFFFF',
-                    },
-                    fontFamily: {
-                        'poppins': ['Poppins', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-
-    <!-- Slick CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/styles.css">
-
-    <!-- Structured data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "RealEstateAgent",
-      "name": "Janneth Aguirre Bienes Raíces",
-      "image": "https://www.jannethaguirre.com/img/Logo-Janneth-Aguirre-2020-ecuador.png",
-      "@id": "https://www.jannethaguirre.com/",
-      "url": "https://www.jannethaguirre.com/",
-      "telephone": "+593987167782",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Dirección de la oficina",
-        "addressLocality": "Guayaquil",
-        "addressRegion": "Guayas",
-        "postalCode": "Código Postal",
-        "addressCountry": "EC"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": -2.1894128,
-        "longitude": -79.8890662
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "sameAs": [
-        "https://www.facebook.com/JannethAguirreBienesRaices",
-        "https://www.instagram.com/jannethaguirrebienesraices",
-        "https://www.linkedin.com/in/jannethaguirre"
-      ]
-    }
-    </script>
-</head>
-<body class="font-poppins bg-background text-gray-800">
-    <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
-        <div class="relative">
-            <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre" width="128" height="128" class="w-32 h-32">
-            <div class="absolute inset-0 border-4 border-primary rounded-full animate-pulse"></div>
-        </div>
-    </div>
-
-    <!-- Top Banner -->
-    <div id="top-banner" class="bg-primary text-white py-2 px-4 text-center">
-        <p id="banner-message"></p>
-    </div>
-
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4">
-            <nav class="flex justify-between items-center py-4">
-                <a href="#inicio" class="flex items-center">
-                    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" width="48" height="48" class="h-12">
-                    <span class="ml-2 text-xl font-semibold text-primary">Janneth Aguirre</span>
-                </a>
-                <button id="install-app" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">
-                    <i class="fas fa-download mr-2" aria-hidden="true"></i> Instalar App
-                </button>
-            </nav>
-        </div>
-    </header>
-
-    <main id="main-content" class="snap-y snap-mandatory h-screen overflow-y-scroll">
-        <section id="inicio" class="relative h-screen overflow-hidden fade-in-section snap-start">
-            <div class="hero-slider absolute inset-0">
-                <!-- Las imágenes del slider se insertarán aquí mediante JavaScript -->
-            </div>
-            <div class="absolute inset-0 flex items-center justify-center z-10 bg-black bg-opacity-50">
-                <div class="text-center text-white p-4">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg">Encontrá Tu Hogar Especial</h1>
-                    <p class="text-xl md:text-2xl mb-6 drop-shadow-lg">Lo mejor de Bienes Raices en Ecuador y en el Mundo.</p>
-                    <a href="#propiedades" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Ver Propiedades</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="quienes-somos" class="py-16 bg-gray-100 fade-in-section snap-start">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold mb-12 text-primary text-center">¿Quiénes Somos?</h2>
-                <div class="flex flex-col lg:flex-row items-center justify-center mb-8">
-                    <div class="lg:w-1/2 mb-8 lg:mb-0 text-center">
-                        <img src="/img/Janneth-Aguirre-M-bienes-raices-ecuador-Licencia-Profesional-609-G-CRS-Realtor-NAR-ID-61242209-350x350.png" alt="Janneth Aguirre" width="350" height="350" class="rounded-lg shadow-lg mx-auto lg:mx-0 w-full max-w-md">
-                    </div>
-                    <div class="lg:w-1/2 lg:pl-12 text-center lg:text-left">
-                        <h3 class="text-2xl font-semibold mb-4 text-secondary">Janneth Aguirre</h3>
-                        <p class="text-lg mb-6">
-                             Es una representante inmobiliaria líder en su ramo desde 2009, consolidada como una reconocida Corredora de Bienes Raíces dentro del mercado ecuatoriano gracias a la satisfacción lograda entre sus clientes por los diversos servicios que presta.
-                        </p>
-                        <p class="text-lg mb-6">
-                            Nuestro compromiso es brindar un servicio personalizado y de alta calidad, asegurando que cada cliente encuentre la propiedad perfecta o logre la mejor inversión posible.
-                        </p>
-                    </div>
-                </div>
-                <div class="quienes-somos-slider">
-                    <div><img src="/img/fiesta.png" alt="Equipo de trabajo" width="400" height="256" class="w-full h-64 object-cover rounded-lg"></div>
-                    <div><img src="/img/evento.png" alt="Oficina" width="400" height="256" class="w-full h-64 object-cover rounded-lg"></div>
-                    <div><img src="/img/firma.png" alt="Casa en venta" width="400" height="256" class="w-full h-64 object-cover rounded-lg"></div>
-                    <div><img src="/img/jannet.png" alt="Apartamento de lujo" width="400" height="256" class="w-full h-64 object-cover rounded-lg"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="propiedades" class="py-16 fade-in-section snap-start">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-primary">Propiedades Destacadas</h2>
-                <div class="properties-filter mb-8">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="venta">Venta</button>
-                    <button class="filter-btn" data-filter="alquiler">Alquiler</button>
-                </div>
-                <div class="properties-slider overflow-x-auto">
-                    <div id="properties-grid" class="flex space-x-4 pb-4">
-                        <!-- Las tarjetas de propiedades se insertarán aquí mediante JavaScript -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="servicios" class="bg-secondary py-16 fade-in-section snap-start">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-white">Nuestros Servicios</h2>
-                <div id="service-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Service cards will be inserted here by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <section id="tienda" class="py-16 fade-in-section snap-start">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-primary">Nuestras Propiedades</h2>
-                <div class="properties-slider overflow-x-auto">
-                    <div id="properties-grid" class="flex space-x-4 pb-4">
-                        <!-- Las tarjetas de propiedades se insertarán aquí mediante JavaScript -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="invest-reasons" class="py-16 bg-gray-100 fade-in-section snap-start">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-primary">¿Por qué invertir?</h2>
-                <div id="invest-samborondon" class="mb-8"></div>
-                <div id="invest-usa" class="mb-8"></div>
-                <div id="invest-panama" class="mb-8"></div>
-            </div>
-        </section>
-
-        <section id="youtube-playlist" class="py-16 bg-gray-100 fade-in-section snap-start">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-primary">Nuestro Canal de YouTube</h2>
-                <div id="youtube-slider" class="youtube-slider">
-                    <!-- Los videos de YouTube se insertarán aquí mediante JavaScript  -->
-                </div>
-            </div>
-        </section>
-        
-        <section id="testimonials" class="py-16 fade-in-section snap-start">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-primary">Lo que dicen nuestros clientes</h2>
-                <div id="testimonials-slider" class="testimonials-slider">
-                    <!-- Testimonials will be inserted here by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <section id="instagram" class="py-16 bg-gray-100 fade-in-section snap-start">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-primary">Síguenos en Instagram</h2>
-                <div id="instagram-slider" class="instagram-slider">
-                    <!-- Instagram posts will be inserted here by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <section id="faqs" class="py-16 fade-in-section snap-start">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-primary">Preguntas Frecuentes</h2>
-                
-                <div id="faq-container">
-                    <!-- FAQ items will be inserted here by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <section id="mapa" class="py-16 fade-in-section snap-start">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-primary">Nuestra Ubicación</h2>
-                <div class="w-full h-96 rounded-lg shadow-lg overflow-hidden">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.9168!2d-79.8890662!3d-2.1894128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTEnMjEuOSJTIDc5wrA1MycyMC42Ilc!5e0!3m2!1ses!2sec!4v1620000000000!5m2!1ses!2sec" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
-                </div>
-            </div>
-        </section>
-
-        <section id="contacto" class="py-16 fade-in-section snap-start">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8 text-primary">Contáctanos</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Formulario de contacto -->
-                    <form id="contact-form" class="space-y-4">
-                        <input type="text" name="name" placeholder="Nombre" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                        <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                        <textarea name="message" placeholder="Mensaje" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
-                        <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">Enviar</button>
-                    </form>
-
-                    <!-- Información de contacto -->
-                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-semibold mb-4 text-secondary">Información de Contacto</h3>
-                        <p class="mb-2"><i class="fas fa-phone mr-2" aria-hidden="true"></i> +593 98 716 7782</p>
-                        <p class="mb-2"><i class="fas fa-envelope mr-2" aria-hidden="true"></i> <a href="/cdn-cgi/l/email-protection#630a0d050c2309020d0d06170b0204160a1111064d000c0e"><span class="__cf_email__" data-cfemail="157c7b737a557f747b7b70617d7472607c6767703b767a78">[email&#160;protected]</span></a></p>
-                        <p class="mb-2"><i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i> Guayaquil, Ecuador</p>
-                        <!-- Agregar enlace con ícono de la página web -->
-                        <p class="mt-4"><i class="fas fa-globe mr-2" aria-hidden="true"></i> <a href="https://www.jannethaguirrebienesraices.com" target="_blank" class="text-primary hover:text-primary/80">Visita nuestra página web</a></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="descargar-app" class="mb-12 bg-gradient-to-r from-primary to-primary/80 text-white rounded-xl shadow-lg p-8 fade-in snap-start">
-            <h2 class="text-4xl font-serif font-bold text-center mb-6">Encontrá Tu Hogar Especial</h2>
-            <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-                <div class="text-center md:text-left">
-                    <p class="mb-4">Descarga nuestra aplicación móvil y descubre las mejores propiedades en Ecuador, Panamá y Estados Unidos.</p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="https://play.google.com/store/apps/details?id=com.jannethaguirre.app" class="bg-black text-white px-6 py-2 rounded-lg flex items-center justify-center hover:bg-gray-800 transition-colors duration-300">
-                            <i class="fab fa-android mr-2" aria-hidden="true"></i> Android
-                        </a>
-                        <a href="https://apps.apple.com/app/id[YOUR_APP_ID]" class="bg-black text-white px-6 py-2 rounded-lg flex items-center justify-center hover:bg-gray-800 transition-colors duration-300">
-                            <i class="fab fa-apple mr-2" aria-hidden="true"></i> iOS
-                        </a>
-                    </div>
-                </div>
-                <img src="images/janneth-aguirre-app.png" alt="Janneth Aguirre Bienes Raíces App" class="w-full max-w-xs rounded-xl shadow-lg">
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-gray-900 text-white py-16">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="fade-in-section">
-                    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo Janneth Aguirre Bienes Raíces" width="64" height="64" class="h-16 mb-4">
-                    <p class="text-gray-400">Expertos en bienes raíces con años de experiencia en el mercado ecuatoriano.</p>
-                </div>
-                <div class="fade-in-section">
-                    <h3 class="text-xl font-bold mb-4 text-primary">Contacto</h3>
-                    <p class="mb-2 text-gray-400"><i class="fas fa-phone mr-2" aria-hidden="true"></i> +593 98 716 7782</p>
-                    <p class="mb-2 text-gray-400"><i class="fas fa-envelope mr-2" aria-hidden="true"></i> <a href="/cdn-cgi/l/email-protection#d8b1b6beb798b2b9b6b6bdacb0b9bfadb1aaaabdf6bbb7b5" class="hover:text-primary transition-colors"><span class="__cf_email__" data-cfemail="f49d9a929bb49e959a9a91809c9593819d868691da979b99">[email&#160;protected]</span></a></p>
-                    <p class="text-gray-400"><i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i> Guayaquil, Ecuador</p>
-                </div>
-                <div class="fade-in-section">
-                    <h3 class="text-xl font-bold mb-4 text-primary">Síguenos</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="https://www.instagram.com/janneth_aguirrem?igsh=MXNxejU5eGV0MjJzcg==" aria-label="Instagram" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="LinkedIn" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="TikTok" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="X" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
-                <p class="text-gray-400 fade-in-section">&copy; 2024 Janneth Aguirre Bienes Raíces. Todos los derechos reservados.</p>
-                <p class="text-gray-400 mt-2 fade-in-section">Powered by <a href="https://dualitydomain.github.io/Dualitydomain/" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-primary/80">Duality Domain</a></p>
-            </div>
-        </div>
-    </footer>
-
-    <div id="ai-real-estate-expert-chatbot" class="fixed bottom-4 right-4 z-50">
-        <button id="open-chatbot" class="bg-white text-primary w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Chatbot" width="40" height="40" class="w-10 h-10">
-        </button>
-        <div id="chatbot-window" class="hidden fixed bottom-20 right-4 bg-white rounded-lg shadow-2xl p-4 w-80 max-w-full">
-            <div class="flex justify-between items-center mb-4">
-                <div class="flex items-center">
-                    <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Logo" width="32" height="32" class="h-8 mr-2">
-                    <h3 class="text-lg font-bold">ARIA - Experta en bienes raíces</h3>
-                </div>
-                <button id="close-chatbot" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            <div id="chatbot-messages" class="h-60 overflow-y-auto mb-4 space-y-2"></div>
-            <div id="suggested-questions" class="mb-4 flex flex-wrap"></div>
-            <form id="chatbot-form" class="flex">
-                <input type="text" id="chatbot-input" class="flex-grow border rounded-l px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Escribe tu pregunta...">
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600 transition-colors duration-200">Enviar</button>
-            </form>
-            <div id="powered-by" class="text-center mt-4 text-sm text-gray-500">
-                Powered by <a href="https://www.dualitydomain.com" target="_blank" class="text-blue-500 hover:underline">Duality Domain</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="fixed bottom-20 left-4 flex flex-col items-center space-y-4 z-50">
-        <a href="https://wa.me/593987167782" class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl" aria-label="Contactar por WhatsApp">
-            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        </a>
-        <button id="open-chatbot" class="bg-white text-primary w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <img src="/img/Logo-Janneth-Aguirre-2020-ecuador.png" alt="Chatbot" width="40" height="40" class="w-10 h-10">
-        </button>
-    </div>
-
-    <button id="back-to-top" class="fixed bottom-20 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl z-50 shadow-lg hover:bg-primary/90 transition-colors duration-300 opacity-0 invisible">
-        <i class="fas fa-chevron-up"></i>
-    </button>
+    <a href="https://wa.me/593987167782" class="fixed bottom-20 right-4 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
 
     <nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-white shadow-lg py-2 px-4 flex justify-around items-center z-40">
         <a href="#inicio" class="text-gray-600 hover:text-primary transition-colors">
