@@ -233,6 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.closeGalleryModal();
             this.loadYouTubeVideos();
             this.initContactForm();
+            this.handleBackToTop();
             this.handleScrollAnimation();
             this.handleInstallApp();
             this.handlePreloader();
@@ -784,18 +785,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             });
-
-    // Ajustar el tamaño y posición según el tamaño de la ventana
-    if (windowWidth <= 600) { // Dispositivos móviles
-        chatbotButton.style.bottom = '80px'; // Mover botón un poco más arriba
-        chatbotWindow.style.width = '250px'; // Reducir tamaño del chatbot
-        chatbotWindow.style.height = '350px'; // Ajustar la altura
-    } else { // Escritorio
-        chatbotButton.style.bottom = '140px';
-        chatbotWindow.style.width = '300px';
-        chatbotWindow.style.height = '400px';
-    }
-}
 
             resizeObserver.observe(document.body);
         }
