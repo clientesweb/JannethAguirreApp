@@ -1,213 +1,221 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Datos de ejemplo (en una aplicación real, estos datos vendrían de una API o base de datos)
+    const heroImages = [
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=900&q=80",
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=900&q=80",
+        "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=900&q=80"
+    ];
+
+    const properties = [
+        { 
+            id: 1, 
+            title: "DEPARTAMENTOS EN VENTA", 
+            price: "NUEVO SAMBORONDON", 
+            image: "img/nuevosamborombon.png", 
+            type: "venta",
+            description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
+            features: [
+                "2 habitaciones con armarios empotrados",
+                "2 baños modernos con acabados de alta calidad",
+                "Cocina abierta con muebles a medida",
+                "Sala y comedor acogedores",
+                "Áreas sociales: piscina, gimnasio, salón de eventos",
+                "Seguridad 24/7 con conserjería y vigilancia"
+            ],
+            gallery: [
+                "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600566752547-33cce5195f64?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600566752421-3ec9c3ec7dfb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600566752734-2a0cd53b9f58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+            ]
+        },
+        { 
+            id: 2, 
+            title: "DEPARTAMENTOS EN VENTA", 
+            price: "ISLA MOCOLI", 
+            image: "img/isla.png", 
+            type: "venta",
+            description: "Ubicados en una de las zonas más prestigiosas y exclusiva  de la ciudad, estos departamentos ofrecen una combinación perfecta de estilo, comodidad y privacidad.Proyecto exclusivo de departamentos de 3 habitaciones en Isla Mocoli.",
+            features: [
+                "3 habitaciones amplias y bien iluminadas",
+                "3,5  baños completos",
+                "Vistas impresionantes a la  Isla y de la ciudad",
+                "Área de lavado y secado",
+                "Seguridad 24/7, Gimnasio, Piscina",
+                "Estacionamiento privado y de visitas"
+            ],
+            gallery: [
+                "https://images.unsplash.com/photo-1600607687644-c7f34e88598f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607687668-0b7b4bf7a00a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607687710-040798eea3fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+            ]
+        },
+        { 
+            id: 3, 
+            title: "LOCALES COMERCIALES", 
+            price: "Consultar", 
+            image: "img/localescomerciales.png", 
+            type: "alquiler",
+            description: "Oportunidad única de invertir en locales comerciales en Nuevo Samborondon  Estos locales ofrecen una combinación perfecta de ubicación, visibilidad y potencial de crecimiento.Nuestros locales comerciales están diseñados para satisfacer las necesidades de los empresarios más exigentes. Ofrecemos:",
+            features: [
+                "Locales de diferentes tamaños y diseños para adaptarse a sus necesidades específicas.",
+                "Ventanas y fachadas amplias para maximizar la visibilidad.",
+                "Acceso fácil para clientes y empleados.",
+                "Instalaciones modernas y bien mantenidas."
+            ],
+            gallery: [
+                "https://images.unsplash.com/photo-1600607687954-e85aa7b46ca3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607687968-d7a205ad5e7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607687985-a6ad18e3c1d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+            ]
+        },
+        { 
+            id: 4, 
+            title: "CASAS PERSONALIZADAS", 
+            price: "Consultar", 
+            image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
+            type: "venta",
+            description: "Nuestra empresa cuenta con un equipo de expertos en construcción y diseño que trabajan juntos para crear casas personalizadas que se adaptan a las necesidades y gustos de cada cliente.Nuestro objetivo es hacer que su sueño de tener una casa perfecta se convierta en realidad.",
+            features: [
+                "Diseño personalizado: trabajamos con usted para crear un diseño que se adapte a su estilo de vida y preferencias.",
+                "Materiales de alta calidad: utilizamos materiales de alta calidad para garantizar la durabilidad y eficiencia energética de su casa.",
+                "Construcción rápida y eficiente: nuestra experiencia y tecnología nos permiten construir casas de manera rápida y eficiente sin comprometer la calidad.",
+                "Atención al detalle: nos enfocamos en los detalles para asegurarnos de que su casa sea perfecta.",
+                "No pierda la oportunidad de tener la casa de sus sueños. ¡Contáctenos hoy mismo para obtener más información y programar una reunión!"
+            ],
+            gallery: [
+                "https://images.unsplash.com/photo-1600607688960-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607688951-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607688942-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+            ]
+        },
+        { 
+            id: 5, 
+            title: "DEPARTAMENTOS EN CUENCA", 
+            price: "Consultar", 
+            image: "img/departamentoscuenca.png", 
+            type: "venta",
+            description: "Oportunidad única de invertir en un departamento en Cuenca, ideal para Airbnb.",
+            features: [
+                "2  Y 3 habitaciones amplias y bien iluminadas",
+                "2  Y 3  baños completos",
+                "Salón-comedor con cocina integrada",
+                "con vistas impresionantes a la ciudad",
+                "Áreas sociales: piscina, gimnasio, salón de eventos",
+                "Seguridad 24/7 con conserjería y vigilancia"
+            ],
+            gallery: [
+                "https://images.unsplash.com/photo-1600607688921-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607688912-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
+                "https://images.unsplash.com/photo-1600607688903-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+            ]
+        }
+    ];
+
+    const services = [
+        { title: "Asesoría Legal", icon: "fas fa-gavel", description: "Asistencia legal completa en transacciones inmobiliarias." },
+        { title: "Avalúo de Propiedades", icon: "fas fa-chart-line", description: "Valoración profesional y precisa de bienes inmuebles." },
+        { title: "Asesoría Dentro y Fuera de Ecuador", icon: "fas fa-globe-americas", description: "Orientación experta en inversiones nacionales e internacionales." },
+        { title: "Gestión de Proyectos", icon: "fas fa-tasks", description: "Administración integral de proyectos inmobiliarios." },
+        { title: "Análisis de Mercado", icon: "fas fa-search-dollar", description: "Estudios detallados del mercado inmobiliario actual." },
+        { title: "Gestión de Ventas", icon: "fas fa-handshake", description: "Estrategias efectivas para la venta de propiedades." },
+        { title: "Venta de Proyectos en Planos", icon: "fas fa-drafting-compass", description: "Comercialización de proyectos inmobiliarios en fase de planificación." },
+        { title: "Gestión de Alquileres", icon: "fas fa-home", description: "Administración completa de propiedades en alquiler." }
+    ];
+
+    const testimonials = [
+    {
+        name: "Juan Pérez",
+        text: "Excelente servicio, encontré mi casa ideal gracias a Janneth Aguirre. Desde el primer momento me ofrecieron opciones que se ajustaban a mis necesidades, y todo el proceso fue transparente y fácil de seguir. El equipo se encargó de cada detalle, desde la negociación hasta la firma. Estoy muy contento con mi compra y la atención que recibí. ¡Recomiendo totalmente sus servicios!",
+        rating: 5, // Calificación de 1 a 5 estrellas
+        date: "Enero 2024"
+    },
+    {
+        name: "María González",
+        text: "Profesionalismo y dedicación en cada paso del proceso de compra. Me acompañaron durante todo el proceso, desde la búsqueda hasta la firma del contrato, explicándome todo con mucha claridad. Además, me brindaron asesoría sobre la mejor opción de financiamiento, lo cual hizo todo mucho más fácil. Estoy muy agradecida por la atención y la calidad de servicio.",
+        rating: 5, // Calificación de 1 a 5 estrellas
+        date: "Marzo 2024"
+    },
+    {
+        name: "Carlos Rodríguez",
+        text: "La mejor experiencia en venta de propiedades. Altamente recomendado. Desde el primer contacto hasta la venta final, todo fue rápido y eficiente. El equipo de Janneth Aguirre se encargó de gestionar cada detalle, manteniéndome informado en todo momento. Me dieron una excelente estrategia de venta y pude lograr una transacción rápida y beneficiosa.",
+        rating: 5, // Calificación de 1 a 5 estrellas
+        date: "Febrero 2024"
+    }
+];
+
+    const instagramPosts = [
+        { image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" },
+        { image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" },
+        { image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" },
+        { image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" }
+    ];
+
+    const faqs = [
+        { 
+            question: "¿Cuál es el proceso para comprar una propiedad?", 
+            answer: "El proceso generalmente incluye: búsqueda de la propiedad, negociación del precio, firma de un contrato de compraventa, obtención de financiamiento si es necesario, y cierre de la transacción. Nuestro equipo le guiará en cada paso." 
+        },
+        { 
+            question: "¿Qué documentos necesito para vender mi propiedad?", 
+            answer: "Generalmente necesitará: título de propiedad, certificado de gravámenes, pago de impuestos al día, y cédula de identidad. Podemos ayudarle a reunir toda la documentación necesaria." 
+        },
+        { 
+            question: "¿Cómo determino el precio de venta de mi propiedad?", 
+            answer: "El precio se determina considerando factores como la ubicación, tamaño, condición de la propiedad, y precios de propiedades similares en la zona. Ofrecemos servicios de tasación profesional para ayudarle a establecer un precio justo." 
+        },
+        { 
+            question: "¿Cuánto tiempo toma vender una propiedad?", 
+            answer: "El tiempo de venta puede variar dependiendo de factores como la ubicación, el precio, y las condiciones del mercado. En promedio, puede tomar entre 3 a 6 meses, pero algunas propiedades se venden más rápido." 
+        },
+        { 
+            question: "¿Ofrecen servicios de administración de propiedades?", 
+            answer: "Sí, ofrecemos servicios completos de administración de propiedades, incluyendo búsqueda de inquilinos, cobro de alquileres, mantenimiento y reparaciones." 
+        }
+    ];
+
+    const investReasons = {
+        samborondon: [
+            "Samborondón, el corazón económico de la región, donde la inversión y el progreso se unen.",
+            "Descubre Samborondón, el destino más próspero para invertir en Ecuador, con crecimiento sostenible y estabilidad.",
+            "Samborondón, ciudad innovadora y emprendedora, impulsa tus negocios con infraestructura y tecnología de vanguardia.",
+            "Invierte en Samborondón y aprovecha su ubicación estratégica",
+            "Samborondón, líder en desarrollo urbano y calidad de vida, ofrece oportunidades ilimitadas para compradores e inversores.",
+            "La economía en crecimiento y la inversión constante convierten a Samborondón en un polo de atracción para empresarios.",
+            "Samborondón, ciudad de oportunidades, donde la inversión en bienes raíces, comercio y servicios florece.",
+            "El clima y la geografía de Samborondón ofrecen un entorno ideal para vivir, trabajar e invertir.",
+            "Samborondón, un lugar donde  la innovación y la tecnología se unen para impulsar el crecimiento económico.",
+            "Invierte en Samborondón y sé parte de una comunidad próspera y en constante  crecimiento, con un futuro brillante."
+        ],
+        usa: [
+            "Estados Unidos ofrece un mercado inmobiliario estable y diversificado para inversores internacionales.",
+            "Benefíciate de un sistema legal robusto que protege los derechos de propiedad de los inversores extranjeros.",
+            "Accede a oportunidades de inversión en ciudades de rápido crecimiento y mercados emergentes en todo el país.",
+            "Aprovecha las tasas de interés históricamente bajas para financiar tus inversiones inmobiliarias.",
+            "Diversifica tu portafolio con propiedades en una de las economías más grandes y estables del mundo.",
+            "Explora opciones de inversión en sectores de alto rendimiento como tecnología, salud y educación.",
+            "Benefíciate de la apreciación a largo plazo del mercado inmobiliario estadounidense.",
+            "Accede a un mercado de alquileres robusto, especialmente en áreas metropolitanas y destinos turísticos.",
+            "Aprovecha las oportunidades en el mercado de propiedades comerciales y de uso mixto en crecimiento.",
+            "Invierte en un país con una infraestructura de clase mundial y una economía impulsada por la innovación."
+        ],
+        panama: [
+            "Panamá, el corazón de América, donde la inversión y el progreso se unen en un solo ritmo.",
+            "Descubre el potencial de Panamá, el hub de inversión más dinámico de América Latina.",
+            "Panamá, donde la estrategia y la innovación se encuentran en el centro de la inversión internacional.",
+            "Invierte en Panamá y aprovecha su posición geográfica única, conectando América del Norte y del Sur.",
+            "Panamá, el destino perfecto para inversores que buscan crecimiento y estabilidad en América.",
+            "El Canal de Panamá, un símbolo de progreso y conexión global, impulse su inversión en este hub clave.",
+            "Panamá, donde la inversión en infraestructura y tecnología impulsa el crecimiento económico sostenible.",
+            "Unirse a la comunidad de inversores en Panamá, donde la innovación y el emprendimiento florecen.",
+            "Panamá, el lugar donde la inversión y la diversificación se unen para crear oportunidades ilimitadas.",
+            "Panamá, el futuro de la inversión en América, donde la visión y la acción se unen para crear un mañana próspero."
+        ]
+    };
+
     class WebsiteManager {
         constructor() {
-            this.heroImages = [
-                "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=900&q=80",
-                "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=900&q=80",
-                "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&h=900&q=80"
-            ];
-            this.properties = [
-                { 
-                    id: 1, 
-                    title: "DEPARTAMENTOS EN VENTA", 
-                    price: "NUEVO SAMBORONDON", 
-                    image: "img/nuevosamborombon.png", 
-                    type: "venta",
-                    description: "¡Oportunidad única! Hermoso departamento en la exclusiva zona de Nuevo Samborondón. Este espacioso hogar cuenta con 2 habitaciones, 2 baños modernos, cocina abierta, sala y comedor acogedores. Áreas sociales incluyen piscina, gimnasio y salón de eventos. Seguridad 24/7 con conserjería y vigilancia.",
-                    features: [
-                        "2 habitaciones con armarios empotrados",
-                        "2 baños modernos con acabados de alta calidad",
-                        "Cocina abierta con muebles a medida",
-                        "Sala y comedor acogedores",
-                        "Áreas sociales: piscina, gimnasio, salón de eventos",
-                        "Seguridad 24/7 con conserjería y vigilancia"
-                    ],
-                    gallery: [
-                        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600566752547-33cce5195f64?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600566752421-3ec9c3ec7dfb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600566752734-2a0cd53b9f58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
-                    ]
-                },
-                { 
-                    id: 2, 
-                    title: "DEPARTAMENTOS EN VENTA", 
-                    price: "ISLA MOCOLI", 
-                    image: "img/isla.png", 
-                    type: "venta",
-                    description: "Ubicados en una de las zonas más prestigiosas y exclusiva  de la ciudad, estos departamentos ofrecen una combinación perfecta de estilo, comodidad y privacidad.Proyecto exclusivo de departamentos de 3 habitaciones en Isla Mocoli.",
-                    features: [
-                        "3 habitaciones amplias y bien iluminadas",
-                        "3,5  baños completos",
-                        "Vistas impresionantes a la  Isla y de la ciudad",
-                        "Área de lavado y secado",
-                        "Seguridad 24/7, Gimnasio, Piscina",
-                        "Estacionamiento privado y de visitas"
-                    ],
-                    gallery: [
-                        "https://images.unsplash.com/photo-1600607687644-c7f34e88598f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600607687668-0b7b4bf7a00a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600607687710-040798eea3fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
-                    ]
-                },
-                { 
-                    id: 3, 
-                    title: "LOCALES COMERCIALES", 
-                    price: "Consultar", 
-                    image: "img/localescomerciales.png", 
-                    type: "alquiler",
-                    description: "Oportunidad única de invertir en locales comerciales en Nuevo Samborondon  Estos locales ofrecen una combinación perfecta de ubicación, visibilidad y potencial de crecimiento.Nuestros locales comerciales están diseñados para satisfacer las necesidades de los empresarios más exigentes. Ofrecemos:",
-                    features: [
-                        "Locales de diferentes tamaños y diseños para adaptarse a sus necesidades específicas.",
-                        "Ventanas y fachadas amplias para maximizar la visibilidad.",
-                        "Acceso fácil para clientes y empleados.",
-                        "Instalaciones modernas y bien mantenidas."
-                    ],
-                    gallery: [
-                        "https://images.unsplash.com/photo-1600607687954-e85aa7b46ca3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600607687968-d7a205ad5e7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600607687985-a6ad18e3c1d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
-                    ]
-                },
-                { 
-                    id: 4, 
-                    title: "CASAS PERSONALIZADAS", 
-                    price: "Consultar", 
-                    image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80", 
-                    type: "venta",
-                    description: "Nuestra empresa cuenta con un equipo de expertos en construcción y diseño que trabajan juntos para crear casas personalizadas que se adaptan a las necesidades y gustos de cada cliente.Nuestro objetivo es hacer que su sueño de tener una casa perfecta se convierta en realidad.",
-                    features: [
-                        "Diseño personalizado: trabajamos con usted para crear un diseño que se adapte a su estilo de vida y preferencias.",
-                        "Materiales de alta calidad: utilizamos materiales de alta calidad para garantizar la durabilidad y eficiencia energética de su casa.",
-                        "Construcción rápida y eficiente: nuestra experiencia y tecnología nos permiten construir casas de manera rápida y eficiente sin comprometer la calidad.",
-                        "Atención al detalle: nos enfocamos en los detalles para asegurarnos de que su casa sea perfecta.",
-                        "No pierda la oportunidad de tener la casa de sus sueños. ¡Contáctenos hoy mismo para obtener más información y programar una reunión!"
-                    ],
-                    gallery: [
-                        "https://images.unsplash.com/photo-1600607688960-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600607688951-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600607688942-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
-                    ]
-                },
-                { 
-                    id: 5, 
-                    title: "DEPARTAMENTOS EN CUENCA", 
-                    price: "Consultar", 
-                    image: "img/departamentoscuenca.png", 
-                    type: "venta",
-                    description: "Oportunidad única de invertir en un departamento en Cuenca, ideal para Airbnb.",
-                    features: [
-                        "2  Y 3 habitaciones amplias y bien iluminadas",
-                        "2  Y 3  baños completos",
-                        "Salón-comedor con cocina integrada",
-                        "con vistas impresionantes a la ciudad",
-                        "Áreas sociales: piscina, gimnasio, salón de eventos",
-                        "Seguridad 24/7 con conserjería y vigilancia"
-                    ],
-                    gallery: [
-                        "https://images.unsplash.com/photo-1600607688921-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600607688912-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80",
-                        "https://images.unsplash.com/photo-1600607688903-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
-                    ]
-                }
-            ];
-            this.services = [
-                { title: "Asesoría Legal", icon: "fas fa-gavel", description: "Asistencia legal completa en transacciones inmobiliarias." },
-                { title: "Avalúo de Propiedades", icon: "fas fa-chart-line", description: "Valoración profesional y precisa de bienes inmuebles." },
-                { title: "Asesoría Dentro y Fuera de Ecuador", icon: "fas fa-globe-americas", description: "Orientación experta en inversiones nacionales e internacionales." },
-                { title: "Gestión de Proyectos", icon: "fas fa-tasks", description: "Administración integral de proyectos inmobiliarios." },
-                { title: "Análisis de Mercado", icon: "fas fa-search-dollar", description: "Estudios detallados del mercado inmobiliario actual." },
-                { title: "Gestión de Ventas", icon: "fas fa-handshake", description: "Estrategias efectivas para la venta de propiedades." },
-                { title: "Venta de Proyectos en Planos", icon: "fas fa-drafting-compass", description: "Comercialización de proyectos inmobiliarios en fase de planificación." },
-                { title: "Gestión de Alquileres", icon: "fas fa-home", description: "Administración completa de propiedades en alquiler." }
-            ];
-            this.testimonials = [
-                {
-                    name: "Juan Pérez",
-                    text: "Excelente servicio, encontré mi casa ideal gracias a Janneth Aguirre. Desde el primer momento me ofrecieron opciones que se ajustaban a mis necesidades, y todo el proceso fue transparente y fácil de seguir. El equipo se encargó de cada detalle, desde la negociación hasta la firma. Estoy muy contento con mi compra y la atención que recibí. ¡Recomiendo totalmente sus servicios!",
-                    rating: 5,
-                    date: "Enero 2024"
-                },
-                {
-                    name: "María González",
-                    text: "Profesionalismo y dedicación en cada paso del proceso de compra. Me acompañaron durante todo el proceso, desde la búsqueda hasta la firma del contrato, explicándome todo con mucha claridad. Además, me brindaron asesoría sobre la mejor opción de financiamiento, lo cual hizo todo mucho más fácil. Estoy muy agradecida por la atención y la calidad de servicio.",
-                    rating: 5,
-                    date: "Marzo 2024"
-                },
-                {
-                    name: "Carlos Rodríguez",
-                    text: "La mejor experiencia en venta de propiedades. Altamente recomendado. Desde el primer contacto hasta la venta final, todo fue rápido y eficiente. El equipo de Janneth Aguirre se encargó de gestionar cada detalle, manteniéndome informado en todo momento. Me dieron una excelente estrategia de venta y pude lograr una transacción rápida y beneficiosa.",
-                    rating: 5,
-                    date: "Febrero 2024"
-                }
-            ];
-            this.instagramPosts = [
-                { image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" },
-                { image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" },
-                { image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" },
-                { image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80", link: "#" }
-            ];
-            this.faqs = [
-                { 
-                    question: "¿Cuál es el proceso para comprar una propiedad?", 
-                    answer: "El proceso generalmente incluye: búsqueda de la propiedad, negociación del precio, firma de un contrato de compraventa, obtención de financiamiento si es necesario, y cierre de la transacción. Nuestro equipo le guiará en cada paso." 
-                },
-                { 
-                    question: "¿Qué documentos necesito para vender mi propiedad?", 
-                    answer: "Generalmente necesitará: título de propiedad, certificado de gravámenes, pago de impuestos al día, y cédula de identidad. Podemos ayudarle a reunir toda la documentación necesaria." 
-                },
-                { 
-                    question: "¿Cómo determino el precio de venta de mi propiedad?", 
-                    answer: "El precio se determina considerando factores como la ubicación, tamaño, condición de la propiedad, y precios de propiedades similares en la zona. Ofrecemos servicios de tasación profesional para ayudarle a establecer un precio justo." 
-                },
-                { 
-                    question: "¿Cuánto tiempo toma vender una propiedad?", 
-                    answer: "El tiempo de venta puede variar dependiendo de factores como la ubicación, el precio, y las condiciones del mercado. En promedio, puede tomar entre 3 a 6 meses, pero algunas propiedades se venden más rápido." 
-                },
-                { 
-                    question: "¿Ofrecen servicios de administración de propiedades?", 
-                    answer: "Sí, ofrecemos servicios completos de administración de propiedades, incluyendo búsqueda de inquilinos, cobro de alquileres, mantenimiento y reparaciones." 
-                }
-            ];
-            this.investReasons = {
-                samborondon: [
-                    "Samborondón, el corazón económico de la región, donde la inversión y el progreso se unen.",
-                    "Descubre Samborondón, el destino más próspero para invertir en Ecuador, con crecimiento sostenible y estabilidad.",
-                    "Samborondón, ciudad innovadora y emprendedora, impulsa tus negocios con infraestructura y tecnología de vanguardia.",
-                    "Invierte en Samborondón y aprovecha su ubicación estratégica",
-                    "Samborondón, líder en desarrollo urbano y calidad de vida, ofrece oportunidades ilimitadas para compradores e inversores.",
-                    "La economía en crecimiento y la inversión constante convierten a Samborondón en un polo de atracción para empresarios.",
-                    "Samborondón, ciudad de oportunidades, donde la inversión en bienes raíces, comercio y servicios florece.",
-                    "El clima y la geografía de Samborondón ofrecen un entorno ideal para vivir, trabajar e invertir.",
-                    "Samborondón, un lugar donde  la innovación y la tecnología se unen para impulsar el crecimiento económico.",
-                    "Invierte en Samborondón y sé parte de una comunidad próspera y en constante  crecimiento, con un futuro brillante."
-                ],
-                usa: [
-                    "Estados Unidos ofrece un mercado inmobiliario estable y diversificado para inversores internacionales.",
-                    "Benefíciate de un sistema legal robusto que protege los derechos de propiedad de los inversores extranjeros.",
-                    "Accede a oportunidades de inversión en ciudades de rápido crecimiento y mercados emergentes en todo el país.",
-                    "Aprovecha las tasas de interés históricamente bajas para financiar tus inversiones inmobiliarias.",
-                    "Diversifica tu portafolio con propiedades en una de las economías más grandes y estables del mundo.",
-                    "Explora opciones de inversión en sectores de alto rendimiento como tecnología, salud y educación.",
-                    "Benefíciate de la apreciación a largo plazo del mercado inmobiliario estadounidense.",
-                    "Accede a un mercado de alquileres robusto, especialmente en áreas metropolitanas y destinos turísticos.",
-                    "Aprovecha las oportunidades en el mercado de propiedades comerciales y de uso mixto en crecimiento.",
-                    "Invierte en un país con una infraestructura de clase mundial y una economía impulsada por la innovación."
-                ],
-                panama: [
-                    "Panamá, el corazón de América, donde la inversión y el progreso se unen en un solo ritmo.",
-                    "Descubre el potencial de Panamá, el hub de inversión más dinámico de América Latina.",
-                    "Panamá, donde la estrategia y la innovación se encuentran en el centro de la inversión internacional.",
-                    "Invierte en Panamá y aprovecha su posición geográfica única, conectando América del Norte y del Sur.",
-                    "Panamá, el destino perfecto para inversores que buscan crecimiento y estabilidad en América.",
-                    "El Canal de Panamá, un símbolo de progreso y conexión global, impulse su inversión en este hub clave.",
-                    "Panamá, donde la inversión en infraestructura y tecnología impulsa el crecimiento económico sostenible.",
-                    "Unirse a la comunidad de inversores en Panamá, donde la innovación y el emprendimiento florecen.",
-                    "Panamá, el lugar donde la inversión y la diversificación se unen para crear oportunidades ilimitadas.",
-                    "Panamá, el futuro de la inversión en América, donde la visión y la acción se unen para crear un mañana próspero."
-                ]
-            };
             this.initializeComponents();
         }
 
@@ -240,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         createHeroSlider() {
             const heroSlider = document.querySelector('.hero-slider');
-            this.heroImages.forEach(image => {
+            heroImages.forEach(image => {
                 const slide = document.createElement('div');
                 slide.style.backgroundImage = `url(${image})`;
                 slide.style.backgroundSize = 'cover';
@@ -289,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         createFeaturedProperties() {
             const propertiesSlider = document.querySelector('.propiedades-slider');
-            this.properties.forEach(property => {
+            properties.forEach(property => {
                 const propertyCard = this.createPropertyCard(property);
                 propertiesSlider.appendChild(propertyCard);
             });
@@ -311,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         createPropertyCards() {
             const propertiesGrid = document.getElementById('properties-grid');
-            this.properties.forEach(property => {
+            properties.forEach(property => {
                 const propertyCard = this.createPropertyCard(property);
                 propertiesGrid.appendChild(propertyCard);
             });
@@ -357,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         createServiceCards() {
             const serviceGrid = document.getElementById('service-grid');
-            this.services.forEach(service => {
+            services.forEach(service => {
                 const serviceCard = document.createElement('div');
                 serviceCard.className = 'service-card';
                 serviceCard.innerHTML = `
@@ -371,7 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         createTestimonialsSlider() {
             const testimonialsSlider = document.getElementById('testimonials-slider');
-            this.testimonials.forEach(testimonial => {
+            testimonials.forEach(testimonial => {
                 const slide = document.createElement('div');
                 slide.className = 'bg-white p-6 rounded-lg shadow-md';
                 slide.innerHTML = `
@@ -394,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         createInstagramSlider() {
             const instagramSlider = document.getElementById('instagram-slider');
-            this.instagramPosts.forEach(post => {
+            instagramPosts.forEach(post => {
                 const slide = document.createElement('div');
                 slide.className = 'px-2';
                 slide.innerHTML = `
@@ -441,7 +449,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         createFAQs() {
             const faqContainer = document.getElementById('faq-container');
-            this.faqs.forEach((faq, index) => {
+            faqs.forEach((faq, index) => {
                 const faqItem = document.createElement('div');
                 faqItem.className = 'faq-item';
                 faqItem.innerHTML = `
@@ -492,200 +500,211 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             };
 
-            createAccordion(document.getElementById('invest-samborondon'), 'Invertir en Samborondón', this.investReasons.samborondon, 'img/ecuador-flag.png');
-            createAccordion(document.getElementById('invest-usa'), 'Invertir en Estados Unidos', this.investReasons.usa, 'img/usa-flag.png');
-            createAccordion(document.getElementById('invest-panama'), 'Invertir en Panamá', this.investReasons.panama, 'img/panama-flag.png');
+            createAccordion(document.getElementById('invest-samborondon'), 'Invertir en Samborondón', investReasons.samborondon, 'https://flagcdn.com/w40/ec.png');
+            createAccordion(document.getElementById('invest-usa'), 'Invertir en Estados Unidos', investReasons.usa, 'https://flagcdn.com/w40/us.png');
+            createAccordion(document.getElementById('invest-panama'), 'Invertir en Panamá', investReasons.panama, 'https://flagcdn.com/w40/pa.png');
         }
 
         handleViewDetails() {
             document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('view-details')) {
-                    const propertyId = e.target.getAttribute('data-id');
-                    const property = this.properties.find(p => p.id == propertyId);
-                    if (property) {
-                        this.showPropertyDetails(property);
-                    }
+                if (e.target && e.target.classList.contains('view-details')) {
+                    const propertyId = parseInt(e.target.dataset.id);
+                    const property = properties.find(p => p.id === propertyId);
+                    this.showPropertyModal(property);
                 }
             });
         }
 
-        showPropertyDetails(property) {
-            const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-            modal.innerHTML = `
-                <div class="bg-white p-8 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-                    <h2 class="text-2xl font-bold mb-4">${property.title}</h2>
-                    <p class="text-xl mb-4">${property.price}</p>
-                    <p class="mb-4">${property.description}</p>
-                    <h3 class="text-xl font-semibold mb-2">Características:</h3>
-                    <ul class="list-disc pl-5 mb-4">
-                        ${property.features.map(feature => `<li>${feature}</li>`).join('')}
-                    </ul>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        ${property.gallery.map(image => `
-                            <img src="${image}" alt="Imagen de la propiedad" class="w-full h-48 object-cover rounded cursor-pointer gallery-image">
-                        `).join('')}
-                    </div>
-                    <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors close-modal">Cerrar</button>
-                </div>
-            `;
-            document.body.appendChild(modal);
+        showPropertyModal(property) {
+            const modal = document.getElementById('gallery-modal');
+            const galleryImages = document.getElementById('gallery-images');
+            const galleryInfo = document.getElementById('gallery-info');
+            
+            galleryImages.innerHTML = '';
 
-            modal.querySelector('.close-modal').addEventListener('click', () => {
-                document.body.removeChild(modal);
+            const imagesToShow = property.gallery.slice(0, 5);
+            
+            imagesToShow.forEach((image, index) => {
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = `${property.title} - Imagen ${index + 1}`;
+                img.className = 'w-full h-64 object-cover cursor-pointer';
+                img.onclick = () => this.showFullImage(image, index, imagesToShow);
+                galleryImages.appendChild(img);
             });
-
-            modal.addEventListener('click', (e) => {
-                if (e.target.classList.contains('gallery-image')) {
-                    this.openGalleryModal(property.gallery, property.gallery.indexOf(e.target.src));
-                }
-            });
-        }
-
-        openGalleryModal(images, startIndex) {
-            const galleryModal = document.createElement('div');
-            galleryModal.className = 'fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50';
-            galleryModal.innerHTML = `
-                <div class="relative w-full h-full">
-                    <button class="absolute top-4 right-4 text-white text-2xl close-gallery">&times;</button>
-                    <div class="gallery-slider h-full flex items-center justify-center">
-                        ${images.map(image => `
-                            <div class="w-full h-full flex items-center justify-center">
-                                <img src="${image}" alt="Imagen de la galería" class="max-w-full max-h-full object-contain">
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(galleryModal);
-
-            this.createSlider('.gallery-slider', {
+            
+            if ($(galleryImages).hasClass('slick-initialized')) {
+                $(galleryImages).slick('unslick');
+            }
+            
+            $(galleryImages).slick({
                 dots: true,
                 infinite: true,
                 speed: 500,
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                initialSlide: startIndex
+                autoplay: true,
+                autoplaySpeed: 3000
             });
-
-            galleryModal.querySelector('.close-gallery').addEventListener('click', () => {
-                document.body.removeChild(galleryModal);
-            });
+                
+            galleryInfo.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">${property.title}</h3>
+                <p class="mb-2"><strong>Precio:</strong> ${property.price}</p>
+                <p class="mb-4">${property.description}</p>
+                <h4 class="font-bold mb-2">Características:</h4>
+                <ul class="list-disc pl-5 mb-4">
+                    ${property.features ? property.features.map(feature => `<li>${feature}</li>`).join('') : ''}
+                </ul>
+                <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">Contactar Agente</button>
+            `;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
         }
 
         closeGalleryModal() {
-            document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('close-gallery')) {
-                    const galleryModal = e.target.closest('.fixed');
-                    if (galleryModal) {
-                        document.body.removeChild(galleryModal);
-                    }
+            const modal = document.getElementById('gallery-modal');
+            const closeButton = document.getElementById('close-modal');
+            
+            closeButton.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
                 }
             });
         }
 
-        loadYouTubeVideos() {
-            const youtubeSlider = document.getElementById('youtube-slider');
-            const videoIds = ['VIDEO_ID_1', 'VIDEO_ID_2', 'VIDEO_ID_3'];
-            videoIds.forEach(videoId => {
-                const videoContainer = document.createElement('div');
-                videoContainer.className = 'px-2';
-                videoContainer.innerHTML = `
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                `;
-                youtubeSlider.appendChild(videoContainer);
-            });
+        async loadYouTubeVideos() {
+            const youtubeContainer = document.getElementById('youtube-slider');
+            const channelId = 'UCiahlQJxCgPY-tEfjvkab8g';
+            const maxResults = 10;
+            const apiKey ='AIzaSyBf5wzygVChOBD-3pPb4BR2v5NA4uE9J5c';
 
-            this.createSlider('#youtube-slider', {
-                dots: true,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1,
+            try {
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${maxResults}`);
+                const data = await response.json();
+
+                data.items.forEach(item => {
+                    const videoId = item.id.videoId;
+                    const title = item.snippet.title;
+                    const thumbnail = item.snippet.thumbnails.medium.url;
+
+                    const videoElement = document.createElement('div');
+                    videoElement.className = 'youtube-video';
+                    videoElement.innerHTML = `
+                        <img src="${thumbnail}" alt="${title}" class="w-full cursor-pointer">
+                        <h3 class="text-lg font-semibold mt-2">${title}</h3>
+                    `;
+                    videoElement.addEventListener('click', () => {
+                        const iframe = document.createElement('iframe');
+                        iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                        iframe.width = '100%';
+                        iframe.height = '200';
+                        iframe.allowFullscreen = true;
+                        videoElement.innerHTML = '';
+                        videoElement.appendChild(iframe);
+                    });
+                    youtubeContainer.appendChild(videoElement);
+                });
+
+                this.createSlider('#youtube-slider', {
+                    dots: true,
+                    infinite: false,
+                    speed: 300,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 2
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
                         }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-            });
+                    ]
+                });
+            } catch (error) {
+                console.error('Error fetching YouTube videos:', error);
+            }
         }
 
         initContactForm() {
             const form = document.getElementById('contact-form');
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const formData = new FormData(form);
-                // Aquí iría la lógica para enviar el formulario, por ejemplo usando fetch
-                console.log('Formulario enviado', Object.fromEntries(formData));
-                // Mostrar un mensaje de éxito
-                alert('Gracias por contactarnos. Nos pondremos en contacto contigo pronto.');
-                form.reset();
-            });
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const { name, email, message } = form.elements;
+                    const whatsappMessage = `Nombre: ${name.value}%0AEmail: ${email.value}%0AMensaje: ${message.value}`;
+                    const whatsappUrl = `https://wa.me/593987167782?text=${whatsappMessage}`;
+                    window.open(whatsappUrl, '_blank');
+                    form.reset();
+                });
+            }
         }
 
         handleBackToTop() {
-            const backToTopButton = document.createElement('button');
-            backToTopButton.innerHTML = '<i class="fas fa-chevron-up"></i>';
-            backToTopButton.className = 'fixed bottom-20 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl z-50 shadow-lg hover:bg-primary/90 transition-colors duration-300 opacity-0 invisible';
-            document.body.appendChild(backToTopButton);
-
+            const backToTopButton = document.getElementById('back-to-top');
+            
             window.addEventListener('scroll', () => {
                 if (window.pageYOffset > 100) {
-                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.style.display = 'block';
                 } else {
-                    backToTopButton.classList.add('opacity-0', 'invisible');
+                    backToTopButton.style.display = 'none';
                 }
             });
-
+            
             backToTopButton.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
 
         handleScrollAnimation() {
-            const fadeInSections = document.querySelectorAll('.fade-in-section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            fadeInSections.forEach(section => {
-                observer.observe(section);
+            const fadeElems = document.querySelectorAll('.fade-in-section');
+            
+            const fadeIn = (elem) => {
+                const distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
+                if (distInView < 0) {
+                    elem.classList.add('is-visible');
+                } else {
+                    elem.classList.remove('is-visible');
+                }
+            };
+            
+            fadeElems.forEach(elem => fadeIn(elem));
+            
+            window.addEventListener('scroll', () => {
+                fadeElems.forEach(elem => fadeIn(elem));
             });
         }
 
         handleInstallApp() {
             let deferredPrompt;
             const installButton = document.getElementById('install-app');
-
+            
             window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 deferredPrompt = e;
                 installButton.style.display = 'block';
             });
-
-            installButton.addEventListener('click', (e) => {
+            
+            installButton.addEventListener('click', () => {
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
                     deferredPrompt.userChoice.then((choiceResult) => {
                         if (choiceResult.outcome === 'accepted') {
-                            console.log('User accepted the install prompt');
-                        } else {
-                            console.log('User dismissed the install prompt');
+                            console.log('Usuario aceptó la instalación de la PWA');
                         }
                         deferredPrompt = null;
                     });
@@ -694,119 +713,67 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         handlePreloader() {
+            const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('main-content');
+
             window.addEventListener('load', () => {
-                const preloader = document.getElementById('preloader');
-                preloader.style.opacity = '0';
                 setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 500);
+                    preloader.style.opacity = '0';
+                    preloader.style.visibility = 'hidden';
+                    mainContent.classList.remove('hidden');
+                }, 1000);
             });
         }
 
         initChatbot() {
-            const openChatbotButton = document.getElementById('open-chatbot');
-            const closeChatbotButton = document.getElementById('close-chatbot');
-            const chatbotWindow = document.getElementById('chatbot-window');
-            const chatbotForm = document.getElementById('chatbot-form');
-            const chatbotInput = document.getElementById('chatbot-input');
-            const chatbotMessages = document.getElementById('chatbot-messages');
-            const suggestedQuestions = document.getElementById('suggested-questions');
+    const chatbotButton = document.getElementById('open-chatbot');
+    const chatbotWindow = document.getElementById('chatbot-window');
+    const closeChatbot = document.getElementById('close-chatbot');
 
-            openChatbotButton.addEventListener('click', () => {
-                chatbotWindow.classList.remove('hidden');
-                chatbotWindow.classList.add('active');
-            });
+    // Cuando el botón de abrir el chatbot es presionado
+    chatbotButton.addEventListener('click', () => {
+        // Alternar la visibilidad del chatbot (usando la clase 'active' para mostrarla)
+        chatbotWindow.classList.toggle('active');
+    });
 
-            closeChatbotButton.addEventListener('click', () => {
-                chatbotWindow.classList.add('hidden');
-                chatbotWindow.classList.remove('active');
-            });
+    // Cuando el botón de cerrar el chatbot es presionado
+    closeChatbot.addEventListener('click', () => {
+        // Añadir la clase 'hidden' para ocultar el chatbot
+        chatbotWindow.classList.remove('active');
+    });
+}
 
-            const initialQuestions = [
-                "¿Cuáles son los servicios que ofrecen?",
-                "¿Cómo puedo comprar una propiedad?",
-                "¿Tienen propiedades en venta en Samborondón?"
+        preloadImages() {
+            const allImages = [
+                ...heroImages,
+                ...properties.map(p => p.image),
+                ...properties.flatMap(p => p.gallery || []),
+                ...instagramPosts.map(p => p.image)
             ];
 
-            initialQuestions.forEach(question => {
-                const button = document.createElement('button');
-                button.textContent = question;
-                button.className = 'bg-gray-200 text-sm rounded px-2 py-1 m-1 hover:bg-gray-300 transition-colors';
-                button.addEventListener('click', () => this.handleChatbotInteraction(question));
-                suggestedQuestions.appendChild(button);
+            allImages.forEach(image => {
+                const img = new Image();
+                img.src = image;
             });
-
-            chatbotForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const message = chatbotInput.value.trim();
-                if (message) {
-                    this.handleChatbotInteraction(message);
-                    chatbotInput.value = '';
-                }
-            });
-        }
-
-        handleChatbotInteraction(message) {
-            this.addMessageToChatbot('user', message);
-            // Aquí iría la lógica para procesar la pregunta y obtener una respuesta
-            // Por ahora, simplemente devolvemos un mensaje genérico
-            setTimeout(() => {
-                this.addMessageToChatbot('bot', "Gracias por tu pregunta. Un agente se pondrá en contacto contigo pronto para ayudarte con más información.");
-            }, 1000);
-        }
-
-        addMessageToChatbot(sender, message) {
-            const messageElement = document.createElement('div');
-            messageElement.className = `mb-2 ${sender === 'user' ? 'text-right' : 'text-left'}`;
-            messageElement.innerHTML = `
-                <span class="inline-block ${sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'} rounded px-4 py-2 max-w-xs lg:max-w-md">
-                    ${message}
-                </span>
-            `;
-            document.getElementById('chatbot-messages').appendChild(messageElement);
-            messageElement.scrollIntoView({ behavior: 'smooth' });
         }
 
         improveResponsiveness() {
-            const header = document.querySelector('header');
-            let lastScrollTop = 0;
-
-            window.addEventListener('scroll', () => {
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                if (scrollTop > lastScrollTop) {
-                    header.style.top = '-80px';
-                } else {
-                    header.style.top = '0';
-                }
-                lastScrollTop = scrollTop;
-            });
-
-            const menuItems = document.querySelectorAll('.bottom-nav a');
-            menuItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = item.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth' });
+            const resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    if (entry.contentBoxSize) {
+                        if (entry.contentBoxSize[0].inlineSize < 768) {
+                            document.body.classList.add('mobile');
+                        } else {
+                            document.body.classList.remove('mobile');
+                        }
                     }
-                });
+                }
             });
-        }
 
-        preloadImages() {
-            const imagesToPreload = [
-                ...this.heroImages,
-                ...this.properties.map(p => p.image),
-                ...this.instagramPosts.map(p => p.image)
-            ];
-
-            imagesToPreload.forEach(src => {
-                const img = new Image();
-                img.src = src;
-            });
+            resizeObserver.observe(document.body);
         }
     }
 
-    new WebsiteManager();
+    // Initialize the website
+    const websiteManager = new WebsiteManager();
 });
