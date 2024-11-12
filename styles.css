@@ -151,7 +151,7 @@ body {
 
 /* Estilos para el menú inferior */
 .bottom-nav {
-    display: flex; /* Aseguramos que esté visible para pruebas */
+    display: flex;
     justify-content: space-around;
     align-items: center;
     position: fixed;
@@ -159,7 +159,7 @@ body {
     left: 0;
     right: 0;
     background-color: var(--primary-color); /* Usamos el color rojo definido */
-    opacity: 0.9; /* Ligera transparencia */
+    opacity: 0.95; /* Ligera transparencia para un efecto moderno */
     backdrop-filter: blur(8px); /* Efecto de desenfoque */
     padding: 0.75rem 1rem;
     z-index: 999;
@@ -175,7 +175,7 @@ body {
 }
 
 .bottom-nav a {
-    color: var(--background-color); /* Texto blanco */
+    color: white; /* Cambiamos a blanco para un mejor contraste */
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -191,12 +191,13 @@ body {
 .bottom-nav i {
     font-size: 1.5rem;
     margin-bottom: 0.2rem;
+    color: white; /* Aseguramos que los íconos sean blancos */
     transition: transform 0.2s ease, color var(--transition-speed);
 }
 
 .bottom-nav a:hover i {
     transform: scale(1.2); /* Efecto de agrandamiento en hover */
-    color: var(--background-color);
+    color: var(--secondary-color); /* Ícono cambia a gris en hover */
 }
 
 /* Estilos para las tarjetas de propiedades */
